@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:s="http://www.w3.org/2001/XMLSchema"
+	xmlns:s0="http://www.stellent.com/MetaData/"
+	targetNamespace="http://www.stellent.com/MetaData/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+	<types>
+		<s:schema elementFormDefault="qualified" targetNamespace="http://www.stellent.com/MetaData/">
+			<s:element name="DocMetaData">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="privilege" type="s:int" />
+						<s:element minOccurs="0" maxOccurs="1" name="extraProps" type="s0:IdcPropertyList" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="DocMetaDataResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="DocMetaDataResult" type="s0:DocMetaDataResult" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="DocMetaDataResult">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="isAutoNumber" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="useAccounts" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="unbounded" name="DocTypes" type="s0:DocTypes" />
+					<s:element minOccurs="0" maxOccurs="1" name="SecurityGroups" type="s0:IdcOptionList" />
+					<s:element minOccurs="0" maxOccurs="1" name="Accounts" type="s0:IdcOptionList" />
+					<s:element minOccurs="0" maxOccurs="unbounded" name="DocMetaFields" type="s0:DocMetaFields" />
+					<s:element minOccurs="0" maxOccurs="1" name="StatusInfo" type="s0:StatusInfo" />
+				</s:sequence>
+			</s:complexType>
+			<s:element name="UserMetaData">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="extraProps" type="s0:IdcPropertyList" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:element name="UserMetaDataResponse">
+				<s:complexType>
+					<s:sequence>
+						<s:element minOccurs="0" maxOccurs="1" name="UserMetaDataResult" type="s0:UserMetaDataResult" />
+					</s:sequence>
+				</s:complexType>
+			</s:element>
+			<s:complexType name="UserMetaDataResult">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="UserMetaFields" type="s0:UserMetaFields" />
+					<s:element minOccurs="0" maxOccurs="1" name="StatusInfo" type="s0:StatusInfo" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="DocTypes">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="dDocType" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dDescription" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dGif" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="DocMetaFields">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="dName" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dType" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dIsRequired" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="dIsEnabled" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="dIsSearchable" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="dCaption" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dIsOptionList" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="dOptionListKey" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dDefaultValue" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dOrder" type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="dOptionListType" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="dOptionListValues" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="UserMetaFields">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="umdName" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdType" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdCaption" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdIsOptionList" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdOptionListType" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdOptionListKey" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdIsAdminEdit" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdIsViewOnly" type="s:boolean" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdOverrideBitFlag" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="umdOptionListValues" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="StatusInfo">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="statusCode" type="s:int" />
+					<s:element minOccurs="0" maxOccurs="1" name="statusMessage" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="IdcPropertyList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="property" type="s0:IdcProperty" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="IdcProperty">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+					<s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+			<s:complexType name="IdcOptionList">
+				<s:sequence>
+					<s:element minOccurs="0" maxOccurs="unbounded" name="option" type="s:string" />
+				</s:sequence>
+			</s:complexType>
+		</s:schema>
+	</types>
+	<message name="DocMetaDataSoapIn">
+		<part name="parameters" element="s0:DocMetaData" />
+	</message>
+	<message name="DocMetaDataSoapOut">
+		<part name="parameters" element="s0:DocMetaDataResponse" />
+	</message>
+	<message name="UserMetaDataSoapIn">
+		<part name="parameters" element="s0:UserMetaData" />
+	</message>
+	<message name="UserMetaDataSoapOut">
+		<part name="parameters" element="s0:UserMetaDataResponse" />
+	</message>
+	<portType name="MetaDataSoap">
+		<operation name="DocMetaData">
+			<input message="s0:DocMetaDataSoapIn" />
+			<output message="s0:DocMetaDataSoapOut" />
+		</operation>
+		<operation name="UserMetaData">
+			<input message="s0:UserMetaDataSoapIn" />
+			<output message="s0:UserMetaDataSoapOut" />
+		</operation>
+	</portType>
+	<binding name="MetaDataSoap" type="s0:MetaDataSoap">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+		<operation name="DocMetaData">
+			<soap:operation soapAction="http://www.stellent.com/MetaData/" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+		<operation name="UserMetaData">
+			<soap:operation soapAction="http://www.stellent.com/MetaData/" style="document" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="MetaData">
+		<port name="MetaDataSoap" binding="s0:MetaDataSoap">
+			<soap:address location="http://ucm-devqa.ccci.org/ucmdev/idcplg" />
+		</port>
+	</service>
+</definitions>
