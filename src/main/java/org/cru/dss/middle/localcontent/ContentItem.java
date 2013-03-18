@@ -1,11 +1,14 @@
 package org.cru.dss.middle.localcontent;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
-
-
+@Entity
+@Table(name = "CRU_WEB_CONTENT_PAGE")
 public class ContentItem implements java.io.Serializable
 {
 
@@ -18,11 +21,15 @@ public class ContentItem implements java.io.Serializable
 	@Column(name = "CONTENT_TYPE")
 	ContentItemType contentType;
 	
+	@Lob
 	@Column(name = "CONTENT")
 	byte[] contentBytes;
 	
 	@Column(name = "TITLE")
 	String title;
+	
+	@Column(name = "FILENAME")
+	String filename;
 	
 	@Column(name = "DESIGNATION")
 	String designation;
@@ -36,12 +43,13 @@ public class ContentItem implements java.io.Serializable
 	}
 	
 	public ContentItem(String ucmId, ContentItemType contentType,
-			byte[] contentBytes, String title, String designation,
+			byte[] contentBytes, String filename, String title, String designation,
 			String fileSize)
 	{
 		this.ucmId = ucmId;
 		this.contentType = contentType;
 		this.contentBytes = contentBytes;
+		this.filename = filename;
 		this.title = title;
 		this.designation = designation;
 		this.fileSize = fileSize;
@@ -71,13 +79,13 @@ public class ContentItem implements java.io.Serializable
 	{
 		this.contentBytes = contentBytes;
 	}
-	public String getTitle()
+	public String getFilename()
 	{
-		return title;
+		return filename;
 	}
-	public void setTitle(String title)
+	public void setFilename(String filename)
 	{
-		this.title = title;
+		this.filename = filename;
 	}
 	public String getDesignation()
 	{
@@ -94,5 +102,15 @@ public class ContentItem implements java.io.Serializable
 	public void setFileSize(String fileSize)
 	{
 		this.fileSize = fileSize;
+	}
+
+	public String getTitle()
+	{
+		return title;
+	}
+
+	public void setTitle(String title)
+	{
+		this.title = title;
 	}
 }

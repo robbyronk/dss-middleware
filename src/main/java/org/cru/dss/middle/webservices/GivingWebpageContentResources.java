@@ -3,7 +3,9 @@ package org.cru.dss.middle.webservices;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -11,23 +13,29 @@ import javax.ws.rs.Produces;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.queryParser.ParseException;
+import org.cru.dss.middle.dao.StaffDesignationDao;
+import org.cru.dss.middle.entity.DesignationEntity;
 import org.cru.dss.middle.localcontent.ContentItem;
 import org.cru.dss.middle.localcontent.LocalContentCacheService;
 import org.cru.dss.middle.util.ContentId;
 import org.cru.dss.middle.util.ContentIdType;
 import org.cru.dss.middle.util.FullHtmlPageClient;
+import org.quartz.SchedulerException;
 
 import com.stellent.dev.getfile.GetFileByNameResult;
 import com.stellent.dev.getfile.GetFileSoap;
 import com.stellent.dev.getfile.IdcFile;
 
-@Path("/")
+@Path("/") @Stateless
 public class GivingWebpageContentResources
 {
 	@Inject GetFileSoap getFileClient;
 	@Inject FullHtmlPageClient pageClient;
-	@Inject LocalContentCacheService localCacheService;
-		
+	@Inject StaffDesignationDao designationDao;
+	@Inject LocalContentCacheService localIndexBuilder;
+	@Inject EntityManager em;
+	
+	
 	Logger log = Logger.getLogger(GivingWebpageContentResources.class);
 	
 	@GET
@@ -36,21 +44,62 @@ public class GivingWebpageContentResources
 	public String getXmlForDesignation(@PathParam("designation") String designation) throws UnsupportedEncodingException
 	{
 		log.info("Fetching XML file for designation: " + designation);
+				
+		ContentItem content = em.find(ContentItem.class, "DSS_STAFF_" + designation);
 		
-		GetFileByNameResult file = getFileClient.getFileByName(new ContentId(designation, ContentIdType.STAFF).toString(), "latest", null, null);
-		
-		if(file.getFileInfo().size() > 0)
+		return new String(content.getContentBytes(),"UTF-8");
+	}
+	
+	@GET
+	@Path("updateStaff")
+	@Produces("text/plain")
+	public String triggerUpdateStaffJob() throws UnsupportedEncodingException, SchedulerException
+	{
+		log.info("Starting staff update job");
+
+		for(DesignationEntity designation : designationDao.fetchAllActiveCruStaff())
 		{
-			log.info("Found a file!");
-			ContentItem item = new ContentItem();
-			item.setContentBytes(file.getDownloadFile().getFileContent());
-			item.setUcmId(new ContentId(designation, ContentIdType.STAFF).toString());
-			
-			log.info("File saved.");
-			return new String(file.getDownloadFile().getFileContent(), "UTF-8");
+			GetFileByNameResult file = getFileClient.getFileByName(new ContentId(designation.getNumber(), ContentIdType.STAFF).toString(), "latest", null, null);
+			if(file != null && file.getFileInfo().size() > 0)
+			{
+				try
+				{
+					em.persist(createContentItemToPersist(designation.getNumber(), file));
+					em.flush();
+				} 
+				catch(Throwable t)
+				{
+					log.error("Error saving content for: " + designation.getNumber());
+					t.printStackTrace();
+					continue;
+				}
+				
+				try
+				{
+					localIndexBuilder.saveContentItemToCache(createContentItemToPersist(designation.getNumber(), file));
+				} 
+				catch (Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				log.info("Saved and indexed content for: " + designation.getNumber());
+			}
 		}
-		
+
 		return "".toString();
+	}
+
+	private ContentItem createContentItemToPersist(String designation,
+			GetFileByNameResult file) throws UnsupportedEncodingException
+	{
+		ContentItem item = new ContentItem();
+		item.setContentBytes(file.getDownloadFile().getFileContent());
+		item.setUcmId(new ContentId(designation, ContentIdType.STAFF).toString());
+		item.setTitle(null);
+		item.setFilename(file.getDownloadFile().getFileName());
+		item.setDesignation(designation);
+		return item;
 	}
 	
 	/**
@@ -73,7 +122,7 @@ public class GivingWebpageContentResources
 		}
 		catch(Exception e)
 		{
-			return new String(localCacheService.retrieveContentItemFromCache(designation).getContentBytes(), "UTF-8");
+			return "";
 		}	
 	}
 	
@@ -99,8 +148,6 @@ public class GivingWebpageContentResources
 	
 	public static void main(String[] args) throws IOException, ParseException
 	{
-//		pageClient = new FullHtmlPageClient();
-//		localCacheService = new LocalContentCacheService("~/Scratch/middleware-content-cache/");
 		new GivingWebpageContentResources().getHtmlForDesignation("0550510");
 	}
 }

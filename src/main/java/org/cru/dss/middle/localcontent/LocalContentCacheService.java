@@ -12,17 +12,13 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.index.CorruptIndexException;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
-import org.apache.lucene.search.TermQuery;
 import org.apache.lucene.search.TopScoreDocCollector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.SimpleFSDirectory;
 import org.apache.lucene.util.Version;
-import org.cru.dss.middle.util.LocalFileUtil;
 
 public class LocalContentCacheService
 {
@@ -45,39 +41,17 @@ public class LocalContentCacheService
     	Document luceneDoc = new Document();
     	luceneDoc.add(new Field("ucmId", content.getUcmId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
     	luceneDoc.add(new Field("designation", content.getDesignation(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-    	luceneDoc.add(new Field("pathInCache", "/data/" + content.getDesignation(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-    	
-//    	indexLock.writeLock().lock();
+    	luceneDoc.add(new Field("pageContent", new String(content.getContentBytes(),"UTF-8"), Field.Store.YES, Field.Index.ANALYZED));
+    	luceneDoc.add(new Field("filename", content.getFilename(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+    	if(content.getTitle() != null) luceneDoc.add(new Field("title", content.getTitle(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+
+    	//    	indexLock.writeLock().lock();
     	IndexWriter writer = openWriter();
     	writer.addDocument(luceneDoc);
     	writer.commit();
     	writer.close();
-//    	indexLock.writeLock().unlock();
+    	//  	indexLock.writeLock().unlock();
     	
-    	LocalFileUtil.writeBytesToFile(new File(contentDir + "/" + content.designation), 
-    														content.getContentBytes());
-    }
-    
-    public ContentItem retrieveContentItemFromCache(String designation) throws CorruptIndexException, IOException, ParseException
-    {
-    	openReader();
-
-    	List<Document> matches = searchIndexWithQuery(new TermQuery(new Term("designation",designation)));
-    	
-    	for(Document potentialMatch : matches)
-    	{
-    		if(potentialMatch.get("designation").equals(designation))
-    		{
-    			ContentItem content = new ContentItem();
-    			content.contentBytes = LocalFileUtil.getBytesFromFile(new File(contentDir + "/" + designation));
-    			content.designation = potentialMatch.get("designation");
-    			content.ucmId = potentialMatch.get("ucmId");
-
-    			return content;
-    		}
-    	}
-    	
-    	return null;
     }
     
     private void init(String rootContentDir)
