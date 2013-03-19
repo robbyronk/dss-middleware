@@ -8,6 +8,7 @@
 		<jta-data-source>java:/jdbc/siebelTestDS</jta-data-source>
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		<class>org.cru.dss.middle.localcontent.ContentItem</class>
+		<class>org.cru.dss.middle.localcontent.WebImage</class>
 		<class>org.cru.dss.middle.entity.DesignationEntity</class>
 		<class>org.cru.dss.middle.entity.AccountEntity</class>
 		<class>org.cru.dss.middle.entity.DesignationExtensionEntity</class>

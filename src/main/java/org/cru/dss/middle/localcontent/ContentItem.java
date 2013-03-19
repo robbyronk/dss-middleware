@@ -34,6 +34,15 @@ public class ContentItem implements java.io.Serializable
 	@Column(name = "DESIGNATION")
 	String designation;
 	
+	@Column(name = "EXTERNAL_WEB_URL")
+	String externalWebUrl;
+	
+	@Column(name = "COVER_IMG_ID")
+	String coverImageUcmId;
+	
+	@Column(name = "PRIMARY_IMG_ID")
+	String primaryImageUcmId;
+	
 	@Transient
 	@Column(name = "FILE_SIZE")
 	String fileSize;
@@ -112,5 +121,35 @@ public class ContentItem implements java.io.Serializable
 	public void setTitle(String title)
 	{
 		this.title = title;
+	}
+
+	public String getExternalWebUrl()
+	{
+		return externalWebUrl;
+	}
+
+	public void setExternalWebUrl(String externalWebUrl)
+	{
+		this.externalWebUrl = externalWebUrl;
+	}
+
+	public String getCoverImageUcmId()
+	{
+		return coverImageUcmId;
+	}
+
+	public void setCoverImageUcmId(String coverImageUcmId)
+	{
+		this.coverImageUcmId = coverImageUcmId;
+	}
+
+	public String getPrimaryImageUcmId()
+	{
+		return primaryImageUcmId;
+	}
+
+	public void setPrimaryImageUcmId(String primaryImageUcmId)
+	{
+		this.primaryImageUcmId = primaryImageUcmId;
 	}
 }
