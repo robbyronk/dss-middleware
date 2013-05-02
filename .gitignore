@@ -1,5 +1,6 @@
 target/
 .svn/
+middleware-content-cache/
 Quartz.properties
 
 # Logs and databases #
