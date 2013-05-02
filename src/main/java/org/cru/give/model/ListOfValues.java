@@ -2,17 +2,20 @@ package org.cru.give.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "S_LST_OF_VAL")
-public class ListOfValues
+public class ListOfValues implements java.io.Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
 	@Column(name = "VAL")
 	String dropdownValue;
-	@Column(name = "NAME")
+	@Id @Column(name = "NAME")
 	String dropdownName;
-	@Column(name = "TYPE")
+	@Id @Column(name = "TYPE")
 	String dropdownType;
 	@Column(name = "ORDER_BY")
 	String dropdownOrderBy;
