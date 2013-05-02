@@ -41,21 +41,22 @@ public class TestCartResource
 		Assert.assertEquals(new Long(27), cart.getCartId());
 	}
 	
-
 	@Test
 	public void testUpdateCart()
 	{
 		GiftCart cart = new GiftCart();
 		cart.setCartId(27L);
 		cart.setMailingAddress(new MailingAddress());
-		cart.getMailingAddress().setCity("Orlando");
+		cart.getMailingAddress().setCity("Bowling Green");
 		
 		client.updateCart("27", cart);
+		
+		createClient();
 		
 		ClientResponse<GiftCart> giftCartResponse = client.getCart("27");
 		GiftCart updatedCart = giftCartResponse.getEntity(GiftCart.class);
 		
 		Assert.assertEquals(new Long(27), updatedCart.getCartId());
-		Assert.assertEquals("Orlando", updatedCart.getMailingAddress().getCity());
+		Assert.assertEquals("Bowling Green", updatedCart.getMailingAddress().getCity());
 	}
 }

@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 
 import org.cru.give.model.CapturedNameAddressAndPayment;
 import org.cru.give.webservices.model.GiftCart;
+import org.cru.give.webservices.model.MailingAddress;
 
 public class GiftCartService
 {
@@ -16,10 +17,11 @@ public class GiftCartService
 		
 		GiftCart giftCart = new GiftCart();
 		giftCart.setCartId(capNap.getCartId());
+		giftCart.setMailingAddress(new MailingAddress());
+		giftCart.getMailingAddress().setCity(capNap.getCity());
 		
 		return giftCart;
 	}
-	
 	
 	public String createNewGiftCart()
 	{
@@ -41,7 +43,6 @@ public class GiftCartService
 	
 	public void updateGiftCart(GiftCart cart)
 	{
-		CapturedNameAddressAndPayment capNap = em.find(CapturedNameAddressAndPayment.class, new Long(cart.getCartId()));
-		capNap.setCity(cart.getMailingAddress().getCity());
+		em.merge(cart.asCapturedNameAddressAndPayment());
 	}
 }
