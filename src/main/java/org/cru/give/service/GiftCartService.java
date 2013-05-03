@@ -28,7 +28,7 @@ public class GiftCartService
 		return giftCart;
 	}
 	
-	public String createNewGiftCart()
+	public Long createNewGiftCart()
 	{
 		CapturedNameAddressAndPayment capNap = new CapturedNameAddressAndPayment();
 		
@@ -38,7 +38,7 @@ public class GiftCartService
 		
 		em.refresh(capNap);
 		
-		return capNap.getCartId().toString();
+		return capNap.getCartId();
 	}
 	
 	public void deleteGiftCart(String cartId)

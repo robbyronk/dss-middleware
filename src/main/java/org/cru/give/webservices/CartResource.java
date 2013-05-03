@@ -38,7 +38,7 @@ public class CartResource
 	@Path("/")
 	public void createCart()
 	{
-		String cartId = cartService.createNewGiftCart();
+		Long cartId = cartService.createNewGiftCart();
 		response.getOutputHeaders().putSingle("X-Created-Cart", "/dss-middleware/rest/cart/" + cartId);
 		response.setStatus(Response.Status.CREATED.getStatusCode()); 
 	}
