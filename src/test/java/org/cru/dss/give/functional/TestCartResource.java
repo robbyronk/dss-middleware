@@ -52,7 +52,7 @@ public class TestCartResource
 		cart.setPayment(new Payment());
 		cart.getPayment().setDescription("Foo's Payment");
 		
-		client.updateCart("48", cart);
+		client.updateCart(cart);
 		
 		createClient();
 		

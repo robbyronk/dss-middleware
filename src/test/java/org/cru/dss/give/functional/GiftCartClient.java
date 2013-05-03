@@ -32,7 +32,7 @@ public interface GiftCartClient
 	public ClientResponse<GiftCart> deleteCart(@PathParam("cartId") String giftCartId);
 	
 	@PUT
-	@Path("/{cartId}")
+	@Path("")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ClientResponse<GiftCart> updateCart(@PathParam("cartId") String giftCartId, GiftCart cart);
+	public ClientResponse<GiftCart> updateCart(GiftCart cart);
 }

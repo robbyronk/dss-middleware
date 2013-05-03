@@ -51,9 +51,9 @@ public class CartResource
 	}
 	
 	@PUT
-	@Path("/{cartId}")
+	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateCart(@PathParam("cartId") String giftCartId, GiftCart cart)
+	public void updateCart(GiftCart cart)
 	{
 		cartService.updateGiftCart(cart);
 	}
