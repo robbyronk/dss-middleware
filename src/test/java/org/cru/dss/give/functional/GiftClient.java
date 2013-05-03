@@ -1,6 +1,10 @@
 package org.cru.dss.give.functional;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,4 +18,17 @@ public interface GiftClient
 	@Path("/{giftId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public GiftDetails getGift(@PathParam("giftId") String giftId);
+	
+	@POST
+	@Path("/")
+	public void createGift();
+	
+	@DELETE
+	@Path("/{giftId}")
+	public void deleteGift(@PathParam("giftId") String giftId);
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void updateCart(GiftDetails gift);
 }
