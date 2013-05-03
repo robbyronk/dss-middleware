@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import org.cru.give.model.CapturedNameAddressAndPayment;
 import org.cru.give.webservices.model.GiftCart;
 import org.cru.give.webservices.model.MailingAddress;
+import org.cru.give.webservices.model.Payment;
 
 public class GiftCartService
 {
@@ -15,10 +16,14 @@ public class GiftCartService
 	{
 		CapturedNameAddressAndPayment capNap = em.find(CapturedNameAddressAndPayment.class, new Long(cartId));
 		
+		if(capNap == null) throw new RuntimeException("Gift Cart: " + cartId + " was not found :(");
+		
 		GiftCart giftCart = new GiftCart();
 		giftCart.setCartId(capNap.getCartId());
 		giftCart.setMailingAddress(new MailingAddress());
 		giftCart.getMailingAddress().setCity(capNap.getCity());
+		giftCart.setPayment(new Payment());
+		giftCart.getPayment().setDescription(capNap.getPaymentDescription());
 		
 		return giftCart;
 	}
