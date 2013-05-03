@@ -22,4 +22,27 @@ public class GiftService
 		
 		return giftDetails;
 	}
+	
+	public Long createNewGift()
+	{
+		CapturedGift capturedGift = new CapturedGift();
+		
+		em.persist(capturedGift);
+		
+		em.flush();
+		
+		em.refresh(capturedGift);
+		
+		return capturedGift.getGiftId();
+	}
+	
+	public void deleteGift(String giftId)
+	{
+		em.remove(em.find(CapturedGift.class, new Long(giftId)));
+	}
+	
+	public void updateGift(GiftDetails gift)
+	{
+		em.merge(gift.asCapturedGift());
+	}
 }
