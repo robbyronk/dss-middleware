@@ -15,8 +15,8 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(generator = "jpa_sucks", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name="jpa_sucks", sequenceName = "cru_gift_cart_seq", allocationSize=1)
+	@GeneratedValue(generator = "gift_cart_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="gift_cart_seq", sequenceName = "cru_gift_cart_seq", allocationSize=1)
 	@Column(name = "CART_ID")
     private Long cartId;
 	@Column(name = "CHECKOUT_ID")
