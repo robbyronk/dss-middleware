@@ -10,6 +10,8 @@ public class GiftCart implements java.io.Serializable
 
 	Long cartId;
 	
+	String status;
+	
 	List<GiftDetails> gifts;
 	
 	NameInformation primaryName;
@@ -17,6 +19,8 @@ public class GiftCart implements java.io.Serializable
 	List<NameInformation> additionalNames;
 	
 	MailingAddress mailingAddress;
+	
+	Payment payment;
 	
 	public CapturedNameAddressAndPayment asCapturedNameAddressAndPayment()
 	{
@@ -46,6 +50,13 @@ public class GiftCart implements java.io.Serializable
 			capturedNameAddressPayment.setAddressLine3(mailingAddress.getStreetAddress3());
 			capturedNameAddressPayment.setAddressLine4(mailingAddress.getStreetAddress4());
 			capturedNameAddressPayment.setCity(mailingAddress.getCity());
+		}
+		
+		if(payment != null)
+		{
+			capturedNameAddressPayment.setPaymentMethod(payment.getPaymentMethod());
+			capturedNameAddressPayment.setPaymentType(payment.getPaymentType());
+			capturedNameAddressPayment.setPaymentDescription(payment.getDescription());
 		}
 		return capturedNameAddressPayment;
 	}
@@ -97,6 +108,16 @@ public class GiftCart implements java.io.Serializable
 	public void setAdditionalNames(List<NameInformation> additionalNames)
 	{
 		this.additionalNames = additionalNames;
+	}
+
+	public Payment getPayment()
+	{
+		return payment;
+	}
+
+	public void setPayment(Payment payment)
+	{
+		this.payment = payment;
 	}
 	
 }
