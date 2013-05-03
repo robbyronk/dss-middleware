@@ -14,7 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.cru.give.service.GiftCartService;
+import org.cru.give.service.CartService;
 import org.cru.give.webservices.model.GiftCart;
 
 @Path("/cart")
@@ -22,16 +22,16 @@ import org.cru.give.webservices.model.GiftCart;
 public class CartResource
 {
 	
-	@Inject GiftCartService cartService;
+	@Inject CartService cartService;
 	
 	@Context org.jboss.resteasy.spi.HttpResponse response;
 	
 	@GET
 	@Path("/{cartId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public GiftCart getCart(@PathParam("cartId") String giftCartId)
+	public GiftCart getCart(@PathParam("cartId") String cartId)
 	{
-		return cartService.fetchGiftCart(giftCartId);
+		return cartService.fetchGiftCart(cartId);
 	}
 	
 	@POST
@@ -45,9 +45,9 @@ public class CartResource
 	
 	@DELETE
 	@Path("/{cartId}")
-	public void deleteCart(@PathParam("cartId") String giftCartId)
+	public void deleteCart(@PathParam("cartId") String cartId)
 	{
-		cartService.deleteGiftCart(giftCartId);
+		cartService.deleteGiftCart(cartId);
 	}
 	
 	@PUT

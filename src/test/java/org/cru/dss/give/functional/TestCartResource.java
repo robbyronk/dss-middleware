@@ -15,13 +15,13 @@ public class TestCartResource
 	
 	Environment environment = Environment.LOCAL;
 	
-	GiftCartClient client;
+	CartClient client;
 	
 	@BeforeMethod
 	public void createClient()
 	{
         String restApiBaseUrl = environment.getUrlAndContext() + "/" + RESOURCE_PREFIX;
-        client = ProxyFactory.create(GiftCartClient.class, restApiBaseUrl);
+        client = ProxyFactory.create(CartClient.class, restApiBaseUrl);
 	}
 
 	@Test

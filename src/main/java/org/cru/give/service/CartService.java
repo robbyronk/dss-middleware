@@ -8,7 +8,7 @@ import org.cru.give.webservices.model.GiftCart;
 import org.cru.give.webservices.model.MailingAddress;
 import org.cru.give.webservices.model.Payment;
 
-public class GiftCartService
+public class CartService
 {
 	@Inject EntityManager em;
 	

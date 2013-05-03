@@ -14,13 +14,13 @@ import org.cru.give.webservices.model.GiftCart;
 import org.jboss.resteasy.client.ClientResponse;
 
 @Path("/cart")
-public interface GiftCartClient
+public interface CartClient
 {
 	
 	@GET
 	@Path("/{cartId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientResponse<GiftCart> getCart(@PathParam("cartId") String giftCartId);
+	public ClientResponse<GiftCart> getCart(@PathParam("cartId") String cartId);
 	
 	@POST
 	@Path("/")
@@ -29,7 +29,7 @@ public interface GiftCartClient
 	
 	@DELETE
 	@Path("/{cartId}")
-	public ClientResponse<GiftCart> deleteCart(@PathParam("cartId") String giftCartId);
+	public ClientResponse<GiftCart> deleteCart(@PathParam("cartId") String cartId);
 	
 	@PUT
 	@Path("")
