@@ -2,6 +2,7 @@ package org.cru.dss.give.functional;
 
 import org.cru.give.webservices.model.GiftCart;
 import org.cru.give.webservices.model.MailingAddress;
+import org.cru.give.webservices.model.Payment;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.testng.Assert;
@@ -35,10 +36,10 @@ public class TestCartResource
 	@Test
 	public void testFetchCart()
 	{
-		ClientResponse<GiftCart> giftCartResponse = client.getCart("27");
+		ClientResponse<GiftCart> giftCartResponse = client.getCart("48");
 		GiftCart cart = giftCartResponse.getEntity(GiftCart.class);
 		
-		Assert.assertEquals(new Long(27), cart.getCartId());
+		Assert.assertEquals(new Long(48), cart.getCartId());
 	}
 	
 	@Test
@@ -48,15 +49,18 @@ public class TestCartResource
 		cart.setCartId(27L);
 		cart.setMailingAddress(new MailingAddress());
 		cart.getMailingAddress().setCity("Bowling Green");
+		cart.setPayment(new Payment());
+		cart.getPayment().setDescription("Foo's Payment");
 		
-		client.updateCart("27", cart);
+		client.updateCart("48", cart);
 		
 		createClient();
 		
-		ClientResponse<GiftCart> giftCartResponse = client.getCart("27");
+		ClientResponse<GiftCart> giftCartResponse = client.getCart("48");
 		GiftCart updatedCart = giftCartResponse.getEntity(GiftCart.class);
 		
-		Assert.assertEquals(new Long(27), updatedCart.getCartId());
+		Assert.assertEquals(new Long(48), updatedCart.getCartId());
 		Assert.assertEquals("Bowling Green", updatedCart.getMailingAddress().getCity());
+		Assert.assertEquals("Foo's Payment", updatedCart.getPayment().getDescription());
 	}
 }
