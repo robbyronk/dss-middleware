@@ -1,9 +1,11 @@
 package org.cru.give.webservices;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +21,7 @@ import javax.ws.rs.core.Response;
 
 import org.cru.give.service.CartService;
 import org.cru.give.service.GiftService;
+import org.cru.give.validators.ValidateGift;
 import org.cru.give.webservices.model.GiftDetails;
 
 @Path("/gift")
@@ -26,6 +29,9 @@ import org.cru.give.webservices.model.GiftDetails;
 public class GiftResource
 {
 
+	@Inject ValidateGift validateGift;
+	
+	@Inject EntityManager em;
 	@Inject GiftService giftService;
 	@Inject CartService cartService;
 	
@@ -66,9 +72,21 @@ public class GiftResource
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateCart(GiftDetails gift)
+	public void updateCart(GiftDetails gift) throws IOException
 	{
+		if(gift.isValidate())
+		{
+			String error = validateGift.validate(gift);
+			
+			if(error != null)
+			{
+				response.sendError(400, error);
+				return;
+			}
+		}
+		
 		giftService.updateGift(gift);
+		response.setStatus(200);
 	}
 	
 }

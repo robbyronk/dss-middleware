@@ -22,6 +22,8 @@ public class GiftDetails implements java.io.Serializable
 	String commentsToRecipient;
 	String commentsToDonationServices;
 	
+	boolean validate;
+	
 	public CapturedGift asCapturedGift()
 	{
 		CapturedGift capturedGift = new CapturedGift();
@@ -123,5 +125,15 @@ public class GiftDetails implements java.io.Serializable
 	public void setGiftId(Long giftId)
 	{
 		this.giftId = giftId;
+	}
+
+	public boolean isValidate()
+	{
+		return validate;
+	}
+
+	public void setValidate(boolean validate)
+	{
+		this.validate = validate;
 	}
 }
