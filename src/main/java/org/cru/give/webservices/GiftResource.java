@@ -1,5 +1,7 @@
 package org.cru.give.webservices;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -10,10 +12,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.cru.give.service.CartService;
 import org.cru.give.service.GiftService;
 import org.cru.give.webservices.model.GiftDetails;
 
@@ -23,6 +27,7 @@ public class GiftResource
 {
 
 	@Inject GiftService giftService;
+	@Inject CartService cartService;
 	
 	@Context org.jboss.resteasy.spi.HttpResponse response;
 	
@@ -32,6 +37,14 @@ public class GiftResource
 	public GiftDetails getGift(@PathParam("giftId") String giftId)
 	{
 		return giftService.fetchGift(giftId);
+	}
+	
+	@GET
+	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<GiftDetails> getGiftsFromCart(@QueryParam("cartId") String cartId)
+	{
+		return cartService.fetchGiftCart(cartId).getGifts();
 	}
 	
 	@POST
