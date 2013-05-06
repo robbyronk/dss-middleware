@@ -12,7 +12,7 @@ public class GiftService
 
 	public GiftDetails fetchGift(String giftId)
 	{
-		CapturedGift capturedGift = em.find(CapturedGift.class, new Long(giftId));
+		CapturedGift capturedGift = findGift(giftId);
 		
 		if(capturedGift == null) throw new RuntimeException("Gift " + giftId + " was not found :(");
 		
@@ -45,4 +45,10 @@ public class GiftService
 	{
 		em.merge(gift.asCapturedGift());
 	}
+	
+	private CapturedGift findGift(String giftId)
+	{
+		return em.find(CapturedGift.class, new Long(giftId));
+	}
+
 }
