@@ -11,24 +11,25 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.cru.give.webservices.model.GiftDetails;
-
+import org.jboss.resteasy.client.ClientResponse;
+@Path("/gift")
 public interface GiftClient
 {
 	@GET
 	@Path("/{giftId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public GiftDetails getGift(@PathParam("giftId") String giftId);
+	public ClientResponse<GiftDetails> getGift(@PathParam("giftId") String giftId);
 	
 	@POST
 	@Path("/")
-	public void createGift();
+	public ClientResponse<GiftDetails> createGift();
 	
 	@DELETE
 	@Path("/{giftId}")
-	public void deleteGift(@PathParam("giftId") String giftId);
+	public ClientResponse<GiftDetails> deleteGift(@PathParam("giftId") String giftId);
 	
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateCart(GiftDetails gift);
+	public ClientResponse<GiftDetails> updateGift(GiftDetails gift);
 }
