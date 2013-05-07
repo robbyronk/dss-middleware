@@ -83,6 +83,26 @@
             <scope>test</scope>
         </dependency>
 
+		<dependency>
+          <groupId>org.ccci</groupId>
+          <artifactId>util</artifactId>
+          <version>3-SNAPSHOT</version>
+          <exclusions>
+            <exclusion>
+              <artifactId>jboss-el</artifactId>
+              <groupId>org.jboss.el</groupId>
+            </exclusion>
+            <exclusion>
+              <artifactId>jodaExt</artifactId>
+              <groupId>joda-ext</groupId>
+            </exclusion>
+            <exclusion>
+              <artifactId>hibernate-commons-annotations</artifactId>
+              <groupId>org.hibernate</groupId>
+            </exclusion>
+          </exclusions>
+        </dependency>
+        
         <dependency>
             <groupId>org.jboss.arquillian.testng</groupId>
             <artifactId>arquillian-testng-container</artifactId>
