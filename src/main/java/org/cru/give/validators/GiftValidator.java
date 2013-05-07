@@ -11,18 +11,32 @@ import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerator;
 import org.cru.give.webservices.model.GiftDetails;
 
-
-public class ValidateGift
+public class GiftValidator
 {
 	@Inject ValidateFrequency validateFrequency;
+	@Inject StartDateValidator validateStartDate;
 	
 	List<ValidationError> validationErrors = new ArrayList<ValidationError>();
+	
+	public void validateInputIfNecessary(GiftDetails gift, org.jboss.resteasy.spi.HttpResponse response) throws IOException
+	{
+		if(!gift.isValidate()) return;
+		
+		String errors = validate(gift);
+		if(errors != null)
+		{
+			response.sendError(400,errors);
+		}
+	}
 	
 	public String validate(GiftDetails gift) throws IOException
 	{
 		ValidationError frequencyValidationError = validateFrequency.validate(gift);
 		if(frequencyValidationError != null) validationErrors.add(frequencyValidationError);
 
+		ValidationError startDateValidationError = validateStartDate.validate(gift);
+		if(startDateValidationError != null) validationErrors.add(startDateValidationError);
+		
 		return serializeErrors();
 	}
 	

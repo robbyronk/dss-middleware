@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
 
 import org.cru.give.service.CartService;
 import org.cru.give.service.GiftService;
-import org.cru.give.validators.ValidateGift;
+import org.cru.give.validators.GiftValidator;
 import org.cru.give.webservices.model.GiftDetails;
 
 @Path("/gift")
@@ -29,7 +29,7 @@ import org.cru.give.webservices.model.GiftDetails;
 public class GiftResource
 {
 
-	@Inject ValidateGift validateGift;
+	@Inject GiftValidator giftValidator;
 	
 	@Inject EntityManager em;
 	@Inject GiftService giftService;
@@ -74,19 +74,12 @@ public class GiftResource
 	@Consumes(MediaType.APPLICATION_JSON)
 	public void updateCart(GiftDetails gift) throws IOException
 	{
-		if(gift.isValidate())
-		{
-			String error = validateGift.validate(gift);
-			
-			if(error != null)
-			{
-				response.sendError(400, error);
-				return;
-			}
-		}
+		giftValidator.validateInputIfNecessary(gift, response);
 		
 		giftService.updateGift(gift);
 		response.setStatus(200);
 	}
+
+	
 	
 }
