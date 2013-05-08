@@ -57,8 +57,10 @@ public class GiftValidator
 			 g.writeStartObject();
 			 g.writeFieldName("field-name");
 			 g.writeString(error.getFieldName());
-			 g.writeFieldName("error-message");
+			 g.writeFieldName("general-error-message");
 			 g.writeString(error.getError().message);
+			 g.writeFieldName("specific-error-message");
+			 g.writeString(error.getCustomErrorMessage());
 			 g.writeEndObject();
 		 }
 		 g.writeEndArray();

@@ -79,7 +79,4 @@ public class GiftResource
 		giftService.updateGift(gift);
 		response.setStatus(200);
 	}
-
-	
-	
 }

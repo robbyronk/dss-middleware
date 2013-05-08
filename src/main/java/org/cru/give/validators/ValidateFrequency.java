@@ -18,7 +18,9 @@ public class ValidateFrequency
 			if(lov.getDropdownName().equals(gift.getGiftFrequency())) return null;
 		}
 		
-		return new ValidationError(ValidationErrorType.INVALID_VALUE, "gift.giftFrequency");
+		return new ValidationError(ValidationErrorType.INVALID_VALUE, 
+									"gift.giftFrequency", 
+									"Gift Frequency must be one of: ....");
 	}
 	
 }

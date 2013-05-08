@@ -7,12 +7,20 @@ public class ValidationError implements java.io.Serializable
 	
 	String fieldName;
 	ValidationErrorType error;
+	String customErrorMessage;
 	
 	public ValidationError(ValidationErrorType error, String fieldName)
 	{
+		this(error, fieldName, null);
+	}
+
+	public ValidationError(ValidationErrorType error, String fieldName, String customErrorMessage)
+	{
 		this.error = error;
 		this.fieldName = fieldName;
+		this.customErrorMessage = customErrorMessage;
 	}
+
 	
 	public ValidationErrorType getError()
 	{
@@ -30,6 +38,14 @@ public class ValidationError implements java.io.Serializable
 	{
 		this.fieldName = fieldName;
 	}
-	
-	
+
+	public String getCustomErrorMessage()
+	{
+		return customErrorMessage;
+	}
+
+	public void setCustomErrorMessage(String customErrorMessage)
+	{
+		this.customErrorMessage = customErrorMessage;
+	}	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 public class GiftFrequencyOptions
 {
 	List<ListOfValues> giftFrequencyOptions;
-
+	
 	public GiftFrequencyOptions(List<ListOfValues> giftFrequencyOptions)
 	{
 		this.giftFrequencyOptions = giftFrequencyOptions;
