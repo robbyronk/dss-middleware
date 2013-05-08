@@ -1,10 +1,9 @@
 package org.cru.dss.give.functional;
 
-import java.util.List;
-
 import org.cru.give.webservices.model.GiftDetails;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
+import org.joda.time.DateTime;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -67,6 +66,18 @@ public class TestGiftResource
 		GiftDetails gift = new GiftDetails();
 		gift.setGiftId(1L);
 		gift.setGiftFrequency("Multi-month");
+		gift.setValidate(true);
+
+		ClientResponse<GiftDetails> updateResponse = client.updateGift(gift);
+		Assert.assertEquals(updateResponse.getStatus(), 400);
+	}
+	
+	@Test 
+	public void testUpdateGiftInvalidStartDate()
+	{
+		GiftDetails gift = new GiftDetails();
+		gift.setGiftId(1L);
+		gift.setStartDate(new DateTime().withDayOfMonth(1).withMonthOfYear(1).withYear(1900).toDate());
 		gift.setValidate(true);
 
 		ClientResponse<GiftDetails> updateResponse = client.updateGift(gift);
