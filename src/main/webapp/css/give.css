@@ -1,0 +1,73 @@
+/* style.css overrides for pages with no right sidebar */
+#content {
+	width: auto;
+	float: none;
+}
+#sidebar {
+	display: none;
+}
+
+#quick-search {
+	float: left;
+	width: 235px;
+}
+
+#quick-search form {
+	position: relative;
+	margin: 0 0 20px 0;
+	padding: 5px;
+	background: #eee;
+}
+#quick-search form input[type="text"] {
+	background: none;
+	border: 0;
+	width: 205px;
+}
+#quick-search form input::-webkit-input-placeholder {
+	font-style: italic;
+}
+#quick-search form input:-moz-placeholder {
+	font-style: italic;
+}
+
+#quick-search form button {
+	position: absolute;
+	top: 0px;
+	right: 3px;
+	width: 30px;
+	height: 30px;
+	background: url(images/sprites.png) -34px -110px;
+	border: 0;
+	cursor: pointer;
+	text-indent: -10000px;
+	overflow: hidden;
+}
+/* style.css override for give.cru.org carousel */
+#carousel {
+	margin: 0 10px 0 0;
+	width: 640px;
+	float: left;
+}
+
+#integrity {
+	clear: both;
+	padding: 15px 0 0 0;
+}
+#integrity .alignright {
+	margin: 0 0 10px 10px;
+}
+#integrity ul {
+	margin: 0 0 0 1.25em;
+}
+#integrity .col {
+	display: block;
+	float: left;
+	width: 225px;
+}
+#integrity .col-last {
+	float: right;
+}
+#integrity .col-2 {
+	width: 430px;
+	margin-left: 20px;
+}

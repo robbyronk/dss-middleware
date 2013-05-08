@@ -1,0 +1,157 @@
+/* Global Give Styles */
+input {
+	padding: 4px;
+	font-family: arial,sans-serif;
+	font-size: 13px;
+}
+
+.tableHeader {background-color: rgb(98,96,98); color: rgb(255,255,255);}
+.tableHeader a {color: rgb(255,255,255);}
+.tableHeaderAlternate {background-color: rgb(245,245,245); color: #000;}
+.rowHeader {background: rgb(98,96,98); color: rgb(255,255,255);}
+.tableFooter {background: rgb(230,230,230);}
+.cruDarkBlue {background: rgb(0,115,152);}
+.cruLightBlue {background: rgb(62,177,200);}
+.cruLightBlueText {color: rgb(62,177,200);}
+.cruGold {background: rgb(249,182,37);}
+.cruDarkGold {background: rgb(222,124,0);}
+.cruGrey {background: rgb(98,96,98);}
+.goldText {color: #930;}
+.giftNumbers {font-family: Arial, sans-serif;}
+.greyButton {padding: 5px 8px; font-size: 14px; font-weight: bold; text-decoration: none; cursor: pointer; color: rgb(255,255,255); background-color: rgb(98,96,98); border-radius: 4px; border: none;}
+.goldButton {padding: 5px 8px; font-size: 14px; font-weight: bold; text-decoration: none; cursor: pointer; color: rgb(255,255,255); background-color: rgb(249,182,37); border-radius: 4px; border: none;}
+.goldButton:hover {background-color: rgb(222,124,0); text-decoration: none;}
+.alternatingRows:nth-child(odd) {background: rgb(240,240,240);}
+.alternatingRows a {color: rgb(0,115,152);}
+.alternatingRows:nth-child(even) {background: rgb(220,220,220);}
+
+.recurringGiftTable th, .recurringGiftTable td {padding: .25em;}
+.recurringGiftTable hr {height: 1px; color: rgb(220,220,220); border: 0; background-color:  rgb(220,220,220);}
+
+.currentStep {color: rgb(0,0,0);}
+.notCurrentStep {color: rgb(200,200,200);}
+
+
+/* used on sign in page */
+.borderLeft {border-left: 1px solid gray; padding-left: 35px;}
+
+.error {
+   background-color: #FFEEEE;
+   color: #AA0000;
+   border: #AA0000 1px solid;
+   padding: 7px 7px 7px 7px;
+   width: 624px;
+   display: block;
+}
+
+.errorSidebox {
+   background-color: #FFEEEE;
+   color: #AA0000;
+   border: #AA0000 1px solid;
+   padding: 7px 7px 7px 7px;
+   width: 100%;
+   display: block;
+}
+
+.success {
+   background-color: #DDFFDD;
+   color: #007700;
+   border: #007700 1px solid;
+   padding: 7px;
+   width: 624px;
+   display: block;
+}
+
+.info {
+   background-color: #CCDDFF;
+   color: #000077;
+   border: #000077 1px solid;
+   padding: 7px;
+   width: 624px;
+   display: block;
+}
+
+textarea {width: 550px;}
+
+.signin {margin-right: 20px;}
+
+.td-no-padding {
+	padding-left: 0 !important; padding-right: 0 !important;
+} 
+
+.td-padding-right {
+	padding-right: .5em !important;
+}
+
+form.sidebar-padding {
+	padding: 10px;
+}
+
+
+#giveIntegrity { margin-top: 50px; }
+#digicertsitesealcode_dss { width: 69px; height: 35px; margin-top: 15px; padding: 0px; position: relative; float: left;}
+#ecfa { float: left; }
+#incometax { float:right; margin:15px 60px 0 0; width:420px;}
+#incometax p { font-size: 12px; }
+.accountnumber h3 { margin-top:-20px; margin-bottom:15px;}
+
+.cols-2 .col:first-child {float: left;}
+/* .cols-2 .col:last-child {float: right;} */
+.cols-2 .col {float: right;}
+
+/* Page Specific Give Styles */
+
+/* Pages with tables breaking widths fix due to padding */
+body#editprofile td, body#editpayment td, body#addpayment td, body#removepaymentmethodsimple td, body#changerecurringgift td, body#redirectgift1 td {
+	padding: .5em 0 .5em .5em;
+}
+
+/* End of Page Specific Give Styles */
+
+
+#content {
+	float: left;
+	width: 640px;
+	min-height: 400px;
+	padding: 35px;
+	background: white;
+	-moz-box-shadow: 0px 0px 100px #c8c8c8;
+	-webkit-box-shadow: 0px 0px 100px #c8c8c8;
+	box-shadow: 0px 0px 100px #c8c8c8;
+}
+
+#sidebar {
+	float: right;
+	width: 250px;
+	margin: 0 5px 0 0;
+	padding: 0;
+	display: inline;
+}
+
+#home #content {
+	width: auto; float: none;
+}
+
+#home #sidebar {display: none;}
+
+
+/* Uber bar search box - override style.css */ 
+#toolbar form {
+	position: absolute;
+	top: 6px;
+	right: 0;
+	height: 24px;
+	width: 200px; /* width 170px on style.css */
+	background: #4c4c4c;
+}
+#toolbar form input {
+	position: absolute;
+	left: 5px;
+	top: 0; /* top 5 px on style.css */
+	width: 140px;
+	height: 20px; /* no height on style.css */
+	background: none;
+	border: 0;
+	font-size: 14px;
+	color: white;
+}
