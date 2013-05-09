@@ -15,6 +15,7 @@ public class GiftValidator
 {
 	@Inject FrequencyValidator validateFrequency;
 	@Inject StartDateValidator validateStartDate;
+	@Inject DrawDayValidator validateDrawDay;
 	
 	String errors = null;
 	boolean isValid = true;
@@ -36,6 +37,9 @@ public class GiftValidator
 
 		ValidationError startDateValidationError = validateStartDate.validate(gift);
 		if(startDateValidationError != null) validationErrors.add(startDateValidationError);
+		
+		ValidationError dayOfMonthValidationError = validateDrawDay.validate(gift);
+		if(dayOfMonthValidationError != null) validationErrors.add(dayOfMonthValidationError);
 		
 		serializeErrors();
 	}

@@ -53,6 +53,10 @@ public class TestGiftResource
 		GiftDetails gift = new GiftDetails();
 		gift.setGiftId(1L);
 		gift.setGiftAmount(20.25);
+		gift.setGiftFrequency("Monthly");
+		gift.setDayOfMonth("10");
+		gift.setStartDate(new DateTime().plusYears(1).toDate());
+		gift.setValidate(true);
 
 		createClient().updateGift(gift);
 
@@ -86,6 +90,18 @@ public class TestGiftResource
 
 		ClientResponse<GiftDetails> updateResponse = createClient().updateGift(gift);
 		Assert.assertEquals(updateResponse.getStatus(), 400);
+	}
+	
+	@Test 
+	public void testUpdateGiftInvalidDrawDay()
+	{
+		GiftDetails gift = new GiftDetails();
+		gift.setGiftId(1L);
+		gift.setGiftFrequency("Monthly");
+		gift.setDayOfMonth("22");
+		gift.setValidate(true);
 
+		ClientResponse<GiftDetails> updateResponse = createClient().updateGift(gift);
+		Assert.assertEquals(updateResponse.getStatus(), 400);
 	}
 }
