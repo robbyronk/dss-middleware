@@ -30,6 +30,7 @@ public class GiftDetails implements java.io.Serializable
 		CapturedGift capturedGift = new CapturedGift();
 		
 		capturedGift.setGiftId(giftId);
+		capturedGift.setCartId(cartId);
 		
 		capturedGift.setDesignationId(designationNumber);
 		capturedGift.setAmount(giftAmount);
