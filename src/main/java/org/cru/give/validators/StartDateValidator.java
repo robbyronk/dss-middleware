@@ -31,12 +31,19 @@ public class StartDateValidator
 		DateTime latestCreditCardRun = drawRunService.getLatestCreditCardDrawStartDateAndTime();
 		DateTime latestEftRun = drawRunService.getLatestEFTDrawStartDateAndTime();
 		
+		/**
+		 * The gift can be given today, so long as the draw hasn't started.  Draw check happens next.
+		 */
 		if(!giftStartDate.isAfter(todayAtMidnight))
 		{
 			return new ValidationError(ValidationErrorType.INVALID_VALUE, "gift.startDate", "Start date must be set today or in the future.");
 		}
 		
-		if(!giftStartDate.isAfter(latestCreditCardRun) && !giftStartDate.isAfter(latestEftRun))
+		/**
+		 * Now check the gift start date at midnight versus the latest draw runs.. this will ensure that if a draw
+		 * is started for the desired gift start date, an exception is thrown
+		 */
+		if(!giftStartDate.withMillisOfDay(0).isAfter(latestCreditCardRun) && !giftStartDate.withMillisOfDay(0).isAfter(latestEftRun))
 		{
 			return new ValidationError(ValidationErrorType.INVALID_VALUE, "gift.startDate", "Start date must be after latest draw");
 		}
