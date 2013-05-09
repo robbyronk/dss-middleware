@@ -13,7 +13,7 @@ import org.cru.give.webservices.model.GiftDetails;
 
 public class GiftValidator
 {
-	@Inject ValidateFrequency validateFrequency;
+	@Inject FrequencyValidator validateFrequency;
 	@Inject StartDateValidator validateStartDate;
 	
 	String errors = null;

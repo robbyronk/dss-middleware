@@ -6,7 +6,7 @@ import org.cru.give.model.GiftFrequencyOptions;
 import org.cru.give.model.ListOfValues;
 import org.cru.give.webservices.model.GiftDetails;
 
-public class ValidateFrequency
+public class FrequencyValidator
 {
 	
 	@Inject GiftFrequencyOptions giftFrequencyOptions;

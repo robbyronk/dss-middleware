@@ -28,7 +28,7 @@ public class TestCartResource
 	public void testCreateCart()
 	{
 		ClientResponse<GiftCart> giftCartResponse = client.createCart();
-		String header = giftCartResponse.getHeaderAsLink("X-Created-Cart").getHref();
+		String header = giftCartResponse.getHeaderAsLink("Location").getHref();
 		
 		Assert.assertNotNull(header);
 	}
