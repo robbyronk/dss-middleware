@@ -9,6 +9,7 @@ public class GiftDetails implements java.io.Serializable
 	private static final long serialVersionUID = 1L;
 
 	Long giftId;
+	Long cartId;
 	
 	String designationNumber;
 	Double giftAmount;
@@ -135,5 +136,15 @@ public class GiftDetails implements java.io.Serializable
 	public void setValidate(boolean validate)
 	{
 		this.validate = validate;
+	}
+
+	public Long getCartId()
+	{
+		return cartId;
+	}
+
+	public void setCartId(Long cartId)
+	{
+		this.cartId = cartId;
 	}
 }

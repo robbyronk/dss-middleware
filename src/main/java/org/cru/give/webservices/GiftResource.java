@@ -72,7 +72,7 @@ public class GiftResource
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateCart(GiftDetails gift) throws IOException
+	public void updateGift(GiftDetails gift) throws IOException
 	{
 		giftValidator.validateInputIfNecessary(gift, response);
 		

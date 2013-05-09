@@ -1,9 +1,12 @@
 package org.cru.give.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.cru.give.model.CapturedGift;
+import org.cru.give.model.transformers.GiftTransformer;
 import org.cru.give.webservices.model.GiftDetails;
 
 public class GiftService
@@ -15,12 +18,16 @@ public class GiftService
 		CapturedGift capturedGift = findGift(giftId);
 		
 		if(capturedGift == null) throw new RuntimeException("Gift " + giftId + " was not found :(");
-		
-		GiftDetails giftDetails = new GiftDetails();
-		giftDetails.setGiftId(capturedGift.getGiftId());
-		giftDetails.setGiftAmount(capturedGift.getAmount());
-		
-		return giftDetails;
+
+		return GiftTransformer.asGiftDetails(capturedGift);
+	}
+	
+	public List<GiftDetails> fetchGiftsForCart(String cartId)
+	{
+		return GiftTransformer.asGiftDetails(
+					em.createQuery("SELECT gift FROM CapturedGift gift WHERE cartId = :cartId", CapturedGift.class)
+							.setParameter("cartId", new Long(cartId))
+							.getResultList());
 	}
 	
 	public Long createNewGift()

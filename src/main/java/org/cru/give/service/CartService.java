@@ -12,6 +12,8 @@ public class CartService
 {
 	@Inject EntityManager em;
 	
+	@Inject GiftService giftService;
+	
 	public GiftCart fetchGiftCart(String cartId)
 	{
 		CapturedNameAddressAndPayment capNap = em.find(CapturedNameAddressAndPayment.class, new Long(cartId));
@@ -24,6 +26,8 @@ public class CartService
 		giftCart.getMailingAddress().setCity(capNap.getCity());
 		giftCart.setPayment(new Payment());
 		giftCart.getPayment().setDescription(capNap.getPaymentDescription());
+		
+		giftCart.setGifts(giftService.fetchGiftsForCart(cartId));
 		
 		return giftCart;
 	}
