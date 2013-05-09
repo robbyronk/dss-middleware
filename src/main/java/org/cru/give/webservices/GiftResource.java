@@ -56,7 +56,7 @@ public class GiftResource
 	public Response createGift() throws URISyntaxException
 	{
 		Long newGiftId = giftService.createNewGift();
-		return Response.created(new URI("/dss-middleware/rest/gift/" + newGiftId)).build();
+		return Response.created(new URI("/gift/" + newGiftId)).build();
 	}
 	
 	@DELETE

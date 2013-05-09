@@ -39,7 +39,7 @@ public class CartResource
 	public Response createCart() throws URISyntaxException
 	{
 		Long cartId = cartService.createNewGiftCart();
-		return Response.created(new URI("/dss-middleware/rest/gift/" + cartId)).build(); 
+		return Response.created(new URI("/cart/" + cartId)).build(); 
 	}
 	
 	@DELETE
