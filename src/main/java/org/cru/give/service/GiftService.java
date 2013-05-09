@@ -12,6 +12,7 @@ import org.cru.give.webservices.model.GiftDetails;
 public class GiftService
 {
 	@Inject EntityManager em;
+	@Inject DesignationService designationService;
 
 	public GiftDetails fetchGift(String giftId)
 	{
@@ -50,7 +51,24 @@ public class GiftService
 	
 	public void updateGift(GiftDetails gift)
 	{
-		em.merge(gift.asCapturedGift());
+		CapturedGift capturedGift = gift.asCapturedGift();
+		
+		capturedGift = setSiebelDesignationId(gift.getDesignationNumber(), capturedGift);
+
+		em.merge(capturedGift);
+	}
+
+	/**
+	 * We will assume that the external client does not know the Siebel Row
+	 * ID of the designation number, so we'll set that for them by using
+	 * the Siebel resource in WSAPI project to look it up.
+	 * @param gift
+	 * @param capturedGift
+	 */
+	private CapturedGift setSiebelDesignationId(String designationNumber, CapturedGift capturedGift)
+	{
+		capturedGift.setDesignationId(designationService.getDesignationByNumber(designationNumber).getId());
+		return capturedGift;
 	}
 	
 	private CapturedGift findGift(String giftId)
