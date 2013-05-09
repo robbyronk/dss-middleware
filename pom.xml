@@ -110,11 +110,11 @@
         </dependency>
 
         <!-- Import internal libraries -->
-        <dependency>
-            <groupId>org.ccci</groupId>
-            <artifactId>cdi-quartz</artifactId>
-            <version>1-SNAPSHOT</version>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.ccci</groupId> -->
+<!--             <artifactId>cdi-quartz</artifactId> -->
+<!--             <version>1-SNAPSHOT</version> -->
+<!--         </dependency> -->
 
         <dependency>
             <groupId>org.ccci</groupId>
