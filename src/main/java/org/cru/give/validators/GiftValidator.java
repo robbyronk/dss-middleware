@@ -16,20 +16,20 @@ public class GiftValidator
 	@Inject ValidateFrequency validateFrequency;
 	@Inject StartDateValidator validateStartDate;
 	
+	String errors = null;
+	boolean isValid = true;
+	
 	List<ValidationError> validationErrors = new ArrayList<ValidationError>();
 	
-	public void validateInputIfNecessary(GiftDetails gift, org.jboss.resteasy.spi.HttpResponse response) throws IOException
+	public void validateInputIfNecessary(GiftDetails gift) throws IOException
 	{
-		if(!gift.isValidate()) return;
-		
-		String errors = validate(gift);
-		if(errors != null)
+		if(gift.isValidate())
 		{
-			response.sendError(400,errors);
+			validate(gift);
 		}
 	}
 	
-	public String validate(GiftDetails gift) throws IOException
+	public void validate(GiftDetails gift) throws IOException
 	{
 		ValidationError frequencyValidationError = validateFrequency.validate(gift);
 		if(frequencyValidationError != null) validationErrors.add(frequencyValidationError);
@@ -37,39 +37,56 @@ public class GiftValidator
 		ValidationError startDateValidationError = validateStartDate.validate(gift);
 		if(startDateValidationError != null) validationErrors.add(startDateValidationError);
 		
-		return serializeErrors();
+		serializeErrors();
 	}
 	
-	private String serializeErrors() throws IOException
+	private void serializeErrors() throws IOException
 	{
-		if(validationErrors.isEmpty()) return null;
+		if(validationErrors.isEmpty())
+		{
+			isValid = true;
+			errors = null;
+		}
+		else
+		{
+			JsonFactory f = new JsonFactory();
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		 JsonFactory f = new JsonFactory();
-		 ByteArrayOutputStream out = new ByteArrayOutputStream();
-		 
-		 JsonGenerator g = f.createJsonGenerator(out);
-		 g.writeStartObject();
-		 g.writeArrayFieldStart("fields");
-		 g.writeStartArray();
+			JsonGenerator g = f.createJsonGenerator(out);
+			g.writeStartObject();
+			g.writeArrayFieldStart("fields");
+			g.writeStartArray();
 
-		 for(ValidationError error : validationErrors)
-		 {
-			 g.writeStartObject();
-			 g.writeFieldName("field-name");
-			 g.writeString(error.getFieldName());
-			 g.writeFieldName("general-error-message");
-			 g.writeString(error.getError().message);
-			 g.writeFieldName("specific-error-message");
-			 g.writeString(error.getCustomErrorMessage());
-			 g.writeEndObject();
-		 }
-		 g.writeEndArray();
-		 
-		 g.close();
-		 
-		 validationErrors.clear();
-		 
-		 return out.toString();
-		 
+			for(ValidationError error : validationErrors)
+			{
+				g.writeStartObject();
+				g.writeFieldName("field-name");
+				g.writeString(error.getFieldName());
+				g.writeFieldName("general-error-message");
+				g.writeString(error.getError().message);
+				g.writeFieldName("specific-error-message");
+				g.writeString(error.getCustomErrorMessage());
+				g.writeEndObject();
+			}
+			g.writeEndArray();
+
+			g.close();
+
+			validationErrors.clear();
+
+			errors = out.toString();
+			isValid = false;
+		}
 	}
+
+	public String getErrors()
+	{
+		return errors;
+	}
+
+	public boolean isValid()
+	{
+		return isValid;
+	}
+
 }

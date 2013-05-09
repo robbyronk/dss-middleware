@@ -1,6 +1,8 @@
 package org.cru.give.webservices;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -14,9 +16,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.cru.give.service.CartService;
 import org.cru.give.service.GiftService;
@@ -32,9 +34,7 @@ public class GiftResource
 	
 	@Inject GiftService giftService;
 	@Inject CartService cartService;
-	
-	@Context org.jboss.resteasy.spi.HttpResponse response;
-	
+		
 	@GET
 	@Path("/{giftId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -53,28 +53,35 @@ public class GiftResource
 	
 	@POST
 	@Path("/")
-	public void createGift()
+	public Response createGift() throws URISyntaxException
 	{
 		Long newGiftId = giftService.createNewGift();
-		response.getOutputHeaders().putSingle("X-Created-Gift", "/dss-middleware/rest/gift/" + newGiftId);
-		response.setStatus(Response.Status.CREATED.getStatusCode());
+		return Response.created(new URI("/dss-middleware/rest/gift/" + newGiftId)).build();
 	}
 	
 	@DELETE
 	@Path("/{giftId}")
-	public void deleteGift(@PathParam("giftId") String giftId)
+	public Response deleteGift(@PathParam("giftId") String giftId)
 	{
 		giftService.deleteGift(giftId);
+		return Response.noContent().build();
 	}
 	
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateGift(GiftDetails gift) throws IOException
+	public Response updateGift(GiftDetails gift) throws IOException
 	{
-		giftValidator.validateInputIfNecessary(gift, response);
+		giftValidator.validateInputIfNecessary(gift);
 		
-		giftService.updateGift(gift);
-		response.setStatus(200);
+		if(giftValidator.isValid())
+		{
+			giftService.updateGift(gift);
+			return Response.noContent().build();
+		}
+		else
+		{
+			return Response.status(Status.BAD_REQUEST).entity(giftValidator.getErrors()).build();
+		}
 	}
 }

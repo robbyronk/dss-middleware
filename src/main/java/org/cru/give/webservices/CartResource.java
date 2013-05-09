@@ -1,5 +1,8 @@
 package org.cru.give.webservices;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -10,7 +13,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -24,8 +26,6 @@ public class CartResource
 	
 	@Inject CartService cartService;
 	
-	@Context org.jboss.resteasy.spi.HttpResponse response;
-	
 	@GET
 	@Path("/{cartId}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -36,25 +36,26 @@ public class CartResource
 	
 	@POST
 	@Path("/")
-	public void createCart()
+	public Response createCart() throws URISyntaxException
 	{
 		Long cartId = cartService.createNewGiftCart();
-		response.getOutputHeaders().putSingle("X-Created-Cart", "/dss-middleware/rest/cart/" + cartId);
-		response.setStatus(Response.Status.CREATED.getStatusCode()); 
+		return Response.created(new URI("/dss-middleware/rest/gift/" + cartId)).build(); 
 	}
 	
 	@DELETE
 	@Path("/{cartId}")
-	public void deleteCart(@PathParam("cartId") String cartId)
+	public Response deleteCart(@PathParam("cartId") String cartId)
 	{
 		cartService.deleteGiftCart(cartId);
+		return Response.noContent().build();
 	}
 	
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateCart(GiftCart cart)
+	public Response updateCart(GiftCart cart)
 	{
 		cartService.updateGiftCart(cart);
+		return Response.noContent().build();
 	}
 }

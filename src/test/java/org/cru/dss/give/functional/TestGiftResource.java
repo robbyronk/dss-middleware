@@ -1,11 +1,16 @@
 package org.cru.dss.give.functional;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.cru.give.webservices.model.GiftDetails;
+import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
+import org.jboss.resteasy.client.core.executors.ApacheHttpClient4Executor;
 import org.joda.time.DateTime;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class TestGiftResource
@@ -14,20 +19,21 @@ public class TestGiftResource
 
 	Environment environment = Environment.LOCAL;
 
-	GiftClient client;
-
-	@BeforeMethod
-	public void createClient()
+	public GiftClient createClient()
 	{
+		ClientConnectionManager cm = new ThreadSafeClientConnManager();
+		HttpClient httpClient = new DefaultHttpClient(cm);
+		ClientExecutor executor = new ApacheHttpClient4Executor(httpClient);
+		
 		String restApiBaseUrl = environment.getUrlAndContext() + "/" + RESOURCE_PREFIX;
-		client = ProxyFactory.create(GiftClient.class, restApiBaseUrl);
+		return ProxyFactory.create(GiftClient.class, restApiBaseUrl, executor);
 	}
 
 	@Test
 	public void testCreateGift()
 	{
-		ClientResponse<GiftDetails> giftResponse = client.createGift();
-		String header = giftResponse.getHeaderAsLink("X-Created-Gift").getHref();
+		ClientResponse<GiftDetails> giftResponse = createClient().createGift();
+		String header = giftResponse.getHeaderAsLink("Location").getHref();
 
 		Assert.assertNotNull(header);
 	}
@@ -35,7 +41,7 @@ public class TestGiftResource
 	@Test
 	public void testFetchGift()
 	{
-		ClientResponse<GiftDetails> giftResponse = client.getGift("1");
+		ClientResponse<GiftDetails> giftResponse = createClient().getGift("1");
 		GiftDetails gift = giftResponse.getEntity(GiftDetails.class);
 
 		Assert.assertEquals(gift.getGiftId(), new Long(1));
@@ -48,11 +54,9 @@ public class TestGiftResource
 		gift.setGiftId(1L);
 		gift.setGiftAmount(20.25);
 
-		client.updateGift(gift);
+		createClient().updateGift(gift);
 
-		createClient();
-
-		ClientResponse<GiftDetails> updatedGiftResponse = client.getGift("1");
+		ClientResponse<GiftDetails> updatedGiftResponse = createClient().getGift("1");
 		GiftDetails updatedGift = updatedGiftResponse.getEntity(GiftDetails.class);
 
 		Assert.assertNotNull(updatedGift);
@@ -68,7 +72,7 @@ public class TestGiftResource
 		gift.setGiftFrequency("Multi-month");
 		gift.setValidate(true);
 
-		ClientResponse<GiftDetails> updateResponse = client.updateGift(gift);
+		ClientResponse<GiftDetails> updateResponse = createClient().updateGift(gift);
 		Assert.assertEquals(updateResponse.getStatus(), 400);
 	}
 	
@@ -80,7 +84,7 @@ public class TestGiftResource
 		gift.setStartDate(new DateTime().withDayOfMonth(1).withMonthOfYear(1).withYear(1900).toDate());
 		gift.setValidate(true);
 
-		ClientResponse<GiftDetails> updateResponse = client.updateGift(gift);
+		ClientResponse<GiftDetails> updateResponse = createClient().updateGift(gift);
 		Assert.assertEquals(updateResponse.getStatus(), 400);
 
 	}
