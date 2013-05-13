@@ -1,4 +1,7 @@
-function GiftDetlController($scope, $http){
+'use strict';
+
+angular.module('dssMiddlewareApp')
+	.controller('GiftDetlController', function ($scope, $http){
 	
 	/*creates a new 'blank cart' in the database and looks for the URI to 
 	 *the resource in the header 'Location'*/
@@ -38,14 +41,4 @@ function GiftDetlController($scope, $http){
 		$http.put('http://localhost:8080/dss-middleware/rest/gift', $scope.gift);
 	};
 	
-};
-
-//TBD below....
-function GiftCartController($scope, $http){
-	$scope.retrieveCart = function(){
-		$http.get('http://localhost:8080/dss-middleware/rest/cart/')
-			.success(function(data, status, headers, config){
-				$scope.cart = data;
-			});
-	}
-}
+});
