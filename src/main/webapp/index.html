@@ -13,7 +13,14 @@
 </head>
 
 <body id="give" data-ng-controller="GiftDetlController" data-ng-init="createGift()">
-	<div class="container" data-ng-view></div>
+	<div class="container">
+		<div id="wrap">
+			<div data-ng-include="'includes/header.html'"></div>
+			<div id="content" style="min-height: 50px;" data-ng-view></div>
+			<div class="clear"></div>
+			<div class="clear"></div>
+		</div>
+	</div>
 	
 	<script src="components/angular.js" type="text/javascript"></script>
 	<script src="js/app.js" type="text/javascript"></script>

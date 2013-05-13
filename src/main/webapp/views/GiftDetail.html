@@ -1,132 +1,112 @@
-<div id="wrap" class="">
-	
-	<div data-ng-include="header.html"></div>
+<h1 class="pagetitle">
+	New Gift
+</h1>
 		
-	<!-- start content -->
-	<div id="content" style="min-height: 50px;">
-			
-			
-		<!-- START EDITING FROM HERE -->
-		<h1 class="pagetitle">
-			New Gift
-		</h1>
-				
-		<form data-ng-submit="saveGift()">
-	
-			<table width="100%" align="center" border="0" cellpadding="3" cellspacing="0" style="border:solid 1px black">
-				
-				<tr class="tableHeader"><td height="20" colspan="3">
-					<b>I would like my gift to benefit the ministry of:</b>
-				</td></tr>
-				
-				<tr ><td colspan="3">
-				<!-- start with right-aligned table; target description comes later -->
-				<b>Ryan T. Carlson</b><br/>
-				<font size="1">Ministry #2843160</font>
-				
-				<!-- if fund appeal specifies special amounts, then display those instead of the defaults  -->
-		
-				<table align="center" border="0" cellspacing="2" cellpadding="2">
-					<tr>
-					    <td width="15" height="30" align="center" valign="middle" >
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="50.00" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$50</b></div></td>
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="100.00" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$100</b></div></td>
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="250.00" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$250</b></div></td>
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="500.00" />
-					    </td>
-					    <td width="50"><div align="left"><b class="giftNumbers">$500</b></div></td>
-					</tr>
-					<tr>
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="1000.00" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$1000</b></div></td>
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="5000.00" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$5000</b></div></td>
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="0.0" />
-					    </td>
-		
-					    <td colspan="3"><b>Other:</b>&nbsp;<input type="text" data-ng-model="gift.giftAmount" class="inputStyle" size="15" style="width: 110px;" /></td>
-					</tr>
-				</table>
-		
-				<br />
-				</td></tr>
-				
-				<tr class="tableHeader"><td height="15" colspan="3">
-					<b>Gift Frequency</b>
-				</td></tr>
-				
-				<tr><td height="30" colspan="3">
-					<center>
-						<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Single"/> <b>Single Gift</b> &nbsp;&nbsp;
-						<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Monthly"/> <b>Monthly</b> &nbsp;&nbsp;
-						<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Quarterly"/> <b>Quarterly</b> &nbsp;&nbsp;
-						<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Semi-Annual"/> <b>Semi-Annual</b> &nbsp;&nbsp;
-						<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Annual"/> <b>Annual</b> &nbsp;&nbsp;
-					</center>
-				</td></tr>
-				
-				<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" class="tableHeader">
-					<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
-				</tr>
-				<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" height="45" valign="middle">
-					<td align="left" valign="middle" width="40%" colspan="1">
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<select>
-							<option value="May, 2013">May, 2013</option>
-						</select>
-						
-					</td>
-					<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
-						<select data-ng-model="gift.dayOfMonth">
-							<option value="5" selected>5th</option>
-							<option value="10">10th</option>
-							<option value="15">15th</option>
-							<option value="20">20th</option>
-							<option value="25">25th</option>
-						</select>
-					</td>
-				</tr>
-				
-				<tr class="tableFooter">
-					<td align="left" border="0" height="30" colspan="1">
-						<a $c.directLink("cancel") class="greyButton" alt="Cancel">Cancel</a>	
-					</td>
-				
-					<td align="right" border="0" height="30" colspan="2">
-				
-			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" />
-				
-				  	</td>
-				</tr>
-			</table>
-			 
-			
-		</form>			
-			<!-- STOP EDITING FROM HERE -->
-			
-		<div class="clear"></div>
-	</div> <!-- end  -->
-	
-	
-	<div class="clear"></div>
-	<div class="clear"></div>
+<form data-ng-submit="saveGift()">
 
-</div> <!-- end wrap -->
+	<table width="100%" align="center" border="0" cellpadding="3" cellspacing="0" style="border:solid 1px black">
+		
+		<tr class="tableHeader"><td height="20" colspan="3">
+			<b>I would like my gift to benefit the ministry of:</b>
+		</td></tr>
+		
+		<tr ><td colspan="3">
+		<!-- start with right-aligned table; target description comes later -->
+		<b>Ryan T. Carlson</b><br/>
+		<font size="1">Ministry #2843160</font>
+		
+		<!-- if fund appeal specifies special amounts, then display those instead of the defaults  -->
+
+		<table align="center" border="0" cellspacing="2" cellpadding="2">
+			<tr>
+			    <td width="15" height="30" align="center" valign="middle" >
+			    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="50.00" />
+			    </td>
+			    <td width="100"><div align="left"><b class="giftNumbers">$50</b></div></td>
+			    <td width="15" height="20" align="center" valign="middle">
+			    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="100.00" />
+			    </td>
+			    <td width="100"><div align="left"><b class="giftNumbers">$100</b></div></td>
+			    <td width="15" height="20" align="center" valign="middle">
+			    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="250.00" />
+			    </td>
+			    <td width="100"><div align="left"><b class="giftNumbers">$250</b></div></td>
+			    <td width="15" height="20" align="center" valign="middle">
+			    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="500.00" />
+			    </td>
+			    <td width="50"><div align="left"><b class="giftNumbers">$500</b></div></td>
+			</tr>
+			<tr>
+			    <td width="15" height="20" align="center" valign="middle">
+			    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="1000.00" />
+			    </td>
+			    <td width="100"><div align="left"><b class="giftNumbers">$1000</b></div></td>
+			    <td width="15" height="20" align="center" valign="middle">
+			    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="5000.00" />
+			    </td>
+			    <td width="100"><div align="left"><b class="giftNumbers">$5000</b></div></td>
+			    <td width="15" height="20" align="center" valign="middle">
+			    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" value="0.0" />
+			    </td>
+
+			    <td colspan="3"><b>Other:</b>&nbsp;<input type="text" data-ng-model="gift.giftAmount" class="inputStyle" size="15" style="width: 110px;" /></td>
+			</tr>
+		</table>
+
+		<br />
+		</td></tr>
+		
+		<tr class="tableHeader"><td height="15" colspan="3">
+			<b>Gift Frequency</b>
+		</td></tr>
+		
+		<tr><td height="30" colspan="3">
+			<center>
+				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Single"/> <b>Single Gift</b> &nbsp;&nbsp;
+				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Monthly"/> <b>Monthly</b> &nbsp;&nbsp;
+				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Quarterly"/> <b>Quarterly</b> &nbsp;&nbsp;
+				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Semi-Annual"/> <b>Semi-Annual</b> &nbsp;&nbsp;
+				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" value="Annual"/> <b>Annual</b> &nbsp;&nbsp;
+			</center>
+		</td></tr>
+		
+		<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" class="tableHeader">
+			<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
+		</tr>
+		<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" height="45" valign="middle">
+			<td align="left" valign="middle" width="40%" colspan="1">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<select>
+					<option value="May, 2013">May, 2013</option>
+				</select>
+				
+			</td>
+			<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
+				<select data-ng-model="gift.dayOfMonth">
+					<option value="5" selected>5th</option>
+					<option value="10">10th</option>
+					<option value="15">15th</option>
+					<option value="20">20th</option>
+					<option value="25">25th</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr class="tableFooter">
+			<td align="left" border="0" height="30" colspan="1">
+				<a $c.directLink("cancel") class="greyButton" alt="Cancel">Cancel</a>	
+			</td>
+		
+			<td align="right" border="0" height="30" colspan="2">
+		
+	  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" />
+		
+		  	</td>
+		</tr>
+	</table>
+	 
 	
-<!-- footer.html -->
+</form>			
 	
+<div class="clear"></div>
