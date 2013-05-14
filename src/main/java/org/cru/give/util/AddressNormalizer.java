@@ -1,13 +1,36 @@
 package org.cru.give.util;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.xml.namespace.QName;
+
 import org.ccci.postalsoft.PostalAddress;
 import org.ccci.postalsoft.PostalsoftService;
+import org.ccci.postalsoft.Util_002fPostalSoft;
 import org.ccci.webservices.services.postalsoft.CorrectionResult;
 import org.cru.give.webservices.model.MailingAddress;
 
 public class AddressNormalizer
 {
 	PostalsoftService postalsoft;
+
+    private static final String namespaceURI = "http://postalsoft.ccci.org";
+    private static final QName serviceName = new QName(namespaceURI ,"util/PostalSoft");
+
+	public AddressNormalizer()
+	{
+		try
+		{
+			URL url = new URL("http://hart-a321.net.ccci.org:8680/wsapi/services/util/PostalSoft");
+			Util_002fPostalSoft svc = new Util_002fPostalSoft(url, serviceName);
+			postalsoft = svc.getUtil_002fPostalSoftHttpPort();
+		}
+		catch(MalformedURLException e)
+		{
+			throw new RuntimeException("Go harass the guy who coded this",e);
+		}
+	}
 	
 	public void normalize(MailingAddress address)
 	{
