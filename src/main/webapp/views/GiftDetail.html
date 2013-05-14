@@ -96,6 +96,53 @@
 			</td>
 		</tr>
 		
+		<tr class="tableHeader">
+			<td height="15" colspan="3">
+				<b>Optional Comments</b>
+			</td>
+		</tr>
+		<tr height="5"><td colspan="3"><!-- this is for spacing --></td></tr>
+		
+		<tr height="20" data-ng-hide="showStaffComment == 'Y'">
+			<td colspan="3">
+				&nbsp <a href="#" data-ng-click="toggleShowComment('staff', $event)"> Add Comments For Ryan T. Carlson</a>
+			</td>
+		</tr>
+		<tr data-ng-hide="showStaffComment == 'N'">
+			<td align="left" valign="middle" height="100" colspan="3">
+				<b>&nbsp Comments For Ryan T. Carlson:</b>
+				<br />
+				<table align="center">
+					<tr >
+						<td>
+							<textarea rows="3" cols="60" align="center" maxlength="1000" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToRecipient" ></textarea>
+						</td>
+					</tr>
+				</table>
+				<br />
+			</td>
+		</tr>
+					
+		<tr height="25" valign="top" data-ng-hide="showDonComment == 'Y'">
+			<td valign="top" colspan="3">
+				&nbsp <a href="#" data-ng-click="toggleShowComment('don', $event)"> Add Comments For Donation Services</a>
+			</td>
+		</tr>
+		<tr data-ng-hide="showDonComment == 'N'">
+			<td align="left" valign="middle" height="20" colspan="3">
+				<b>&nbsp Comments For Donation Services:</b>
+				<br />
+				<table align="center">
+					<tr >
+						<td>
+							<textarea rows="3" cols="60" align="center" maxlength="250" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToDonationServices"></textarea>
+						</td>
+					</tr>
+				</table>
+				<br />
+			</td>
+		</tr>
+		
 		<tr class="tableFooter">
 			<td align="left" border="0" height="30" colspan="1">
 				<a $c.directLink("cancel") class="greyButton" alt="Cancel">Cancel</a>	
