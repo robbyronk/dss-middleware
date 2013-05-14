@@ -23,6 +23,11 @@ public class DrawDayValidator
 	public ValidationError validate(GiftDetails gift)
 	{
 		if("Single".equals(gift.getGiftFrequency())) return null;
+		if(gift.getDayOfMonth() == null || gift.getDayOfMonth().trim().equals(""))
+		{
+			return new ValidationError(ValidationErrorType.MISSING_REQUIRED_FIELD, 
+										"gift.dayOfMonth");
+		}
 		if(validValues.containsKey(gift.getDayOfMonth()) || validValues.containsValue(gift.getDayOfMonth())) return null;
 		
 		return new ValidationError(ValidationErrorType.INVALID_VALUE, 
