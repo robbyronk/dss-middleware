@@ -8,6 +8,7 @@ angular.module('dssMiddlewareApp')
 		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual'];
 		$scope.showDonComment = 'N';
 		$scope.showStaffComment = 'N';
+		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry'};
 		
 		/*creates a new 'blank cart' in the database and looks for the URI to 
 		 *the resource in the header 'Location'*/

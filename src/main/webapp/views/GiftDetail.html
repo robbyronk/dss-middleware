@@ -10,8 +10,8 @@
 		
 		<tr ><td colspan="3">
 		<!-- start with right-aligned table; target description comes later -->
-		<b>Ryan T. Carlson</b><br/>
-		<font size="1">Ministry #{{designationNumber}}</font>
+		<b>{{designation.externalDescription}}</b><br/>
+		<font size="1">{{designation.type}} #{{designationNumber}}</font>
 		
 		<!-- if fund appeal specifies special amounts, then display those instead of the defaults  -->
 
@@ -105,12 +105,12 @@
 		
 		<tr height="20" data-ng-hide="showStaffComment == 'Y'">
 			<td colspan="3">
-				&nbsp <a href="#" data-ng-click="toggleShowComment('staff', $event)"> Add Comments For Ryan T. Carlson</a>
+				&nbsp; <a href="#" data-ng-click="toggleShowComment('staff', $event)"> Add Comments For {{designation.externalDescription}}</a>
 			</td>
 		</tr>
 		<tr data-ng-hide="showStaffComment == 'N'">
 			<td align="left" valign="middle" height="100" colspan="3">
-				<b>&nbsp Comments For Ryan T. Carlson:</b>
+				<b>&nbsp; Comments For {{designation.externalDescription}}:</b>
 				<br />
 				<table align="center">
 					<tr >
@@ -125,12 +125,12 @@
 					
 		<tr height="25" valign="top" data-ng-hide="showDonComment == 'Y'">
 			<td valign="top" colspan="3">
-				&nbsp <a href="#" data-ng-click="toggleShowComment('don', $event)"> Add Comments For Donation Services</a>
+				&nbsp; <a href="#" data-ng-click="toggleShowComment('don', $event)"> Add Comments For Donation Services</a>
 			</td>
 		</tr>
 		<tr data-ng-hide="showDonComment == 'N'">
 			<td align="left" valign="middle" height="20" colspan="3">
-				<b>&nbsp Comments For Donation Services:</b>
+				<b>&nbsp; Comments For Donation Services:</b>
 				<br />
 				<table align="center">
 					<tr >
