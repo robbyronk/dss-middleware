@@ -6,75 +6,145 @@ import org.testng.annotations.Test;
 
 public class AddressValidationTest
 {
-
-
 	@Test
 	public void testZipCodeCorrectVersions() throws Exception
 	{
 		MailingAddress addr = createStandardAddress();
+		
 		addr.setZipCode("32832");
+		Assert.assertNull(new AddressValidator().validate(addr), "Valid zip-code, no error expected");
+		
+		addr = createStandardAddress();
 		addr.setZipCode("85254");
+		Assert.assertNull(new AddressValidator().validate(addr), "Valid zip-code, no error expected");
+		
+		addr = createStandardAddress();
 		addr.setZipCode("32832-4567");
+		Assert.assertNull(new AddressValidator().validate(addr), "Valid zip-code, no error expected");
+		
+		addr = createStandardAddress();
 		addr.setZipCode("99999-0000");
-
+		Assert.assertNull(new AddressValidator().validate(addr), "Valid zip-code, no error expected");
 	}
 
 	@Test
 	public void testZipCodeIncorrectVersions() throws Exception
 	{
 		MailingAddress addr = createStandardAddress();
-		try { addr.setZipCode("1");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 1");}
+		
+		addr.setZipCode("1");
+		ValidationError error = new AddressValidator().validate(addr);
+		
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
+		
+		addr = createStandardAddress();
+		addr.setZipCode("12");
+		error = new AddressValidator().validate(addr);
+		
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try	{ addr.setZipCode("12");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 2");}
+		addr = createStandardAddress();
+		addr.setZipCode("123");
+		error = new AddressValidator().validate(addr);
 
-		try	{ addr.setZipCode("123");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 3");}
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try	{ addr.setZipCode("1234");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 4");}
+		addr = createStandardAddress();
+		addr.setZipCode("1234");
+		error = new AddressValidator().validate(addr);
+		
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try	{ addr.setZipCode("123456");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 5");}
+		addr = createStandardAddress();
+		addr.setZipCode("123456");
+		error = new AddressValidator().validate(addr);
 
-		try	{ addr.setZipCode("12345x");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 6");}
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try	{ addr.setZipCode("12345--");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 7");}
+		addr = createStandardAddress();
+		addr.setZipCode("12345x");
+		error = new AddressValidator().validate(addr);
+		
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try	{ addr.setZipCode("12345-12345");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 8");}
+		addr = createStandardAddress();
+		addr.setZipCode("12345--");
+		error = new AddressValidator().validate(addr);
+		
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try	{ addr.setZipCode("12345-67");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 9");}
+		addr = createStandardAddress();
+		addr.setZipCode("12345-12345");
+		error = new AddressValidator().validate(addr);
 
-		try	{ addr.setZipCode("12345-678");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 10");}
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try	{addr.setZipCode("12345-67899");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 11");}
+		addr = createStandardAddress();
+		addr.setZipCode("12345-67");
+		error = new AddressValidator().validate(addr);
 
-		try	{addr.setZipCode("xxxxx-xxxx");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 12");}
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
 
-		try {addr.setZipCode("9876-54321");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 13 in all");}
+		addr = createStandardAddress();
+		addr.setZipCode("12345-678");
+		error = new AddressValidator().validate(addr);
 
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
+
+		addr = createStandardAddress();
+		addr.setZipCode("12345-67899");
+		error = new AddressValidator().validate(addr);
+
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
+
+		addr = createStandardAddress();
+		addr.setZipCode("xxxxx-xxxx");
+		error = new AddressValidator().validate(addr);
+
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
+
+		addr = createStandardAddress();
+		addr.setZipCode("9876-54321");
+		error = new AddressValidator().validate(addr);
+		
+		Assert.assertNotNull(error, "Invalid zip-code, error expected");		
+		Assert.assertEquals(error.getError(), ValidationErrorType.INVALID_VALUE);
+	}
+	
+	@Test
+	public void testMissingStreetAddressOne()
+	{
+		MailingAddress addr = createStandardAddress();
+		addr.setStreetAddress1(null);
+		
+		ValidationError error = new AddressValidator().validate(addr);
+		Assert.assertNotNull(error, "Missing street address 1");		
+		
+		Assert.assertEquals(error.getError(), ValidationErrorType.MISSING_REQUIRED_FIELD);
+	}
+	
+	@Test
+	public void testMissingCountry()
+	{
+		MailingAddress addr = createStandardAddress();
+		addr.setCountry(null);
+		
+		ValidationError error = new AddressValidator().validate(addr);
+		Assert.assertNotNull(error, "Missing country");		
+		
+		Assert.assertEquals(error.getError(), ValidationErrorType.MISSING_REQUIRED_FIELD);
 	}
 
 	private MailingAddress createStandardAddress()
@@ -87,6 +157,8 @@ public class AddressValidationTest
 		addr.setCity("city");
 		addr.setState("state");
 		addr.setZipCode("ZipCode");
+		addr.setCountry("USA");
+		
 		return addr;
 	}
 }

@@ -32,25 +32,39 @@ public class AddressNormalizer
 		}
 	}
 	
-	public void normalize(MailingAddress address)
+	public MailingAddress normalize(MailingAddress address)
 	{
 		/**
 		 * If we have a US address, run it through address correction
 		 */
 		if(address.isUsa(address.getCountry()))
 		{
+			/**
+			 * Hold on to this value, b/c the following correction code will wipe it out. 
+			 * We will need to reset it below.
+			 */
+			String orignalCountryValue = address.getCountry();
+			
 			CorrectionResult correctedAddress = postalsoft.correctAddress("dss", "MickeyMouseWasOnceHere", createPostalsoftAddressFrom(address));
 
 			if(correctedAddress.getResultStatus().getValue().equals("SUCCESS"))
 			{
 				address = createMailingAddressFrom(correctedAddress);
 			}
+			
+			/**
+			 * Here's where this value gets reset.
+			 */
+			address.setCountry(orignalCountryValue);
 		}
 		
 		/**
-		 * No matter what, run address normalization to shorten fields according to our Cru address standards
+		 * No matter what, run address normalization to shorten fields
+		 * according to our Cru address standards.
 		 */
 		address.normalize();
+		
+		return address;
 	}
 	
 	private MailingAddress createMailingAddressFrom(CorrectionResult correctedAddress)
@@ -85,6 +99,7 @@ public class AddressNormalizer
 		{
 			mailingAddress.setZipCode(correctedAddress.getAddress().getValue().getZip().getValue());
 		}
+		
 		return mailingAddress;
 	}
 	
