@@ -3,7 +3,7 @@
 angular.module('dssMiddlewareApp', [])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/GiftDetail', {
+      .when('/GiftDetail/:designationNumber', {
         templateUrl: 'views/GiftDetail.html',
         controller: 'GiftDetlController'
       })
@@ -12,6 +12,6 @@ angular.module('dssMiddlewareApp', [])
     	  controller: 'GiftCartController'
       })
       .otherwise({
-        redirectTo: '/GiftDetail'
+        redirectTo: '/GiftDetail/:designationNumber'
       });
   });
