@@ -5,6 +5,7 @@ angular.module('dssMiddlewareApp')
 	
 		$scope.params = $routeParams;
 		$scope.designationNumber = $scope.params.designationNumber;
+		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual'];
 		
 		/*creates a new 'blank cart' in the database and looks for the URI to 
 		 *the resource in the header 'Location'*/

@@ -58,15 +58,20 @@
 			<b>Gift Frequency</b>
 		</td></tr>
 		
-		<tr><td height="30" colspan="3">
-			<center>
-				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="'Single'"/> <b>Single Gift</b> &nbsp;&nbsp;
-				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="'Monthly'"/> <b>Monthly</b> &nbsp;&nbsp;
-				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="'Quarterly'"/> <b>Quarterly</b> &nbsp;&nbsp;
-				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="'Semi-Annual'"/> <b>Semi-Annual</b> &nbsp;&nbsp;
-				<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="'Annual'"/> <b>Annual</b> &nbsp;&nbsp;
-			</center>
-		</td></tr>
+		<tr>
+			<td height="30" colspan="3" style="text-align: center;">
+				<span data-ng-repeat="frequency in frequencies">
+					<span data-ng-switch="frequency">
+						<span data-ng-switch-when="Single">
+							<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}} Gift</b> &nbsp;&nbsp;
+						</span>
+						<span data-ng-switch-default>
+							<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}}</b> &nbsp;&nbsp;
+						</span>
+					</span>
+				</span>
+			</td>
+		</tr>
 		
 		<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" class="tableHeader">
 			<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
