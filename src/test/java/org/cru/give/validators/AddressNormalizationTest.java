@@ -9,66 +9,142 @@ public class AddressNormalizationTest
 {
 
 	@Test
+	public void testCorrectedMailingAddress() throws Exception
+	{
+		MailingAddress addr = new MailingAddress();
+		addr.setStreetAddress1("32 n college st");
+		addr.setStreetAddress2("Apt c");
+		addr.setCity("Athens");
+		addr.setState("Ohio");
+		addr.setZipCode("45701");
+		addr.setCountry("us");
+		
+		addr = new AddressNormalizer().normalize(addr);
+		
+		Assert.assertEquals(addr.getStreetAddress1(), "32 N College St Ste C");
+		Assert.assertEquals(addr.getStreetAddress2(), "");
+		Assert.assertEquals(addr.getStreetAddress3(), "");
+		Assert.assertEquals(addr.getStreetAddress4(), "");
+		Assert.assertEquals(addr.getCity(), "Athens");
+		Assert.assertEquals(addr.getState(), "OH");
+		Assert.assertEquals(addr.getZipCode(), "45701-2464");
+	}
+	
+	@Test
+	public void testFourLineUsMailingAddress() throws Exception
+	{
+		MailingAddress addr = createStandardAddress();
+        addr.setCountry("us");
+        
+        addr = new AddressNormalizer().normalize(addr);
+
+        Assert.assertEquals(addr.getStreetAddress1(), "line1");
+		Assert.assertEquals(addr.getStreetAddress2(), "line2");
+		Assert.assertEquals(addr.getStreetAddress3(), "line3");
+		Assert.assertEquals(addr.getStreetAddress4(), "line4");
+		Assert.assertEquals(addr.getCity(), "city");
+		Assert.assertEquals(addr.getState(), "state");
+		Assert.assertEquals(addr.getZipCode(), "ZipCode");
+	}
+	
+	@Test
+	public void testThreeLineUsMailingAddress() throws Exception
+	{
+		MailingAddress addr = createStandardAddress();
+        addr.setCountry("us");
+        addr.setStreetAddress4("");
+        
+        addr = new AddressNormalizer().normalize(addr);
+
+        Assert.assertEquals(addr.getStreetAddress1(), "line1");
+		Assert.assertEquals(addr.getStreetAddress2(), "line2");
+		Assert.assertEquals(addr.getStreetAddress3(), "line3");
+		Assert.assertEquals(addr.getStreetAddress4(), "");
+		Assert.assertEquals(addr.getCity(), "city");
+		Assert.assertEquals(addr.getState(), "state");
+		Assert.assertEquals(addr.getZipCode(), "ZipCode");
+	}
+	
+	@Test
+	public void testTwoLineUsMailingAddress() throws Exception
+	{
+		MailingAddress addr = createStandardAddress();
+        addr.setCountry("us");
+        addr.setStreetAddress3("");
+        addr.setStreetAddress4("");
+        
+        addr = new AddressNormalizer().normalize(addr);
+
+        Assert.assertEquals(addr.getStreetAddress1(), "line1");
+		Assert.assertEquals(addr.getStreetAddress2(), "line2");
+		Assert.assertEquals(addr.getStreetAddress3(), "");
+		Assert.assertEquals(addr.getStreetAddress4(), "");
+		Assert.assertEquals(addr.getCity(), "city");
+		Assert.assertEquals(addr.getState(), "state");
+		Assert.assertEquals(addr.getZipCode(), "ZipCode");
+	}
+	
+	@Test
 	public void testCanadianMailingAddress() throws Exception
 	{
 		MailingAddress addr = createStandardAddress();
 		addr.setCountry("ca");
 		
-		new AddressNormalizer().normalize(addr);
+		addr = new AddressNormalizer().normalize(addr);
 		
 		Assert.assertEquals(addr.getStreetAddress1(), "line1");
 		Assert.assertEquals(addr.getStreetAddress2(), "line2");
-		Assert.assertEquals(addr.getStreetAddress3(), "line3 line4 city state ZipCode");
-		Assert.assertEquals(addr.getStreetAddress4(), "");
+		Assert.assertEquals(addr.getStreetAddress3(), "line3");
+		Assert.assertEquals(addr.getStreetAddress4(), "line4 city state ZipCode");
 		Assert.assertEquals(addr.getCity(), "");
 		Assert.assertEquals(addr.getState(), "");
 		Assert.assertEquals(addr.getZipCode(), "");
 	}
 
 	@Test
-	public void testInternationalMailingAddress() throws Exception
+	public void testFourLineInternationalMailingAddress() throws Exception
 	{
 		MailingAddress addr = createStandardAddress();
 		addr.setCountry("x");
 		
-		new AddressNormalizer().normalize(addr);
+		addr = new AddressNormalizer().normalize(addr);
 		
 		Assert.assertEquals(addr.getStreetAddress1(), "line1");
 		Assert.assertEquals(addr.getStreetAddress2(), "line2");
-		Assert.assertEquals(addr.getStreetAddress3(), "line3 line4 city state ZipCode");
-		Assert.assertEquals(addr.getStreetAddress4(), "");
+		Assert.assertEquals(addr.getStreetAddress3(), "line3");
+		Assert.assertEquals(addr.getStreetAddress4(), "line4 city state ZipCode");
 		Assert.assertEquals(addr.getCity(), "");
 		Assert.assertEquals(addr.getState(), "");
 		Assert.assertEquals(addr.getZipCode(), "");
 	}
 
 	@Test
-	public void testInternationalMailingAddress2() throws Exception
+	public void testThreeLineInternationalMailingAddress() throws Exception
 	{
 		MailingAddress addr = createStandardAddress();
 		addr.setCountry("x");
 		addr.setStreetAddress4("");
 
-		new AddressNormalizer().normalize(addr);
+		addr = new AddressNormalizer().normalize(addr);
 		
 		Assert.assertEquals(addr.getStreetAddress1(), "line1");
 		Assert.assertEquals(addr.getStreetAddress2(), "line2");
-		Assert.assertEquals(addr.getStreetAddress3(), "line3 city state ZipCode");
-		Assert.assertEquals(addr.getStreetAddress4(), "");
+		Assert.assertEquals(addr.getStreetAddress3(), "line3");
+		Assert.assertEquals(addr.getStreetAddress4(), "city state ZipCode");
 		Assert.assertEquals(addr.getCity(), "");
 		Assert.assertEquals(addr.getState(), "");
 		Assert.assertEquals(addr.getZipCode(), "");
 	}
 
 	@Test
-	public void testInternationalMailingAddress3() throws Exception
+	public void testTwoLineInternationalMailingAddress() throws Exception
 	{
 		MailingAddress addr = createStandardAddress();
 		addr.setCountry("x");
 		addr.setStreetAddress3("");
 		addr.setStreetAddress4("");
 
-		new AddressNormalizer().normalize(addr);
+		addr = new AddressNormalizer().normalize(addr);
 		
 		Assert.assertEquals(addr.getStreetAddress1(), "line1");
 		Assert.assertEquals(addr.getStreetAddress2(), "line2");
@@ -80,7 +156,7 @@ public class AddressNormalizationTest
 	}
 
 	@Test
-	public void testInternationalMailingAddress4() throws Exception
+	public void testOneLineInternationalMailingAddress() throws Exception
 	{
 		MailingAddress addr = createStandardAddress();
 		addr.setCountry("x");
@@ -88,7 +164,7 @@ public class AddressNormalizationTest
 		addr.setStreetAddress3("");
 		addr.setStreetAddress4("");
 		
-		new AddressNormalizer().normalize(addr);
+		addr = new AddressNormalizer().normalize(addr);
 		
 		Assert.assertEquals(addr.getStreetAddress1(), "line1");
 		Assert.assertEquals(addr.getStreetAddress2(), "city state ZipCode");
@@ -97,75 +173,6 @@ public class AddressNormalizationTest
 		Assert.assertEquals(addr.getCity(), "");
 		Assert.assertEquals(addr.getState(), "");
 		Assert.assertEquals(addr.getZipCode(), "");
-	}
-
-	@Test
-	public void testZipCodeCorrectVersions() throws Exception
-	{
-		MailingAddress addr = createStandardAddress();
-		addr.setZipCode("32832");
-		addr.setZipCode("85254");
-		addr.setZipCode("32832-4567");
-		addr.setZipCode("99999-0000");
-
-	}
-
-	@Test
-	public void testZipCodeIncorrectVersions() throws Exception
-	{
-		MailingAddress addr = createStandardAddress();
-		try { addr.setZipCode("1");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 1");}
-
-		try	{ addr.setZipCode("12");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 2");}
-
-		try	{ addr.setZipCode("123");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 3");}
-
-		try	{ addr.setZipCode("1234");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 4");}
-
-		try	{ addr.setZipCode("123456");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 5");}
-
-		try	{ addr.setZipCode("12345x");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 6");}
-
-		try	{ addr.setZipCode("12345--");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 7");}
-
-		try	{ addr.setZipCode("12345-12345");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 8");}
-
-		try	{ addr.setZipCode("12345-67");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 9");}
-
-		try	{ addr.setZipCode("12345-678");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 10");}
-
-		try	{addr.setZipCode("12345-67899");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 11");}
-
-		try	{addr.setZipCode("xxxxx-xxxx");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 12");}
-
-		try {addr.setZipCode("9876-54321");
-		Assert.fail("should have thrown exception");}
-		catch(Exception e){System.out.println("Expected exception was caught. 13 in all");}
-
 	}
 
 	private MailingAddress createStandardAddress()
