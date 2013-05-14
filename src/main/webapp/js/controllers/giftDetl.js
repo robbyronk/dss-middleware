@@ -32,6 +32,7 @@ angular.module('dssMiddlewareApp')
 							$scope.gift = data;
 							$scope.gift.designationNumber = $scope.designationNumber;
 							$scope.gift.giftAmount = '50.00';
+							$scope.gift.giftFrequency = 'Single';
 							
 							/*for now we assume there is no cart and it must be created*/
 							$scope.createCart();
