@@ -49,15 +49,15 @@ public class MailingAddress implements java.io.Serializable
     
     private void addToLastAddrLine(String newLine)
 	{
-		if(getStreetAddress2().trim().length()==0)
+		if(Util.isBlank(getStreetAddress2()))
 		{
 			setStreetAddress2(newLine);
 		}
-		else if(getStreetAddress3().trim().length()==0)
+		else if(Util.isBlank(getStreetAddress3()))
 		{
 			setStreetAddress3(newLine);
 		}
-		else if(getStreetAddress4().trim().length()==0)
+		else if(Util.isBlank(getStreetAddress4()))
 		{
 			setStreetAddress4(newLine);
 		}
