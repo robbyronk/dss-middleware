@@ -36,17 +36,17 @@ public class TestCartResource
 	@Test
 	public void testFetchCart()
 	{
-		ClientResponse<GiftCart> giftCartResponse = client.getCart("48");
+		ClientResponse<GiftCart> giftCartResponse = client.getCart("22");
 		GiftCart cart = giftCartResponse.getEntity(GiftCart.class);
 		
-		Assert.assertEquals(new Long(48), cart.getCartId());
+		Assert.assertEquals(new Long(22), cart.getCartId());
 	}
 	
 	@Test
 	public void testUpdateCart()
 	{
 		GiftCart cart = new GiftCart();
-		cart.setCartId(27L);
+		cart.setCartId(22L);
 		cart.setMailingAddress(new MailingAddress());
 		cart.getMailingAddress().setCity("Bowling Green");
 		cart.setPayment(new Payment());
@@ -56,10 +56,10 @@ public class TestCartResource
 		
 		createClient();
 		
-		ClientResponse<GiftCart> giftCartResponse = client.getCart("48");
+		ClientResponse<GiftCart> giftCartResponse = client.getCart("22");
 		GiftCart updatedCart = giftCartResponse.getEntity(GiftCart.class);
 		
-		Assert.assertEquals(new Long(48), updatedCart.getCartId());
+		Assert.assertEquals(new Long(22), updatedCart.getCartId());
 		Assert.assertEquals("Bowling Green", updatedCart.getMailingAddress().getCity());
 		Assert.assertEquals("Foo's Payment", updatedCart.getPayment().getDescription());
 	}
