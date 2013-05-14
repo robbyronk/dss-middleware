@@ -116,6 +116,12 @@
             <version>1-SNAPSHOT</version>
         </dependency>
 
+		<dependency>
+			<groupId>org.ccci</groupId>
+			<artifactId>wsapi-postalsoft-client</artifactId>
+			<version>1-SNAPSHOT</version>
+		</dependency>
+		
         <dependency>
             <groupId>org.ccci</groupId>
             <artifactId>casclient-ccci</artifactId>
