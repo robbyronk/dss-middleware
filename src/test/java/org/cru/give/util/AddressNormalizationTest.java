@@ -1,4 +1,4 @@
-package org.cru.give.validators;
+package org.cru.give.util;
 
 import org.cru.give.util.AddressNormalizer;
 import org.cru.give.webservices.model.MailingAddress;

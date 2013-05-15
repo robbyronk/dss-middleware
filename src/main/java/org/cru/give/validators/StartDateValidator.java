@@ -1,5 +1,6 @@
 package org.cru.give.validators;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import org.ccci.util.time.Clock;
@@ -11,7 +12,7 @@ public class StartDateValidator
 {
 	
 	@Inject Clock systemClock;
-	@Inject DrawRunService drawRunService;
+	@Inject @Default DrawRunService drawRunService;
 	
 	/**
 	 * Things about Start Date that are validated:
