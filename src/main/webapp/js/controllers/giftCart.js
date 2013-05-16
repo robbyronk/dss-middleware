@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartController', function ($scope, $http) {
+	.controller('GiftCartCtrl', function ($scope, $http) {
 		
 		$scope.retrieveCart = function(cartId) {
 			$http.get('http://localhost:8080/dss-middleware/rest/cart/' + cartId)

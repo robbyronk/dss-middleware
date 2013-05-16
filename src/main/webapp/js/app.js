@@ -5,11 +5,11 @@ angular.module('dssMiddlewareApp', [])
     $routeProvider
       .when('/GiftDetail/:designationNumber', {
         templateUrl: 'views/GiftDetail.html',
-        controller: 'GiftDetlController'
+        controller: 'GiftDetailCtrl'
       })
       .when('/GiftCartPage', {
     	  templateUrl: 'views/GiftCartPage.html',
-    	  controller: 'GiftCartController'
+    	  controller: 'GiftCartCtrl'
       })
       .otherwise({
         redirectTo: '/GiftDetail/:designationNumber'

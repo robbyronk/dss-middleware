@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetlController', function ($scope, $http, $routeParams) {
+	.controller('GiftDetailCtrl', function ($scope, $http, $routeParams) {
 	
 		$scope.params = $routeParams;
 		$scope.designationNumber = $scope.params.designationNumber;
@@ -51,7 +51,11 @@ angular.module('dssMiddlewareApp')
 			$http.put('http://localhost:8080/dss-middleware/rest/gift', $scope.gift);
 		};
 		
-		//TODO: should be a service
+		$scope.cancel = function() {
+			//do something here
+		};
+		
+		//TODO: should be a service?
 		$scope.isMaxLength = function(obj) {
 			var mlength = obj.getAttribute?parseInt(obj.getAttribute("maxlength")) : "";
 			if (obj.getAttribute && obj.value.length > mlength) {
