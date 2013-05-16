@@ -110,12 +110,6 @@
         </dependency>
 
         <!-- Import internal libraries -->
-<!--         <dependency> -->
-<!--             <groupId>org.ccci</groupId> -->
-<!--             <artifactId>cdi-quartz</artifactId> -->
-<!--             <version>1-SNAPSHOT</version> -->
-<!--         </dependency> -->
-
 		<dependency>
 			<groupId>org.ccci</groupId>
 			<artifactId>wsapi-postalsoft-client</artifactId>
@@ -315,6 +309,27 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12</version>
+            </plugin>
+            
+            <plugin>
+                <groupId>com.github.searls</groupId>
+                <artifactId>jasmine-maven-plugin</artifactId>
+                <version>1.3.1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jsSrcDir>src/main/webapp/js</jsSrcDir>
+                    <jsTestSrcDir>src/test/webapp/js</jsTestSrcDir>
+                    <sourceIncludes>
+                        <source>src/main/webapp/components/angular.js</source>
+                        <source>src/test/webapp/components/angular-mocks.js</source>
+                    </sourceIncludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
