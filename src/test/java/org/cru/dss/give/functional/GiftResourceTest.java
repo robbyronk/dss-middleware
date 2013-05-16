@@ -4,6 +4,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.cru.dss.give.functional.clients.GiftClient;
 import org.cru.give.webservices.model.GiftDetails;
 import org.jboss.resteasy.client.ClientExecutor;
 import org.jboss.resteasy.client.ClientResponse;
@@ -13,7 +14,7 @@ import org.joda.time.DateTime;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TestGiftResource
+public class GiftResourceTest
 {
 	static final String RESOURCE_PREFIX = "rest";
 

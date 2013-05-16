@@ -1,5 +1,6 @@
 package org.cru.dss.give.functional;
 
+import org.cru.dss.give.functional.clients.CartClient;
 import org.cru.give.webservices.model.GiftCart;
 import org.cru.give.webservices.model.MailingAddress;
 import org.cru.give.webservices.model.Payment;
@@ -9,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TestCartResource
+public class CartResourceTest
 {
 	static final String RESOURCE_PREFIX = "rest";
 	

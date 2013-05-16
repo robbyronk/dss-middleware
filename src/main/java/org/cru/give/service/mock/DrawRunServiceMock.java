@@ -1,8 +1,10 @@
 package org.cru.give.service.mock;
 
+import org.cru.give.cdi.annotations.Mock;
 import org.cru.give.service.DrawRunService;
 import org.joda.time.DateTime;
 
+@Mock
 public class DrawRunServiceMock implements DrawRunService
 {	
 	

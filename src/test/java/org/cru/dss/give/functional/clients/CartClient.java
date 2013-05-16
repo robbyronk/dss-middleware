@@ -1,4 +1,4 @@
-package org.cru.dss.give.functional;
+package org.cru.dss.give.functional.clients;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
