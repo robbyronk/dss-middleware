@@ -4,6 +4,8 @@ angular.module('dssMiddlewareApp')
 	.factory('cart', ['$q', 'cartEndpoints', function($q, cartEndpoints) {
 		var cart = {};
 		
+		/*creates a new 'blank cart' in the database and looks for the URI to 
+		 *the resource in the header 'Location'*/
 		cart.create = function() {
 			var deferred = $q.defer();
 			
