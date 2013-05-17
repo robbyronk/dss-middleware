@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $http, $routeParams) {
+	.controller('GiftDetailCtrl', function ($scope, $http, $routeParams, cartEndpoints, giftEndpoints) {
 	
 		$scope.params = $routeParams;
 		$scope.designationNumber = $scope.params.designationNumber;
@@ -13,21 +13,21 @@ angular.module('dssMiddlewareApp')
 		/*creates a new 'blank cart' in the database and looks for the URI to 
 		 *the resource in the header 'Location'*/
 		$scope.createCart = function() {
-			$http.post('http://localhost:8080/dss-middleware/rest/cart')
+			cartEndpoints.create()
 				.success(function(data, status, headers, config) {
 					var createdCartLocation = headers('Location');
-				
+					
 					$http.get(createdCartLocation)
-						.success(function(data) {
-							$scope.cart = data;
-						});
+					.success(function(data) {
+						$scope.cart = data;
+					});
 				});
 		};
 	
 		/*creates a new 'blank gift' in the database and looks for the URI to 
 		 *the resource in the header 'Location'*/
 		$scope.createGift = function() {
-			$http.post('http://localhost:8080/dss-middleware/rest/gift')
+			giftEndpoints.create()
 				.success(function(data, status, headers, config) {
 					var createdGiftLocation = headers('Location');
 	
@@ -48,7 +48,7 @@ angular.module('dssMiddlewareApp')
 		$scope.saveGift = function() {
 			$scope.gift.cartId = $scope.cart.cartId;
 			
-			$http.put('http://localhost:8080/dss-middleware/rest/gift', $scope.gift);
+			giftEndpoints.update($scope.gift);
 		};
 		
 		$scope.cancel = function() {

@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartCtrl', function ($scope, $http) {
+	.controller('GiftCartCtrl', function ($scope, cartEndpoints) {
 		
 		$scope.retrieveCart = function(cartId) {
-			$http.get('http://localhost:8080/dss-middleware/rest/cart/' + cartId)
+			cartEndpoints.retrieve(cartId)
 				.success(function(data, status, headers, config){
 					$scope.cart = data;
 				});
