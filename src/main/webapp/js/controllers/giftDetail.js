@@ -10,22 +10,9 @@ angular.module('dssMiddlewareApp')
 		$scope.showStaffComment = 'N';
 		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry'};
 		
-		/*creates a new 'blank cart' in the database and looks for the URI to 
-		 *the resource in the header 'Location'*/
-		$scope.createCart = function() {
-			cartEndpoints.create()
-				.success(function(data, status, headers, config) {
-					var createdCartLocation = headers('Location');
-					
-					cartEndpoints.retrieveSpecificLocation(createdCartLocation)
-						.success(function(data) {
-							$scope.cart = data;
-						});
-				});
-		};
-	
-		/*creates a new 'blank gift' in the database and looks for the URI to 
-		 *the resource in the header 'Location'*/
+		/**
+		 * Create a gift and set the proper gift values and defaults.
+		 */
 		$scope.createGift = function() {
 			var cartAndGift = {};
 			gift.create().then(function(results) {
@@ -38,10 +25,11 @@ angular.module('dssMiddlewareApp')
 			});
 		};
 	
-		/*update the previously saved gift with the values input by the client*/
+		/**
+		 * Update the previously saved gift with the values input by the client.
+		 */
 		$scope.saveGift = function() {
 			$scope.gift.cartId = $scope.cart.cartId;
-			
 			gift.update($scope.gift);
 		};
 		
@@ -50,6 +38,10 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		//TODO: should this be a service?
+		/**
+		 * Check the length of the DOM element passed in to see 
+		 * if it is over its max length or not.
+		 */
 		$scope.isMaxLength = function(obj) {
 			var mlength = obj.getAttribute?parseInt(obj.getAttribute("maxlength")) : "";
 			if (obj.getAttribute && obj.value.length > mlength) {
