@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
     </properties>
 
     <dependencyManagement>
@@ -324,11 +324,21 @@
                 </executions>
                 <configuration>
                     <jsSrcDir>src/main/webapp/js</jsSrcDir>
-                    <jsTestSrcDir>src/test/webapp/js</jsTestSrcDir>
                     <sourceIncludes>
+                        <include>src/main/webapp/components/jquery-1.9.1.js</include>
+                        <include>src/main/webapp/components/angular.js</include>
+                        <include>src/main/webapp/components/angular-resource.js</include>
+                        <include>src/main/webapp/js/app.js</include>
+                    </sourceIncludes>
+                    <preloadSources>
+                        <source>src/main/webapp/components/jquery-1.9.1.js</source>
                         <source>src/main/webapp/components/angular.js</source>
                         <source>src/test/webapp/components/angular-mocks.js</source>
-                    </sourceIncludes>
+                        <source>src/main/webapp/components/angular-resource.js</source>
+                        <source>src/main/webapp/js/app.js</source>
+                        <source>src/main/webapp/js/controllers/giftDetail.js</source>
+                    </preloadSources>
+                    <jsTestSrcDir>src/test/webapp/js</jsTestSrcDir>
                 </configuration>
             </plugin>
         </plugins>
