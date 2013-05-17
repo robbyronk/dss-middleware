@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, cartEndpoints, giftEndpoints) {
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, cartEndpoints, gift) {
 	
 		$scope.params = $routeParams;
 		$scope.designationNumber = $scope.params.designationNumber;
@@ -27,35 +27,29 @@ angular.module('dssMiddlewareApp')
 		/*creates a new 'blank gift' in the database and looks for the URI to 
 		 *the resource in the header 'Location'*/
 		$scope.createGift = function() {
-			giftEndpoints.create()
-				.success(function(data, status, headers, config) {
-					var createdGiftLocation = headers('Location');
-	
-					giftEndpoints.retrieveSpecificLocation(createdGiftLocation)
-						.success(function(data) {
-							$scope.gift = data;
-							$scope.gift.designationNumber = $scope.designationNumber;
-							$scope.gift.giftAmount = '50.00';
-							$scope.gift.giftFrequency = 'Single';
-							
-							/*for now we assume there is no cart and it must be created*/
-							$scope.createCart();
-						});
-				});
+			var cartAndGift = {};
+			gift.create().then(function(results) {
+				cartAndGift = results;
+				$scope.gift = cartAndGift.gift;
+				$scope.gift.designationNumber = $scope.designationNumber;
+				$scope.gift.giftAmount = '50.00';
+				$scope.gift.giftFrequency = 'Single';
+				$scope.cart = cartAndGift.cart;
+			});
 		};
 	
 		/*update the previously saved gift with the values input by the client*/
 		$scope.saveGift = function() {
 			$scope.gift.cartId = $scope.cart.cartId;
 			
-			giftEndpoints.update($scope.gift);
+			gift.update($scope.gift);
 		};
 		
 		$scope.cancel = function() {
 			//do something here
 		};
 		
-		//TODO: should be a service?
+		//TODO: should this be a service?
 		$scope.isMaxLength = function(obj) {
 			var mlength = obj.getAttribute?parseInt(obj.getAttribute("maxlength")) : "";
 			if (obj.getAttribute && obj.value.length > mlength) {

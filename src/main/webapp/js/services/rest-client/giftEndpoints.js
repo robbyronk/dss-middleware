@@ -13,7 +13,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		gift.retrieveSpecificLocation = function(location) {
-			return http.get(location);
+			return $http.get(location);
 		};
 		
 		return gift;
