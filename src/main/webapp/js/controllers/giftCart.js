@@ -1,13 +1,12 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartCtrl', function ($scope, cartEndpoints) {
+	.controller('GiftCartCtrl', function ($scope, cart) {
 		
 		$scope.retrieveCart = function(cartId) {
-			cartEndpoints.retrieve(cartId)
-				.success(function(data, status, headers, config){
-					$scope.cart = data;
-				});
+			cart.retrieve(cartId).then(function(results) {
+				$scope.cart = results;
+			});
 		};
 		
 		$scope.proceedToCheckout = function() {

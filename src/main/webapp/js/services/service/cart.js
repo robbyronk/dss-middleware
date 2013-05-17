@@ -25,7 +25,15 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		cart.retrieve = function(cartId) {
-			return cartEndpoints.retrieve(cartId);
+			var deferred = $q.defer();
+			
+			cartEndpoints.retrieve(cartId)
+				.success(function(data, status, headers, config){
+					var retrievedCart = data;
+					deferred.resolve(retrievedCart);
+				});
+			
+			return deferred.promise;
 		};
 		
 		return cart;
