@@ -329,8 +329,8 @@
                         <include>src/main/webapp/components/angular.js</include>
                         <include>src/main/webapp/components/angular-resource.js</include>
                         <include>src/main/webapp/js/app.js</include>
-                        <include>src/main/webapp/js/services/rest-client/cart.js</include>
-                        <include>src/main/webapp/js/services/rest-client/gift.js</include>
+                        <include>src/main/webapp/js/services/rest-client/cartEndpoints.js</include>
+                        <include>src/main/webapp/js/services/rest-client/giftEndpoints.js</include>
                     </sourceIncludes>
                     <preloadSources>
                         <source>src/main/webapp/components/jquery-1.9.1.js</source>
@@ -339,8 +339,8 @@
                         <source>src/main/webapp/components/angular-resource.js</source>
                         <source>src/main/webapp/js/app.js</source>
                         <source>src/main/webapp/js/controllers/giftDetail.js</source>
-                        <source>src/main/webapp/js/services/rest-client/cart.js</source>
-                        <source>src/main/webapp/js/services/rest-client/gift.js</source>
+                        <source>src/main/webapp/js/services/rest-client/cartEndpoints.js</source>
+                        <source>src/main/webapp/js/services/rest-client/giftEndpoints.js</source>
                     </preloadSources>
                     <jsTestSrcDir>src/test/webapp/js</jsTestSrcDir>
                 </configuration>
