@@ -63,14 +63,14 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
-		$scope.toggleShowComment = function(type) {
+		$scope.toggleShowComment = function(type, comment) {
+			comment = comment == 'Y'?'N': 'Y';
 			if(type == 'don') {
-				$scope.showDonComment = $scope.showDonComment == 'Y'?'N': 'Y';
-				return $scope.showDonComment;
+				$scope.showDonComment = comment;
 			}
-			else if(type == 'staff') {
-				$scope.showStaffComment = $scope.showStaffComment == 'Y'?'N': 'Y';
-				return $scope.showStaffComment;
+			else {
+				$scope.showStaffComment = comment;
 			}
+			return comment;
 		};
 });

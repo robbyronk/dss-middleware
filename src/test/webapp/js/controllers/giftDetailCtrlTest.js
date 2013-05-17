@@ -18,11 +18,22 @@ describe('Gift detail controller tests', function() {
 			var showDonComment = 'N';
 			var showStaffComment = 'N';
 			
-			showDonComment = scope.toggleShowComment('don');
+			showDonComment = scope.toggleShowComment('don', showDonComment);
 			expect(showDonComment).toEqual('Y');
 			
-			showStaffComment = scope.toggleShowComment('staff');
+			showStaffComment = scope.toggleShowComment('staff', showStaffComment);
 			expect(showStaffComment).toEqual('Y');
+		});
+		
+		it('Should toggle from Y to N', function() {
+			var showDonComment = 'Y';
+			var showStaffComment = 'Y';
+			
+			showDonComment = scope.toggleShowComment('don', showDonComment);
+			expect(showDonComment).toEqual('N');
+			
+			showStaffComment = scope.toggleShowComment('staff', showStaffComment);
+			expect(showStaffComment).toEqual('N');
 		});
 	});
 });
