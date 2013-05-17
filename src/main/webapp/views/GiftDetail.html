@@ -113,7 +113,7 @@
 		
 		<tr height="20" data-ng-hide="showStaffComment == 'Y'">
 			<td colspan="3">
-				&nbsp; <a href="#" data-ng-click="toggleShowComment('staff', $event)"> Add Comments For {{designation.externalDescription}}</a>
+				&nbsp; <a href="#" data-ng-click="toggleShowComment('staff')" data-prevent-event> Add Comments For {{designation.externalDescription}}</a>
 			</td>
 		</tr>
 		<tr data-ng-hide="showStaffComment == 'N'">
@@ -133,7 +133,7 @@
 					
 		<tr height="25" valign="top" data-ng-hide="showDonComment == 'Y'">
 			<td valign="top" colspan="3">
-				&nbsp; <a href="#" data-ng-click="toggleShowComment('don', $event)"> Add Comments For Donation Services</a>
+				&nbsp; <a href="#" data-ng-click="toggleShowComment('don')" data-prevent-event> Add Comments For Donation Services</a>
 			</td>
 		</tr>
 		<tr data-ng-hide="showDonComment == 'N'">

@@ -63,14 +63,14 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
-		$scope.toggleShowComment = function(type, $event) {
-			$event.preventDefault();
-			
+		$scope.toggleShowComment = function(type) {
 			if(type == 'don') {
 				$scope.showDonComment = $scope.showDonComment == 'Y'?'N': 'Y';
+				return $scope.showDonComment;
 			}
 			else if(type == 'staff') {
 				$scope.showStaffComment = $scope.showStaffComment == 'Y'?'N': 'Y';
+				return $scope.showStaffComment;
 			}
 		};
 });
