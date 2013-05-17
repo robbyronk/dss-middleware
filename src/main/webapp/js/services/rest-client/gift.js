@@ -12,5 +12,9 @@ angular.module('dssMiddlewareApp')
 			return $http.put('http://localhost:8080/dss-middleware/rest/gift', giftToUpdate);
 		};
 		
+		gift.retrieveSpecificLocation = function(location) {
+			return http.get(location);
+		};
+		
 		return gift;
 	}]);

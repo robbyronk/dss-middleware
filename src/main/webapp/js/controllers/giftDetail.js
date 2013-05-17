@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $http, $routeParams, cartEndpoints, giftEndpoints) {
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, cartEndpoints, giftEndpoints) {
 	
 		$scope.params = $routeParams;
 		$scope.designationNumber = $scope.params.designationNumber;
@@ -17,10 +17,10 @@ angular.module('dssMiddlewareApp')
 				.success(function(data, status, headers, config) {
 					var createdCartLocation = headers('Location');
 					
-					$http.get(createdCartLocation)
-					.success(function(data) {
-						$scope.cart = data;
-					});
+					cartEndpoints.retrieveSpecificLocation(createdCartLocation)
+						.success(function(data) {
+							$scope.cart = data;
+						});
 				});
 		};
 	
@@ -31,7 +31,7 @@ angular.module('dssMiddlewareApp')
 				.success(function(data, status, headers, config) {
 					var createdGiftLocation = headers('Location');
 	
-					$http.get(createdGiftLocation)
+					giftEndpoints.retrieveSpecificLocation(createdGiftLocation)
 						.success(function(data) {
 							$scope.gift = data;
 							$scope.gift.designationNumber = $scope.designationNumber;

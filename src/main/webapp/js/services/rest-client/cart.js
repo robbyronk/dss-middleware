@@ -12,5 +12,9 @@ angular.module('dssMiddlewareApp')
 			return $http.get('http://localhost:8080/dss-middleware/rest/cart/' + cartId);
 		};
 		
+		cart.retrieveSpecificLocation = function(location) {
+			return $http.get(location);
+		};
+		
 		return cart;
 	}]);
