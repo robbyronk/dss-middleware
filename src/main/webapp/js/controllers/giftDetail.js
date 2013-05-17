@@ -62,15 +62,4 @@ angular.module('dssMiddlewareApp')
 				obj.value = obj.value.substring(0,mlength);
 			}
 		};
-		
-		$scope.toggleShowComment = function(type, comment) {
-			comment = comment == 'Y'?'N': 'Y';
-			if(type == 'don') {
-				$scope.showDonComment = comment;
-			}
-			else {
-				$scope.showStaffComment = comment;
-			}
-			return comment;
-		};
 });
