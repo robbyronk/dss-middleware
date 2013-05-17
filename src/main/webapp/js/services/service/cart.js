@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.factory('cart', ['cartEndpoints', '$q', function(cartEndpoints, $q) {
+	.factory('cart', ['$q', 'cartEndpoints', function($q, cartEndpoints) {
 		var cart = {};
 		
 		cart.create = function() {
