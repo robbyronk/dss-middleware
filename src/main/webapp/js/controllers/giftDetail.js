@@ -3,11 +3,11 @@
 angular.module('dssMiddlewareApp')
 	.controller('GiftDetailCtrl', function ($scope, $routeParams, cartEndpoints, gift) {
 	
-		$scope.params = $routeParams;
-		$scope.designationNumber = $scope.params.designationNumber;
+		var params = $routeParams;
+		var cart = {};
 		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; //TODO: Get this from server
 		$scope.showComment = {staff: 'N', dsg: 'N'};
-		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry'}; //TODO: Get this from server
+		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', designationNumber: params.designationNumber}; //TODO: Get this from server
 		
 		/**
 		 * Create a gift and set the proper gift values and defaults.
@@ -17,10 +17,10 @@ angular.module('dssMiddlewareApp')
 			gift.create().then(function(results) {
 				cartAndGift = results;
 				$scope.gift = cartAndGift.gift;
-				$scope.gift.designationNumber = $scope.designationNumber;
+				$scope.gift.designationNumber = $scope.designation.designationNumber;
 				$scope.gift.giftAmount = '50.00';
 				$scope.gift.giftFrequency = 'Single';
-				$scope.cart = cartAndGift.cart;
+				cart = cartAndGift.cart;
 			});
 		};
 	
@@ -28,7 +28,7 @@ angular.module('dssMiddlewareApp')
 		 * Update the previously saved gift with the values input by the client.
 		 */
 		$scope.saveGift = function() {
-			$scope.gift.cartId = $scope.cart.cartId;
+			$scope.gift.cartId = cart.cartId;
 			gift.update($scope.gift);
 		};
 		

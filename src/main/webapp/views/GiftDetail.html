@@ -1,4 +1,8 @@
+<!-- TODO: Add logic to determine New or Edit -->
 <h1 class="pagetitle">New Gift</h1>
+
+<!-- TODO: Add error include -->
+<!-- TODO: End of year text? -->
 		
 <form data-ng-submit="saveGift()" data-ng-init="createGift()">
 	<table style="border:solid 1px black; margin-left:auto; margin-right:auto; width:100%; padding:3px; border-spacing:0">
@@ -12,9 +16,9 @@
 		<tr >
 			<td colspan="3">
 				<b>{{designation.externalDescription}}</b><br/>
-				<font size="1">{{designation.type}} #{{designationNumber}}</font>
+				<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
 		
-				<!-- if fund appeal specifies special amounts, then display those instead of the defaults  -->
+				<!-- TODO: If fund appeal specifies special amounts, then display those instead of the defaults  -->
 
 				<table style="margin-left:auto; margin-right:auto; padding:2px; border-spacing:2px">
 					<tr>
@@ -84,6 +88,7 @@
 		<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" class="tableHeader">
 			<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
 		</tr>
+		<!-- TODO: Add dynamic months to begin -->
 		<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" height="45" valign="middle">
 			<td align="left" valign="middle" width="40%" colspan="1">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
@@ -91,8 +96,8 @@
 				<select>
 					<option value="May, 2013">May, 2013</option>
 				</select>
-				
 			</td>
+			<!-- TODO: Add dynamic transaction days -->
 			<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
 				<select data-ng-model="gift.dayOfMonth">
 					<option value="5" selected>5th</option>
