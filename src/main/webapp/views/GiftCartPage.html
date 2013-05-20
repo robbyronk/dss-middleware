@@ -1,68 +1,72 @@
-<h1 class="pagetitle">Your Gift Cart</h1>
-<br />
-
-<div id="checkoutOptionDisplay">
-	<form data-ng-submit="proceedToCheckout()">
-		<table width="100%" border="0" cellspacing="0">
-			<tr> 
-				<td>
-					<table width="95%" cellspacing="0" cellpadding="0" style="border:solid 1px black">
-						<!-- My Gift History Header Row -->
-						<tr>
-							<td class="tableHeader" colspan="6" valign="middle" align="left">
-								<b>I would like my gift to benefit the ministry of:</b>
-							</td>
-						</tr>
-		
-						<!-- My Gift History Detail Row -->
-						
-						<tr class="alternatingRows">
-							<td align="left" style="padding: 4px" colspan="2">
-								&nbsp;<a href="/give/View/$line.Designation">$line.WebTitle</a><br/>
-								<span>&nbsp;$line.DesigType \#$line.Designation</span>
-							</td>
-							<td align="left" style="padding: 4px" colspan="2">
-								&nbsp;<b class="giftNumbers">$line.Amount</b>
-								Single Gift
-								<br />&nbsp;<span>Transaction Date: 1-2 Business Days</span>
-							</td>
-							<td align="center" style="padding: 4px" colspan="2">
-								<a $c.directLink("edit",$LineNum)>Edit</a>&nbsp;|&nbsp;<a $c.directLink("remove",$LineNum)>Remove</a>
-							</td>
-						</tr>						
-		
-		
-		 				<!-- Gift Summary Row -->
-						<tr>
-							<td colspan="6">
-								<table border="0" width="100%" cellpadding="3" cellspacing="0">
-									<tr>
-										<td  align="right"><span class="goldText">My $DOpts.GiftFrequencyLookup.get($frequency) Total:</span> <span class="giftNumbers" style="font-weight:bold;">$GiftCart.getTotalForFrequency($frequency)</span></td>
-									</tr>
-								</table>
-							</td>
-						</tr>
-		
-						<!-- Add More Gifts Button Row -->
-						<tr class="tableFooter">
-							<td colspan="6" class="td-no-padding">
-								<table width="100%"  border="0" cellpadding="3" cellspacing="0" style="margin-bottom:0;">
-		  								<tr>
-											<td  height="30" align="left" valign="center">
-												<a class="greyButton" $c.directLinkToPage("View","continueBrowsing") alt="Add More Gifts" style="font-size:18px;">Add More Gifts</a>
-											</td>
-											<td colspan="3" height="30" align="right" valign="center">
-												<input type="submit" class="goldButton" border="0" value="Proceed to Checkout">
-											</td>
-		  								</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-	</form>
+<div id="content" style="min-height: 50px;">
+	<h1 class="pagetitle">Your Gift Cart</h1>
+	<br />
+	
+	<div id="checkoutOptionDisplay">
+		<form data-ng-submit="proceedToCheckout()">
+			<table width="100%" border="0" cellspacing="0">
+				<tr> 
+					<td>
+						<table width="95%" cellspacing="0" cellpadding="0" style="border:solid 1px black">
+							<!-- My Gift History Header Row -->
+							<tr>
+								<td class="tableHeader" colspan="6" valign="middle" align="left">
+									<b>I would like my gift to benefit the ministry of:</b>
+								</td>
+							</tr>
+			
+							<!-- My Gift History Detail Row -->
+							
+							<tr class="alternatingRows">
+								<td align="left" style="padding: 4px" colspan="2">
+									&nbsp;<a href="/give/View/$line.Designation">$line.WebTitle</a><br/>
+									<span>&nbsp;$line.DesigType \#$line.Designation</span>
+								</td>
+								<td align="left" style="padding: 4px" colspan="2">
+									&nbsp;<b class="giftNumbers">$line.Amount</b>
+									Single Gift
+									<br />&nbsp;<span>Transaction Date: 1-2 Business Days</span>
+								</td>
+								<td align="center" style="padding: 4px" colspan="2">
+									<a $c.directLink("edit",$LineNum)>Edit</a>&nbsp;|&nbsp;<a $c.directLink("remove",$LineNum)>Remove</a>
+								</td>
+							</tr>						
+			
+			
+			 				<!-- Gift Summary Row -->
+							<tr>
+								<td colspan="6">
+									<table border="0" width="100%" cellpadding="3" cellspacing="0">
+										<tr>
+											<td  align="right"><span class="goldText">My $DOpts.GiftFrequencyLookup.get($frequency) Total:</span> <span class="giftNumbers" style="font-weight:bold;">$GiftCart.getTotalForFrequency($frequency)</span></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+			
+							<!-- Add More Gifts Button Row -->
+							<tr class="tableFooter">
+								<td colspan="6" class="td-no-padding">
+									<table width="100%"  border="0" cellpadding="3" cellspacing="0" style="margin-bottom:0;">
+			  								<tr>
+												<td  height="30" align="left" valign="center">
+													<a class="greyButton" $c.directLinkToPage("View","continueBrowsing") alt="Add More Gifts" style="font-size:18px;">Add More Gifts</a>
+												</td>
+												<td colspan="3" height="30" align="right" valign="center">
+													<input type="submit" class="goldButton" border="0" value="Proceed to Checkout">
+												</td>
+			  								</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<div class="clear"></div>
 </div>
-
+<div class="clear"></div>
 <div class="clear"></div>

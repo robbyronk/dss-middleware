@@ -1,174 +1,181 @@
-<!-- TODO: Add logic to determine New or Edit -->
-<h1 class="pagetitle">New Gift</h1>
-
-<!-- TODO: Add error include -->
-<!-- TODO: End of year text? -->
-		
-<form data-ng-submit="saveGift()" data-ng-init="createGift()">
-	<table style="border:solid 1px black; margin-left:auto; margin-right:auto; width:100%; padding:3px; border-spacing:0">
-		
-		<tr class="tableHeader">
-			<td height="20" colspan="3">
-				<b>I would like my gift to benefit the ministry of:</b>
-			</td>
-		</tr>
-		
-		<tr >
-			<td colspan="3">
-				<b>{{designation.externalDescription}}</b><br/>
-				<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
-		
-				<!-- TODO: If fund appeal specifies special amounts, then display those instead of the defaults  -->
-
-				<table style="margin-left:auto; margin-right:auto; padding:2px; border-spacing:2px">
-					<tr>
-					    <td width="15" height="30" align="center" valign="middle" >
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'50.00'" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$50</b></div></td>
-					    
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'100.00'" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$100</b></div></td>
-					    
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'250.00'" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$250</b></div></td>
-					    
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'500.00'" />
-					    </td>
-					    <td width="50"><div align="left"><b class="giftNumbers">$500</b></div></td>
-					</tr>
-					<tr>
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'1000.00'" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$1000</b></div></td>
-					    
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'5000.00'" />
-					    </td>
-					    <td width="100"><div align="left"><b class="giftNumbers">$5000</b></div></td>
-					    
-					    <td width="15" height="20" align="center" valign="middle">
-					    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'0.0'" />
-					    </td>
-					    <td colspan="3"><b>Other:</b>&nbsp;<input type="text" data-ng-model="gift.giftAmount" class="inputStyle" size="15" style="width: 110px;" /></td>
-					</tr>
-				</table>
-
-				<br />
-			</td>
-		</tr>
-		
-		<tr class="tableHeader">
-			<td height="15" colspan="3">
-				<b>Gift Frequency</b>
-			</td>
-		</tr>
-		
-		<tr>
-			<td height="30" colspan="3" style="text-align: center;">
-				<span data-ng-repeat="frequency in frequencies">
-					<span data-ng-switch="frequency">
-						<span data-ng-switch-when="Single">
-							<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}} Gift</b> &nbsp;&nbsp;
-						</span>
-						<span data-ng-switch-default>
-							<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}}</b> &nbsp;&nbsp;
+<div id="content" style="min-height: 50px;">
+	<!-- TODO: Add logic to determine New or Edit -->
+	<h1 class="pagetitle">New Gift</h1>
+	
+	<!-- TODO: Add error include -->
+	<!-- TODO: End of year text? -->
+			
+	<form data-ng-submit="saveGift()" data-ng-init="createGift()">
+		<table style="border:solid 1px black; margin-left:auto; margin-right:auto; width:100%; padding:3px; border-spacing:0">
+			
+			<tr class="tableHeader">
+				<td height="20" colspan="3">
+					<b>I would like my gift to benefit the ministry of:</b>
+				</td>
+			</tr>
+			
+			<tr >
+				<td colspan="3">
+					<b>{{designation.externalDescription}}</b><br/>
+					<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
+			
+					<!-- TODO: If fund appeal specifies special amounts, then display those instead of the defaults  -->
+	
+					<table style="margin-left:auto; margin-right:auto; padding:2px; border-spacing:2px">
+						<tr>
+						    <td width="15" height="30" align="center" valign="middle" >
+						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'50.00'" />
+						    </td>
+						    <td width="100"><div align="left"><b class="giftNumbers">$50</b></div></td>
+						    
+						    <td width="15" height="20" align="center" valign="middle">
+						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'100.00'" />
+						    </td>
+						    <td width="100"><div align="left"><b class="giftNumbers">$100</b></div></td>
+						    
+						    <td width="15" height="20" align="center" valign="middle">
+						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'250.00'" />
+						    </td>
+						    <td width="100"><div align="left"><b class="giftNumbers">$250</b></div></td>
+						    
+						    <td width="15" height="20" align="center" valign="middle">
+						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'500.00'" />
+						    </td>
+						    <td width="50"><div align="left"><b class="giftNumbers">$500</b></div></td>
+						</tr>
+						<tr>
+						    <td width="15" height="20" align="center" valign="middle">
+						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'1000.00'" />
+						    </td>
+						    <td width="100"><div align="left"><b class="giftNumbers">$1000</b></div></td>
+						    
+						    <td width="15" height="20" align="center" valign="middle">
+						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'5000.00'" />
+						    </td>
+						    <td width="100"><div align="left"><b class="giftNumbers">$5000</b></div></td>
+						    
+						    <td width="15" height="20" align="center" valign="middle">
+						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'0.0'" />
+						    </td>
+						    <td colspan="3"><b>Other:</b>&nbsp;<input type="text" data-ng-model="gift.giftAmount" class="inputStyle" size="15" style="width: 110px;" /></td>
+						</tr>
+					</table>
+	
+					<br />
+				</td>
+			</tr>
+			
+			<tr class="tableHeader">
+				<td height="15" colspan="3">
+					<b>Gift Frequency</b>
+				</td>
+			</tr>
+			
+			<tr>
+				<td height="30" colspan="3" style="text-align: center;">
+					<span data-ng-repeat="frequency in frequencies">
+						<span data-ng-switch="frequency">
+							<span data-ng-switch-when="Single">
+								<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}} Gift</b> &nbsp;&nbsp;
+							</span>
+							<span data-ng-switch-default>
+								<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}}</b> &nbsp;&nbsp;
+							</span>
 						</span>
 					</span>
-				</span>
-			</td>
-		</tr>
-		
-		<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" class="tableHeader">
-			<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
-		</tr>
-		<!-- TODO: Add dynamic months to begin -->
-		<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" height="45" valign="middle">
-			<td align="left" valign="middle" width="40%" colspan="1">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select>
-					<option value="May, 2013">May, 2013</option>
-				</select>
-			</td>
-			<!-- TODO: Add dynamic transaction days -->
-			<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
-				<select data-ng-model="gift.dayOfMonth">
-					<option value="5" selected>5th</option>
-					<option value="10">10th</option>
-					<option value="15">15th</option>
-					<option value="20">20th</option>
-					<option value="25">25th</option>
-				</select>
-			</td>
-		</tr>
-		
-		<tr class="tableHeader">
-			<td height="15" colspan="3">
-				<b>Optional Comments</b>
-			</td>
-		</tr>
-		<tr height="5"><td colspan="3"><!-- this is for spacing --></td></tr>
-		
-		<tr height="20" data-ng-hide="showComment.staff == 'Y'">
-			<td colspan="3">
-				&nbsp; <a data-ng-click="showComment.staff = 'Y'"> Add Comments For {{designation.externalDescription}}</a>
-			</td>
-		</tr>
-		<tr data-ng-hide="showComment.staff == 'N'">
-			<td align="left" valign="middle" height="100" colspan="3">
-				<b>&nbsp; Comments For {{designation.externalDescription}}:</b>
-				<br />
-				<table style="margin-left:auto; margin-right:auto;">
-					<tr >
-						<td>
-							<textarea rows="3" cols="60" maxlength="1000" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToRecipient" ></textarea>
-						</td>
-					</tr>
-				</table>
-				<br />
-			</td>
-		</tr>
-					
-		<tr height="25" valign="top" data-ng-hide="showComment.dsg == 'Y'">
-			<td valign="top" colspan="3">
-				&nbsp; <a data-ng-click="showComment.dsg = 'Y'"> Add Comments For Donation Services</a>
-			</td>
-		</tr>
-		<tr data-ng-hide="showComment.dsg == 'N'">
-			<td align="left" valign="middle" height="20" colspan="3">
-				<b>&nbsp; Comments For Donation Services:</b>
-				<br />
-				<table style="margin-left:auto; margin-right:auto;">
-					<tr >
-						<td>
-							<textarea rows="3" cols="60" maxlength="250" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToDonationServices"></textarea>
-						</td>
-					</tr>
-				</table>
-				<br />
-			</td>
-		</tr>
-		
-		<tr class="tableFooter">
-			<!-- TODO: Add logic to determine Back or Cancel -->
-			<td align="left" height="30" colspan="1">
-				<a data-ng-click="cancel()" class="greyButton">Cancel</a>	
-			</td>
-		
-			<td align="right" height="30" colspan="2">
-				<!-- TODO: Add logic to determine Update or Add -->
-		  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" />
-		  	</td>
-		</tr>
-	</table>
-</form>			
+				</td>
+			</tr>
+			
+			<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" class="tableHeader">
+				<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
+			</tr>
+			<!-- TODO: Add dynamic months to begin -->
+			<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" height="45" valign="middle">
+				<td align="left" valign="middle" width="40%" colspan="1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<select>
+						<option value="May, 2013">May, 2013</option>
+					</select>
+				</td>
+				<!-- TODO: Add dynamic transaction days -->
+				<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
+					<select data-ng-model="gift.dayOfMonth">
+						<option value="5" selected>5th</option>
+						<option value="10">10th</option>
+						<option value="15">15th</option>
+						<option value="20">20th</option>
+						<option value="25">25th</option>
+					</select>
+				</td>
+			</tr>
+			
+			<tr class="tableHeader">
+				<td height="15" colspan="3">
+					<b>Optional Comments</b>
+				</td>
+			</tr>
+			<tr height="5"><td colspan="3"><!-- this is for spacing --></td></tr>
+			
+			<tr height="20" data-ng-hide="showComment.staff == 'Y'">
+				<td colspan="3">
+					&nbsp; <a data-ng-click="showComment.staff = 'Y'"> Add Comments For {{designation.externalDescription}}</a>
+				</td>
+			</tr>
+			<tr data-ng-hide="showComment.staff == 'N'">
+				<td align="left" valign="middle" height="100" colspan="3">
+					<b>&nbsp; Comments For {{designation.externalDescription}}:</b>
+					<br />
+					<table style="margin-left:auto; margin-right:auto;">
+						<tr >
+							<td>
+								<textarea rows="3" cols="60" maxlength="1000" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToRecipient" ></textarea>
+							</td>
+						</tr>
+					</table>
+					<br />
+				</td>
+			</tr>
+						
+			<tr height="25" valign="top" data-ng-hide="showComment.dsg == 'Y'">
+				<td valign="top" colspan="3">
+					&nbsp; <a data-ng-click="showComment.dsg = 'Y'"> Add Comments For Donation Services</a>
+				</td>
+			</tr>
+			<tr data-ng-hide="showComment.dsg == 'N'">
+				<td align="left" valign="middle" height="20" colspan="3">
+					<b>&nbsp; Comments For Donation Services:</b>
+					<br />
+					<table style="margin-left:auto; margin-right:auto;">
+						<tr >
+							<td>
+								<textarea rows="3" cols="60" maxlength="250" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToDonationServices"></textarea>
+							</td>
+						</tr>
+					</table>
+					<br />
+				</td>
+			</tr>
+			
+			<tr class="tableFooter">
+				<!-- TODO: Add logic to determine Back or Cancel -->
+				<td align="left" height="30" colspan="1">
+					<a data-ng-click="cancel()" class="greyButton">Cancel</a>	
+				</td>
+			
+				<td align="right" height="30" colspan="2">
+					<!-- TODO: Add logic to determine Update or Add -->
+			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" />
+			  	</td>
+			</tr>
+		</table>
+	</form>			
+	
+	<div data-ng-include="'includes/footer-text.html'"></div>
+	<div class="clear"></div>
+</div>
 
-<div data-ng-include="'includes/footer-text.html'"></div>
+<div id="sidebar" data-ng-include="'includes/need-help.html'"></div>
+
+<div class="clear"></div>
 <div class="clear"></div>
