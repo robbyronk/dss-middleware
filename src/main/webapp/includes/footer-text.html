@@ -1,36 +1,45 @@
 <!-- Code to open DigiCert in Pop-Up Window -->
-<SCRIPT LANGUAGE="JavaScript">
-<!-- Begin
-function NewWindow(mypage, myname, w, h, scroll) {
-var winl = (screen.width - w) / 2;
-var wint = (screen.height - h) / 2;
-winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'
-win = window.open(mypage, myname, winprops)
-if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
-}
-//  End -->
+<script type="text/javascript">
+	function NewWindow(mypage, myname, w, h, scroll) {
+		var winl = (screen.width - w) / 2;
+		var wint = (screen.height - h) / 2;
+		winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable';
+		win = window.open(mypage, myname, winprops);
+		if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
+	}
 </script>
-			<div id="giveIntegrity">
 
-				<div id="ecfa" style="margin:0px;">
-					<a href="http://www.ecfa.org/" title="visit ECFA" target="_blank">
-						<img src="/images/ecfa.jpg" alt="ECFA logo" />
-					</a>
-				</div>
-    
-    			<div id="incometax" style="float:left;margin:20px 0 0 15px;">
-    				<p>All contributions to Cru are income tax deductible and are made with the understanding that Cru has complete discretion and control over the use of all donated funds.</p>
-    			</div>
-    			<!-- Begin DigiCert/ClickID site seal HTML and JavaScript -->
-    
-				<div id="digicertsitesealcode_dss" style="margin:5px 0 0 30px;">
-					<div id="DigiCertClickID_h2TlCBUc" data-language="en_US">
-					</div>
-				</div>
+<div id="giveIntegrity">
 
-				<script type="text/javascript">
-					var __dcid = __dcid || [];__dcid.push(["DigiCertClickID_h2TlCBUc", "3", "m", "black", "h2TlCBUc"]);(function(){var cid=document.createElement("script");cid.async=true;cid.src="//seal.digicert.com/seals/cascade/seal.min.js";var s = document.getElementsByTagName("script");var ls = s[(s.length - 1)];ls.parentNode.insertBefore(cid, ls.nextSibling);}());
-				</script>
-				<!-- End DigiCert/ClickID site seal HTML and JavaScript -->
-    
-			</div> <!--end giveIntegrity-->	
+	<div id="ecfa" style="margin:0px;">
+		<a href="http://www.ecfa.org/" title="visit ECFA" target="_blank">
+			<img src="/images/ecfa.jpg" alt="ECFA logo" />
+		</a>
+	</div>
+ 
+	<div id="incometax" style="float:left;margin:20px 0 0 15px;">
+		<p>All contributions to Cru are income tax deductible and are made with the understanding that Cru has complete discretion and control over the use of all donated funds.</p>
+	</div>
+	
+	<!-- Begin DigiCert/ClickID site seal HTML and JavaScript -->
+ 
+	<div id="digicertsitesealcode_dss" style="margin:5px 0 0 30px;">
+		<div id="DigiCertClickID_h2TlCBUc" data-language="en_US"></div>
+	</div>
+
+	<script type="text/javascript">
+		var __dcid = __dcid || [];
+		__dcid.push(["DigiCertClickID_h2TlCBUc", "3", "m", "black", "h2TlCBUc"]);
+		
+		(function() {
+			var cid=document.createElement("script");
+			cid.async=true;
+			cid.src="//seal.digicert.com/seals/cascade/seal.min.js";
+			var s = document.getElementsByTagName("script");
+			var ls = s[(s.length - 1)];
+			ls.parentNode.insertBefore(cid, ls.nextSibling);
+		}());
+	</script>
+	<!-- End DigiCert/ClickID site seal HTML and JavaScript -->
+ 
+</div> <!--end giveIntegrity-->	
