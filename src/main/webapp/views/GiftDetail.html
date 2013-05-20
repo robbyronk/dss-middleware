@@ -111,12 +111,12 @@
 		</tr>
 		<tr height="5"><td colspan="3"><!-- this is for spacing --></td></tr>
 		
-		<tr height="20" data-ng-hide="showStaffComment == 'Y'">
+		<tr height="20" data-ng-hide="showComment.staff == 'Y'">
 			<td colspan="3">
-				&nbsp; <a data-ng-click="showStaffComment = 'Y'"> Add Comments For {{designation.externalDescription}}</a>
+				&nbsp; <a data-ng-click="showComment.staff = 'Y'"> Add Comments For {{designation.externalDescription}}</a>
 			</td>
 		</tr>
-		<tr data-ng-hide="showStaffComment == 'N'">
+		<tr data-ng-hide="showComment.staff == 'N'">
 			<td align="left" valign="middle" height="100" colspan="3">
 				<b>&nbsp; Comments For {{designation.externalDescription}}:</b>
 				<br />
@@ -131,12 +131,12 @@
 			</td>
 		</tr>
 					
-		<tr height="25" valign="top" data-ng-hide="showDonComment == 'Y'">
+		<tr height="25" valign="top" data-ng-hide="showComment.dsg == 'Y'">
 			<td valign="top" colspan="3">
-				&nbsp; <a data-ng-click="showDonComment = 'Y'"> Add Comments For Donation Services</a>
+				&nbsp; <a data-ng-click="showComment.dsg = 'Y'"> Add Comments For Donation Services</a>
 			</td>
 		</tr>
-		<tr data-ng-hide="showDonComment == 'N'">
+		<tr data-ng-hide="showComment.dsg == 'N'">
 			<td align="left" valign="middle" height="20" colspan="3">
 				<b>&nbsp; Comments For Donation Services:</b>
 				<br />
