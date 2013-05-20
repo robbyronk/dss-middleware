@@ -37,6 +37,12 @@ angular.module('dssMiddlewareApp')
 			//do something here
 		};
 		
+		
+		/***********************************************
+		* Textarea Maxlength script- © Dynamic Drive (www.dynamicdrive.com)
+		* This notice must stay intact for legal use.
+		* Visit http://www.dynamicdrive.com/ for full source code
+		***********************************************/
 		//TODO: should this be a service?
 		/**
 		 * Check the length of the DOM element passed in to see 
