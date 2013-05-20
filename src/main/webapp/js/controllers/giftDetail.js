@@ -8,6 +8,7 @@ angular.module('dssMiddlewareApp')
 		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; //TODO: Get this from server
 		$scope.showComment = {staff: 'N', dsg: 'N'};
 		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', designationNumber: params.designationNumber}; //TODO: Get this from server
+		$scope.isNew = true; //TODO: Get this from server
 		
 		/**
 		 * Create a gift and set the proper gift values and defaults.

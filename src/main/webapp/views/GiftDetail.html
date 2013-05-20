@@ -1,6 +1,6 @@
 <div id="content" style="min-height: 50px;">
-	<!-- TODO: Add logic to determine New or Edit -->
-	<h1 class="pagetitle">New Gift</h1>
+	<h1 class="pagetitle" data-ng-hide="!isNew">New Gift</h1>
+	<h1 class="pagetitle" data-ng-hide="isNew">Edit Gift</h1>
 	
 	<!-- TODO: Add error include -->
 	<!-- TODO: End of year text? -->
@@ -158,14 +158,15 @@
 			</tr>
 			
 			<tr class="tableFooter">
-				<!-- TODO: Add logic to determine Back or Cancel -->
 				<td align="left" height="30" colspan="1">
-					<a data-ng-click="cancel()" class="greyButton">Cancel</a>	
+					<a data-ng-click="cancel()" class="greyButton" data-ng-hide="!isNew">Cancel</a>
+					<a data-ng-click="cancel()" class="greyButton" data-ng-hide="isNew">Back</a>	
 				</td>
 			
 				<td align="right" height="30" colspan="2">
 					<!-- TODO: Add logic to determine Update or Add -->
-			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" />
+			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" data-ng-hide="!isNew" />
+			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Update Gift Cart" data-ng-hide="isNew" />
 			  	</td>
 			</tr>
 		</table>
