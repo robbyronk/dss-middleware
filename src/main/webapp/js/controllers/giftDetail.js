@@ -5,10 +5,9 @@ angular.module('dssMiddlewareApp')
 	
 		$scope.params = $routeParams;
 		$scope.designationNumber = $scope.params.designationNumber;
-		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual'];
-		$scope.showDonComment = 'N';
-		$scope.showStaffComment = 'N';
-		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry'};
+		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; //TODO: Get this from server
+		$scope.showComment = {staff: 'N', dsg: 'N'};
+		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry'}; //TODO: Get this from server
 		
 		/**
 		 * Create a gift and set the proper gift values and defaults.
@@ -43,11 +42,6 @@ angular.module('dssMiddlewareApp')
 		* This notice must stay intact for legal use.
 		* Visit http://www.dynamicdrive.com/ for full source code
 		***********************************************/
-		//TODO: should this be a service?
-		/**
-		 * Check the length of the DOM element passed in to see 
-		 * if it is over its max length or not.
-		 */
 		$scope.isMaxLength = function(obj) {
 			var mlength = obj.getAttribute?parseInt(obj.getAttribute("maxlength")) : "";
 			if (obj.getAttribute && obj.value.length > mlength) {
