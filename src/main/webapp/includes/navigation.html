@@ -1,4 +1,4 @@
-<div id="header">
+<div id="header" data-ng-controller="NavigationCtrl">
 	<h1><a href="http://www.cru.org">cru : a caring community passionate about connecting people to Jesus Christ</a></h1>
 
 	<a href="http://www.cru.org" class="ccc">Campus Crusade for Christ</a>
@@ -13,9 +13,9 @@
 
 	<div id="nav">
 		<ul class="">
-			<li class=""><a class="" href="http://www.cru.org/index.htm">Home</a></li>
-			<li class=""><a href="http://www.cru.org/how-to-know-god/index.htm">How to Know God</a>  
-				<ul>
+			<li class="" data-ng-mouseover="navigation.selection = 'home'"><a class="" href="http://www.cru.org/index.htm">Home</a></li>
+			<li class="" data-ng-mouseover="navigation.selection = 'knowGod'"><a href="http://www.cru.org/how-to-know-god/index.htm">How to Know God</a>  
+				<ul data-ng-show="navigation.selection == 'knowGod'" data-calculated-offset>
 					<li class=""><a href="http://www.cru.org/how-to-know-god/would-you-like-to-know-god-personally/index.htm">Would You Like to Know God Personally?</a></li>
 					<li class=""><a href="http://www.cru.org/how-to-know-god/who-is-jesus-god-or-just-a-good-man/index.htm">Who Is Jesus?</a></li>
 					<li class=""><a href="http://www.cru.org/how-to-know-god/did-jesus-christ-really-rise-from-the-dead/index.htm">Did Jesus Rise From the Dead?</a></li>
@@ -23,8 +23,8 @@
 					<li class=""><a href="http://www.cru.org/how-to-know-god/my-story-a-life-changed/index.htm">My Story</a></li>
 				</ul>
 			</li>
-			<li class=""><a href="http://www.cru.org/training-and-growth/index.htm">Training & Growth</a>  
-				<ul>
+			<li class="" data-ng-mouseover="navigation.selection = 'training'"><a href="http://www.cru.org/training-and-growth/index.htm">Training & Growth</a>  
+				<ul data-ng-show="navigation.selection == 'training'" data-calculated-offset>
 					<li class=""><a href="http://www.cru.org/training-and-growth/classics/index.htm">Classic Cru</a>  		
 						<div class="menu">
 							<div class="col">
@@ -81,8 +81,8 @@
 					<li class=""><a href="http://www.cru.org/training-and-growth/mentoring/index.htm">Mentoring</a></li>
 				</ul>
 			</li>
-			<li class=""><a href="http://www.cru.org/opportunities/index.htm">Opportunities</a>  
-				<ul>
+			<li class="" data-ng-mouseover="navigation.selection = 'opportunities'"><a href="http://www.cru.org/opportunities/index.htm">Opportunities</a>  
+				<ul data-ng-show="navigation.selection == 'opportunities'" data-calculated-offset>
 					<li class=""><a href="http://www.cru.org/opportunities/careers/index.htm">Careers</a>  		
 						<div class="menu">
 							<div class="col">
@@ -136,8 +136,8 @@
 					<li class=""><a href="http://www.cru.org/opportunities/give-redirect/index.htm">Give</a></li>
 				</ul>
 			</li>
-			<li class=""><a href="http://www.cru.org/about-us/index.htm">About Us</a>  
-				<ul>
+			<li class="" data-ng-mouseover="navigation.selection = 'aboutUs'"><a href="http://www.cru.org/about-us/index.htm">About Us</a>  
+				<ul data-ng-show="navigation.selection == 'aboutUs'" data-calculated-offset>
 					<li class=""><a href="http://www.cru.org/about-us/donor-relations/index.htm">Donor Relations</a>  		
 						<div class="menu">
 							<div class="col">
@@ -190,8 +190,8 @@
 					<li class=""><a href="http://www.cru.org/about-us/contact-us/index.htm">Contact Us</a></li>
 				</ul>
 			</li>
-			<li class=""><a href="http://www.cru.org/ministries-and-locations/index.htm">Ministries & Locations</a>  
-				<ul>
+			<li class="" data-ng-mouseover="navigation.selection = 'ministries'"><a href="http://www.cru.org/ministries-and-locations/index.htm">Ministries & Locations</a>  
+				<ul data-ng-show="navigation.selection == 'ministries'" data-calculated-offset>
 					<li class=""><a href="http://www.cru.org/ministries-and-locations/ministries/index.htm">Ministries</a>  		
 						<div class="menu">
 							<div class="col">
@@ -390,15 +390,15 @@
 					</li>
 				</ul>
 			</li>
-			<li class=""><a href="http://www.cru.org/store/index.htm">Store</a>  
-				<ul>
+			<li class="" data-ng-mouseover="navigation.selection = 'store'"><a href="http://www.cru.org/store/index.htm">Store</a>  
+				<ul data-ng-show="navigation.selection == 'store'" data-calculated-offset>
 					<li class=""><a href="http://www.cru.org/store/all-stores/index.htm">All Stores</a></li>
 					<li class=""><a href="http://www.cru.org/store/featured-products/index.htm">Featured Products</a></li>
 				</ul>
 			</li>
 	
-			<li class="selected"><a href="/" class="">Give</a>
-				<ul>
+			<li class="selected" data-ng-mouseover="navigation.selection = 'give'"><a href="/" class="">Give</a>
+				<ul data-ng-show="navigation.selection == 'give'" data-calculated-offset>
 					<li class=""><a href="#">Search Staff, Ministries</a>
 						<div class="menu">
 							<div class="col">	
