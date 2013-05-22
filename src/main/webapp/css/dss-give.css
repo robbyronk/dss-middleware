@@ -175,7 +175,7 @@ body#editprofile td, body#editpayment td, body#addpayment td, body#removepayment
 	margin-right: 16px;
 	margin-bottom: 12px;
 }
-.listItemz {
+.individualGiftAmountLi {
 	list-style-type: none;
 	margin-right: 39px;
 	width: 100px;
