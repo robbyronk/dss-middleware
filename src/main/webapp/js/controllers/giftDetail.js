@@ -44,6 +44,26 @@ angular.module('dssMiddlewareApp')
 			//do something here
 		};
 		
+		/**
+		 * Set the gift amount selection to "Other"
+		 */
+		$scope.setGiftToOther = function() {
+			$scope.gift.giftAmount = 'Other:';
+		};
+		
+		/**
+		 * Set the focus to the "Other" textbox
+		 */
+		$scope.setFocusOther = function(last) {
+			/*
+			 * A little bit fragile.  If we move "Other" to another position other 
+			 * than last in the repeat, this will break.
+			 */
+			if(last === true) {
+				$scope.otherFocus = true;
+			}
+		};
+		
 		
 		/***********************************************
 		* Textarea Maxlength script- © Dynamic Drive (www.dynamicdrive.com)

@@ -25,12 +25,12 @@
 					<div class="giftAmounts" >
 						<ul data-ng-repeat="amount in amounts">
 							<li>
-								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount"  data-ng-value="amount" />
+								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount"  data-ng-value="amount" data-ng-change="setFocusOther($last)" />
 								<div class="actualAmount" data-ng-hide="$last"><b class="giftNumbers">${{amount}}</b></div>
 								<div class="actualAmount" data-ng-hide="!$last"><b>{{amount}}</b></div>
 							</li>
 						</ul>
-						<div class="otherText"><input type="text" class="inputStyle" size="15" data-ng-model="otherValue" /></div>
+						<div class="otherText"><input type="text" class="inputStyle" size="15" data-ng-model="$parent.otherValue" data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" /></div>
 					</div>
 					<br /><br />
 				</td>
