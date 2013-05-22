@@ -9,6 +9,7 @@ angular.module('dssMiddlewareApp')
 		$scope.showComment = {staff: 'N', dsg: 'N'};
 		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', designationNumber: params.designationNumber}; //TODO: Get this from server
 		$scope.isNew = true; //TODO: Get this from server
+		$scope.amounts = ['50','100','250','500','1000','5000', 'Other:']; //TODO: Get this from server (can get custom amounts or defaults)
 		
 		/**
 		 * Create a gift and set the proper gift values and defaults.
@@ -19,8 +20,8 @@ angular.module('dssMiddlewareApp')
 				cartAndGift = results;
 				$scope.gift = cartAndGift.gift;
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
-				$scope.gift.giftAmount = '50.00';
-				$scope.gift.giftFrequency = 'Single';
+				$scope.gift.giftAmount = $scope.amounts[0];
+				$scope.gift.giftFrequency = $scope.frequencies[0];
 				cart = cartAndGift.cart;
 			});
 		};
@@ -30,6 +31,12 @@ angular.module('dssMiddlewareApp')
 		 */
 		$scope.saveGift = function() {
 			$scope.gift.cartId = cart.cartId;
+			
+			//make sure we have a positive value in the Other box and Other is selected
+			if($scope.otherValue != null && $scope.otherValue > 0 
+					&& $scope.gift.giftAmount === 'Other:') {
+				$scope.gift.giftAmount = $scope.otherValue;
+			}
 			gift.update($scope.gift);
 		};
 		

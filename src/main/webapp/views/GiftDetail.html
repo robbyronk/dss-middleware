@@ -1,6 +1,7 @@
 <div id="content" style="min-height: 50px;">
 	<h1 class="pagetitle" data-ng-hide="!isNew">New Gift</h1>
 	<h1 class="pagetitle" data-ng-hide="isNew">Edit Gift</h1>
+	<br />
 	
 	<!-- TODO: Add error include -->
 	<!-- TODO: End of year text? -->
@@ -20,48 +21,18 @@
 					<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
 			
 					<!-- TODO: If fund appeal specifies special amounts, then display those instead of the defaults  -->
-	
-					<table style="margin-left:auto; margin-right:auto; padding:2px; border-spacing:2px">
-						<tr>
-						    <td width="15" height="30" align="center" valign="middle" >
-						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'50.00'" />
-						    </td>
-						    <td width="100"><div align="left"><b class="giftNumbers">$50</b></div></td>
-						    
-						    <td width="15" height="20" align="center" valign="middle">
-						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'100.00'" />
-						    </td>
-						    <td width="100"><div align="left"><b class="giftNumbers">$100</b></div></td>
-						    
-						    <td width="15" height="20" align="center" valign="middle">
-						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'250.00'" />
-						    </td>
-						    <td width="100"><div align="left"><b class="giftNumbers">$250</b></div></td>
-						    
-						    <td width="15" height="20" align="center" valign="middle">
-						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'500.00'" />
-						    </td>
-						    <td width="50"><div align="left"><b class="giftNumbers">$500</b></div></td>
-						</tr>
-						<tr>
-						    <td width="15" height="20" align="center" valign="middle">
-						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'1000.00'" />
-						    </td>
-						    <td width="100"><div align="left"><b class="giftNumbers">$1000</b></div></td>
-						    
-						    <td width="15" height="20" align="center" valign="middle">
-						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'5000.00'" />
-						    </td>
-						    <td width="100"><div align="left"><b class="giftNumbers">$5000</b></div></td>
-						    
-						    <td width="15" height="20" align="center" valign="middle">
-						    	<input type="radio" data-ng-model="gift.giftAmount" name="giftAmount" data-ng-value="'0.0'" />
-						    </td>
-						    <td colspan="3"><b>Other:</b>&nbsp;<input type="text" data-ng-model="gift.giftAmount" class="inputStyle" size="15" style="width: 110px;" /></td>
-						</tr>
-					</table>
-	
-					<br />
+					
+					<div class="giftAmountsDiv" >
+						<ul class="individualGiftAmountUl" data-ng-repeat="amount in amounts">
+							<li class="listItemz">
+								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount"  data-ng-value="amount" />
+								<div class="actualAmount" data-ng-hide="$last"><b class="giftNumbers">${{amount}}</b></div>
+								<div class="actualAmount" data-ng-hide="!$last"><b>{{amount}}</b></div>
+							</li>
+						</ul>
+						<div class="otherTextDiv"><input type="text" class="inputStyle otherText" size="15" data-ng-model="otherValue" /></div>
+					</div>
+					<br /><br />
 				</td>
 			</tr>
 			
