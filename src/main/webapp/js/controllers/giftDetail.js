@@ -54,12 +54,8 @@ angular.module('dssMiddlewareApp')
 		/**
 		 * Set the focus to the "Other" textbox
 		 */
-		$scope.setFocusOther = function(last) {
-			/*
-			 * A little bit fragile.  If we move "Other" to another position other 
-			 * than last in the repeat, this will break.
-			 */
-			if(last === true) {
+		$scope.setFocusOther = function() {
+			if($scope.gift.giftAmount === 'Other:') {
 				$scope.otherFocus = true;
 			}
 		};

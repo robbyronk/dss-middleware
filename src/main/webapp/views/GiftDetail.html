@@ -25,7 +25,7 @@
 					<div class="giftAmounts" >
 						<ul data-ng-repeat="amount in amounts">
 							<li>
-								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount"  data-ng-value="amount" data-ng-change="setFocusOther($last)" />
+								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount"  data-ng-value="amount" data-ng-change="setFocusOther()" />
 								<div class="actualAmount" data-ng-hide="$last"><b class="giftNumbers">${{amount}}</b></div>
 								<div class="actualAmount" data-ng-hide="!$last"><b>{{amount}}</b></div>
 							</li>
