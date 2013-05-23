@@ -1,6 +1,6 @@
 /**
  * Modified from http://plnkr.co/edit/gmaQCl?p=preview.
- * Taken from http://stackoverflow.com/a/14837021.
+ * Taken from http://stackoverflow.com/a/14837021 (Mark Rajcok).
  */
 
 angular.module('dssMiddlewareApp')
