@@ -61,7 +61,7 @@
 				<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
 			</tr>
 			<!-- TODO: Add dynamic months to begin -->
-			<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" height="45" valign="middle">
+			<tr height="45" valign="middle" data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'">
 				<td align="left" valign="middle" width="40%" colspan="1">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -69,15 +69,8 @@
 						<option value="May, 2013">May, 2013</option>
 					</select>
 				</td>
-				<!-- TODO: Add dynamic transaction days -->
 				<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
-					<select data-ng-model="gift.dayOfMonth">
-						<option value="5" selected>5th</option>
-						<option value="10">10th</option>
-						<option value="15">15th</option>
-						<option value="20">20th</option>
-						<option value="25">25th</option>
-					</select>
+					<select data-ng-model="gift.dayOfMonth" data-ng-options="day.value as day.display for day in transactionDays"></select>
 				</td>
 			</tr>
 			
@@ -100,7 +93,7 @@
 					<table style="margin-left:auto; margin-right:auto;">
 						<tr >
 							<td>
-								<textarea rows="3" cols="60" maxlength="1000" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToRecipient" ></textarea>
+								<textarea rows="3" cols="60" maxlength="1000" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToRecipient"></textarea>
 							</td>
 						</tr>
 					</table>

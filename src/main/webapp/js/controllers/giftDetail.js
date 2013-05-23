@@ -10,6 +10,11 @@ angular.module('dssMiddlewareApp')
 		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', designationNumber: params.designationNumber}; //TODO: Get this from server
 		$scope.isNew = true; //TODO: Get this from server
 		$scope.amounts = ['50','100','250','500','1000','5000', 'Other:']; //TODO: Get this from server (can get custom amounts or defaults)
+		$scope.transactionDays = [{display: '5th', value: '5'},
+		                          {display: '10th', value: '10'},
+		                          {display: '15th', value: '15'},
+		                          {display: '20th', value: '20'},
+		                          {display: '25th', value: '25'}];  //TODO: Get this from server
 		
 		/**
 		 * Create a gift and set the proper gift values and defaults.
