@@ -3,10 +3,10 @@
 	<h1 class="pagetitle" data-ng-hide="isNew">Edit Gift</h1>
 	<br />
 	
-	<!-- TODO: Add error include -->
+	<div data-ng-controller="ErrorCtrl" data-ng-include="'includes/errors.html'"></div>
 	<!-- TODO: End of year text? -->
 			
-	<form data-ng-submit="saveGift()" data-ng-init="createGift()">
+	<form data-ng-init="createGift()" data-ng-submit="saveGift()">
 		<table style="border:solid 1px black; margin-left:auto; margin-right:auto; width:100%; padding:3px; border-spacing:0">
 			
 			<tr class="tableHeader">
@@ -15,7 +15,7 @@
 				</td>
 			</tr>
 			
-			<tr >
+			<tr>
 				<td colspan="3">
 					<b>{{designation.externalDescription}}</b><br/>
 					<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
@@ -47,27 +47,24 @@
 					<span data-ng-repeat="frequency in frequencies">
 						<span data-ng-switch="frequency">
 							<span data-ng-switch-when="Single">
-								<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}} Gift</b> &nbsp;&nbsp;
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency" /> <b>{{frequency}} Gift</b> &nbsp;&nbsp;
 							</span>
 							<span data-ng-switch-default>
-								<input type="radio" data-ng-model="gift.giftFrequency" name="giftFrequency" data-ng-value="frequency" /> <b>{{frequency}}</b> &nbsp;&nbsp;
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency" /> <b>{{frequency}}</b> &nbsp;&nbsp;
 							</span>
 						</span>
 					</span>
 				</td>
 			</tr>
 			
-			<tr data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'" class="tableHeader">
+			<tr class="tableHeader" data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'">
 				<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
 			</tr>
-			<!-- TODO: Add dynamic months to begin -->
 			<tr height="45" valign="middle" data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'">
 				<td align="left" valign="middle" width="40%" colspan="1">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<select>
-						<option value="May, 2013">May, 2013</option>
-					</select>
+					<select data-ng-model="transactionMonth" data-ng-options="month as month.display for month in transactionMonths"></select>
 				</td>
 				<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
 					<select data-ng-model="gift.dayOfMonth" data-ng-options="day.value as day.display for day in transactionDays"></select>
@@ -123,8 +120,8 @@
 			
 			<tr class="tableFooter">
 				<td align="left" height="30" colspan="1">
-					<a data-ng-click="cancel()" class="greyButton" data-ng-hide="!isNew">Cancel</a>
-					<a data-ng-click="cancel()" class="greyButton" data-ng-hide="isNew">Back</a>	
+					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="!isNew">Cancel</a>
+					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="isNew">Back</a>	
 				</td>
 			
 				<td align="right" height="30" colspan="2">

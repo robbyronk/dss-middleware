@@ -5,16 +5,35 @@ angular.module('dssMiddlewareApp')
 	
 		var params = $routeParams;
 		var cart = {};
-		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; //TODO: Get this from server
 		$scope.showComment = {staff: 'N', dsg: 'N'};
-		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', designationNumber: params.designationNumber}; //TODO: Get this from server
-		$scope.isNew = true; //TODO: Get this from server
-		$scope.amounts = ['50','100','250','500','1000','5000', 'Other:']; //TODO: Get this from server (can get custom amounts or defaults)
+		
+		
+		//TODO: Get these values from the server
+		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; 
+		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
+							  designationNumber: params.designationNumber}; 
+		$scope.isNew = true; 
+		//can get custom amounts or defaults
+		$scope.amounts = ['50','100','250','500','1000','5000', 'Other:'];
 		$scope.transactionDays = [{display: '5th', value: '5'},
 		                          {display: '10th', value: '10'},
 		                          {display: '15th', value: '15'},
 		                          {display: '20th', value: '20'},
-		                          {display: '25th', value: '25'}];  //TODO: Get this from server
+		                          {display: '25th', value: '25'}];  
+		$scope.transactionMonths = [{display: 'May, 2013', month: '5', year: '2013', value: '5/2013'},
+		                            {display: 'June, 2013', month: '6', year: '2013', value: '6/2013'},
+		                            {display: 'July, 2013', month: '7', year: '2013', value: '7/2013'},
+		                            {display: 'August, 2013', month: '8', year: '2013', value: '8/2013'},
+		                            {display: 'September, 2013', month: '9', year: '2013', value: '9/2013'},
+		                            {display: 'October, 2013', month: '10', year: '2013', value: '10/2013'},
+		                            {display: 'November, 2013', month: '11', year: '2013', value: '11/2013'},
+		                            {display: 'December, 2013', month: '12', year: '2013', value: '12/2013'},
+		                            {display: 'January, 2014', month: '1', year: '2014', value: '1/2014'},
+		                            {display: 'February, 2014', month: '2', year: '2014', value: '2/2014'},
+		                            {display: 'March, 2014', month: '3', year: '2014', value: '3/2014'},
+		                            {display: 'April, 2014', month: '4', year: '2014', value: '4/2014'}]; 
+		
+		$scope.transactionMonth = $scope.transactionMonths[0];
 		
 		/**
 		 * Create a gift and set the proper gift values and defaults.
