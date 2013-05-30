@@ -62,11 +62,19 @@ angular.module('dssMiddlewareApp')
 					&& $scope.gift.giftAmount === 'Other:') {
 				$scope.gift.giftAmount = $scope.otherValue;
 			}
+			
+			if($scope.gift.giftFrequency != 'Single') {
+				$scope.gift.startDate = $scope.createStartDate($scope.transactionMonth.month, 
+						$scope.transactionMonth.year, $scope.gift.dayOfMonth);
+			}
 			gift.update($scope.gift);
 		};
 		
 		$scope.cancel = function() {
-			//do something here
+			//TODO: Delete gift
+			//TODO: Delete cart
+			//TODO: Redirect to ministry/staff/fund appeal detail page
+				//this requires designation number
 		};
 		
 		/**
@@ -85,6 +93,15 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		/**
+		 * Using the month, year, and day, create a date object
+		 */
+		$scope.createStartDate = function(month, year, day) {
+			var startDate = new Date();
+			var zeroIndexMonth = month - 1;
+			startDate.setFullYear(year,zeroIndexMonth,day);
+			return startDate;
+		};
 		
 		/***********************************************
 		* Textarea Maxlength script- © Dynamic Drive (www.dynamicdrive.com)
