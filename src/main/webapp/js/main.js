@@ -3,7 +3,7 @@ function GiftDetlController($scope, $http){
 	/*creates a new 'blank cart' in the database and looks for the URI to 
 	 *the resource in the header 'Location'*/
 	$scope.createCart = function(){
-		$http.post('http://localhost:8080/dss-middleware/rest/cart')
+		$http.post('/dss-middleware/rest/cart')
 			.success(function(data, status, headers, config){
 				var createdCartLocation = headers('Location');
 			
@@ -17,7 +17,7 @@ function GiftDetlController($scope, $http){
 	/*creates a new 'blank gift' in the database and looks for the URI to 
 	 *the resource in the header 'Location'*/
 	$scope.createGift = function(){
-		$http.post('http://localhost:8080/dss-middleware/rest/gift')
+		$http.post('/dss-middleware/rest/gift')
 			.success(function(data, status, headers, config){
 				var createdGiftLocation = headers('Location');
 
@@ -35,7 +35,7 @@ function GiftDetlController($scope, $http){
 	$scope.saveGift = function(){
 		$scope.gift.cartId = $scope.cart.cartId;
 		
-		$http.put('http://localhost:8080/dss-middleware/rest/gift', $scope.gift);
+		$http.put('/dss-middleware/rest/gift', $scope.gift);
 	};
 	
 };
@@ -43,7 +43,7 @@ function GiftDetlController($scope, $http){
 //TBD below....
 function GiftCartController($scope, $http){
 	$scope.retrieveCart = function(){
-		$http.get('http://localhost:8080/dss-middleware/rest/cart/')
+		$http.get('cd/dss-middleware/rest/cart/')
 			.success(function(data, status, headers, config){
 				$scope.cart = data;
 			});
