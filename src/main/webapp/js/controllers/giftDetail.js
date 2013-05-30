@@ -46,6 +46,7 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
 				$scope.gift.giftAmount = $scope.amounts[0];
 				$scope.gift.giftFrequency = $scope.frequencies[0];
+				$scope.gift.dayOfMonth = $scope.transactionDays[0].value;
 				cart = cartAndGift.cart;
 			});
 		};
