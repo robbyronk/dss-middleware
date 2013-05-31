@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cru.give.service.DrawRunService;
+import org.cru.give.webservices.model.DrawMonth;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -17,20 +18,19 @@ public class ValidGiftStartDates
 	DateTime currentDateAndTime;
 	DrawRunService drawRunService;
 
-	DateTimeFormatter formatter;
+	
 	
 	public ValidGiftStartDates(DrawRunService drawRunService, DateTime currentDateAndTime)
 	{
 		this.drawRunService = drawRunService;
 		this.currentDateAndTime = currentDateAndTime;
-		
-		this.formatter = DateTimeFormat.forPattern("MMMM, yyyy");
 	}
 	
-	public List<String> getGiftStartMonths()
+	public List<DrawMonth> getGiftStartMonths()
 	{
-		List<String> validStartingMonths = new ArrayList<String>();
+		List<DrawMonth> validStartingMonths = new ArrayList<DrawMonth>();
 		DateTime monthCounter = currentDateAndTime;
+		
 		if(getGiftStartDaysForMonth(currentDateAndTime).isEmpty())
 		{
 			monthCounter = monthCounter.plusMonths(1);
@@ -38,7 +38,9 @@ public class ValidGiftStartDates
 		
 		for(int i = 0; i < 12; i++)
 		{
-			validStartingMonths.add(formatter.print(monthCounter));
+			DrawMonth drawMonth = new DrawMonth(monthCounter);
+			
+			validStartingMonths.add(drawMonth);
 			monthCounter = monthCounter.plusMonths(1);
 		}
 		

@@ -67,7 +67,7 @@
 					<select data-ng-model="transactionMonth" data-ng-options="month as month.display for month in transactionMonths"></select>
 				</td>
 				<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
-					<select data-ng-model="gift.dayOfMonth" data-ng-options="day.value as day.display for day in transactionDays"></select>
+					<select data-ng-model="transactionDay" data-ng-options="day.key as day.value for day in transactionDays"></select>
 				</td>
 			</tr>
 			

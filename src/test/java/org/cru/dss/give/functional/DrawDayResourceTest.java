@@ -3,7 +3,7 @@ package org.cru.dss.give.functional;
 import java.util.List;
 
 import org.cru.dss.give.functional.clients.DrawDayClient;
-import org.cru.give.webservices.DrawDayResource.DrawDay;
+import org.cru.give.webservices.model.DrawDay;
 import org.jboss.resteasy.client.ClientResponse;
 import org.jboss.resteasy.client.ProxyFactory;
 import org.joda.time.DateTime;
