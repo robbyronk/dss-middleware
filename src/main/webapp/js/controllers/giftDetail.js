@@ -42,6 +42,16 @@ angular.module('dssMiddlewareApp')
 			$scope.transactionMonth = $scope.transactionMonths[0];
 		});
 		
+		$scope.refreshDrawDays = function(){
+			drawDayEndpoints.fetchDrawDays($scope.createDate(
+														$scope.transactionMonth.year,
+														$scope.transactionMonth.month,
+														1).toISOString()).then(function(results){
+				$scope.transactionDays = results.data;
+				$scope.transactionDay = $scope.transactionDays[0].key;
+			});
+		};
+		
 		/**
 		 * Update the previously saved gift with the values input by the client.
 		 */
@@ -55,7 +65,7 @@ angular.module('dssMiddlewareApp')
 			}
 			
 			if($scope.gift.giftFrequency != 'Single') {
-				$scope.gift.startDate = $scope.createStartDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
+				$scope.gift.startDate = $scope.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
 			}
 			gift.update($scope.gift);
 		};
@@ -86,7 +96,7 @@ angular.module('dssMiddlewareApp')
 		/**
 		 * Using the month, year, and day, create a date object
 		 */
-		$scope.createStartDate = function(year, month, day) {
+		$scope.createDate = function(year, month, day) {
 			var startDate = new Date();
 			var zeroIndexMonth = month - 1;
 			startDate.setFullYear(year,zeroIndexMonth,day);

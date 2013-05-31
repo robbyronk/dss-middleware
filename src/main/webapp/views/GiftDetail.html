@@ -64,7 +64,9 @@
 				<td align="left" valign="middle" width="40%" colspan="1">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<select data-ng-model="transactionMonth" data-ng-options="month as month.display for month in transactionMonths"></select>
+					<select data-ng-model="transactionMonth" 
+							data-ng-change="refreshDrawDays();"
+							data-ng-options="month as month.display for month in transactionMonths"></select>
 				</td>
 				<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
 					<select data-ng-model="transactionDay" data-ng-options="day.key as day.value for day in transactionDays"></select>
