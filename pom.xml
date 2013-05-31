@@ -92,11 +92,14 @@
         </dependency>
 
         <!-- Import internal libraries -->
+<<<<<<< HEAD
 <!--         <dependency> -->
 <!--             <groupId>org.ccci</groupId> -->
 <!--             <artifactId>cdi-quartz</artifactId> -->
 <!--             <version>1-SNAPSHOT</version> -->
 <!--         </dependency> -->
+=======
+>>>>>>> 80e5b96151e632e5268251fbb0525630a9613f14
 
 		<dependency>
 			<groupId>org.ccci</groupId>
