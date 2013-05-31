@@ -5,11 +5,11 @@ angular.module('dssMiddlewareApp')
 		var cart = {};
 		
 		cart.create = function() {
-			return $http.post('http://localhost:8080/dss-middleware/rest/cart');
+			return $http.post('rest/cart');
 		};
 		
 		cart.retrieve = function(cartId) {
-			return $http.get('http://localhost:8080/dss-middleware/rest/cart/' + cartId);
+			return $http.get('rest/cart/' + cartId);
 		};
 		
 		cart.retrieveSpecificLocation = function(location) {
