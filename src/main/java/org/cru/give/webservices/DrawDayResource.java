@@ -1,6 +1,7 @@
 package org.cru.give.webservices;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import org.ccci.util.time.Clock;
 import org.cru.give.service.DrawRunService;
 import org.cru.give.util.ValidGiftStartDates;
+import org.joda.time.DateTime;
 
 @Path("/drawday")
 public class DrawDayResource
@@ -30,12 +32,12 @@ public class DrawDayResource
 		return new ValidGiftStartDates(drawRunService,clock.currentDateTime()).getGiftStartMonths();
 	}
 	
-	@Path("/{year}/{month}")
+	@Path("/{date}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<DrawDay> getValidDrawDays(@PathParam("year") String year, @PathParam("month") String month)
+	public List<DrawDay> getValidDrawDays(@PathParam("date") DateTime date)
 	{
-		Map<String,String> mappy = new ValidGiftStartDates(drawRunService, clock.currentDateTime()).getGiftStartDaysForMonth(month + ", " + year);
+		Map<String,String> mappy = new ValidGiftStartDates(drawRunService, clock.currentDateTime()).getGiftStartDaysForMonth(new DateTime(date));
 		List<DrawDay> drawDayList = new ArrayList<DrawDay>();
 		
 		for(String key : mappy.keySet())

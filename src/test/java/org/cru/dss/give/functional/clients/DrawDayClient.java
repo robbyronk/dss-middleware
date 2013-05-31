@@ -10,12 +10,13 @@ import javax.ws.rs.core.MediaType;
 
 import org.cru.give.webservices.DrawDayResource.DrawDay;
 import org.jboss.resteasy.client.ClientResponse;
+import org.joda.time.DateTime;
 
-@Path("/drawdays")
+@Path("/drawday")
 public interface DrawDayClient
 {
-	@Path("/{year}/{month}")
+	@Path("/{date}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ClientResponse<List<DrawDay>> getValidDrawDays(@PathParam("year") String year, @PathParam("month") String month);
+	public ClientResponse<List<DrawDay>> getValidDrawDays(@PathParam("date") DateTime date);
 }

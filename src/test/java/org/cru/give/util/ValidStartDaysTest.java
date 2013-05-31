@@ -16,7 +16,7 @@ public class ValidStartDaysTest
 		DateTime currentDateAndTime = new DateTime().withDayOfMonth(2).withMonthOfYear(5).withYear(2013).withMillisOfDay(0);
 		ValidGiftStartDates giftStartDatesProcess = new ValidGiftStartDates(new DrawRunServiceMock(), currentDateAndTime);
 		
-		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("May, 2013");
+		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 5, 1, 0, 0, 0, 0));
 
 		/**
 		 * The 5th should not be a valid option b/c the mock service says the May 5th, 2013 draw has begun. 
@@ -35,7 +35,7 @@ public class ValidStartDaysTest
 		DateTime currentDateAndTime = new DateTime().withDayOfMonth(2).withMonthOfYear(5).withYear(2013).withMillisOfDay(0);
 		ValidGiftStartDates giftStartDatesProcess = new ValidGiftStartDates(new DrawRunServiceMock(), currentDateAndTime);
 		
-		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("June, 2013");
+		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 6, 1, 0, 0, 0, 0));
 
 		/**
 		 * The 5th should not be a valid option b/c the mock service says the May 5th, 2013 draw has begun. 
@@ -57,7 +57,7 @@ public class ValidStartDaysTest
 		DateTime currentDateAndTime = new DateTime().withDayOfMonth(2).withMonthOfYear(5).withYear(2013).withMillisOfDay(0);
 		ValidGiftStartDates giftStartDatesProcess = new ValidGiftStartDates(drawRunService, currentDateAndTime);
 		
-		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("May, 2013");
+		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 5, 1, 0, 0, 0, 0));
 
 		/**
 		 * The 5th & 10th should not be valid options b/c the mock service says the May 10th, 2013 draw has begun. 
@@ -79,7 +79,7 @@ public class ValidStartDaysTest
 		DateTime currentDateAndTime = new DateTime().withDayOfMonth(26).withMonthOfYear(5).withYear(2013).withMillisOfDay(0);
 		ValidGiftStartDates giftStartDatesProcess = new ValidGiftStartDates(drawRunService, currentDateAndTime);
 		
-		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("May, 2013");
+		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 5, 1, 0, 0, 0, 0));
 
 		/**
 		 * There should not be any valid options this month, b/c we're at the end of the month and the 
@@ -91,7 +91,7 @@ public class ValidStartDaysTest
 		Assert.assertFalse(validStartDays.containsKey("20"));
 		Assert.assertFalse(validStartDays.containsKey("25"));
 		
-		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("June, 2013");
+		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 6, 1, 0, 0, 0, 0));
 
 		/**
 		 * All June options should be valid
@@ -102,7 +102,7 @@ public class ValidStartDaysTest
 		Assert.assertTrue(validStartDays.containsKey("20"));
 		Assert.assertTrue(validStartDays.containsKey("25"));
 		
-		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("July, 2013");
+		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 7, 1, 0, 0, 0, 0));
 
 		/**
 		 * All the July dates should be valid
@@ -123,7 +123,7 @@ public class ValidStartDaysTest
 		DateTime currentDateAndTime = new DateTime().withDayOfMonth(29).withMonthOfYear(5).withYear(2013).withMillisOfDay(0);
 		ValidGiftStartDates giftStartDatesProcess = new ValidGiftStartDates(drawRunService, currentDateAndTime);
 		
-		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("May, 2013");
+		Map<String, String> validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 5, 1, 0, 0, 0, 0));
 
 		/**
 		 * No May dates should be options, we're passed them all and the draw has started.
@@ -134,7 +134,7 @@ public class ValidStartDaysTest
 		Assert.assertFalse(validStartDays.containsKey("20"));
 		Assert.assertFalse(validStartDays.containsKey("25"));
 		
-		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("June, 2013");
+		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 6, 1, 0, 0, 0, 0));
 
 		/**
 		 * The 5th should not be a valid option b/c the mock service says the June 5th, 2013 draw has begun. 
@@ -146,7 +146,7 @@ public class ValidStartDaysTest
 		Assert.assertTrue(validStartDays.containsKey("20"));
 		Assert.assertTrue(validStartDays.containsKey("25"));
 		
-		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth("July, 2013");
+		validStartDays = giftStartDatesProcess.getGiftStartDaysForMonth(new DateTime(2013, 7, 1, 0, 0, 0, 0));
 
 		/**
 		 * All July dates should be valid

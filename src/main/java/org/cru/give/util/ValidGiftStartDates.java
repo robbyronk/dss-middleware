@@ -31,7 +31,7 @@ public class ValidGiftStartDates
 	{
 		List<String> validStartingMonths = new ArrayList<String>();
 		DateTime monthCounter = currentDateAndTime;
-		if(getGiftStartDaysForMonth(this.formatter.print(currentDateAndTime)).isEmpty())
+		if(getGiftStartDaysForMonth(currentDateAndTime).isEmpty())
 		{
 			monthCounter = monthCounter.plusMonths(1);
 		}
@@ -45,7 +45,7 @@ public class ValidGiftStartDates
 		return validStartingMonths;
 	}
 	
-	public Map<String, String> getGiftStartDaysForMonth(String monthAndYear)
+	public Map<String, String> getGiftStartDaysForMonth(DateTime date)
 	{
 		Map<String, String> validStartDays = new LinkedHashMap<String, String>(NewGiftValidDrawDays.values);
 		
@@ -54,7 +54,7 @@ public class ValidGiftStartDates
 		
 		DateTime dateAndTimeWeAreConcernedAbout = takeLaterDateOf(currentDateAndTime, latestDraw);
 
-		DateTime monthInQuestion = formatter.parseDateTime(monthAndYear).withDayOfMonth(1);
+		DateTime monthInQuestion = date.withDayOfMonth(1);
 		
 		/**
 		 * If caller asks for a month which is beyond the date we are concerned about,
