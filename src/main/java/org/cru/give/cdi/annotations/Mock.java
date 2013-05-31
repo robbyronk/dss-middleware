@@ -7,8 +7,9 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-@Retention(RetentionPolicy.RUNTIME)
+
 @Target(value=ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
 @Qualifier
 public @interface Mock
 {
