@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dssMiddlewareApp', [])
+angular.module('dssMiddlewareApp', ['ui'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/GiftDetail/:designationNumber', {

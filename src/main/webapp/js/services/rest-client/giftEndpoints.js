@@ -5,11 +5,11 @@ angular.module('dssMiddlewareApp')
 		var gift = {};
 		
 		gift.create = function() {
-			return $http.post('http://localhost:8080/dss-middleware/rest/gift');
+			return $http.post('rest/gift');
 		};
 		
 		gift.update = function(giftToUpdate) {
-			return $http.put('http://localhost:8080/dss-middleware/rest/gift', giftToUpdate);
+			return $http.put('rest/gift', giftToUpdate);
 		};
 		
 		gift.retrieveSpecificLocation = function(location) {

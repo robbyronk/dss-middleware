@@ -304,6 +304,7 @@
                         <include>src/main/webapp/components/jquery-1.9.1.js</include>
                         <include>src/main/webapp/components/angular.js</include>
                         <include>src/main/webapp/components/angular-resource.js</include>
+                        <include>src/main/webapp/components/angular-ui.js</include>
                         <include>src/main/webapp/js/app.js</include>
                         <include>src/main/webapp/js/services/rest-client/cartEndpoints.js</include>
                         <include>src/main/webapp/js/services/rest-client/giftEndpoints.js</include>
@@ -315,6 +316,7 @@
                         <source>src/main/webapp/components/angular.js</source>
                         <source>src/test/webapp/components/angular-mocks.js</source>
                         <source>src/main/webapp/components/angular-resource.js</source>
+                        <source>src/main/webapp/components/angular-ui.js</source>
                         <source>src/main/webapp/js/app.js</source>
                         <source>src/main/webapp/js/services/rest-client/cartEndpoints.js</source>
                         <source>src/main/webapp/js/services/rest-client/giftEndpoints.js</source>

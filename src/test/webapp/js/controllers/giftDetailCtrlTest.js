@@ -3,7 +3,6 @@
 describe('Gift detail controller tests', function() {
 	describe('Start date', function() {
 		var scope;
-		var http;
 		var params = {designationNumber: '2843160'};
 		var controlDate;
 		var startDate;
@@ -12,8 +11,7 @@ describe('Gift detail controller tests', function() {
 		
 		beforeEach(inject(function($rootScope, $controller, $httpBackend) {
 			scope = $rootScope.$new();
-			http = $httpBackend;
-			$controller('GiftDetailCtrl', {$scope: scope, $http: http, $routeParams: params});
+			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params});
 		}));
 		
 		it('should be May 5th, 2013', function() {
