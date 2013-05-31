@@ -91,12 +91,7 @@
             <scope>test</scope>
         </dependency>
 
-<<<<<<< HEAD
         <!-- Import internal libraries -->
-
-=======
-        <!-- Import internal libraries -->
->>>>>>> 9919e26a825742ff957fa1e915e741891e8a71ec
 		<dependency>
 			<groupId>org.ccci</groupId>
 			<artifactId>wsapi-postalsoft-client</artifactId>
