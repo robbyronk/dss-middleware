@@ -1,8 +1,10 @@
 package org.cru.give.util;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.cru.give.service.DrawRunService;
@@ -25,15 +27,25 @@ public class ValidGiftStartDates
 		this.formatter = DateTimeFormat.forPattern("MMMM, yyyy");
 	}
 	
-//	public List<String> getGiftStartMonthsForDayOfMonth(String dayOfMonth)
-//	{
-//		List<String> validStartMonths = new ArrayList<String>();
-//
-//		DateTime latestDraw = takeLaterDateOf(drawRunService.getLatestCreditCardDrawStartDateAndTime(), 
-//												drawRunService.getLatestEFTDrawStartDateAndTime());
-//	}
+	public List<String> getGiftStartMonths()
+	{
+		List<String> validStartingMonths = new ArrayList<String>();
+		DateTime monthCounter = currentDateAndTime;
+		if(getGiftStartDaysForMonth(this.formatter.print(currentDateAndTime)).isEmpty())
+		{
+			monthCounter = monthCounter.plusMonths(1);
+		}
+		
+		for(int i = 0; i < 12; i++)
+		{
+			validStartingMonths.add(formatter.print(monthCounter));
+			monthCounter = monthCounter.plusMonths(1);
+		}
+		
+		return validStartingMonths;
+	}
 	
-	public Map<String, String> getGiftStartDaysForMonth(String month)
+	public Map<String, String> getGiftStartDaysForMonth(String monthAndYear)
 	{
 		Map<String, String> validStartDays = new LinkedHashMap<String, String>(NewGiftValidDrawDays.values);
 		
@@ -42,7 +54,7 @@ public class ValidGiftStartDates
 		
 		DateTime dateAndTimeWeAreConcernedAbout = takeLaterDateOf(currentDateAndTime, latestDraw);
 
-		DateTime monthInQuestion = formatter.parseDateTime(month).withDayOfMonth(1);
+		DateTime monthInQuestion = formatter.parseDateTime(monthAndYear).withDayOfMonth(1);
 		
 		/**
 		 * If caller asks for a month which is beyond the date we are concerned about,

@@ -155,3 +155,41 @@ body#editprofile td, body#editpayment td, body#addpayment td, body#removepayment
 	font-size: 14px;
 	color: white;
 }
+
+
+
+/* CSS for gift amounts on GiftDetail */
+.amountRadio {
+	margin-right: 12px;
+	margin-bottom: 12px;
+	margin-top: 12px;
+/* 	width: 25px; */
+}
+.giftAmounts {
+	margin-top: -12px;
+	margin-left: 52px;
+	width: 92%;
+}
+.giftAmounts ul {
+	margin-left: 0px;
+	margin-right: 16px;
+	margin-bottom: 12px;
+}
+.giftAmounts li {
+	list-style-type: none;
+	margin-right: 39px;
+	width: 100px;
+	float: left;
+}
+.actualAmount {
+	display: inline;
+	margin-top: -2px;
+}
+.otherText {
+	display: inline;
+	margin-left: -57px;
+}
+.otherText input {
+	margin-top: 10px !important;
+	width: 110px !important;
+}

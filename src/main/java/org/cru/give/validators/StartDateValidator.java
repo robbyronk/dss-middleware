@@ -12,7 +12,7 @@ public class StartDateValidator
 {
 	
 	@Inject Clock systemClock;
-	@Inject @Default DrawRunService drawRunService;
+	@Inject DrawRunService drawRunService;
 	
 	/**
 	 * Things about Start Date that are validated:

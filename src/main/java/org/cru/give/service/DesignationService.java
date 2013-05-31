@@ -16,7 +16,6 @@ public class DesignationService
 	
 	public Designation getDesignationByNumber(String designation)
 	{
-		designation = "0550510";
 		DesignationRESTfulResults results = createClient().lookupDesignation(designation, "-----------whatUpRibs");
 		
 		Designation desig = new Designation();

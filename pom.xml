@@ -9,7 +9,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> -->
     </properties>
 
     <dependencyManagement>
@@ -91,8 +91,12 @@
             <scope>test</scope>
         </dependency>
 
+<<<<<<< HEAD
         <!-- Import internal libraries -->
 
+=======
+        <!-- Import internal libraries -->
+>>>>>>> 9919e26a825742ff957fa1e915e741891e8a71ec
 		<dependency>
 			<groupId>org.ccci</groupId>
 			<artifactId>wsapi-postalsoft-client</artifactId>
@@ -286,6 +290,45 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.12</version>
+            </plugin>
+            
+            <plugin>
+                <groupId>com.github.searls</groupId>
+                <artifactId>jasmine-maven-plugin</artifactId>
+                <version>1.3.1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jsSrcDir>src/main/webapp/js</jsSrcDir>
+                    <sourceIncludes>
+                        <include>src/main/webapp/components/jquery-1.9.1.js</include>
+                        <include>src/main/webapp/components/angular.js</include>
+                        <include>src/main/webapp/components/angular-resource.js</include>
+                        <include>src/main/webapp/js/app.js</include>
+                        <include>src/main/webapp/js/services/rest-client/cartEndpoints.js</include>
+                        <include>src/main/webapp/js/services/rest-client/giftEndpoints.js</include>
+                        <include>src/main/webapp/js/services/service/cart.js</include>
+                        <include>src/main/webapp/js/services/service/gift.js</include>
+                    </sourceIncludes>
+                    <preloadSources>
+                        <source>src/main/webapp/components/jquery-1.9.1.js</source>
+                        <source>src/main/webapp/components/angular.js</source>
+                        <source>src/test/webapp/components/angular-mocks.js</source>
+                        <source>src/main/webapp/components/angular-resource.js</source>
+                        <source>src/main/webapp/js/app.js</source>
+                        <source>src/main/webapp/js/services/rest-client/cartEndpoints.js</source>
+                        <source>src/main/webapp/js/services/rest-client/giftEndpoints.js</source>
+                        <source>src/main/webapp/js/services/service/cart.js</source>
+                        <source>src/main/webapp/js/services/service/gift.js</source>
+                        <source>src/main/webapp/js/controllers/giftDetail.js</source>
+                    </preloadSources>
+                    <jsTestSrcDir>src/test/webapp/js</jsTestSrcDir>
+                </configuration>
             </plugin>
         </plugins>
     </build>
