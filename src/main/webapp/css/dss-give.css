@@ -53,6 +53,12 @@ input {
    display: block;
 }
 
+.error-input {
+   background-color: #FFEEEE;
+   color: #AA0000;
+   border: #AA0000 1px solid;
+}
+
 .success {
    background-color: #DDFFDD;
    color: #007700;

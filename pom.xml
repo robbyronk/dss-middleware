@@ -311,6 +311,7 @@
                         <include>src/main/webapp/js/services/rest-client/drawDayEndpoints.js</include>
                         <include>src/main/webapp/js/services/service/cart.js</include>
                         <include>src/main/webapp/js/services/service/gift.js</include>
+                        <include>src/main/webapp/js/services/service/validationService.js</include>
                     </sourceIncludes>
                     <preloadSources>
                         <source>src/main/webapp/components/jquery-1.9.1.js</source>
@@ -324,6 +325,7 @@
                         <source>src/main/webapp/js/services/rest-client/drawDayEndpoints.js</source>
                         <source>src/main/webapp/js/services/service/cart.js</source>
                         <source>src/main/webapp/js/services/service/gift.js</source>
+                        <source>src/main/webapp/js/services/service/validationService.js</source>
                         <source>src/main/webapp/js/controllers/giftDetail.js</source>
                     </preloadSources>
                     <jsTestSrcDir>src/test/webapp/js</jsTestSrcDir>

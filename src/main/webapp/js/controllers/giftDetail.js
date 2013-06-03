@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, cartEndpoints, drawDayEndpoints, gift) {
-	
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, cartEndpoints, drawDayEndpoints, gift, validationService) {
 		var params = $routeParams;
 		var cart = {};
 		$scope.showComment = {staff: 'N', dsg: 'N'};
+		$scope.clientSideError = {message: ''};
 		
 		
 		//TODO: Get these values from the server
@@ -119,5 +119,9 @@ angular.module('dssMiddlewareApp')
 			if (obj.getAttribute && obj.value.length > mlength) {
 				obj.value = obj.value.substring(0,mlength);
 			}
+		};
+		
+		$scope.setErrorMessage = function(errorMessage) {
+			validationService.setErrorMessage(errorMessage);
 		};
 });

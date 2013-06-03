@@ -2,9 +2,9 @@
 	<h1 class="pagetitle" data-ng-hide="!isNew">New Gift</h1>
 	<h1 class="pagetitle" data-ng-hide="isNew">Edit Gift</h1>
 	<br />
-	<!--
+	
 	<div data-ng-controller="ErrorCtrl" data-ng-include="'includes/errors.html'"></div>
-	 TODO: End of year text? -->
+	<!-- TODO: End of year text? -->
 			
 	<form data-ng-init="initPage()" data-ng-submit="saveGift()">
 		<table style="border:solid 1px black; margin-left:auto; margin-right:auto; width:100%; padding:3px; border-spacing:0">
@@ -20,8 +20,6 @@
 					<b>{{designation.externalDescription}}</b><br/>
 					<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
 			
-					<!-- TODO: If fund appeal specifies special amounts, then display those instead of the defaults  -->
-					
 					<div class="giftAmounts" >
 						<ul data-ng-repeat="amount in amounts">
 							<li>
@@ -30,7 +28,7 @@
 								<div class="actualAmount" data-ng-hide="!$last"><b>{{amount}}</b></div>
 							</li>
 						</ul>
-						<div class="otherText"><input type="text" class="inputStyle" size="15" data-ng-model="$parent.otherValue" data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" /></div>
+						<div class="otherText"><input type="text" class="inputStyle" size="15" data-ng-model="$parent.otherValue" data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" data-other-amount-validate /></div>
 					</div>
 					<br /><br />
 				</td>
