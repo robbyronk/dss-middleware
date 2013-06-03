@@ -18,7 +18,7 @@ describe('Gift detail controller tests', function() {
 			controlDate = new Date();
 			controlDate.setFullYear(2013, 4, 5);
 			removeTime(controlDate);
-			startDate = scope.createStartDate(5, 2013, 5);
+			startDate = scope.createDate(2013, 5, 5);
 			removeTime(startDate);
 			expect(startDate).toEqual(controlDate);
 		});
@@ -27,7 +27,7 @@ describe('Gift detail controller tests', function() {
 			controlDate = new Date();
 			controlDate.setFullYear(2014, 0, 20);
 			removeTime(controlDate);
-			startDate = scope.createStartDate(1, 2014, 20);
+			startDate = scope.createDate(2014, 1, 20);
 			removeTime(startDate);
 			expect(startDate).toEqual(controlDate);
 		});

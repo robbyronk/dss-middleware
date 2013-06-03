@@ -16,6 +16,7 @@ angular.module('dssMiddlewareApp')
 		//can get custom amounts or defaults
 		$scope.amounts = ['50','100','250','500','1000','5000', 'Other:'];
 
+		
 		/**
 		 * Create a gift and set the proper gift values and defaults.
 		 */
@@ -32,15 +33,20 @@ angular.module('dssMiddlewareApp')
 			});
 		};
 	
-		drawDayEndpoints.fetchDrawDays(new Date().toISOString()).then(function(results){
-			$scope.transactionDays = results.data;
-			$scope.transactionDay = $scope.transactionDays[0].key;
-		});
+		$scope.initPage = function(){
+			$scope.createGift();
+			
+			drawDayEndpoints.fetchDrawDays(new Date().toISOString()).then(function(results){
+				$scope.transactionDays = results.data;
+				$scope.transactionDay = $scope.transactionDays[0].key;
+			});
+			
+			drawDayEndpoints.fetchDrawMonths(new Date().toISOString()).then(function(results){
+				$scope.transactionMonths = results.data;
+				$scope.transactionMonth = $scope.transactionMonths[0];
+			});
+		};
 		
-		drawDayEndpoints.fetchDrawMonths(new Date().toISOString()).then(function(results){
-			$scope.transactionMonths = results.data;
-			$scope.transactionMonth = $scope.transactionMonths[0];
-		});
 		
 		$scope.refreshDrawDays = function(){
 			drawDayEndpoints.fetchDrawDays($scope.createDate(
