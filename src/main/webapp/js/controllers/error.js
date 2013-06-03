@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('ErrorCtrl', function($scope) {
+	.controller('ErrorCtrl', function($scope, validationService) {
 		$scope.errors = [];
 		$scope.error = '';
-		$scope.errorText = '';
+		$scope.errorText = validationService.getErrorMessage();
 		$scope.errorHeader = '';
 		
 		$scope.hasError = function() {
@@ -19,4 +19,8 @@ angular.module('dssMiddlewareApp')
 		$scope.errorsSizeOne = function() {
 			return $scope.errors.length == 1;
 		};
+		
+		$scope.$on('updateError', function(event, message) {
+			$scope.errorText = validationService.getErrorMessage();
+		});
 	});
