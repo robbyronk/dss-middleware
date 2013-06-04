@@ -3,8 +3,9 @@
 angular.module('dssMiddlewareApp')
 	.controller('GiftCartCtrl', function ($scope, cart) {
 		
-		$scope.giftLines = [{webTitle: 'Ryan T. Carlson', desigType: 'Ministry', designation: '2843160', amount: '50.00'}];
-		$scope.line = $scope.giftLines[0];
+		$scope.giftLines = [{webTitle: 'Ryan T. Carlson', desigType: 'Ministry', designation: '2843160', amount: '50.00'}, 
+		                    {webTitle: 'Marc and Evangeline Vergo', desigType: 'Staff', designation: '0550510', amount: '100.00'}];
+//		$scope.line = $scope.giftLines[0];
 		
 		$scope.retrieveCart = function(cartId) {
 			cart.retrieve(cartId).then(function(results) {

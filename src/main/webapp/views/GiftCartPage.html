@@ -17,7 +17,7 @@
 			
 							<!-- My Gift History Detail Row -->
 							
-							<tr class="alternatingRows">
+							<tr class="alternatingRows" data-ng-repeat="line in giftLines">
 								<td align="left" style="padding: 4px" colspan="2">
 									&nbsp;<a data-ng-click="viewDesig(line.designation)">{{line.webTitle}}</a><br/>
 									<span>&nbsp;{{line.desigType}} #{{line.designation}}</span>
