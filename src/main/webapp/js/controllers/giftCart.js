@@ -18,11 +18,11 @@ angular.module('dssMiddlewareApp')
 			//do stuff
 		};
 		
-		$scope.edit = function() {
+		$scope.edit = function(designation) {
 			//do stuff
 		};
 		
-		$scope.remove = function() {
+		$scope.remove = function(designation) {
 			//do stuff
 		};
 		
