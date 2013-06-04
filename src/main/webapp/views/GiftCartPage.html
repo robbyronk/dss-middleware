@@ -23,9 +23,10 @@
 									<span>&nbsp;{{line.desigType}} #{{line.designation}}</span>
 								</td>
 								<td align="left" style="padding: 4px" colspan="2">
-									&nbsp;<b class="giftNumbers">${{line.amount}}</b>
-									Single Gift
-									<br />&nbsp;<span>Transaction Date: 1-2 Business Days</span>
+									&nbsp;<b class="giftNumbers">${{line.amount | number:2}}</b>
+									{{line.giftRecurrence}} Gift
+									<br />&nbsp;<span data-ng-hide="line.giftRecurrence != 'Single'">Transaction Date: 1-2 Business Days</span>
+									<span data-ng-hide="line.giftRecurrence == 'Single'">(First Gift: {{line.startDate}})</span>
 								</td>
 								<td align="center" style="padding: 4px" colspan="2">
 									<a data-ng-click="edit(line.designation)">Edit</a>&nbsp;|&nbsp;<a data-ng-click="remove(line.designation)">Remove</a>
