@@ -31,7 +31,15 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		gift.update = function(giftToUpdate) {
-			return giftEndpoints.update(giftToUpdate);
+			var deferred = $q.defer();
+			
+			giftEndpoints.update(giftToUpdate)
+				.success(function(data) {
+					var updatedCart = data;
+					deferred.resolve(updatedCart);
+				});
+			
+			return deferred.promise;
 		};
 		
 		return gift;

@@ -1,12 +1,16 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartCtrl', function ($scope, cart) {
+	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cart) {
+		var params = $routeParams;
 		
 		$scope.initPage = function() {
-			$scope.giftLines = [{webTitle: 'Ryan T. Carlson', desigType: 'Ministry', designation: '2843160', amount: 50.00, giftRecurrence: 'Single', startDate: ''}, 
-			                    {webTitle: 'Marc and Evangeline Vergo', desigType: 'Staff', designation: '0550510', amount: 100.00, giftRecurrence: 'Monthly', startDate: '6/10/2013'}, 
-			                    {webTitle: 'Orphan Care Outreach', desigType: 'Fund Appeal', designation: '2863048', amount: 47.50, giftRecurrence: 'Monthly', startDate: '7/15/2013'}];
+			$scope.retrieveCart(params.cartId);
+			
+//			$scope.giftLines = [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
+//			                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
+//			                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}];
+			
 			
 			$scope.generateFrequencyLists();
 			$scope.generateListOfFrequencies();
@@ -92,9 +96,24 @@ angular.module('dssMiddlewareApp')
 			else if(frequency == 'Annual') return $scope.annualTotal;
 		};
 		
+		$scope.getWebTitle = function(designationNumber) {
+			//TODO: REST call
+			if(designationNumber == null || designationNumber == '2843160') return 'Ryan T. Carlson';
+			else if(designationNumber == '0550510') return 'Marc and Evangeline Vergo';
+			else if(designationNumber == '2863048') return 'Orphan Care Outreach';
+		};
+		
+		$scope.getDesigType = function(designationNumber) {
+			//TODO: REST call
+			if(designationNumber == null || designationNumber == '2843160') return 'Ministry';
+			else if(designationNumber == '0550510') return 'Staff';
+			else if(designationNumber == '2863048') return 'Fund Appeal';
+		};
+		
 		$scope.retrieveCart = function(cartId) {
 			cart.retrieve(cartId).then(function(results) {
 				$scope.cart = results;
+				$scope.giftLines = $scope.cart.gifts;
 			});
 		};
 		

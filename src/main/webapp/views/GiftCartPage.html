@@ -19,17 +19,17 @@
 							
 							<tr class="alternatingRows" data-ng-repeat="line in giftLines">
 								<td align="left" style="padding: 4px" colspan="2">
-									&nbsp;<a data-ng-click="viewDesig(line.designation)">{{line.webTitle}}</a><br/>
-									<span>&nbsp;{{line.desigType}} #{{line.designation}}</span>
+									&nbsp;<a data-ng-click="viewDesig(line.designationNumber)">{{getWebTitle(line.designationNumber)}}</a><br/>
+									<span>&nbsp;{{getDesigType(line.designationNumber)}} #{{line.designationNumber}}</span>
 								</td>
 								<td align="left" style="padding: 4px" colspan="2">
-									&nbsp;<b class="giftNumbers">${{line.amount | number:2}}</b>
-									{{line.giftRecurrence}} Gift
-									<br />&nbsp;<span data-ng-hide="line.giftRecurrence != 'Single'">Transaction Date: 1-2 Business Days</span>
-									<span data-ng-hide="line.giftRecurrence == 'Single'">(First Gift: {{line.startDate}})</span>
+									&nbsp;<b class="giftNumbers">${{line.giftAmount | number:2}}</b>
+									{{line.giftFrequency}} Gift
+									<br />&nbsp;<span data-ng-hide="line.giftFrequency != 'Single'">Transaction Date: 1-2 Business Days</span>
+									<span data-ng-hide="line.giftFrequency == 'Single'">(First Gift: {{line.startDate | date:'M/d/yyyy'}})</span>
 								</td>
 								<td align="center" style="padding: 4px" colspan="2">
-									<a data-ng-click="edit(line.designation)">Edit</a>&nbsp;|&nbsp;<a data-ng-click="remove(line.designation)">Remove</a>
+									<a data-ng-click="edit(line.designationNumber)">Edit</a>&nbsp;|&nbsp;<a data-ng-click="remove(line.designationNumber)">Remove</a>
 								</td>
 							</tr>						
 			

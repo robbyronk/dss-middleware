@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, cartEndpoints, drawDayEndpoints, gift, validationService) {
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, cartEndpoints, drawDayEndpoints, gift, validationService) {
 		var params = $routeParams;
 		var cart = {};
 		$scope.showComment = {staff: 'N', dsg: 'N'};
@@ -73,7 +73,9 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.dayOfMonth = $scope.transactionDay;
 				$scope.gift.startDate = $scope.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
 			}
-			gift.update($scope.gift);
+			gift.update($scope.gift).then(function(results) {
+				$location.path('/GiftCartPage/' + cart.cartId);
+			});
 		};
 		
 		$scope.cancel = function() {
