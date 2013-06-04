@@ -4,10 +4,10 @@
 	
 	<div id="checkoutOptionDisplay">
 		<form data-ng-submit="proceedToCheckout()">
-			<table width="100%" border="0" cellspacing="0">
+			<table style="width:100%; border:0; border-spacing:0">
 				<tr> 
 					<td>
-						<table width="95%" cellspacing="0" cellpadding="0" style="border:solid 1px black">
+						<table style="border:solid 1px black; width:95%; border-spacing:0; padding:0;">
 							<!-- My Gift History Header Row -->
 							<tr>
 								<td class="tableHeader" colspan="6" valign="middle" align="left">
@@ -36,7 +36,7 @@
 			 				<!-- Gift Summary Row -->
 							<tr>
 								<td colspan="6">
-									<table border="0" width="100%" cellpadding="3" cellspacing="0">
+									<table style="border:0; width:100%; padding:3px; border-spacing:0;">
 										<tr>
 											<td  align="right"><span class="goldText">My $DOpts.GiftFrequencyLookup.get($frequency) Total:</span> <span class="giftNumbers" style="font-weight:bold;">$GiftCart.getTotalForFrequency($frequency)</span></td>
 										</tr>
@@ -47,7 +47,7 @@
 							<!-- Add More Gifts Button Row -->
 							<tr class="tableFooter">
 								<td colspan="6" class="td-no-padding">
-									<table width="100%"  border="0" cellpadding="3" cellspacing="0" style="margin-bottom:0;">
+									<table style="margin-bottom:0; border:0; width:100%; padding:3px; border-spacing:0;">
 			  								<tr>
 												<td  height="30" align="left" valign="center">
 													<a class="greyButton" $c.directLinkToPage("View","continueBrowsing") alt="Add More Gifts" style="font-size:18px;">Add More Gifts</a>
