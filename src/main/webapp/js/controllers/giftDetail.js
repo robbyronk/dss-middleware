@@ -28,7 +28,6 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
 				$scope.gift.giftAmount = $scope.amounts[0];
 				$scope.gift.giftFrequency = $scope.frequencies[0];
-				$scope.gift.dayOfMonth = $scope.transactionDays[0].value;
 				cart = cartAndGift.cart;
 			});
 		};
@@ -71,6 +70,7 @@ angular.module('dssMiddlewareApp')
 			}
 			
 			if($scope.gift.giftFrequency != 'Single') {
+				$scope.gift.dayOfMonth = $scope.transactionDay;
 				$scope.gift.startDate = $scope.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
 			}
 			gift.update($scope.gift);
