@@ -5,18 +5,24 @@ angular.module('dssMiddlewareApp')
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
-			$scope.retrieveCart(params.cartId);
+			
+			cart.retrieve(params.cartId).then(function(results) {
+				$scope.cart = results;
+				$scope.giftLines = $scope.cart.gifts;
+				
+				$scope.generateFrequencyLists();
+				$scope.generateListOfFrequencies();
+				$scope.calculateFrequencyTotals();
+			});
 			
 //			$scope.giftLines = [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
 //			                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
 //			                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}];
-			
-			
-			$scope.generateFrequencyLists();
-			$scope.generateListOfFrequencies();
-			$scope.calculateFrequencyTotals();
 		};
 		
+		/**
+		 * Separate out each type of gift into specified arrays
+		 */
 		$scope.generateFrequencyLists = function() {
 			$scope.singleGifts = [];
 			$scope.monthlyGifts = [];
@@ -43,6 +49,9 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		/**
+		 * Create a list of the frequencies that are being utilized
+		 */
 		$scope.generateListOfFrequencies = function() {
 			$scope.frequencies = [];
 			
@@ -63,6 +72,9 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		/**
+		 * Calculate the total amounts based on frequency
+		 */
 		$scope.calculateFrequencyTotals = function() {
 			$scope.singleTotal = 0;
 			$scope.monthlyTotal = 0;
@@ -108,13 +120,6 @@ angular.module('dssMiddlewareApp')
 			if(designationNumber == null || designationNumber == '2843160') return 'Ministry';
 			else if(designationNumber == '0550510') return 'Staff';
 			else if(designationNumber == '2863048') return 'Fund Appeal';
-		};
-		
-		$scope.retrieveCart = function(cartId) {
-			cart.retrieve(cartId).then(function(results) {
-				$scope.cart = results;
-				$scope.giftLines = $scope.cart.gifts;
-			});
 		};
 		
 		$scope.proceedToCheckout = function() {

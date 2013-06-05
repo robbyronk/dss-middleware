@@ -3,16 +3,14 @@
 angular.module('dssMiddlewareApp')
 	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, cartEndpoints, drawDayEndpoints, gift, validationService) {
 		var params = $routeParams;
-		var cart = {};
+		var cart = null;
 		$scope.showComment = {staff: 'N', dsg: 'N'};
 		$scope.clientSideError = {message: ''};
 		
 		
 		//TODO: Get these values from the server
 		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; 
-		$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
-							  designationNumber: params.designationNumber}; 
-		$scope.isNew = true; 
+		 
 		//can get custom amounts or defaults
 		$scope.amounts = ['50','100','250','500','1000','5000', 'Other:'];
 
@@ -31,9 +29,9 @@ angular.module('dssMiddlewareApp')
 				cart = cartAndGift.cart;
 			});
 		};
-	
+		
 		$scope.initPage = function(){
-			$scope.createGift();
+			
 			
 			drawDayEndpoints.fetchDrawDays(new Date().toISOString()).then(function(results){
 				$scope.transactionDays = results.data;
@@ -44,6 +42,37 @@ angular.module('dssMiddlewareApp')
 				$scope.transactionMonths = results.data;
 				$scope.transactionMonth = $scope.transactionMonths[0];
 			});
+			
+			var designationNumber = '';
+			
+			if(params.edit == 'Y') {
+				$scope.isNew = false;
+				gift.retrieve(params.giftId).then(function(results) {
+					$scope.gift = results;
+					designationNumber = $scope.gift.designationNumber;
+					
+					//TODO: Remove this once we can load designation numbers properly
+					if(designationNumber == null) {
+						designationNumber = '2843160';
+					}
+					$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
+							  designationNumber: designationNumber};
+					$scope.gift.designationNumber = $scope.designation.designationNumber;
+					
+					if(isOther($scope.gift.giftAmount)) {
+						$scope.otherValue = $scope.gift.giftAmount;
+						$scope.setGiftToOther();
+					}
+				});
+			}
+			else {
+				$scope.isNew = true;
+				$scope.createGift();
+				designationNumber = params.designationNumber;
+				
+				$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
+						  designationNumber: designationNumber};
+			}
 		};
 		
 		
@@ -61,7 +90,14 @@ angular.module('dssMiddlewareApp')
 		 * Update the previously saved gift with the values input by the client.
 		 */
 		$scope.saveGift = function() {
-			$scope.gift.cartId = cart.cartId;
+			/* Only set the cart id here if the cart is not null 
+			 * because if they are coming back to the page, the 
+			 * cart will be null and the gift.cartId will already 
+			 * be set from the retrieve()
+			*/
+			if(cart != null) {
+				$scope.gift.cartId = cart.cartId;
+			}
 			
 			//make sure we have a positive value in the Other box and Other is selected
 			if($scope.otherValue != null && $scope.otherValue > 0 
@@ -74,14 +110,15 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.startDate = $scope.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
 			}
 			gift.update($scope.gift).then(function(results) {
-				$location.path('/GiftCartPage/' + cart.cartId);
+				//TODO: Need some sort of way to tell the user that the server is working
+				$location.path('/GiftCartPage/' + $scope.gift.cartId);
 			});
 		};
 		
 		$scope.cancel = function() {
-			//TODO: Delete gift
-			//TODO: Delete cart
-			//TODO: Redirect to ministry/staff/fund appeal detail page
+			//TODO: if new: delete gift else go back to GiftCartPage with no edits
+			//TODO: if new: delete cart
+			//TODO: if new: redirect to ministry/staff/fund appeal detail page
 				//this requires designation number
 		};
 		
@@ -126,4 +163,14 @@ angular.module('dssMiddlewareApp')
 		$scope.setErrorMessage = function(errorMessage) {
 			validationService.setErrorMessage(errorMessage);
 		};
+		
+		function isOther(amount) {
+			for(var i = 0; i < $scope.amounts.length; i++) {
+				if($scope.amounts[i] == amount) {
+					return false;
+				}
+			}
+			
+			return true;
+		}
 });
