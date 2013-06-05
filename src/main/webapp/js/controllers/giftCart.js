@@ -121,8 +121,8 @@ angular.module('dssMiddlewareApp')
 			//do stuff
 		};
 		
-		$scope.edit = function(designation) {
-			//do stuff
+		$scope.edit = function(giftId) {
+			$location.path('/GiftDetail/' + giftId + '/Y');
 		};
 		
 		$scope.remove = function(designation) {
