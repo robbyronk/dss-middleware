@@ -59,7 +59,7 @@ angular.module('dssMiddlewareApp')
 							  designationNumber: designationNumber};
 					$scope.gift.designationNumber = $scope.designation.designationNumber;
 					
-					if($scope.isOther($scope.gift.giftAmount)) {
+					if($scope.isOther($scope.gift.giftAmount, $scope.amounts)) {
 						$scope.otherValue = $scope.gift.giftAmount;
 						$scope.setGiftToOther();
 					}
@@ -164,9 +164,9 @@ angular.module('dssMiddlewareApp')
 			validationService.setErrorMessage(errorMessage);
 		};
 		
-		$scope.isOther = function(amount) {
-			for(var i = 0; i < $scope.amounts.length; i++) {
-				if($scope.amounts[i] == amount) {
+		$scope.isOther = function(amount, amounts) {
+			for(var i = 0; i < amounts.length; i++) {
+				if(amounts[i] == amount) {
 					return false;
 				}
 			}

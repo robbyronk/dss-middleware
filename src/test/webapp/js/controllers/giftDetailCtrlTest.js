@@ -1,9 +1,12 @@
 'use strict';
 
 describe('Gift detail controller tests', function() {
+	var scope = null;
+	var params = null;
+	
 	describe('Start date', function() {
-		var scope;
-		var params = {designationNumber: '2843160'};
+		
+		params = {designationNumber: '2843160'};
 		var controlDate;
 		var startDate;
 		
@@ -38,5 +41,29 @@ describe('Gift detail controller tests', function() {
 			date.setSeconds(0);
 			date.setMilliseconds(0);
 		}
+	});
+	
+	describe('isOther', function() {
+		var other = null;
+		var amounts = [];
+		
+		beforeEach(module('dssMiddlewareApp'));
+		
+		beforeEach(inject(function($rootScope, $controller, $httpBackend) {
+			scope = $rootScope.$new();
+			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params});
+		}));
+		
+		it('should be false', function() {
+			amounts = ['50','100','200','500','1000','2000','5000'];
+			other = scope.isOther(50, amounts);
+			expect(other).toBe(false);
+		});
+		
+		it('should be true', function() {
+			amounts = ['500','1000','2000','5000','10000','20000','50000'];
+			other = scope.isOther(14.11, amounts);
+			expect(other).toBe(true);
+		});
 	});
 });
