@@ -115,10 +115,15 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.cancel = function() {
-			//TODO: if new: delete gift else go back to GiftCartPage with no edits
-			//TODO: if new: delete cart
-			//TODO: if new: redirect to ministry/staff/fund appeal detail page
-				//this requires designation number
+			if(params.edit == 'Y') {
+				$location.path('/GiftCartPage/' + $scope.gift.cartId);
+			}
+			else {
+				//TODO: if new: delete gift
+				//TODO: if new: delete cart
+				//TODO: if new: redirect to ministry/staff/fund appeal detail page
+					//this requires designation number
+			}
 		};
 		
 		/**
