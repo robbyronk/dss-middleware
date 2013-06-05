@@ -25,19 +25,19 @@ angular.module('dssMiddlewareApp')
 			$scope.annualGifts = [];
 			
 			for(var i = 0; i < $scope.giftLines.length; i++) {
-				if($scope.giftLines[i].giftRecurrence == 'Single') {
+				if($scope.giftLines[i].giftFrequency == 'Single') {
 					$scope.singleGifts.push($scope.giftLines[i]);
 				}
-				else if($scope.giftLines[i].giftRecurrence == 'Monthly') {
+				else if($scope.giftLines[i].giftFrequency == 'Monthly') {
 					$scope.monthlyGifts.push($scope.giftLines[i]);
 				}
-				else if($scope.giftLines[i].giftRecurrence == 'Quarterly') {
+				else if($scope.giftLines[i].giftFrequency == 'Quarterly') {
 					$scope.quarterlyGifts.push($scope.giftLines[i]);
 				}
-				else if($scope.giftLines[i].giftRecurrence == 'Semi-Annual') {
+				else if($scope.giftLines[i].giftFrequency == 'Semi-Annual') {
 					$scope.semiAnnualGifts.push($scope.giftLines[i]);
 				}
-				else if($scope.giftLines[i].giftRecurrence == 'Annual') {
+				else if($scope.giftLines[i].giftFrequency == 'Annual') {
 					$scope.annualGifts.push($scope.giftLines[i]);
 				}
 			}
@@ -72,19 +72,19 @@ angular.module('dssMiddlewareApp')
 			var i = 0;
 			
 			for(i = 0; i < $scope.singleGifts.length; i++) {
-				$scope.singleTotal += $scope.singleGifts[i].amount;
+				$scope.singleTotal += $scope.singleGifts[i].giftAmount;
 			}
 			for(i = 0; i < $scope.monthlyGifts.length; i++) {
-				$scope.monthlyTotal += $scope.monthlyGifts[i].amount;
+				$scope.monthlyTotal += $scope.monthlyGifts[i].giftAmount;
 			}
 			for(i = 0; i < $scope.quarterlyGifts.length; i++) {
-				$scope.quarterlyTotal += $scope.quarterlyGifts[i].amount;
+				$scope.quarterlyTotal += $scope.quarterlyGifts[i].giftAmount;
 			}
 			for(i = 0; i < $scope.semiAnnualGifts.length; i++) {
-				$scope.semiAnnualTotal += $scope.semiAnnualGifts[i].amount;
+				$scope.semiAnnualTotal += $scope.semiAnnualGifts[i].giftAmount;
 			}
 			for(i = 0; i < $scope.annualGifts.length; i++) {
-				$scope.annualTotal += $scope.annualGifts[i].amount;
+				$scope.annualTotal += $scope.annualGifts[i].giftAmount;
 			}
 		};
 		
