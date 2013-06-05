@@ -7,6 +7,10 @@ angular.module('dssMiddlewareApp', ['ui'])
         templateUrl: 'views/GiftDetail.html',
         controller: 'GiftDetailCtrl'
       })
+      .when('/GiftDetail/:giftId/:edit', {
+        templateUrl: 'views/GiftDetail.html',
+        controller: 'GiftDetailCtrl'
+      })
       .when('/GiftCartPage', {
     	  templateUrl: 'views/GiftCartPage.html',
     	  controller: 'GiftCartCtrl'
