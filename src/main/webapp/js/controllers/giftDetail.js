@@ -12,7 +12,8 @@ angular.module('dssMiddlewareApp')
 		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; 
 		 
 		//can get custom amounts or defaults
-		$scope.amounts = ['50','100','250','500','1000','5000', 'Other:'];
+		$scope.amounts = ['50','100','250','500','1000','5000'];
+		$scope.amounts.push('Other:');
 
 		
 		/**
@@ -31,8 +32,6 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.initPage = function(){
-			
-			
 			drawDayEndpoints.fetchDrawDays(new Date().toISOString()).then(function(results){
 				$scope.transactionDays = results.data;
 				$scope.transactionDay = $scope.transactionDays[0].key;
@@ -164,6 +163,11 @@ angular.module('dssMiddlewareApp')
 			validationService.setErrorMessage(errorMessage);
 		};
 		
+		
+		/**
+		 * Determine whether the user picked a default radio 
+		 * option or if they entered a custom amount.
+		 */
 		$scope.isOther = function(amount, amounts) {
 			for(var i = 0; i < amounts.length; i++) {
 				if(amounts[i] == amount) {
