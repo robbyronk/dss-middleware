@@ -42,5 +42,17 @@ angular.module('dssMiddlewareApp')
 			return deferred.promise;
 		};
 		
+		gift.retrieve = function(giftId) {
+			var deferred = $q.defer();
+			
+			giftEndpoints.retrieve(giftId)
+				.success(function(data) {
+					var retrievedCart = data;
+					deferred.resolve(retrievedCart);
+				});
+			
+			return deferred.promise;
+		};
+		
 		return gift;
 	}]);

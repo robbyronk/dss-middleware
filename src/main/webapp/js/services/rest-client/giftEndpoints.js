@@ -16,5 +16,9 @@ angular.module('dssMiddlewareApp')
 			return $http.get(location);
 		};
 		
+		gift.retrieve = function(giftId) {
+			return $http.get('rest/gift/' + giftId);
+		};
+		
 		return gift;
 	}]);
