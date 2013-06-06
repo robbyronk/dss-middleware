@@ -31,17 +31,51 @@ angular.module('dssMiddlewareApp')
 			});
 		};
 		
-		$scope.initPage = function(){
+		/**
+		 * Retrieve the list of transaction days and months.
+		 */
+		$scope.initTransactionDate = function() {
 			drawDayEndpoints.fetchDrawDays(new Date().toISOString()).then(function(results){
 				$scope.transactionDays = results.data;
-				$scope.transactionDay = $scope.transactionDays[0].key;
+				$scope.transactionDay = 
+					$scope.setTransactionDay($scope.gift.dayOfMonth, $scope.transactionDays);
 			});
 			
 			drawDayEndpoints.fetchDrawMonths(new Date().toISOString()).then(function(results){
 				$scope.transactionMonths = results.data;
-				$scope.transactionMonth = $scope.transactionMonths[0];
+				$scope.transactionMonth = 
+					$scope.setTransactionMonth($scope.gift.startDate, $scope.transactionMonths);
 			});
-			
+		};
+		
+		/**
+		 * Initialize the transaction month select box with the proper 
+		 * month option selected.
+		 */
+		$scope.setTransactionMonth = function(startDate, transactionMonths) {
+			if(startDate != null) {
+				var monthObject = $scope.generateMonthObject(startDate);
+				return transactionMonths[$scope.getTransactionMonthIndex(monthObject)];
+			}
+			else {
+				return transactionMonths[0];
+			}
+		};
+		
+		/**
+		 * Initialize the transaction day select box with the proper 
+		 * day option selected.
+		 */
+		$scope.setTransactionDay = function(dayOfMonth, transactionDays) {
+			if(dayOfMonth != null) {
+				return dayOfMonth;
+			}
+			else {
+				return transactionDays[0].key;
+			}
+		};
+		
+		$scope.initPage = function(){
 			var designationNumber = '';
 			
 			if(params.edit == 'Y') {
@@ -49,6 +83,7 @@ angular.module('dssMiddlewareApp')
 				gift.retrieve(params.giftId).then(function(results) {
 					$scope.gift = results;
 					designationNumber = $scope.gift.designationNumber;
+					$scope.initTransactionDate();
 					
 					//TODO: Remove this once we can load designation numbers properly
 					if(designationNumber == null) {
@@ -68,6 +103,7 @@ angular.module('dssMiddlewareApp')
 				$scope.isNew = true;
 				$scope.createGift();
 				designationNumber = params.designationNumber;
+				$scope.initTransactionDate();
 				
 				$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
 						  designationNumber: designationNumber};
@@ -114,14 +150,19 @@ angular.module('dssMiddlewareApp')
 			});
 		};
 		
+		/**
+		 * Either go back instead of editing the gift or 
+		 * remove the newly created gift and cart then take the 
+		 * user back to a detail page.
+		 */
 		$scope.cancel = function() {
 			if(params.edit == 'Y') {
 				$location.path('/GiftCartPage/' + $scope.gift.cartId);
 			}
 			else {
-				//TODO: if new: delete gift
-				//TODO: if new: delete cart
-				//TODO: if new: redirect to ministry/staff/fund appeal detail page
+				//TODO: delete gift
+				//TODO: delete cart
+				//TODO: redirect to ministry/staff/fund appeal detail page
 					//this requires designation number
 			}
 		};
@@ -150,6 +191,50 @@ angular.module('dssMiddlewareApp')
 			var zeroIndexMonth = month - 1;
 			startDate.setFullYear(year,zeroIndexMonth,day);
 			return startDate;
+		};
+		
+		$scope.generateMonthObject = function(millisDate) {
+			var monthObject = {};
+			monthObject.month = '' + $scope.parseMonth(millisDate);
+			monthObject.year = '' + $scope.parseYear(millisDate);
+			monthObject.display = $scope.monthAsString(monthObject.month) 
+				+ ', ' + monthObject.year;
+			return monthObject;
+		};
+		
+		/**
+		 * Get the month for a specific millisecond date
+		 */
+		$scope.parseMonth = function(millisDate) {
+			var date = new Date(millisDate);
+			var month = date.getMonth();  //this is 0 based
+			return month + 1;
+		};
+		
+		/**
+		 * Get the year for a specific millisecond date
+		 */
+		$scope.parseYear = function(millisDate) {
+			var date = new Date(millisDate);
+			return date.getFullYear();
+		};
+		
+		/**
+		 * Get the name of the month based on the number month
+		 */
+		$scope.monthAsString = function(month) {
+			var months = ['January', 'February', 'March', 'April', 
+			              'May', 'June', 'July', 'August', 'September', 
+			              'October', 'November', 'December'];
+			return months[month - 1];
+		};
+		
+		$scope.getTransactionMonthIndex = function(monthObject) {
+			for(var i = 0; i < $scope.transactionMonths.length; i++) {
+				if($scope.transactionMonths[i].display == monthObject.display) {
+					return i;
+				}
+			}
 		};
 		
 		/***********************************************
