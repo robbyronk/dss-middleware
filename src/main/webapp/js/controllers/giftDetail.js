@@ -55,7 +55,7 @@ angular.module('dssMiddlewareApp')
 		$scope.setTransactionMonth = function(startDate, transactionMonths) {
 			if(startDate != null) {
 				var monthObject = $scope.generateMonthObject(startDate);
-				return transactionMonths[$scope.getTransactionMonthIndex(monthObject)];
+				return transactionMonths[$scope.getTransactionMonthIndex(monthObject, transactionMonths)];
 			}
 			else {
 				return transactionMonths[0];
@@ -193,6 +193,10 @@ angular.module('dssMiddlewareApp')
 			return startDate;
 		};
 		
+		/**
+		 * Create an object with the transaction month information 
+		 * included.
+		 */
 		$scope.generateMonthObject = function(millisDate) {
 			var monthObject = {};
 			monthObject.month = '' + $scope.parseMonth(millisDate);
@@ -229,9 +233,9 @@ angular.module('dssMiddlewareApp')
 			return months[month - 1];
 		};
 		
-		$scope.getTransactionMonthIndex = function(monthObject) {
-			for(var i = 0; i < $scope.transactionMonths.length; i++) {
-				if($scope.transactionMonths[i].display == monthObject.display) {
+		$scope.getTransactionMonthIndex = function(monthObject, transactionMonths) {
+			for(var i = 0; i < transactionMonths.length; i++) {
+				if(transactionMonths[i].display == monthObject.display) {
 					return i;
 				}
 			}
