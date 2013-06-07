@@ -31,15 +31,23 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.giftAmount = $scope.amounts[0];
 				$scope.gift.giftFrequency = $scope.frequencies[0];
 				cart = cartAndGift.cart;
-				$scope.initTransactionDate();
+				$scope.initTransactionDate(null);
 			});
 		};
 		
 		/**
 		 * Retrieve the list of transaction days and months.
 		 */
-		$scope.initTransactionDate = function() {
-			drawDayEndpoints.fetchDrawDays(new Date().toISOString()).then(function(results){
+		$scope.initTransactionDate = function(startDate) {
+			var fetchDate = null;
+			if($scope.isNew == 'Y') {
+				fetchDate = new Date();
+			}
+			else {
+				fetchDate = new Date(startDate);
+			}
+			
+			drawDayEndpoints.fetchDrawDays(fetchDate.toISOString()).then(function(results){
 				$scope.transactionDays = results.data;
 				$scope.transactionDay = 
 					$scope.setTransactionDay($scope.gift.dayOfMonth, $scope.transactionDays);
@@ -48,7 +56,7 @@ angular.module('dssMiddlewareApp')
 			drawDayEndpoints.fetchDrawMonths(new Date().toISOString()).then(function(results){
 				$scope.transactionMonths = results.data;
 				$scope.transactionMonth = 
-					$scope.setTransactionMonth($scope.gift.startDate, $scope.transactionMonths);
+					$scope.setTransactionMonth(startDate, $scope.transactionMonths);
 			});
 		};
 		
@@ -87,7 +95,7 @@ angular.module('dssMiddlewareApp')
 				gift.retrieve(params.giftId).then(function(results) {
 					$scope.gift = results;
 					designationNumber = $scope.gift.designationNumber;
-					$scope.initTransactionDate();
+					$scope.initTransactionDate($scope.gift.startDate);
 					
 					//TODO: Remove this once we can load designation numbers properly
 					if(designationNumber == null) {
