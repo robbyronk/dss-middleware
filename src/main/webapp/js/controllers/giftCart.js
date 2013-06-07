@@ -100,6 +100,10 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		/**
+		 * Get the total amount of all the gifts for a specific 
+		 * frequency.
+		 */
 		$scope.getFrequencyTotal = function(frequency) {
 			if(frequency == 'Single') return $scope.singleTotal;
 			else if(frequency == 'Monthly') return $scope.monthlyTotal;
@@ -131,14 +135,44 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.remove = function(designation) {
-			//do stuff
+			//do stuff (Remove gift, go back to giftDetail with success message)
 		};
 		
 		$scope.addMoreGifts = function() {
-			//do stuff
+			//do stuff (Currently goes back to the designation detail page you were on)
 		};
 		
 		$scope.viewDesig = function(designation) {
 			//do stuff
+		};
+		
+		/**
+		 * Determine whether or not there is a comment to 
+		 * the specified recipient.
+		 */
+		$scope.hasComments = function(commentTo, gift) {
+			if(commentTo == 'recipient') {
+				if(gift.commentsToRecipient == null || 
+						gift.commentsToRecipient.length == 0) {
+					return false;
+				}
+			}
+			else {
+				if(gift.commentsToDonationServices == null || 
+						gift.commentsToDonationServices.length == 0) {
+					return false;
+				}
+			}
+			
+			return true;
+		};
+		
+		$scope.isStaff = function(designationNumber) {
+			if($scope.getDesigType() == 'Staff') {
+				return true;
+			}
+			else {
+				return false;
+			}
 		};
 });

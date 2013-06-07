@@ -27,6 +27,9 @@
 									{{line.giftFrequency}} Gift
 									<br />&nbsp;<span data-ng-hide="line.giftFrequency != 'Single'">Transaction Date: 1-2 Business Days</span>
 									<span data-ng-hide="line.giftFrequency == 'Single'">(First Gift: {{line.startDate | date:'M/d/yyyy'}})</span>
+									<span data-ng-show="hasComments('recipient', line) && isStaff(line.designationNumber)"><br />&nbsp;Includes Comments For Staff Member</span>
+									<span data-ng-show="hasComments('recipient', line) && !isStaff(line.designationNumber)"><br />&nbsp;Includes Comments For Ministry</span>
+									<span data-ng-show="hasComments('dsg', line)"><br />&nbsp;Includes Comments For Donation Services</span>
 								</td>
 								<td align="center" style="padding: 4px" colspan="2">
 									<a data-ng-click="edit(line.giftId)">Edit</a>&nbsp;|&nbsp;<a data-ng-click="remove(line.designationNumber)">Remove</a>
