@@ -5,19 +5,23 @@ angular.module('dssMiddlewareApp')
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
-			
-			cart.retrieve(params.cartId).then(function(results) {
-				$scope.cart = results;
-				$scope.giftLines = $scope.cart.gifts;
+			if(params.cartId == undefined) {
+				$scope.emptyCart = true;
+			}
+			else {
+				cart.retrieve(params.cartId).then(function(results) {
+					$scope.cart = results;
+					$scope.giftLines = $scope.cart.gifts;
+					
+					$scope.generateFrequencyLists();
+					$scope.generateListOfFrequencies();
+					$scope.calculateFrequencyTotals();
+				});
 				
-				$scope.generateFrequencyLists();
-				$scope.generateListOfFrequencies();
-				$scope.calculateFrequencyTotals();
-			});
-			
-//			$scope.giftLines = [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
-//			                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
-//			                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}];
+//				$scope.giftLines = [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
+//				                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
+//				                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}];
+			}
 		};
 		
 		/**

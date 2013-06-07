@@ -16,8 +16,19 @@
 							</tr>
 			
 							<!-- My Gift History Detail Row -->
+							<tr data-ng-show="emptyCart">
+								<td colspan="6">
+									<table style="width:95%;">
+										<tr>
+											<td>
+												<h4>You currently have no gifts in your gift cart. Once you add a gift it will appear on this page.</h4>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 							
-							<tr class="alternatingRows" data-ng-repeat="line in giftLines">
+							<tr data-ng-hide="emptyCart" class="alternatingRows" data-ng-repeat="line in giftLines">
 								<td align="left" style="padding: 4px" colspan="2">
 									&nbsp;<a data-ng-click="viewDesig(line.designationNumber)">{{getWebTitle(line.designationNumber)}}</a><br/>
 									<span>&nbsp;{{getDesigType(line.designationNumber)}} #{{line.designationNumber}}</span>
@@ -49,7 +60,7 @@
 							</tr>
 			
 							<!-- Add More Gifts Button Row -->
-							<tr class="tableFooter">
+							<tr class="tableFooter" data-ng-hide="emptyCart">
 								<td colspan="6" class="td-no-padding">
 									<table style="margin-bottom:0; border:0; width:100%; padding:3px; border-spacing:0;">
 			  								<tr>
@@ -61,6 +72,18 @@
 												</td>
 			  								</tr>
 									</table>
+								</td>
+							</tr>
+						</table>
+						<table style="width:620px; border:0; border-spacing:0; padding:3px;" data-ng-show="emptyCart">
+							<tr height="5">
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<td align="center">
+									<p align="center">
+										<a class="greyButton" data-ng-click="continueBrowsing()">Continue Browsing</a>
+									</p>
 								</td>
 							</tr>
 						</table>
