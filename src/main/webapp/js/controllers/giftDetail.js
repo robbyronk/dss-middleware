@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, giftCrud, validationService) {
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, giftCrud, cartCrud, validationService) {
 		var params = $routeParams;
 		var cart = null;
 		$scope.showComment = {staff: 'N', dsg: 'N'};
@@ -176,10 +176,16 @@ angular.module('dssMiddlewareApp')
 				$location.path('/GiftCartPage/' + $scope.gift.cartId);
 			}
 			else {
-				//TODO: delete gift
-				//TODO: delete cart
-				//TODO: redirect to ministry/staff/fund appeal detail page
-					//this requires designation number
+				var giftId = $scope.gift.giftId;
+				var cartId = cart.cartId;
+				giftCrud.deleteGift(giftId).then(function() {
+					cartCrud.deleteCart(cartId).then(function() {
+						//TODO: redirect to ministry/staff/fund appeal detail page
+						//this requires designation number
+					});
+				});
+				
+				
 			}
 		};
 		
