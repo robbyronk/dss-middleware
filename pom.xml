@@ -309,7 +309,7 @@
                         <include>src/main/webapp/js/services/rest-client/cartEndpoints.js</include>
                         <include>src/main/webapp/js/services/rest-client/giftEndpoints.js</include>
                         <include>src/main/webapp/js/services/rest-client/drawDayEndpoints.js</include>
-                        <include>src/main/webapp/js/services/service/cart.js</include>
+                        <include>src/main/webapp/js/services/service/cartCrud.js</include>
                         <include>src/main/webapp/js/services/service/gift.js</include>
                         <include>src/main/webapp/js/services/service/validationService.js</include>
                     </sourceIncludes>
@@ -323,7 +323,7 @@
                         <source>src/main/webapp/js/services/rest-client/cartEndpoints.js</source>
                         <source>src/main/webapp/js/services/rest-client/giftEndpoints.js</source>
                         <source>src/main/webapp/js/services/rest-client/drawDayEndpoints.js</source>
-                        <source>src/main/webapp/js/services/service/cart.js</source>
+                        <source>src/main/webapp/js/services/service/cartCrud.js</source>
                         <source>src/main/webapp/js/services/service/gift.js</source>
                         <source>src/main/webapp/js/services/service/validationService.js</source>
                         <source>src/main/webapp/js/controllers/giftDetail.js</source>

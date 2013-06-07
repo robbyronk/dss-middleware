@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.factory('cart', ['$q', 'cartEndpoints', function($q, cartEndpoints) {
+	.factory('cartCrud', ['$q', 'cartEndpoints', function($q, cartEndpoints) {
 		var cart = {};
 		
 		/*creates a new 'blank cart' in the database and looks for the URI to 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cart) {
+	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cartCrud) {
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
@@ -9,7 +9,7 @@ angular.module('dssMiddlewareApp')
 				$scope.emptyCart = true;
 			}
 			else {
-				cart.retrieve(params.cartId).then(function(results) {
+				cartCrud.retrieve(params.cartId).then(function(results) {
 					$scope.cart = results;
 					$scope.giftLines = $scope.cart.gifts;
 					

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.factory('gift', ['$q', 'cart', 'giftEndpoints', function($q, cart, giftEndpoints) {
+	.factory('gift', ['$q', 'cartCrud', 'giftEndpoints', function($q, cartCrud, giftEndpoints) {
 		var gift = {};
 		
 		/*creates a new 'blank gift' in the database and looks for the URI to 
@@ -19,7 +19,7 @@ angular.module('dssMiddlewareApp')
 							createdGiftAndCart.gift = data;
 							
 							/*for now we assume there is no cart and it must be created*/
-							cart.create().then(function(c) {
+							cartCrud.create().then(function(c) {
 								 createdGiftAndCart.cart = c;
 								 deferred.resolve(createdGiftAndCart);
 							});
