@@ -109,6 +109,15 @@ angular.module('dssMiddlewareApp')
 						$scope.otherValue = $scope.gift.giftAmount;
 						$scope.setGiftToOther();
 					}
+					
+					if($scope.gift.commentsToDonationServices != null && 
+							$scope.gift.commentsToDonationServices.length > 0) {
+						$scope.showComment.dsg = 'Y';
+					}
+					if($scope.gift.commentsToRecipient != null && 
+							$scope.gift.commentsToRecipient.length > 0) {
+						$scope.showComment.staff = 'Y';
+					}
 				});
 			}
 			else {
