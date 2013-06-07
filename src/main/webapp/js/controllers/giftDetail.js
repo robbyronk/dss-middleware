@@ -24,10 +24,14 @@ angular.module('dssMiddlewareApp')
 			gift.create().then(function(results) {
 				cartAndGift = results;
 				$scope.gift = cartAndGift.gift;
+				designationNumber = params.designationNumber;
+				$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
+						  designationNumber: designationNumber};
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
 				$scope.gift.giftAmount = $scope.amounts[0];
 				$scope.gift.giftFrequency = $scope.frequencies[0];
 				cart = cartAndGift.cart;
+				$scope.initTransactionDate();
 			});
 		};
 		
@@ -102,11 +106,6 @@ angular.module('dssMiddlewareApp')
 			else {
 				$scope.isNew = true;
 				$scope.createGift();
-				designationNumber = params.designationNumber;
-				$scope.initTransactionDate();
-				
-				$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
-						  designationNumber: designationNumber};
 			}
 		};
 		
