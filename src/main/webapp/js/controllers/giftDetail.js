@@ -40,7 +40,7 @@ angular.module('dssMiddlewareApp')
 		 */
 		$scope.initTransactionDate = function(startDate) {
 			var fetchDate = null;
-			if($scope.isNew == 'Y') {
+			if($scope.isNew) {
 				fetchDate = new Date();
 			}
 			else {
