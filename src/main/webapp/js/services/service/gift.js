@@ -54,5 +54,16 @@ angular.module('dssMiddlewareApp')
 			return deferred.promise;
 		};
 		
+		gift.deleteGift = function(giftId) {
+			var deferred = $q.defer();
+			
+			giftEndpoints.deleteGift(giftId)
+				.success(function(data) {
+					deferred.resolve(data);
+				});
+			
+			return deferred.promise;
+		};
+		
 		return gift;
 	}]);

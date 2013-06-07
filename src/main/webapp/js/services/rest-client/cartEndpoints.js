@@ -16,5 +16,9 @@ angular.module('dssMiddlewareApp')
 			return $http.get(location);
 		};
 		
+		cart.deleteCart = function(cartId) {
+			return $http({method: 'DELETE', url: 'rest/cart/' + cartId});
+		};
+		
 		return cart;
 	}]);

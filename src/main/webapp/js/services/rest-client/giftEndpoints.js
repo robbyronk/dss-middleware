@@ -20,5 +20,9 @@ angular.module('dssMiddlewareApp')
 			return $http.get('rest/gift/' + giftId);
 		};
 		
+		gift.deleteGift = function(giftId) {
+			return $http({method: 'DELETE', url: 'rest/gift/' + giftId});
+		};
+		
 		return gift;
 	}]);
