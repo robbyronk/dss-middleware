@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, cartEndpoints, drawDayEndpoints, gift, validationService) {
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, gift, validationService) {
 		var params = $routeParams;
 		var cart = null;
 		$scope.showComment = {staff: 'N', dsg: 'N'};
