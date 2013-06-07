@@ -310,7 +310,7 @@
                         <include>src/main/webapp/js/services/rest-client/giftEndpoints.js</include>
                         <include>src/main/webapp/js/services/rest-client/drawDayEndpoints.js</include>
                         <include>src/main/webapp/js/services/service/cartCrud.js</include>
-                        <include>src/main/webapp/js/services/service/gift.js</include>
+                        <include>src/main/webapp/js/services/service/giftCrud.js</include>
                         <include>src/main/webapp/js/services/service/validationService.js</include>
                     </sourceIncludes>
                     <preloadSources>
@@ -324,7 +324,7 @@
                         <source>src/main/webapp/js/services/rest-client/giftEndpoints.js</source>
                         <source>src/main/webapp/js/services/rest-client/drawDayEndpoints.js</source>
                         <source>src/main/webapp/js/services/service/cartCrud.js</source>
-                        <source>src/main/webapp/js/services/service/gift.js</source>
+                        <source>src/main/webapp/js/services/service/giftCrud.js</source>
                         <source>src/main/webapp/js/services/service/validationService.js</source>
                         <source>src/main/webapp/js/controllers/giftDetail.js</source>
                     </preloadSources>

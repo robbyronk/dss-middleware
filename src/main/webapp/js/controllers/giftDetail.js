@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, gift, validationService) {
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, giftCrud, validationService) {
 		var params = $routeParams;
 		var cart = null;
 		$scope.showComment = {staff: 'N', dsg: 'N'};
@@ -21,7 +21,7 @@ angular.module('dssMiddlewareApp')
 		 */
 		$scope.createGift = function() {
 			var cartAndGift = {};
-			gift.create().then(function(results) {
+			giftCrud.create().then(function(results) {
 				cartAndGift = results;
 				$scope.gift = cartAndGift.gift;
 				designationNumber = params.designationNumber;
@@ -92,7 +92,7 @@ angular.module('dssMiddlewareApp')
 			
 			if(params.edit == 'Y') {
 				$scope.isNew = false;
-				gift.retrieve(params.giftId).then(function(results) {
+				giftCrud.retrieve(params.giftId).then(function(results) {
 					$scope.gift = results;
 					designationNumber = $scope.gift.designationNumber;
 					$scope.initTransactionDate($scope.gift.startDate);
@@ -160,7 +160,7 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.dayOfMonth = $scope.transactionDay;
 				$scope.gift.startDate = $scope.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
 			}
-			gift.update($scope.gift).then(function(results) {
+			giftCrud.update($scope.gift).then(function(results) {
 				//TODO: Need some sort of way to tell the user that the server is working
 				$location.path('/GiftCartPage/' + $scope.gift.cartId);
 			});
