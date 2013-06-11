@@ -146,7 +146,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.proceedToCheckout = function() {
-			//do stuff
+			//TODO: Redirect to either info page or payment page based on logged in status
 		};
 		
 		$scope.edit = function(giftId) {
@@ -161,11 +161,23 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.addMoreGifts = function() {
-			//do stuff (Currently goes back to the designation detail page you were on)
+			/* current logic:
+			 *  if type == ministry, go back to that ministry's page
+			 *  if type == staff, go back to home page
+			 *  if type == fund appeal, go back to that fund appeal's page
+			 *  this is based on the most recent gift given
+			 */
+			//TODO: Redirect back to the client
+			window.href = 'https://give-stage.cru.org/';
+		};
+		
+		$scope.continueBrowsing = function() {
+			//TODO: Redirect back to the client
+			window.href = 'https://give-stage.cru.org/';
 		};
 		
 		$scope.viewDesig = function(designation) {
-			//do stuff
+			//TODO: Redirect to give.cru.org/designation
 		};
 		
 		/**
