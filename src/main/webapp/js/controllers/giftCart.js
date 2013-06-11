@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cartCrud) {
+	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cartCrud, giftCrud) {
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
+			$scope.successMessage = '';
+			
 			if(params.cartId == undefined) {
 				$scope.emptyCart = true;
 			}
@@ -13,9 +15,22 @@ angular.module('dssMiddlewareApp')
 					$scope.cart = results;
 					$scope.giftLines = $scope.cart.gifts;
 					
-					$scope.generateFrequencyLists();
-					$scope.generateListOfFrequencies();
-					$scope.calculateFrequencyTotals();
+					//This is the case where a user deletes a line and the cart becomes empty
+					if($scope.giftLines.length == 0) {
+						var cartId = $scope.cart.cartId;
+						/*Delete cart to prevent empty carts sitting in the database
+						 * This is okay because a new cart will be created when 
+						 * the user comes back to add a gift.
+						 */
+						cartCrud.deleteCart(cartId).then(function() {
+							$scope.emptyCart = true;
+						});
+					}
+					else {
+						$scope.generateFrequencyLists();
+						$scope.generateListOfFrequencies();
+						$scope.calculateFrequencyTotals();
+					}
 				});
 				
 //				$scope.giftLines = [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
@@ -138,8 +153,11 @@ angular.module('dssMiddlewareApp')
 			$location.path('/GiftDetail/' + giftId + '/Y');
 		};
 		
-		$scope.remove = function(designation) {
-			//do stuff (Remove gift, go back to giftDetail with success message)
+		$scope.remove = function(giftId) {
+			giftCrud.deleteGift(giftId).then(function() {
+				$scope.initPage();
+				$scope.successMessage = 'Your gift was successfully removed. Your updated gift cart is displayed below.';
+			});
 		};
 		
 		$scope.addMoreGifts = function() {

@@ -4,6 +4,10 @@
 	
 	<div id="checkoutOptionDisplay">
 		<form data-ng-init="initPage()" data-ng-submit="proceedToCheckout()">
+			<p class="success" data-ng-show="successMessage.length > 0">
+				{{successMessage}}
+			</p>
+			
 			<table style="width:100%; border:0; border-spacing:0">
 				<tr> 
 					<td>
@@ -43,7 +47,7 @@
 									<span data-ng-show="hasComments('dsg', line)"><br />&nbsp;Includes Comments For Donation Services</span>
 								</td>
 								<td align="center" style="padding: 4px" colspan="2">
-									<a data-ng-click="edit(line.giftId)">Edit</a>&nbsp;|&nbsp;<a data-ng-click="remove(line.designationNumber)">Remove</a>
+									<a data-ng-click="edit(line.giftId)">Edit</a>&nbsp;|&nbsp;<a data-ng-click="remove(line.giftId)">Remove</a>
 								</td>
 							</tr>						
 			
