@@ -20,7 +20,8 @@ angular.module('dssMiddlewareApp')
 			                 {stateCode: 'IN', stateName: 'Indiana'},
 			                 {stateCode: 'FL', stateName: 'Florida'},
 			                 {stateCode: 'TX', stateName: 'Texas'}];
-			$scope.countries = [{countryCode: 'Macedonia, The Former Yugoslav', countryName: 'Macedonia, The Former Yugoslav'},
+			$scope.countries = [{countryCode: 'Canada', countryName: 'Canada'},
+			                    {countryCode: 'Macedonia, The Former Yugoslav', countryName: 'Macedonia, The Former Yugoslav'},
 			                    {countryCode: 'USA', countryName: 'USA'}, 
 			                    {countryCode: 'Zimbabwe', countryName: 'Zimbabwe'}];
 			$scope.loggedIn = false;
@@ -33,5 +34,9 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.isUsa = function(personalInfo) {
 			return personalInfo.mailingAddress.countryCode === 'USA';
+		};
+		
+		$scope.isCanadianAddress = function(personalInfo) {
+			return personalInfo.mailingAddress.countryCode === 'Canada';
 		};
 	});
