@@ -1,0 +1,107 @@
+<div id="dssAddressEditor">
+	<table style="width:100%; border:0; border-spacing:0; padding:3px;">
+
+		<!-- IF USA -->
+	  	<tr data-ui-if="$parent.isUsa($parent.personalInfo)">
+		    <td width="3%" rowspan="5">&nbsp;</td>
+		    <td colspan="5">
+		    	<span class="redhighlight">*</span> <b>Address</b><br/>
+	    		<input type="text" class="inputStyle" size="28" maxlength="35" 
+	    			data-ng-disabled="readOnly" data-ng-model="$parent.personalInfo.mailingAddress.addressLine1" 
+	    			data-ng-required="!readOnly" 
+	    			data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+	  	</tr>
+	  	<tr data-ui-if="$parent.isUsa($parent.personalInfo)">
+		    <td colspan="5">
+		    	<input type="text" class="inputStyle" size="28" maxlength="35" 
+		    		data-ng-disabled="readOnly" data-ng-model="$parent.personalInfo.mailingAddress.addressLine2" 
+		    		data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+	  	</tr>
+	  	<tr data-ui-if="$parent.isUsa($parent.personalInfo)">
+		    <td colspan="5">
+	    		<input type="text" class="inputStyle" size="28" maxlength="35" 
+	    			data-ng-disabled="readOnly" data-ng-model="$parent.personalInfo.mailingAddress.addressLine3" 
+	    			data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+	  	</tr>
+	  	<tr data-ui-if="$parent.isUsa($parent.personalInfo)">
+		    <td colspan="3">
+		    	<span class="redhighlight">*</span> <b>City</b><br/>
+		    	<input type="text" class="inputStyle" size="25" maxlength="30" 
+		    		data-ng-disabled="readOnly" data-ng-model="$parent.personalInfo.mailingAddress.city" 
+		    		data-ng-required="!readOnly" 
+		    		data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+		    <td width="144">
+		    	<span class="redhighlight">*</span> <b>State</b><br/>
+		    	<select style="width:150px;" 
+		    		data-ng-disabled="readOnly" data-ng-required="!readOnly" 
+		    		data-ng-model="$parent.personalInfo.mailingAddress.state" 
+		    		data-ng-options="state as state.stateName for state in states">
+		    	</select>
+		    </td>
+	
+		    <td width="263">
+		    	<span class="redhighlight">*</span> <b>Zip/Postal Code</b><br/>
+	    		<input type="text" class="inputStyle" size="14" maxlength="10" 
+	    			data-ng-disabled="readOnly" data-ng-required="!readOnly" 
+	    			data-ng-model="$parent.personalInfo.mailingAddress.zip" 
+	    			data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+	  	</tr>
+
+
+		<!-- IF NOT USA -->
+		<tr data-ui-if="!$parent.isUsa($parent.personalInfo)">
+			<td width="3%" rowspan="4">&nbsp;</td>
+		    <td>
+		    	<span class="redhighlight">*</span> <b>Address</b><br/>
+			    <input type="text" class="inputStyle" size="28" maxlength="35" 
+			    	data-ng-disabled="readOnly" data-ng-required="!readOnly" 
+			    	data-ng-model="$parent.personalInfo.mailingAddress.addressLine1" 
+			    	data-ng-class="{readOnly: disabled-background}" />
+			</td>
+		    <td rowspan="3" align="left" valign="middle">
+		    	Please use the four Address lines on the<br/>
+		    	left to enter your full mailing address, not<br>
+		    	including the country name.
+		    </td>
+		</tr>
+		<tr data-ui-if="!$parent.isUsa($parent.personalInfo)">
+			<td>
+				<input type="text" class="inputStyle" size="28" maxlength="35" 
+					data-ng-disabled="readOnly" data-ng-required="!readOnly" 
+					data-ng-model="$parent.personalInfo.mailingAddress.addressLine2" 
+					data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+		</tr>
+		<tr data-ui-if="!$parent.isUsa($parent.personalInfo)">
+		    <td>
+				<input class="inputStyle" type="text" size="28" maxlength="35" 
+				 	data-ng-disabled="readOnly" data-ng-required="!readOnly" 
+				 	data-ng-model="$parent.personalInfo.mailingAddress.addressLine3" 
+				 	data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+		</tr>
+		<tr data-ui-if="!$parent.isUsa($parent.personalInfo)">
+		    <td>
+		    	<input class="inputStyle" type="text" size="28" maxlength="35" 
+				 	data-ng-disabled="readOnly" data-ng-required="!readOnly" 
+				 	data-ng-model="$parent.personalInfo.mailingAddress.addressLine4" 
+				 	data-ng-class="{readOnly: disabled-background}" />
+		    </td>
+		</tr>
+  
+		<tr>
+		    <td colspan="5">
+			    <span class="redhighlight">*</span> <b>Country</b><br/>
+			    <select data-ng-disabled="readOnly" data-ng-required="!readOnly"
+			    	data-ng-model="$parent.personalInfo.mailingAddress.countryCode" 
+			    	data-ng-options="country.countryCode as country.countryName for country in countries">
+			    </select>
+		    </td>
+		</tr>
+	</table>  
+</div>

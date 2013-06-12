@@ -199,3 +199,7 @@ body#editprofile td, body#editpayment td, body#addpayment td, body#removepayment
 	margin-top: 10px !important;
 	width: 110px !important;
 }
+
+.disabled-background {
+	background: #eee;
+}

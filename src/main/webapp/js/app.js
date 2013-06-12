@@ -19,6 +19,10 @@ angular.module('dssMiddlewareApp', ['ui'])
     	  templateUrl: 'views/GiftCartPage.html',
     	  controller: 'GiftCartCtrl'
       })
+      .when('/CheckoutMailingAddress/:cartId', {
+    	  templateUrl: 'views/CheckoutMailingAddress.html',
+    	  controller: 'CheckoutMailingAddressCtrl'
+      })
       .otherwise({
         redirectTo: '/GiftDetail/:designationNumber'
       });
