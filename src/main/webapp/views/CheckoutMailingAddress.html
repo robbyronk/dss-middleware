@@ -97,7 +97,7 @@
 						    <td width="">
 						    	Suffix<br/> 
 						    	<select data-ng-model="primaryName.suffix" 
-						    		data-ng-options="suffix as suffix.suffix for suffix in suffixes">
+						    		data-ng-options="suffix.nameSuffix as suffix.suffix for suffix in suffixes">
 						    	</select>
 						    </td>
 					  	</tr>
@@ -114,7 +114,7 @@
 								<br/>
 								<span data-ng-repeat="phoneType in phoneTypes">
 									<input type="radio" name="phoneType" 
-										data-ng-model="personalInfo.phoneNumber.type" data-ng-value="phoneType.value" />
+										data-ng-model="$parent.phoneNumber" data-ng-value="phoneType.value" />
 									&nbsp;&nbsp;{{phoneType.display}} &nbsp;&nbsp;&nbsp;
 								</span>
 							</td>
@@ -126,7 +126,7 @@
 						    <td width="160" colspan="2">
 						    	<span class="redhighlight">*</span> <b>E-mail Address</b><br/>
 						    	<input type="text" class="inputStyle" size="20" maxlength="60"
-						    		data-ng-model="personalInfo.emailAddressAllowCcc" data-ng-required="true" />
+						    		data-ng-model="$parent.emailAddress" data-ng-required="true" />
 						    </td>
 						</tr>
 					</table>
@@ -167,7 +167,7 @@
 						    <td width="">
 						    	Suffix<br/> 
 						    	<select data-ng-model="primaryName.suffix" 
-						    		data-ng-options="suffix as suffix.suffix for suffix in suffixes">
+						    		data-ng-options="suffix.nameSuffix as suffix.suffix for suffix in suffixes">
 						    	</select>
 						    </td>
 						</tr>
@@ -179,7 +179,7 @@
 						    <td width="160">
 						    	Phone Number<br/>
 						    	<input type="text" class="inputStyle" size="20" maxlength="12"
-						    		data-ng-model="personalInfo.phoneNumber.number" />
+						    		data-ng-model="$parent.phoneNumber" />
 						    </td>
 						    <td>
 						    	<br/>
@@ -197,7 +197,7 @@
 						    <td width="160" colspan="2">
 						    	<span class="redhighlight">*</span> <b>E-mail Address</b><br/>
 						    	<input type="text" class="inputStyle" size="20" maxlength="60"
-						    		data-ng-model="personalInfo.emailAddressAllowCcc" />
+						    		data-ng-model="$parent.emailAddress" data-ng-required="true" />
 						    </td>
 						</tr>
 					</table>
@@ -249,7 +249,7 @@
 							<td width="">
 								Suffix<br/>
 								<select data-ng-model="spouseName.suffix" 
-							    		data-ng-options="suffix as suffix.suffix for suffix in suffixes">
+							    		data-ng-options="suffix.nameSuffix as suffix.suffix for suffix in suffixes">
 						    	</select> 
 						    </td>
 					  	</tr>

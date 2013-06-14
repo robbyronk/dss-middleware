@@ -22,6 +22,9 @@ public class GiftCart implements java.io.Serializable
 	
 	Payment payment;
 	
+	String emailAddress;
+	String phoneNumber;
+	
 	public CapturedNameAddressAndPayment asCapturedNameAddressAndPayment()
 	{
 		CapturedNameAddressAndPayment capturedNameAddressPayment = new CapturedNameAddressAndPayment();
@@ -34,6 +37,7 @@ public class GiftCart implements java.io.Serializable
 			capturedNameAddressPayment.setFirstName(primaryName.getFirstName());
 			capturedNameAddressPayment.setMiddleName(primaryName.getMiddleName());
 			capturedNameAddressPayment.setLastName(primaryName.getLastName());
+			capturedNameAddressPayment.setSuffix(primaryName.getSuffix());
 		}
 		if(spouseName != null)
 		{
@@ -41,6 +45,7 @@ public class GiftCart implements java.io.Serializable
 			capturedNameAddressPayment.setSpouseFirstName(spouseName.getFirstName());
 			capturedNameAddressPayment.setSpouseMiddleName(spouseName.getMiddleName());
 			capturedNameAddressPayment.setSpouseLastName(spouseName.getLastName());
+			capturedNameAddressPayment.setSpouseSuffix(spouseName.getSuffix());
 		}
 		
 		if(mailingAddress != null)
@@ -50,6 +55,9 @@ public class GiftCart implements java.io.Serializable
 			capturedNameAddressPayment.setAddressLine3(mailingAddress.getStreetAddress3());
 			capturedNameAddressPayment.setAddressLine4(mailingAddress.getStreetAddress4());
 			capturedNameAddressPayment.setCity(mailingAddress.getCity());
+			capturedNameAddressPayment.setState(mailingAddress.getState());
+			capturedNameAddressPayment.setZipCode(mailingAddress.getZipCode());
+			capturedNameAddressPayment.setCountry(mailingAddress.getCountry());
 		}
 		
 		if(payment != null)
@@ -58,6 +66,9 @@ public class GiftCart implements java.io.Serializable
 			capturedNameAddressPayment.setPaymentType(payment.getPaymentType());
 			capturedNameAddressPayment.setPaymentDescription(payment.getDescription());
 		}
+		
+		capturedNameAddressPayment.setEmailAddress(emailAddress);
+		capturedNameAddressPayment.setPhoneNumber(phoneNumber);
 		return capturedNameAddressPayment;
 	}
 	
@@ -118,6 +129,26 @@ public class GiftCart implements java.io.Serializable
 	public void setPayment(Payment payment)
 	{
 		this.payment = payment;
+	}
+	
+	public String getEmailAddress()
+	{
+		return emailAddress;
+	}
+	
+	public void setEmailAddress(String emailAddress)
+	{
+		this.emailAddress = emailAddress;
+	}
+	
+	public String getPhoneNumber()
+	{
+		return phoneNumber;
+	}
+	
+	public void setPhoneNumber(String phoneNumber)
+	{
+		this.phoneNumber = phoneNumber;
 	}
 	
 }

@@ -12,6 +12,8 @@ angular.module('dssMiddlewareApp')
 				$scope.mailingAddress = cart.mailingAddress;
 				$scope.primaryName = cart.primaryName;
 				$scope.spouseName = cart.spouseName;
+				$scope.phoneNumber = cart.phoneNumber;
+				$scope.emailAddress = cart.emailAddress;
 				
 				//TODO: Get these from the server
 				$scope.personalInfo = {personType: 'Household', isStaff: false, hasPaymentMethods: false};
@@ -55,9 +57,11 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.continueToPaymentPage = function() {
 			//TODO: Do I want to do this to abstract from the direct input or do I want to use the cart attributes directly?
-			cart.mailingAddress = $scope.mailingAddress;  //TODO: Add validation for things like apostraphes (or do this as directive)
+			cart.mailingAddress = $scope.mailingAddress;  //TODO: Add validation for things like apostrophes (or do this as directive)
 			cart.primaryName = $scope.primaryName;
 			cart.spouseName = $scope.spouseName;
+			cart.phoneNumber = $scope.phoneNumber;
+			cart.emailAddress = $scope.emailAddress;
 			
 			cartCrud.updateCart(cart).then(function(data) {
 				//TODO: Update personal Info?

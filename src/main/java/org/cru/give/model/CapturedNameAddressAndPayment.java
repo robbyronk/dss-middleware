@@ -57,6 +57,8 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	private String middleName;
 	@Column(name = "LAST_NAME")
 	private String lastName;
+	@Column(name = "SUFFIX")
+	private String suffix;
 	
 	@Column(name = "SP_NAME_PREFIX")
 	private String spouseNamePrefix;
@@ -66,6 +68,8 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	private String spouseMiddleName;
 	@Column(name = "SP_LAST_NAME")
 	private String spouseLastName;
+	@Column(name = "SP_SUFFIX")
+	private String spouseSuffix;
 	
 	@Column(name = "ADDRESS_LINE1")
 	private String addressLine1;
@@ -266,6 +270,14 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	{
 		this.lastName = lastName;
 	}
+	public String getSuffix()
+	{
+		return suffix;
+	}
+	public void setSuffix(String suffix)
+	{
+		this.suffix = suffix;
+	}
 	public String getSpouseNamePrefix()
 	{
 		return spouseNamePrefix;
@@ -297,6 +309,14 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	public void setSpouseLastName(String spouseLastName)
 	{
 		this.spouseLastName = spouseLastName;
+	}
+	public String getSpouseSuffix()
+	{
+		return spouseSuffix;
+	}
+	public void setSpouseSuffix(String spouseSuffix)
+	{
+		this.spouseSuffix = spouseSuffix;
 	}
 	public String getAddressLine1()
 	{

@@ -6,6 +6,7 @@ public class NameInformation
 	String firstName;
 	String middleName;
 	String lastName;
+	String suffix;
 	
 	
 	public String getNamePrefix()
@@ -39,5 +40,13 @@ public class NameInformation
 	public void setLastName(String lastName)
 	{
 		this.lastName = lastName;
+	}
+	public String getSuffix()
+	{
+		return suffix;
+	}
+	public void setSuffix(String suffix)
+	{
+		this.suffix = suffix;
 	}
 }
