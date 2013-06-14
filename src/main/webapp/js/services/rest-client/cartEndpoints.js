@@ -20,5 +20,9 @@ angular.module('dssMiddlewareApp')
 			return $http({method: 'DELETE', url: 'rest/cart/' + cartId});
 		};
 		
+		cart.updateCart = function(cartToUpdate) {
+			return $http.put('rest/cart', cartToUpdate);
+		};
+		
 		return cart;
 	}]);

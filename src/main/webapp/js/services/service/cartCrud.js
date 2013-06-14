@@ -47,5 +47,16 @@ angular.module('dssMiddlewareApp')
 			return deferred.promise;
 		};
 		
+		cart.updateCart = function(cartToUpdate) {
+			var deferred = $q.defer();
+			
+			cartEndpoints.updateCart(cartToUpdate)
+				.success(function(data) {
+					deferred.resolve(data);
+				});
+			
+			return deferred.promise;
+		};
+		
 		return cart;
 	}]);
