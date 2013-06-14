@@ -3,19 +3,11 @@
 angular.module('dssMiddlewareApp')
 	.controller('CheckoutMailingAddressCtrl', function ($scope, $routeParams, $location, giftCrud, cartCrud) {
 		var params = $routeParams;
-		var cart;
 		
 		$scope.initPage = function() {
 			
 			cartCrud.retrieve(params.cartId).then(function(data) {
-				cart = data;
-				$scope.mailingAddress = cart.mailingAddress;
-				$scope.primaryName = cart.primaryName;
-				$scope.spouseName = cart.spouseName;
-				$scope.phoneNumber = cart.phoneNumber;
-				$scope.emailAddress = cart.emailAddress;
-				$scope.organizationName = cart.organizationName;
-				$scope.personType = cart.personType;
+				$scope.cart = data;
 				
 				//TODO: Get these from the server
 				$scope.personalInfo = {isStaff: false, hasPaymentMethods: false};
@@ -42,12 +34,12 @@ angular.module('dssMiddlewareApp')
 				$scope.failoverMode = false;
 				
 				//If blank, set country code to the default
-				if($scope.mailingAddress.country == '' || $scope.mailingAddress.country == null) {
-					$scope.mailingAddress.country = 'USA';
+				if($scope.cart.mailingAddress.country == '' || $scope.cart.mailingAddress.country == null) {
+					$scope.cart.mailingAddress.country = 'USA';
 				}
 				
-				if($scope.personType == '' || $scope.personType == null) {
-					$scope.personType = 'Household';
+				if($scope.cart.personType == '' || $scope.cart.personType == null) {
+					$scope.cart.personType = 'Household';
 				}
 			});
 			
@@ -62,22 +54,13 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.continueToPaymentPage = function() {
-			//TODO: Do I want to do this to abstract from the direct input or do I want to use the cart attributes directly?
-			cart.mailingAddress = $scope.mailingAddress;  //TODO: Add validation for things like apostrophes (or do this as directive)
-			cart.primaryName = $scope.primaryName;
-			cart.spouseName = $scope.spouseName;
-			cart.phoneNumber = $scope.phoneNumber;
-			cart.emailAddress = $scope.emailAddress;
-			cart.organizationName = $scope.organizationName;
-			cart.personType = $scope.personType;
-			
-			cartCrud.updateCart(cart).then(function(data) {
+			cartCrud.updateCart($scope.cart).then(function(data) {
 				//TODO: Update personal Info?
 				if($scope.loggedIn && $scope.personalInfo.hasPaymentMethods) {
-					$location.path('/CheckoutSelectPaymentMethod/' + cart.cartId);
+					$location.path('/CheckoutSelectPaymentMethod/' + $scope.cart.cartId);
 				}
 				else {
-					$location.path('/CheckoutPaymentMethod/' + cart.cartId);
+					$location.path('/CheckoutPaymentMethod/' + $scope.cart.cartId);
 				}
 			});
 		};
