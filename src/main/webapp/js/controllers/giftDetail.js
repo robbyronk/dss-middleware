@@ -6,6 +6,7 @@ angular.module('dssMiddlewareApp')
 		var cart = null;
 		$scope.showComment = {staff: 'N', dsg: 'N'};
 		$scope.clientSideError = {message: ''};
+		var designationNumber = '';
 		
 		
 		//TODO: Get these values from the server
@@ -88,7 +89,6 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.initPage = function(){
-			var designationNumber = '';
 			
 			if(params.edit == 'Y') {
 				$scope.isNew = false;
