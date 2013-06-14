@@ -180,6 +180,10 @@ angular.module('dssMiddlewareApp')
 			//TODO: Redirect to give.cru.org/designation
 		};
 		
+		$scope.proceedToCheckout = function() {
+			$location.path('/CheckoutMailingAddress/' + $scope.cart.cartId);
+		};
+		
 		/**
 		 * Determine whether or not there is a comment to 
 		 * the specified recipient.

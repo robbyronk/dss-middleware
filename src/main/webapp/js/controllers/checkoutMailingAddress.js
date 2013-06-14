@@ -38,18 +38,18 @@ angular.module('dssMiddlewareApp')
 				$scope.failoverMode = false;
 				
 				//If blank, set country code to the default
-				if($scope.mailingAddress.countryCode == '' || $scope.mailingAddress.countryCode == null) {
-					$scope.mailingAddress.countryCode = 'USA';
+				if($scope.mailingAddress.country == '' || $scope.mailingAddress.country == null) {
+					$scope.mailingAddress.country = 'USA';
 				}
 			});
 			
 		};
 		
 		$scope.isUsa = function(mailingAddress) {
-			return mailingAddress.countryCode === 'USA';
+			return mailingAddress.country === 'USA';
 		};
 		
 		$scope.isCanadianAddress = function(mailingAddress) {
-			return mailingAddress.countryCode === 'Canada';
+			return mailingAddress.country === 'Canada';
 		};
 	});

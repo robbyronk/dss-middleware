@@ -71,9 +71,9 @@
 						<tr>
 					    	<td width="">
 					    		<span class="redhighlight">*</span>&nbsp;<b>Title</b><br/>
-					    		<select data-ng-model="primaryName.namePrefix" 
+					    		<select data-ng-model="$parent.primaryName.namePrefix" 
 					    			data-ng-required="true" 
-					    			data-ng-options="prefix as prefix.namePrefix for prefix in prefixes">
+					    			data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes">
 					    		</select>
 					    	</td>
 					  	</tr>
@@ -82,17 +82,17 @@
 						    <td width="">
 						    	<span class="redhighlight">*</span>&nbsp;<b>First Name</b><br/>
 						    	<input type="text" size="11" maxlength="40" style="width:175px"
-						    		data-ng-model="primaryName.firstName" data-ng-required="true" />
+						    		data-ng-model="$parent.primaryName.firstName" data-ng-required="true" />
 						    </td>
 						    <td width="">
 						    	MI<br/>
 						    	<input type="text" style="width:35px" size="5" maxlength="15" 
-						    		data-ng-model="primaryName.middleName" />
+						    		data-ng-model="$parent.primaryName.middleName" />
 						    </td>
 						    <td width="">
 						    	<span class="redhighlight">*</span>&nbsp;<b>Last Name</b><br/>
 						    	<input type="text" size="17" maxlength="40" style="width:175px" 
-						    		data-ng-model="primaryName.lastName" data-ng-required="true" />
+						    		data-ng-model="$parent.primaryName.lastName" data-ng-required="true" />
 						    </td>
 						    <td width="">
 						    	Suffix<br/> 
@@ -143,8 +143,8 @@
 							<td width="">
 								<span class="redhighlight">*</span> <b>Title</b><br/>
 								<select data-ng-required="true" 
-									data-ng-model="primaryName.namePrefix"
-									data-ng-options="prefix as prefix.namePrefix for prefix in prefixes">
+									data-ng-model="$parent.primaryName.namePrefix"
+									data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes">
 								</select>
 							</td>
 						</tr>
@@ -152,17 +152,17 @@
 							<td width="">
 								<span class="redhighlight">*</span>&nbsp;<b>First Name</b><br/>
 								<input type="text" class="inputStyle" style="width:175px;" size="11" maxlength="40"  
-									data-ng-model="primaryName.firstName" data-ng-required="true" />
+									data-ng-model="$parent.primaryName.firstName" data-ng-required="true" />
 							</td>
 						    <td width="12">
 						    	MI<br/> 
 						    	<input type="text" class="inputStyle" style="width:35px;" size="5" maxlength="15"
-						    		data-ng-model="primaryName.middleName" />
+						    		data-ng-model="$parent.primaryName.middleName" />
 						    </td>
 						    <td width="">
 						    	<span class="redhighlight">*</span> <b>Last Name</b><br/>
 						    	<input  type="text" class="inputStyle" size="17" maxlength="40" style="width:175px;"
-						    		data-ng-model="primaryName.lastName" data-ng-required="true" />
+						    		data-ng-model="$parent.primaryName.lastName" data-ng-required="true" />
 						    </td>
 						    <td width="">
 						    	Suffix<br/> 
@@ -225,8 +225,8 @@
 						<tr>
 							<td width="">
 								Title<br/>
-								<select class="inputStyle" data-ng-model="spouseName.namePrefix" 
-									data-ng-options="prefix as prefix.namePrefix for prefix in prefixes">
+								<select class="inputStyle" data-ng-model="$parent.spouseName.namePrefix" 
+									data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes">
 								</select>
 							</td>
 						</tr>
@@ -234,17 +234,17 @@
 							<td width="">
 								First Name<br/>
 								<input type="text" class="inputStyle" style="width: 175px;" size="11" maxlength="40" 
-									data-ng-model="spouseName.firstName" />
+									data-ng-model="$parent.spouseName.firstName" />
 							</td>
 							<td width="">
 								MI<br/> 
 								<input type="text" style="width: 35px;" class="inputStyle" size="5" maxlength="15"
-									data-ng-model="spouseName.middleName" />
+									data-ng-model="$parent.spouseName.middleName" />
 							</td>
 							<td width="">
 								Last Name<br/>
 								<input type="text" style="width: 175px;" class="inputStyle" size="17" maxlength="40" 
-								data-ng-model="spouseName.lastName" />
+								data-ng-model="$parent.spouseName.lastName" />
 							</td>
 							<td width="">
 								Suffix<br/>
