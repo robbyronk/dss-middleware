@@ -46,10 +46,12 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.isUsa = function(mailingAddress) {
+			if(mailingAddress == undefined) return false;
 			return mailingAddress.country === 'USA';
 		};
 		
 		$scope.isCanadianAddress = function(mailingAddress) {
+			if(mailingAddress == undefined) return false;
 			return mailingAddress.country === 'Canada';
 		};
 		
