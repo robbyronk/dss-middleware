@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<script src="$Page.OptimizelySourcePath"></script>
+	
+	<!-- javascript and css -->
+	#include as template 'DssCommon/html-assets.html'
+	#include as template 'DssCommon/google-analytics.html'
+
+	<title>Online Giving - Cru</title>
+	
+	$c.ajaxPostbackHeader()
+</head>
+
+<body id="checkoutpaymentmethod">
+	<div id="wrap" class="">
+
+		<!-- header.html - this includes toolbar and navigation -->
+		#include as template 'DssCommon/header.html'
+
+
+		<!-- start content -->
+		<div id="content" style="min-height: 50px;">
+
+
+			<!-- START EDITING FROM HERE -->
+			<h1 class="pagetitle">Checkout Step 2 of 3</h1>
+			
+			<p>
+				<b><span class="notCurrentStep">&nbsp;&nbsp;&nbsp;Receipt Mailing Address</span>
+				<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+				<span class="currentStep">Gift Payment Method</span>
+				<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+				<span class="notCurrentStep">Submit Gift</span></b>
+			</p>
+			
+			
+						#include as template 'includes/errors.html'
+						#include as template 'includes/canadian-address.html'
+			
+						<form method="post" $c.formPrettyUrl('next')>
+							<table width="100%" style="border:solid 1px black;" cellpadding="0" cellspacing="0">
+								<!-- PAYMENT TYPE SECTION -->
+								<tr class="tableHeader" height="20">
+									<td colspan="2">
+										<b>Gift Payment Type</b> 
+									</td>
+								</tr>
+								<tr >
+									<td colspan="2" class="td-no-padding">
+										<table width="100%"  border="0" cellpadding="0" cellspacing="0">
+											<tr height="30">
+												<td width="3%"></td>
+												<td width="45%">
+													<div id="radioDiv">
+														<input type="radio" name="TransType" value="BA" #if($Page.CheckoutBusLogic.TransType.toCode() == 'BA') #begin  CHECKED  #end onClick="$c.ajaxExecuteEvent('content','changePaymentType','BA')"/>&nbsp;&nbsp;<b>Bank Account</b>
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<input type="radio" name="TransType" value="CC" #if($Page.CheckoutBusLogic.TransType.toCode() == 'CC') #begin  CHECKED  #end onClick="$c.ajaxExecuteEvent('content','changePaymentType','CC')"/>&nbsp;&nbsp;<b>Credit Card</b>
+													</div>
+												</td>
+												<td width="52%" align="right">
+													#if($FrameworkUser && $PaymentMethodList && $PaymentMethodList.size()>0)
+														<a $c.directLink("useExisting")>Use My Gift Payment Method On Record</a>&nbsp;&nbsp;
+													#end
+												</td>
+											</tr>
+										</table>
+										#if($Page.CheckoutBusLogic.TransType.toCode() == 'CC')
+										
+											$c.param("payment",$GiftCart.EPayment)
+											$c.param("mailingAddress",$GiftCart.MailingAddress)
+											$c.param("limitedEdit",false)
+											$c.param("conversation",$GiftCart.CreditCardConversation)
+											$c.param("isCheckout",true)
+											$c.component("CreditCardEditor")
+										#else
+											$c.param("payment",$GiftCart.EPayment)
+											$c.param("isCheckout",true)
+											$c.component("BankAccountEditor")
+										#end
+									</td>
+								</tr>
+								<tr class="tableFooter">
+									<td width="500"></td>
+									<td width="86" valign="middle" align="right"><input type="submit" class="goldButton" value="Continue" border="0" alt="Continue" /></div></td>
+								</tr>
+							</table>
+						</form>
+			
+						<p>&nbsp;&nbsp;&nbsp;"<span class="redhighlight">*</span>" indicates a required field.</p>
+			
+				#if($Page.CheckoutBusLogic.TransType.toCode() == 'CC')
+					<p>Please note, 2.35% of each credit card donation (all of which is still tax-deductible) will be used to cover the fee credit card companies charge Cru for the transaction. Bank account transactions have no fee.</p>
+				#end
+
+
+
+			#include as template 'DssCommon/footer-text.html'
+			<!-- STOP EDITING FROM HERE -->
+
+			<div class="clear"></div>
+		</div> <!-- end content -->
+
+
+		<div id="sidebar">
+
+			<div class="box">
+				<h3>More Choices</h3>
+				#include as template 'includes/searchbox.html'		
+			</div> <!--end box -->
+
+		</div> <!--end sidebar -->
+
+		<div class="clear"></div>
+		<div class="clear"></div>
+
+	</div> <!-- end wrap -->
+
+	<!-- footer.html -->
+	#include as template 'DssCommon/Checkout-footer.html'

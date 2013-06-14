@@ -23,6 +23,14 @@ angular.module('dssMiddlewareApp', ['ui'])
     	  templateUrl: 'views/CheckoutMailingAddress.html',
     	  controller: 'CheckoutMailingAddressCtrl'
       })
+      .when('/CheckoutSelectPaymentMethod/:cartId', {
+    	  templateUrl: 'views/CheckoutSelectPaymentMethod.html',
+    	  controller: 'CheckoutPaymentMethodCtrl'
+      })
+      .when('/CheckoutPaymentMethod/:cartId', {
+    	  templateUrl: 'views/CheckoutPaymentMethod.html',
+    	  controller: 'CheckoutPaymentMethodCtrl'
+      })
       .otherwise({
         redirectTo: '/GiftDetail/:designationNumber'
       });
