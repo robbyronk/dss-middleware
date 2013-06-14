@@ -21,3 +21,8 @@ Quartz.properties
 Icon?
 ehthumbs.db
 Thumbs.db
+
+# IDE files #
+#############
+.settings/
+*.iml
