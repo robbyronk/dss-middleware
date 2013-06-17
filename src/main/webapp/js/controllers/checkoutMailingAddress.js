@@ -57,7 +57,6 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.continueToPaymentPage = function() {
 			cartCrud.updateCart($scope.cart).then(function(data) {
-				//TODO: Update personal Info?
 				if($scope.loggedIn && $scope.personalInfo.hasPaymentMethods) {
 					$location.path('/CheckoutSelectPaymentMethod/' + $scope.cart.cartId);
 				}

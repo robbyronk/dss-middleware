@@ -44,7 +44,6 @@
 				</td>
 			</tr>
 			
-			<!-- IF ORGANIZATION -->
 		    <tr class="tableHeader" data-ui-if="cart.personType != 'Household' && loggedIn == false">
 		       <td><b>Organization Name</b></td>
 		    </tr>
@@ -62,81 +61,11 @@
 					</table>
 		     	</td>
 			</tr>
-		    <tr class="tableHeader" data-ui-if="cart.personType != 'Household' && loggedIn == false">
-				<td><b>Contact Person</b></td>
+		    <tr class="tableHeader" data-ui-if="loggedIn == false">
+				<td data-ng-show="cart.personType != 'Household'"><b>Contact Person</b></td>
+				<td data-ng-show="cart.personType == 'Household'"><b>Your Name</b></td>
 			</tr>
-			<tr data-ui-if="cart.personType != 'Household' && loggedIn == false">
-		    	<td>
-					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
-						<tr>
-					    	<td width="">
-					    		<span class="redhighlight">*</span>&nbsp;<b>Title</b><br/>
-					    		<select data-ng-model="$parent.cart.primaryName.namePrefix" 
-					    			data-ng-required="true" 
-					    			data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes">
-					    		</select>
-					    	</td>
-					  	</tr>
-					 
-					 	<tr>
-						    <td width="">
-						    	<span class="redhighlight">*</span>&nbsp;<b>First Name</b><br/>
-						    	<input type="text" size="11" maxlength="40" style="width:175px"
-						    		data-ng-model="$parent.cart.primaryName.firstName" data-ng-required="true" />
-						    </td>
-						    <td width="">
-						    	MI<br/>
-						    	<input type="text" style="width:35px" size="5" maxlength="15" 
-						    		data-ng-model="$parent.cart.primaryName.middleName" />
-						    </td>
-						    <td width="">
-						    	<span class="redhighlight">*</span>&nbsp;<b>Last Name</b><br/>
-						    	<input type="text" size="17" maxlength="40" style="width:175px" 
-						    		data-ng-model="$parent.cart.primaryName.lastName" data-ng-required="true" />
-						    </td>
-						    <td width="">
-						    	Suffix<br/> 
-						    	<select data-ng-model="cart.primaryName.suffix" 
-						    		data-ng-options="suffix.nameSuffix as suffix.suffix for suffix in suffixes">
-						    	</select>
-						    </td>
-					  	</tr>
-					</table> 
-					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
-						<tr>
-						    <td width="5">&nbsp;</td>
-						    <td width="160">
-						    	Phone Number<br/> <!-- TODO: Could be helpful to add a format hint -->
-						    	<input type="text" class="inputStyle" size="20" maxlength="12"
-						    		data-ng-model="$parent.cart.phoneNumber" />
-						    </td>
-							<td>
-								<br/>
-								<span data-ng-repeat="phoneType in phoneTypes">
-									<input type="radio" name="phoneType" 
-										data-ng-model="$personalInfo.phoneNumber.type" data-ng-value="phoneType.value" />
-									&nbsp;&nbsp;{{phoneType.display}} &nbsp;&nbsp;&nbsp;
-								</span>
-							</td>
-						</tr>
-					</table>
-					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
-						<tr>
-						    <td width="5">&nbsp;</td>
-						    <td width="160" colspan="2">
-						    	<span class="redhighlight">*</span> <b>E-mail Address</b><br/>
-						    	<input type="text" class="inputStyle" size="20" maxlength="60"
-						    		data-ng-model="$parent.cart.emailAddress" data-ng-required="true" />
-						    </td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<!-- IF PERSON -->
-			<tr class="tableHeader" data-ui-if="cart.personType == 'Household' && loggedIn == false">
-		    	<td><b>Your Name</b></td>
-		    </tr>
-		    <tr height="15" data-ui-if="cart.personType == 'Household' && loggedIn == false">
+			<tr data-ui-if="loggedIn == false">
 		    	<td>
 					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
 						<tr>
