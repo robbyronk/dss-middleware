@@ -145,10 +145,6 @@ angular.module('dssMiddlewareApp')
 			else if(designationNumber == '2863048') return 'Fund Appeal';
 		};
 		
-		$scope.proceedToCheckout = function() {
-			//TODO: Redirect to either info page or payment page based on logged in status
-		};
-		
 		$scope.edit = function(giftId) {
 			$location.path('/GiftDetail/' + giftId + '/Y');
 		};
