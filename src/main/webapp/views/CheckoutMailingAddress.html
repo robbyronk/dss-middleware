@@ -65,6 +65,7 @@
 				<td data-ng-show="cart.personType != 'Household'"><b>Contact Person</b></td>
 				<td data-ng-show="cart.personType == 'Household'"><b>Your Name</b></td>
 			</tr>
+			<!-- PRIMARY NAME INFO -->
 			<tr data-ui-if="loggedIn == false">
 		    	<td>
 					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
@@ -108,7 +109,8 @@
 						    <td width="160">
 						    	Phone Number<br/>
 						    	<input type="text" class="inputStyle" size="20" maxlength="12"
-						    		data-ng-model="$parent.cart.phoneNumber" />
+						    		data-ng-model="$parent.cart.phoneNumber" 
+						    		placeholder="555-555-5555" />
 						    </td>
 						    <td>
 						    	<br/>
@@ -132,7 +134,7 @@
 					</table>
 				</td>
 			</tr>
-			
+			<!-- ADDRESS INFO -->
 			<tr class="tableHeader">
 				<td data-ng-show="cart.personType != 'Household'"><b>Organization Mailing Address</b></td>
 				<td data-ng-show="cart.personType == 'Household'"><b>Your Mailing Address</b></td>
@@ -144,7 +146,7 @@
 	        		</div>
 		   		</td>
 			</tr>
-		
+			<!-- SPOUSE NAME INFO -->
 			<tr class="tableHeader" data-ui-if="cart.personType == 'Household' && loggedIn == false">
 	       		<td><b>Spouse Name (If Applicable)</b></td>
 	    	</tr>
@@ -185,7 +187,7 @@
 					</table>
 				</td>
 			</tr>
-			
+			<!-- ACCOUNT NUMBER -->
 			<tr class="tableHeader" data-ui-if="failoverMode == false && loggedIn == false">
 	       		<td>
 	       			<b>Your Personal  9 digit Account number here will help us 
@@ -200,7 +202,8 @@
 		   					<td>
 		   						Donor Account ID<br/>
 		   						<input type="text" class="inputStyle" size="9" 
-		   							maxlength="9" data-ng-model="personalInfo.existingPeopleId" />
+		   							maxlength="9" data-ng-model="personalInfo.existingPeopleId" 
+		   							placeholder="435024555" />
 		   						<b>&nbsp;&nbsp;&nbsp;Optional (e.g., 435024555)</b></td>
 				  		</tr>
 					</table>
