@@ -41,10 +41,13 @@ angular.module('dssMiddlewareApp')
 				if($scope.cart.personType == '' || $scope.cart.personType == null) {
 					$scope.cart.personType = 'Household';
 				}
+				
+				$scope.addressToEdit = $scope.cart.mailingAddress;
 			});
 			
 		};
 		
+		//TODO: Rename mailingAddress to address (in both of these functions)
 		$scope.isUsa = function(mailingAddress) {
 			if(mailingAddress == undefined) return false;
 			return mailingAddress.country === 'USA';
@@ -56,6 +59,8 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.continueToPaymentPage = function() {
+			$scope.cart.mailingAddress = $scope.addressToEdit;
+			
 			cartCrud.updateCart($scope.cart).then(function(data) {
 				if($scope.loggedIn && $scope.personalInfo.hasPaymentMethods) {
 					$location.path('/CheckoutSelectPaymentMethod/' + $scope.cart.cartId);
