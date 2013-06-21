@@ -44,12 +44,8 @@ angular.module('dssMiddlewareApp')
 				$scope.editingCreditCard = false;
 				
 				$scope.creditCardTypes = ['Visa', 'Mastercard', 'Discover', 'Diners Club'];
-				$scope.availableExpirationMonths = [{number: '01', name: 'January'},{number: '02', name: 'February'},
-				                                    {number: '03', name: 'March'},{number: '04', name: 'April'},
-				                                    {number: '05', name: 'May'},{number: '06', name: 'June'},
-				                                    {number: '07', name: 'July'},{number: '08', name: 'August'},
-				                                    {number: '09', name: 'September'},{number: '10', name: 'October'},
-				                                    {number: '11', name: 'November'},{number: '12', name: 'December'}];
+				$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 
+				                                    '07', '08', '09', '10', '11', '12'];
 				$scope.availableExpirationYears = ['2013','2014','2015','2016','2017','2018','2019','2020','2021',
 				                                   '2022','2023','2024','2025','2026','2027','2028','2029','2030'];
 				
