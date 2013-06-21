@@ -7,7 +7,6 @@ angular.module('dssMiddlewareApp')
 		$scope.initPage = function() {
 			cartCrud.retrieve(params.cartId).then(function(data) {
 				$scope.cart = data;
-				$scope.pointToMailAddr = true; //TODO: This should be dynamic based on if the billing address and mailing address are the same and billing address is filled in
 				$scope.paymentIdCurrentlyBeingEdited = null;
 				$scope.limitedEdit = false;
 				$scope.isCheckout = false;
@@ -41,6 +40,7 @@ angular.module('dssMiddlewareApp')
 									 			  			  country: ''}}];
 				
 				$scope.selectedPayment = $scope.paymentMethodList[0];
+				$scope.pointToMailAddr = $scope.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress);
 				$scope.editingCreditCard = false;
 				
 				$scope.creditCardTypes = ['Visa', 'Mastercard', 'Discover', 'Diners Club'];
@@ -80,6 +80,15 @@ angular.module('dssMiddlewareApp')
 			$scope.paymentIdCurrentlyBeingEdited = paymentId;
 			$scope.limitedEdit = true;
 			$scope.isCheckout = true;
+			
+			/* If the user comes into the edit mode and the billing address is
+			 * different from the mailing address, we want to make sure 
+			 * the user can edit the address and that it is pre-filled.
+			 */ 
+			if(!$scope.pointToMailAddr) {
+				$scope.readOnly = false;
+				$scope.addressToEdit = $scope.selectedPayment.billingAddress;
+			}
 		};
 		
 		$scope.longMonthYearDate = function(month, year) {
@@ -130,6 +139,20 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.isCanadianAddress = function(address) {
 			return addressService.isCanada(address);
+		};
+		
+		$scope.areAddressesEffectivelyTheSame = function(mailingAddress, billingAddress) {
+			if(billingAddress == null || billingAddress.streetAddress1 == '' || 
+					(billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
+					 billingAddress.streetAddress2 == mailingAddress.streetAddress2 && 
+					 billingAddress.city == mailingAddress.city && 
+					 billingAddress.state == mailingAddress.state && 
+					 billingAddress.country == mailingAddress.country)) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		};
 		
 		$scope.continueToSubmitPage = function() {
