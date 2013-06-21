@@ -46,6 +46,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.continueToPaymentPage = function() {
+			addressService.removeUnusedAddressInformation($scope.addressToEdit);
 			$scope.cart.mailingAddress = $scope.addressToEdit;
 			
 			cartCrud.updateCart($scope.cart).then(function(data) {

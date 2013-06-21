@@ -160,6 +160,7 @@ angular.module('dssMiddlewareApp')
 				$scope.selectedPayment.billingAddress = $scope.displayAddress;
 			}
 			else {
+				addressService.removeUnusedAddressInformation($scope.addressToEdit);
 				$scope.selectedPayment.billingAddress = $scope.addressToEdit;
 			}
 			

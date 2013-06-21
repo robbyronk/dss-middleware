@@ -29,5 +29,18 @@ angular.module('dssMiddlewareApp')
                     {countryCode: 'Zimbabwe', countryName: 'Zimbabwe'}];
 		};
 		
+		addressServiceObject.removeUnusedAddressInformation = function(address) {
+			//If USA, remove address line 4
+			if(address.country == 'USA') {
+				address.streetAddress4 = null;
+			}
+			else {
+				//Otherwise remove City, State, Zip
+				address.city = null;
+				address.state = null;
+				address.zipCode = null;
+			}
+		};
+		
 		return addressServiceObject;
 	});
