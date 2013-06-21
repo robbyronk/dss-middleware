@@ -30,7 +30,7 @@
 						<td width="39%">
 							<span class="redhighlight">*</span> <b>Expiration Date </b><br/>
 							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationMonth" 
-								data-ng-options="month.name as month.number for month in $parent.availableExpirationMonths">
+								data-ng-options="month.number as month.number for month in $parent.availableExpirationMonths">
 							</select>
 							<b>/</b>
 							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationYear" 
@@ -54,7 +54,7 @@
 						<td width="42%" align="left" data-ng-show="$parent.limitedEdit">
 							<span class="redhighlight">*</span><b>Expiration Date </b><br/>
 							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationMonth" 
-								data-ng-options="month.name as month.number for month in $parent.availableExpirationMonths">
+								data-ng-options="month.number as month.number for month in $parent.availableExpirationMonths">
 							</select>
 							<b>/</b>													
 							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationYear" 

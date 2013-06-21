@@ -32,20 +32,42 @@ public class CartService
 		giftCart.getMailingAddress().setState(capNap.getState());
 		giftCart.getMailingAddress().setZipCode(capNap.getZipCode());
 		giftCart.getMailingAddress().setCountry(capNap.getCountry());
+		
 		giftCart.setPayment(new Payment());
 		giftCart.getPayment().setDescription(capNap.getPaymentDescription());
+		giftCart.getPayment().setPaymentMethod(capNap.getPaymentMethod());
+		giftCart.getPayment().setPaymentType(capNap.getPaymentType());
+		giftCart.getPayment().setLastFourDigits(capNap.getLastFourDigits());
+		giftCart.getPayment().setBankName(capNap.getBankName());
+		giftCart.getPayment().setBankAccountNumber(capNap.getBankAccountNumber());
+		giftCart.getPayment().setBankRoutingNumber(capNap.getBankRoutingNumber());
+		giftCart.getPayment().setCreditCardToken(capNap.getCreditCardToken());
+		giftCart.getPayment().setCreditCardHash(capNap.getCreditCardHash());
+		giftCart.getPayment().setExpirationMonth(capNap.getExpirationMonth());
+		giftCart.getPayment().setExpirationYear(capNap.getExpirationYear());
+		giftCart.getPayment().setCardholderName(capNap.getNameOnCard());
+		giftCart.getPayment().setBillingAddress(new MailingAddress());
+		giftCart.getPayment().getBillingAddress().setStreetAddress1(capNap.getCcBillingAddressLine1());
+		giftCart.getPayment().getBillingAddress().setStreetAddress2(capNap.getCcBillingAddressLine2());
+		giftCart.getPayment().getBillingAddress().setCity(capNap.getCcBillingCity());
+		giftCart.getPayment().getBillingAddress().setState(capNap.getCcBillingState());
+		giftCart.getPayment().getBillingAddress().setZipCode(capNap.getCcBillingZipCode());
+		giftCart.getPayment().getBillingAddress().setCountry(capNap.getCcBillingCountry());
+		
 		giftCart.setPrimaryName(new NameInformation());
 		giftCart.getPrimaryName().setNamePrefix(capNap.getNamePrefix());
 		giftCart.getPrimaryName().setFirstName(capNap.getFirstName());
 		giftCart.getPrimaryName().setMiddleName(capNap.getMiddleName());
 		giftCart.getPrimaryName().setLastName(capNap.getLastName());
 		giftCart.getPrimaryName().setSuffix(capNap.getSuffix());
+		
 		giftCart.setSpouseName(new NameInformation());
 		giftCart.getSpouseName().setNamePrefix(capNap.getSpouseNamePrefix());
 		giftCart.getSpouseName().setFirstName(capNap.getSpouseFirstName());
 		giftCart.getSpouseName().setMiddleName(capNap.getSpouseMiddleName());
 		giftCart.getSpouseName().setLastName(capNap.getSpouseLastName());
 		giftCart.getSpouseName().setSuffix(capNap.getSpouseSuffix());
+		
 		giftCart.setPhoneNumber(capNap.getPhoneNumber());
 		giftCart.setEmailAddress(capNap.getEmailAddress());
 		giftCart.setOrganizationName(capNap.getOrganizationName());

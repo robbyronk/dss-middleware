@@ -7,33 +7,17 @@ angular.module('dssMiddlewareApp')
 		$scope.initPage = function() {
 			cartCrud.retrieve(params.cartId).then(function(data) {
 				$scope.cart = data;
-				$scope.pointToMailAddr = true;
+				$scope.pointToMailAddr = true; //TODO: This should be dynamic based on if the billing address and mailing address are the same and billing address is filled in
 				$scope.paymentIdCurrentlyBeingEdited = null;
 				$scope.limitedEdit = false;
 				$scope.isCheckout = false;
+				$scope.readOnly = true;
 				
-				//TODO: Get these from server
-				$scope.paymentMethodList = [{existingPaymentId: '1',
-											 description: 'Test Credit Card', 
-											 paymentMethod: 'Credit Card',
-											 paymentType: 'Visa',
-											 lastFourDigits: '1111',
-											 bankName: null,
-											 bankAccountNumber: null,
-											 bankRoutingNumber: null,
-											 creditCardToken: '34q23jfhalr2r',
-											 creditCardHash: '2w3jajraks32',
-											 expirationMonth: 'April',
-											 expirationYear: '2020',
-											 cardholderName: 'Bob Jones',
-											 billingAddress: {streetAddress1: '',
-												 			  streetAddress2: '',
-												 			  streetAddress3: '',
-												 			  streetAddress4: '',
-												 			  city: '',
-												 			  state: '',
-												 			  zipCode: '',
-												 			  country: ''}},
+				/*TODO: Create a payment method list on the server to retrieve 
+				 *	    and figure out how we want to deal with updating only 
+				 *		the selected payment
+				 */
+				$scope.paymentMethodList = [$scope.cart.payment,
 											{existingPaymentId: '2',
 											 description: 'Test Bank Account', 
 											 paymentMethod: 'EFT',
@@ -99,7 +83,15 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.longMonthYearDate = function(month, year) {
-			return month + ' ' + year;
+			return $scope.getMonthLongName(month) + ' ' + year;
+		};
+		
+		$scope.getMonthLongName = function(month) {
+			var months = ['', 'January', 'February', 'March', 'April', 
+			              'May', 'June', 'July', 'August', 'September', 
+			              'October', 'November', 'December'];
+			var monthAsNumber = parseInt(month);
+			return months[monthAsNumber];
 		};
 		
 		$scope.isExpired = function(selectedPayment) {
@@ -118,6 +110,7 @@ angular.module('dssMiddlewareApp')
 		$scope.changePointToMailAddr = function() {
 			if($scope.pointToMailAddr) {
 				$scope.displayAddress = $scope.cart.mailingAddress;
+				$scope.readOnly = true;
 			}
 			else {
 				$scope.readOnly = false;
@@ -144,6 +137,17 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.continueToSubmitPage = function() {
+			if($scope.pointToMailAddr) {
+				$scope.selectedPayment.billingAddress = $scope.displayAddress;
+			}
+			else {
+				$scope.selectedPayment.billingAddress = $scope.addressToEdit;
+			}
 			
+			$scope.cart.payment = $scope.selectedPayment;
+			
+			cartCrud.updateCart($scope.cart).then(function() {
+				//TODO: Redirect to submit page
+			});
 		};
 	});

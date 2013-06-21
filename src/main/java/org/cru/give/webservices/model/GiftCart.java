@@ -64,9 +64,24 @@ public class GiftCart implements java.io.Serializable
 		
 		if(payment != null)
 		{
+			capturedNameAddressPayment.setPaymentDescription(payment.getDescription());
 			capturedNameAddressPayment.setPaymentMethod(payment.getPaymentMethod());
 			capturedNameAddressPayment.setPaymentType(payment.getPaymentType());
-			capturedNameAddressPayment.setPaymentDescription(payment.getDescription());
+			capturedNameAddressPayment.setLastFourDigits(payment.getLastFourDigits());
+			capturedNameAddressPayment.setBankName(payment.getBankName());
+			capturedNameAddressPayment.setBankAccountNumber(payment.getBankAccountNumber());
+			capturedNameAddressPayment.setBankRoutingNumber(payment.getBankRoutingNumber());
+			capturedNameAddressPayment.setCreditCardToken(payment.getCreditCardToken());
+			capturedNameAddressPayment.setCreditCardHash(payment.getCreditCardHash());
+			capturedNameAddressPayment.setExpirationMonth(payment.getExpirationMonth());
+			capturedNameAddressPayment.setExpirationYear(payment.getExpirationYear());
+			capturedNameAddressPayment.setNameOnCard(payment.getCardholderName());
+			capturedNameAddressPayment.setCcBillingAddressLine1(payment.getBillingAddress().getStreetAddress1());
+			capturedNameAddressPayment.setCcBillingAddressLine2(payment.getBillingAddress().getStreetAddress2());
+			capturedNameAddressPayment.setCcBillingCity(payment.getBillingAddress().getCity());
+			capturedNameAddressPayment.setCcBillingState(payment.getBillingAddress().getState());
+			capturedNameAddressPayment.setCcBillingZipCode(payment.getBillingAddress().getZipCode());
+			capturedNameAddressPayment.setCcBillingCountry(payment.getBillingAddress().getCountry());
 		}
 		
 		capturedNameAddressPayment.setEmailAddress(emailAddress);
