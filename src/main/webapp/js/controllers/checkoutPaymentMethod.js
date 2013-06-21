@@ -63,14 +63,23 @@ angular.module('dssMiddlewareApp')
 			
 		};
 		
+		/**
+		 * Create a new bank account profile
+		 */
 		$scope.newBankAccount = function() {
 			
 		};
 		
+		/**
+		 * Create a new credit card profile
+		 */
 		$scope.newCreditCard = function() {
 			
 		};
 		
+		/**
+		 * Allow the user to edit their selected credit card.
+		 */
 		$scope.editCreditCard = function(paymentId) {
 			$scope.editingCreditCard = true;
 			$scope.paymentIdCurrentlyBeingEdited = paymentId;
@@ -87,10 +96,17 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		/**
+		 * Format the given month and year for display.
+		 */
 		$scope.longMonthYearDate = function(month, year) {
 			return $scope.getMonthLongName(month) + ' ' + year;
 		};
 		
+		/**
+		 * Given a numeric month, find the proper month name, 
+		 * for example: 01 = January
+		 */
 		$scope.getMonthLongName = function(month) {
 			var months = ['', 'January', 'February', 'March', 'April', 
 			              'May', 'June', 'July', 'August', 'September', 
@@ -99,12 +115,42 @@ angular.module('dssMiddlewareApp')
 			return months[monthAsNumber];
 		};
 		
+		/**
+		 * Check to see if the selected payment profile is 
+		 * currently expired.
+		 */
 		$scope.isExpired = function(selectedPayment) {
+			var expMonth = parseInt(selectedPayment.expirationMonth) - 1; //Subtract one month because Javascript is 0 based and we are 1 based
+			var expirationDate = new Date(selectedPayment.expirationYear, expMonth + 1, 0); //This will set it to the last day of the expiration month
+			var today = new Date();
 			
+			if(today.getTime() >= expirationDate.getTime()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		};
 		
+		/**
+		 * Check to see if the selected payment profile will 
+		 * expire in the next two months.
+		 */
 		$scope.willExpireTwoMonths = function(selectedPayment) {
+			if(selectedPayment == undefined) return false;
 			
+			var expMonth = parseInt(selectedPayment.expirationMonth) - 1; //Subtract one month because Javascript is 0 based and we are 1 based
+			var expirationDate = new Date(selectedPayment.expirationYear, expMonth + 1, 0); //This will set it to the last day of the expiration month
+			var today = new Date();
+			var thisMonth = today.getMonth();
+			today.setMonth(thisMonth + 2);
+			
+			if(expirationDate.getTime() < today.getTime()) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		};
 		
 		$scope.getAccountMasked = function(selectedPayment) {
@@ -112,12 +158,24 @@ angular.module('dssMiddlewareApp')
 			return '******' + selectedPayment.lastFourDigits;
 		};
 		
+		/**
+		 * Deal with the more complex logic involved with 
+		 * switching between the mailing address on file and a 
+		 * separate, specific billing address for this credit card.
+		 */
 		$scope.changePointToMailAddr = function() {
 			if($scope.pointToMailAddr) {
+				/* If we are using the mailing address, we do not need the ability to
+				 * edit the fields, so we want to make it read only (so the required 
+				 * is taken off and we can submit the form).
+				 */ 
 				$scope.displayAddress = $scope.cart.mailingAddress;
 				$scope.readOnly = true;
 			}
 			else {
+				/* If we are using a separate billing address, we need to be able to 
+				 * edit the address fields.
+				 */
 				$scope.readOnly = false;
 				$scope.addressToEdit = $scope.selectedPayment.billingAddress;
 				
@@ -133,6 +191,9 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		/**
+		 * Determine whether the mailing address and billing address are the same place.
+		 */
 		$scope.areAddressesEffectivelyTheSame = function(mailingAddress, billingAddress) {
 			if(billingAddress == null || billingAddress.streetAddress1 == '' || 
 					(billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
