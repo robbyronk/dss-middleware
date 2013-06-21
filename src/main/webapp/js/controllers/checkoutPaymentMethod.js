@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, cartCrud, addressService) {
+	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService) {
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
@@ -11,6 +11,7 @@ angular.module('dssMiddlewareApp')
 				$scope.limitedEdit = false;
 				$scope.isCheckout = false;
 				$scope.readOnly = true;
+				$scope.loggedIn = true;
 				
 				/*TODO: Create a payment method list on the server to retrieve 
 				 *	    and figure out how we want to deal with updating only 
@@ -39,11 +40,9 @@ angular.module('dssMiddlewareApp')
 									 			  			  zipCode: '',
 									 			  			  country: ''}}];
 				
-				$scope.selectedPayment = $scope.paymentMethodList[0];
-				$scope.pointToMailAddr = $scope.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress);
-				$scope.editingCreditCard = false;
 				
-				$scope.creditCardTypes = ['Visa', 'Mastercard', 'Discover', 'Diners Club'];
+				
+				$scope.creditCardTypes = ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa'];
 				$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 
 				                                    '07', '08', '09', '10', '11', '12'];
 				$scope.availableExpirationYears = ['2013','2014','2015','2016','2017','2018','2019','2020','2021',
@@ -52,6 +51,24 @@ angular.module('dssMiddlewareApp')
 				$scope.states = addressService.getStates();
 				$scope.countries = addressService.getCountries();
 				
+				
+				if($location.path().indexOf('/CheckoutPaymentMethod') !== -1) {
+					$scope.selectedPayment = {billingAddress: {}};
+					$scope.pointToMailAddr = true;
+					
+					if(params.transType == undefined || params.transType == null) {
+						$scope.transType = 'BA';
+					}
+					else {
+						$scope.transType = params.transType;
+					}
+				}
+				else {
+					$scope.selectedPayment = $scope.paymentMethodList[0];
+					$scope.pointToMailAddr = $scope.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress);
+					$scope.editingCreditCard = false;
+				}
+				
 				if($scope.pointToMailAddr) {
 					$scope.displayAddress = $scope.cart.mailingAddress;
 				}
@@ -59,22 +76,20 @@ angular.module('dssMiddlewareApp')
 					$scope.displayAddress = $scope.selectedPayment.billingAddress;
 				}
 			});
-			
-			
 		};
 		
 		/**
 		 * Create a new bank account profile
 		 */
 		$scope.newBankAccount = function() {
-			
+			$location.path('/CheckoutPaymentMethod/' + $scope.cart.cartId + '/BA');
 		};
 		
 		/**
 		 * Create a new credit card profile
 		 */
 		$scope.newCreditCard = function() {
-			
+			$location.path('/CheckoutPaymentMethod/' + $scope.cart.cartId + '/CC');
 		};
 		
 		/**
@@ -208,6 +223,20 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		$scope.setTransTypeVariables = function(transType) {
+			if(transType == 'CC') {
+				$scope.limitedEdit = false;
+				$scope.isCheckout = true;
+			}
+			else {
+				$scope.isCheckout = true;
+			}
+		};
+		
+		$scope.useExisting = function() {
+			$location.path('/CheckoutSelectPaymentMethod/' + $scope.cart.cartId);
+		};
+		
 		$scope.continueToSubmitPage = function() {
 			if($scope.pointToMailAddr) {
 				$scope.selectedPayment.billingAddress = $scope.cart.mailingAddress;
@@ -219,6 +248,7 @@ angular.module('dssMiddlewareApp')
 			
 			$scope.cart.payment = $scope.selectedPayment;
 			
+			//TODO: Do we want to do client side validation on credit card expired?
 			cartCrud.updateCart($scope.cart).then(function() {
 				//TODO: Redirect to submit page
 			});

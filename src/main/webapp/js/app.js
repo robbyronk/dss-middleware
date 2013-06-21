@@ -31,6 +31,10 @@ angular.module('dssMiddlewareApp', ['ui'])
     	  templateUrl: 'views/CheckoutPaymentMethod.html',
     	  controller: 'CheckoutPaymentMethodCtrl'
       })
+      .when('/CheckoutPaymentMethod/:cartId/:transType', {
+    	  templateUrl: 'views/CheckoutPaymentMethod.html',
+    	  controller: 'CheckoutPaymentMethodCtrl'
+      })
       .otherwise({
         redirectTo: '/GiftDetail/:designationNumber'
       });
