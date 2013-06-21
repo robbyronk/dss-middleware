@@ -1,4 +1,4 @@
-<div id="dssAddressEditor">
+<div id="dssAddressEditor" data-ng-controller="DssAddressEditorCtrl">
 	<table style="width:100%; border:0; border-spacing:0; padding:3px;">
 	  	<tr>
 		    <td width="3%" rowspan="5">&nbsp;</td>
@@ -9,7 +9,7 @@
 	    			data-ng-required="!readOnly" 
 	    			data-ng-class="{readOnly: disabled-background}" />
 		    </td>
-		    <td rowspan="3" align="left" valign="middle" data-ng-show="!$parent.isUsa($parent.addressToEdit)">
+		    <td rowspan="3" align="left" valign="middle" data-ng-show="!isUsa($parent.addressToEdit)">
 		    	Please use the four Address lines on the<br/>
 		    	left to enter your full mailing address, not<br>
 		    	including the country name.
@@ -29,7 +29,7 @@
 	    			data-ng-class="{readOnly: disabled-background}" />
 		    </td>
 	  	</tr>
-	  	<tr data-ui-if="$parent.isUsa($parent.addressToEdit)">
+	  	<tr data-ui-if="isUsa($parent.addressToEdit)">
 		    <td colspan="3">
 		    	<span class="redhighlight">*</span> <b>City</b><br/>
 		    	<input type="text" class="inputStyle" size="25" maxlength="30" 
@@ -54,7 +54,7 @@
 	    			data-ng-class="{readOnly: disabled-background}" />
 		    </td>
 	  	</tr>
-	  	<tr data-ui-if="!$parent.isUsa($parent.addressToEdit)">
+	  	<tr data-ui-if="!isUsa($parent.addressToEdit)">
 		    <td>
 		    	<input class="inputStyle" type="text" size="28" maxlength="35" 
 				 	data-ng-disabled="readOnly" 

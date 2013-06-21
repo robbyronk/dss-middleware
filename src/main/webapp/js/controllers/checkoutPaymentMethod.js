@@ -128,10 +128,6 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
-		$scope.isUsa = function(address) {
-			return addressService.isUsa(address);
-		};
-		
 		$scope.isCanadianAddress = function(address) {
 			return addressService.isCanada(address);
 		};
