@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutMailingAddressCtrl', function ($scope, $routeParams, $location, giftCrud, cartCrud) {
+	.controller('CheckoutMailingAddressCtrl', function ($scope, $routeParams, $location, giftCrud, cartCrud, addressService) {
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
@@ -22,14 +22,8 @@ angular.module('dssMiddlewareApp')
 				$scope.phoneTypes = [{display: 'Home', value: 'HOME'},
 				                     {display: 'Work', value: 'WORK'},
 				                     {display: 'Mobile', value: 'MOBILE'}];
-				$scope.states = [{stateCode: 'AE', stateName: 'Armed Forces Europe (includes Africa, Middle East and Canada)'},
-				                 {stateCode: 'IN', stateName: 'Indiana'},
-				                 {stateCode: 'FL', stateName: 'Florida'},
-				                 {stateCode: 'TX', stateName: 'Texas'}];
-				$scope.countries = [{countryCode: 'Canada', countryName: 'Canada'},
-				                    {countryCode: 'Macedonia, The Former Yugoslav', countryName: 'Macedonia, The Former Yugoslav'},
-				                    {countryCode: 'USA', countryName: 'USA'}, 
-				                    {countryCode: 'Zimbabwe', countryName: 'Zimbabwe'}];
+				$scope.states = addressService.getStates();
+				$scope.countries = addressService.getCountries();
 				$scope.loggedIn = false;
 				$scope.failoverMode = false;
 				
@@ -47,15 +41,12 @@ angular.module('dssMiddlewareApp')
 			
 		};
 		
-		//TODO: Rename mailingAddress to address (in both of these functions)
-		$scope.isUsa = function(mailingAddress) {
-			if(mailingAddress == undefined) return false;
-			return mailingAddress.country === 'USA';
+		$scope.isUsa = function(address) {
+			return addressService.isUsa(address);
 		};
 		
-		$scope.isCanadianAddress = function(mailingAddress) {
-			if(mailingAddress == undefined) return false;
-			return mailingAddress.country === 'Canada';
+		$scope.isCanadianAddress = function(address) {
+			return addressService.isCanada(address);
 		};
 		
 		$scope.continueToPaymentPage = function() {

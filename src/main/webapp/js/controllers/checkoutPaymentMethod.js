@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, cartCrud) {
+	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, cartCrud, addressService) {
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
@@ -69,11 +69,8 @@ angular.module('dssMiddlewareApp')
 				$scope.availableExpirationYears = ['2013','2014','2015','2016','2017','2018','2019','2020','2021',
 				                                   '2022','2023','2024','2025','2026','2027','2028','2029','2030'];
 				
-				//TODO: Need to do DSSAddressEditor differently.  Probably a service of some sort.
-				$scope.countries = [{countryCode: 'Canada', countryName: 'Canada'},
-				                    {countryCode: 'Macedonia, The Former Yugoslav', countryName: 'Macedonia, The Former Yugoslav'},
-				                    {countryCode: 'USA', countryName: 'USA'}, 
-				                    {countryCode: 'Zimbabwe', countryName: 'Zimbabwe'}];
+				$scope.states = addressService.getStates();
+				$scope.countries = addressService.getCountries();
 				
 				if($scope.pointToMailAddr) {
 					$scope.displayAddress = $scope.cart.mailingAddress;
@@ -138,16 +135,12 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
-		//TODO: Move these two functions into some sort of service or something
-		//TODO: Rename mailingAddress to address (in both of these functions)
-		$scope.isUsa = function(mailingAddress) {
-			if(mailingAddress == undefined) return false;
-			return mailingAddress.country === 'USA';
+		$scope.isUsa = function(address) {
+			return addressService.isUsa(address);
 		};
 		
-		$scope.isCanadianAddress = function(mailingAddress) {
-			if(mailingAddress == undefined) return false;
-			return mailingAddress.country === 'Canada';
+		$scope.isCanadianAddress = function(address) {
+			return addressService.isCanada(address);
 		};
 		
 		$scope.continueToSubmitPage = function() {
