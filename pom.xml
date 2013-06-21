@@ -306,16 +306,6 @@
                         <source>src/test/webapp/components/angular-mocks.js</source>
                         <source>src/main/webapp/components/angular-resource.js</source>
                         <source>src/main/webapp/components/angular-ui.js</source>
-                        <source>src/main/webapp/js/app.js</source>
-                        <source>src/main/webapp/js/services/rest-client/cartEndpoints.js</source>
-                        <source>src/main/webapp/js/services/rest-client/giftEndpoints.js</source>
-                        <source>src/main/webapp/js/services/rest-client/drawDayEndpoints.js</source>
-                        <source>src/main/webapp/js/services/service/cartCrud.js</source>
-                        <source>src/main/webapp/js/services/service/giftCrud.js</source>
-                        <source>src/main/webapp/js/services/service/validationService.js</source>
-                        <source>src/main/webapp/js/controllers/giftDetail.js</source>
-                        <source>src/main/webapp/js/controllers/checkoutMailingAddress.js</source>
-                        <source>src/main/webapp/js/controllers/giftCart.js</source>
                     </preloadSources>
                     <jsTestSrcDir>src/test/webapp/js</jsTestSrcDir>
                 </configuration>
