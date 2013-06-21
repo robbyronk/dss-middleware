@@ -137,10 +137,6 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
-		$scope.isCanadianAddress = function(address) {
-			return addressService.isCanada(address);
-		};
-		
 		$scope.areAddressesEffectivelyTheSame = function(mailingAddress, billingAddress) {
 			if(billingAddress == null || billingAddress.streetAddress1 == '' || 
 					(billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
@@ -157,7 +153,7 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.continueToSubmitPage = function() {
 			if($scope.pointToMailAddr) {
-				$scope.selectedPayment.billingAddress = $scope.displayAddress;
+				$scope.selectedPayment.billingAddress = $scope.cart.mailingAddress;
 			}
 			else {
 				addressService.removeUnusedAddressInformation($scope.addressToEdit);

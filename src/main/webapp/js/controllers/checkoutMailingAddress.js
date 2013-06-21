@@ -41,10 +41,6 @@ angular.module('dssMiddlewareApp')
 			
 		};
 		
-		$scope.isCanadianAddress = function(address) {
-			return addressService.isCanada(address);
-		};
-		
 		$scope.continueToPaymentPage = function() {
 			addressService.removeUnusedAddressInformation($scope.addressToEdit);
 			$scope.cart.mailingAddress = $scope.addressToEdit;
