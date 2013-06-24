@@ -1,81 +1,106 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService) {
+	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService, creditCardEditorService) {
 		var params = $routeParams;
+		var pointToMailAddr;
 		
-		$scope.initPage = function() {
+		$scope.initCheckoutPaymentMethod = function() {
 			cartCrud.retrieve(params.cartId).then(function(data) {
 				$scope.cart = data;
-				$scope.paymentIdCurrentlyBeingEdited = null;
+				$scope.isCheckout = true;
 				$scope.limitedEdit = false;
-				$scope.isCheckout = false;
-				$scope.readOnly = true;
-				$scope.loggedIn = true;
+				$scope.agreeToTerms = false;
+				$scope.selectedPayment = {billingAddress: {}};
+				pointToMailAddr = true;
+				creditCardEditorService.setPointToMailAddr(pointToMailAddr);
+				$scope.initCommonVariables();
+				$scope.routingHelp = "Routing Number is 9 digits surrounded by the &nbsp;<img src='images/RoutingIcon.gif'/>&nbsp; symbols and may be listed left or right of the Account Number. &nbsp;If your check has an ACH/RT number, enter that as your bank routing number.";
+				$scope.accountHelp = "Account Number may be up to 17 digits and is usually listed left of the &nbsp;<img src='images/AccountIcon.gif'/>&nbsp; symbol.  &nbsp;Check Number may be listed left of the Account Number, but should not be included in the Account Number.";
+				$scope.retypeAccountHelp = $scope.accountHelp;
+				$scope.retypeBankAccountNumber = '';
+				$scope.showRoutingHelpTip = false;
+				$scope.showAccountHelpTip = false;
+				$scope.showRetypeAccountHelpTip = false;
 				
-				/*TODO: Create a payment method list on the server to retrieve 
-				 *	    and figure out how we want to deal with updating only 
-				 *		the selected payment
-				 */
-				$scope.paymentMethodList = [$scope.cart.payment,
-											{existingPaymentId: '2',
-											 description: 'Test Bank Account', 
-											 paymentMethod: 'EFT',
-											 paymentType: 'Checking',
-											 lastFourDigits: '6789',
-											 bankName: 'Test Bank',
-											 bankAccountNumber: '123456789',
-											 bankRoutingNumber: '123123123',
-											 creditCardToken: null,
-											 creditCardHash: null,
-											 expirationMonth: null,
-											 expirationYear: null,
-											 cardholderName: null,
-											 billingAddress: {streetAddress1: '',
-									 			  			  streetAddress2: '',
-									 			  			  streetAddress3: '',
-									 			  			  streetAddress4: '',
-									 			  			  city: '',
-									 			  			  state: '',
-									 			  			  zipCode: '',
-									 			  			  country: ''}}];
-				
-				
-				
-				$scope.creditCardTypes = ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa'];
-				$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 
-				                                    '07', '08', '09', '10', '11', '12'];
-				$scope.availableExpirationYears = ['2013','2014','2015','2016','2017','2018','2019','2020','2021',
-				                                   '2022','2023','2024','2025','2026','2027','2028','2029','2030'];
-				
-				$scope.states = addressService.getStates();
-				$scope.countries = addressService.getCountries();
-				
-				
-				if($location.path().indexOf('/CheckoutPaymentMethod') !== -1) {
-					$scope.selectedPayment = {billingAddress: {}};
-					$scope.pointToMailAddr = true;
-					
-					if(params.transType == undefined || params.transType == null) {
-						$scope.transType = 'BA';
-					}
-					else {
-						$scope.transType = params.transType;
-					}
+				if(params.transType == undefined || params.transType == null || params.transType == 'BA') {
+					$scope.transType = 'BA';
+					$scope.selectedPayment.paymentMethod = 'EFT';
+					$scope.selectedPayment.paymentType = 'Checking';
 				}
 				else {
-					$scope.selectedPayment = $scope.paymentMethodList[0];
-					$scope.pointToMailAddr = $scope.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress);
-					$scope.editingCreditCard = false;
+					$scope.transType = params.transType;
 				}
 				
-				if($scope.pointToMailAddr) {
-					$scope.displayAddress = $scope.cart.mailingAddress;
-				}
-				else {
-					$scope.displayAddress = $scope.selectedPayment.billingAddress;
-				}
+				$scope.displayAddress = $scope.setDisplayAddress(pointToMailAddr);
+				creditCardEditorService.setSelectedPayment($scope.selectedPayment);
 			});
+		};
+		
+		$scope.initCheckoutSelectPaymentMethod = function() {
+			cartCrud.retrieve(params.cartId).then(function(data) {
+				$scope.cart = data;
+				$scope.isCheckout = true;
+				$scope.limitedEdit = true;
+				$scope.paymentIdCurrentlyBeingEdited = null;
+				$scope.readOnly = true;
+				$scope.editingCreditCard = false;
+				$scope.initCommonVariables();
+				$scope.selectedPayment = $scope.paymentMethodList[0];
+				creditCardEditorService.setSelectedPayment($scope.selectedPayment);
+				pointToMailAddr = creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress);
+				creditCardEditorService.setPointToMailAddr(pointToMailAddr);
+				$scope.displayAddress = $scope.setDisplayAddress(pointToMailAddr);
+			});
+			
+		};
+		
+		$scope.initCommonVariables = function() {
+			$scope.loggedIn = true;
+			$scope.creditCardTypes = ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa'];
+			$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 
+			                                    '07', '08', '09', '10', '11', '12'];
+			$scope.availableExpirationYears = ['2013','2014','2015','2016','2017','2018','2019','2020','2021',
+			                                   '2022','2023','2024','2025','2026','2027','2028','2029','2030'];
+			
+			$scope.states = addressService.getStates();
+			$scope.countries = addressService.getCountries();
+			
+			/*TODO: Create a payment method list on the server to retrieve 
+			 *	    and figure out how we want to deal with updating only 
+			 *		the selected payment
+			 */
+			$scope.paymentMethodList = [$scope.cart.payment,
+										{existingPaymentId: '2',
+										 description: 'Test Bank Account', 
+										 paymentMethod: 'EFT',
+										 paymentType: 'Checking',
+										 lastFourDigits: '6789',
+										 bankName: 'Test Bank',
+										 bankAccountNumber: '123456789',
+										 bankRoutingNumber: '123123123',
+										 creditCardToken: null,
+										 creditCardHash: null,
+										 expirationMonth: null,
+										 expirationYear: null,
+										 cardholderName: null,
+										 billingAddress: {streetAddress1: '',
+								 			  			  streetAddress2: '',
+								 			  			  streetAddress3: '',
+								 			  			  streetAddress4: '',
+								 			  			  city: '',
+								 			  			  state: '',
+								 			  			  zipCode: '',
+								 			  			  country: ''}}];
+		};
+		
+		$scope.setDisplayAddress = function(pointToMailAddr) {
+			if(pointToMailAddr) {
+				return $scope.cart.mailingAddress;
+			}
+			else {
+				return $scope.selectedPayment.billingAddress;
+			}
 		};
 		
 		/**
@@ -105,9 +130,9 @@ angular.module('dssMiddlewareApp')
 			 * different from the mailing address, we want to make sure 
 			 * the user can edit the address and that it is pre-filled.
 			 */ 
-			if(!$scope.pointToMailAddr) {
+			if(!creditCardEditorService.getPointToMailAddr()) {
 				$scope.readOnly = false;
-				$scope.addressToEdit = $scope.selectedPayment.billingAddress;
+				creditCardEditorService.setAddressToEdit(creditCardEditorService.getSelectedPayment().billingAddress);
 			}
 		};
 		
@@ -173,63 +198,24 @@ angular.module('dssMiddlewareApp')
 			return '******' + selectedPayment.lastFourDigits;
 		};
 		
-		/**
-		 * Deal with the more complex logic involved with 
-		 * switching between the mailing address on file and a 
-		 * separate, specific billing address for this credit card.
-		 */
-		$scope.changePointToMailAddr = function() {
-			if($scope.pointToMailAddr) {
-				/* If we are using the mailing address, we do not need the ability to
-				 * edit the fields, so we want to make it read only (so the required 
-				 * is taken off and we can submit the form).
-				 */ 
-				$scope.displayAddress = $scope.cart.mailingAddress;
-				$scope.readOnly = true;
-			}
-			else {
-				/* If we are using a separate billing address, we need to be able to 
-				 * edit the address fields.
-				 */
-				$scope.readOnly = false;
-				$scope.addressToEdit = $scope.selectedPayment.billingAddress;
-				
-				//If blank, set country to the current mailing address country or USA if that is blank
-				if($scope.addressToEdit.country == '' || $scope.addressToEdit.country == null) {
-					if($scope.cart.mailingAddress != null && $scope.cart.mailingAddress.country != '') {
-						$scope.addressToEdit.country = $scope.cart.mailingAddress.country;
-					}
-					else {
-						$scope.addressToEdit.country = 'USA';
-					}
+		$scope.setTransTypeVariables = function(transType) {
+			if(transType == 'BA') {
+				if($scope.selectedPayment.paymentType == undefined) {
+					$scope.selectedPayment.paymentType = 'Checking';
 				}
 			}
 		};
 		
-		/**
-		 * Determine whether the mailing address and billing address are the same place.
-		 */
-		$scope.areAddressesEffectivelyTheSame = function(mailingAddress, billingAddress) {
-			if(billingAddress == null || billingAddress.streetAddress1 == '' || 
-					(billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
-					 billingAddress.streetAddress2 == mailingAddress.streetAddress2 && 
-					 billingAddress.city == mailingAddress.city && 
-					 billingAddress.state == mailingAddress.state && 
-					 billingAddress.country == mailingAddress.country)) {
-				return true;
+		//TODO: Perhaps turn this into a directive
+		$scope.showHelpTip = function(field, event) {
+			if(field == 'routingNumber') {
+				showHelpTip(event, $scope.routingHelp, false);
 			}
-			else {
-				return false;
+			else if(field == 'accountNumber') {
+				showHelpTip(event, $scope.accountHelp, false);
 			}
-		};
-		
-		$scope.setTransTypeVariables = function(transType) {
-			if(transType == 'CC') {
-				$scope.limitedEdit = false;
-				$scope.isCheckout = true;
-			}
-			else {
-				$scope.isCheckout = true;
+			else if(field == 'retypeAccountNumber') {
+				showHelpTip(event, $scope.retypeAccountHelp, false);
 			}
 		};
 		
@@ -238,17 +224,18 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.continueToSubmitPage = function() {
-			if($scope.pointToMailAddr) {
+			if(creditCardEditorService.getPointToMailAddr()) {
 				$scope.selectedPayment.billingAddress = $scope.cart.mailingAddress;
 			}
 			else {
-				addressService.removeUnusedAddressInformation($scope.addressToEdit);
-				$scope.selectedPayment.billingAddress = $scope.addressToEdit;
+				addressService.removeUnusedAddressInformation(creditCardEditorService.getAddressToEdit());
+				$scope.selectedPayment.billingAddress = creditCardEditorService.getAddressToEdit();
 			}
 			
 			$scope.cart.payment = $scope.selectedPayment;
 			
 			//TODO: Do we want to do client side validation on credit card expired?
+			//TODO: Add a create payment method type thing
 			cartCrud.updateCart($scope.cart).then(function() {
 				//TODO: Redirect to submit page
 			});

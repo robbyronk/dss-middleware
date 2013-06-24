@@ -1,4 +1,4 @@
-<div id="content" style="min-height: 50px;" data-ng-init="initPage()">
+<div id="content" style="min-height: 50px;" data-ng-init="initCheckoutSelectPaymentMethod()">
 
 
 	<!-- START EDITING FROM HERE -->
@@ -79,7 +79,7 @@
 								</span>
 							</td>
 						</tr>
-						<tr data-ng-show="editingCreditCard && selectedPayment != null && selectedPayment.existingPaymentId == paymentIdCurrentlyBeingEdited">
+						<tr data-ui-if="editingCreditCard && selectedPayment != null && selectedPayment.existingPaymentId == paymentIdCurrentlyBeingEdited">
 							<td colspan="3" data-ng-include="'viewComponents/CreditCardEditor.html'"></td>
 						</tr>
 					</table>						

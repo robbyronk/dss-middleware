@@ -1,4 +1,4 @@
-<div id="content" style="min-height: 50px;" data-ng-init="initPage()">
+<div id="content" style="min-height: 50px;" data-ng-init="initCheckoutPaymentMethod()">
 
 
 	<!-- START EDITING FROM HERE -->
@@ -44,8 +44,11 @@
 							</td>
 						</tr>
 					</table>
-					<span data-ng-show="transType == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span>
-					<span data-ng-show="transType == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span>
+					<!-- TODO: Find a way to speed this up.  Show is much faster, but gives a $digest already in progress error. -->
+<!-- 					<span data-ng-show="transType == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span> -->
+<!-- 					<span data-ng-show="transType == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span> -->
+					<span data-ui-if="transType == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span>
+					<span data-ui-if="transType == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span>
 				</td>
 			</tr>
 			<tr class="tableFooter">
@@ -57,7 +60,7 @@
 		</table>
 	</form>
 	
-	<p>&nbsp;&nbsp;&nbsp;"<span class="redhighlight">*</span>" indicates a required field.</p>
+	<p>&nbsp;&nbsp;&nbsp;<span class="redhighlight">*</span> indicates a required field.</p>
 	
 	<p data-ng-show="transType == 'CC'">Please note, 2.35% of each credit card donation (all of which is still tax-deductible) will be used to cover the fee credit card companies charge Cru for the transaction. Bank account transactions have no fee.</p>
 

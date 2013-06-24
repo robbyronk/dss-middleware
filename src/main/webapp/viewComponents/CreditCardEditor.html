@@ -1,4 +1,4 @@
-<div id="dssCreditCardEditor">
+<div id="dssCreditCardEditor" data-ng-controller="CreditCardEditorCtrl" data-ng-init="initPage()">
 	<table style="width:100%; border:0; padding:3px; border-spacing:0;">
 		<tr class="tableHeader" data-ng-show="!$parent.limitedEdit">
 			<td>			
@@ -16,7 +16,7 @@
 						    <span class="redhighlight">*</span> 
 						    <b>Card Type</b>
 						    <br/>
-						    <select data-ng-required="true" data-ng-model="$parent.selectedPayment.paymentType" 
+						    <select data-ng-required="true" data-ng-model="selectedPayment.paymentType" 
 						    	data-ng-options="type for type in $parent.creditCardTypes">
 						    </select>
 						</td>
@@ -25,15 +25,15 @@
 							<b><label id="creditCardNumberLabel" for="creditCardNumber">Credit Card Number</label></b>
 							<br/>
 							<!-- TODO: Figure out what to do with CCP, probably do it in controller/services -->
-							<span data-ng-include="'includes/creditCardNumberFieldAndJavascript.html'"></span>  
+<!-- 							<span data-ng-include="'includes/creditCardNumberFieldAndJavascript.html'"></span>   -->
 						</td>
 						<td width="39%">
 							<span class="redhighlight">*</span> <b>Expiration Date </b><br/>
-							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationMonth" 
+							<select data-ng-required="true" data-ng-model="selectedPayment.expirationMonth" 
 								data-ng-options="month for month in $parent.availableExpirationMonths">
 							</select>
 							<b>/</b>
-							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationYear" 
+							<select data-ng-required="true" data-ng-model="selectedPayment.expirationYear" 
 								data-ng-options="year for year in $parent.availableExpirationYears">
 							</select>
 						</td>
@@ -49,15 +49,15 @@
 						<td align="left">
 							<span class="redhighlight">*</span><b> Name On Card</b><br/>
 							<input type="text" class="inputStyle" size="45" maxlength="55" 
-								data-ng-required="true" data-ng-model="$parent.selectedPayment.cardholderName" />
+								data-ng-required="true" data-ng-model="selectedPayment.cardholderName" />
 						</td>
 						<td width="42%" align="left" data-ng-show="$parent.limitedEdit">
 							<span class="redhighlight">*</span><b>Expiration Date </b><br/>
-							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationMonth" 
+							<select data-ng-required="true" data-ng-model="selectedPayment.expirationMonth" 
 								data-ng-options="month for month in $parent.availableExpirationMonths">
 							</select>
 							<b>/</b>													
-							<select data-ng-required="true" data-ng-model="$parent.selectedPayment.expirationYear" 
+							<select data-ng-required="true" data-ng-model="selectedPayment.expirationYear" 
 								data-ng-options="year for year in $parent.availableExpirationYears">
 							</select>
 						</td>
@@ -82,7 +82,7 @@
 						<tr>
 							<td width="2%"></td>
 							<td width="98%" align="left">
-								<input type="checkbox" class="pointToMailAddr" data-ng-model="$parent.pointToMailAddr" data-ng-change="changePointToMailAddr()" /><b>&nbsp;My credit card billing address is the same as my mailing address.</b>
+								<input type="checkbox" class="pointToMailAddr" data-ng-model="pointToMailAddr" data-ng-change="changePointToMailAddr()" /><b>&nbsp;My credit card billing address is the same as my mailing address.</b>
 							</td>
 						</tr>
 					</table>
@@ -90,9 +90,9 @@
 			</tr>
 			<tr>
 				<td>
-					<span class="error" data-ng-show="!$parent.pointToMailAddr && $parent.selectedPayment.billingAddress == null">Problem:  BillingAddress not set correctly</span>
-					<span data-ng-include="'viewComponents/DssAddressEditor.html'" data-ng-show="!$parent.pointToMailAddr && $parent.selectedPayment.billingAddress != null"></span>
-					<table style="width:100%;" data-ng-show="$parent.pointToMailAddr">
+					<span class="error" data-ng-show="!pointToMailAddr && selectedPayment.billingAddress == null">Problem:  BillingAddress not set correctly</span>
+					<span data-ng-include="'viewComponents/DssAddressEditor.html'" data-ng-show="!pointToMailAddr && selectedPayment.billingAddress != null"></span>
+					<table style="width:100%;" data-ng-show="pointToMailAddr">
 						<tr>
 							<td width="2%"/>
 							<td width="120px" valign="top"><b>Billing Address:</b></td>
@@ -123,7 +123,7 @@
 							<td width="3%">&nbsp;</td>
 							<td width="97%">
 								<b>Nickname for this credit card:</b><br/><br/>
-								<input type="text" class="inputStyle" autocomplete="off" size="35" maxlength="30" data-ng-model="$parent.selectedPayment.description" /> &nbsp; <small>(Example: John's Visa)</small>
+								<input type="text" class="inputStyle" autocomplete="off" size="35" maxlength="30" data-ng-model="selectedPayment.description" /> &nbsp; <small>(Example: John's Visa)</small>
 							</td>
 						</tr>
 					</table>

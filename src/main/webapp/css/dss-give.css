@@ -203,3 +203,13 @@ body#editprofile td, body#editpayment td, body#addpayment td, body#removepayment
 .disabled-background {
 	background: #eee;
 }
+
+div.scroll {
+	height: 70px;
+	width: 555px;
+	overflow: auto;
+	border: 1px solid black;
+	background-color: #FFFFFF;
+	padding: 2px;
+	text-align: left;
+}
