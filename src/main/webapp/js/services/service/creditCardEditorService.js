@@ -4,7 +4,6 @@ angular.module('dssMiddlewareApp')
 	.factory('creditCardEditorService', function() {
 		var creditCardEditor = {};
 		var pointToMailAddr_ = false;
-		var cart_ = {};
 		var selectedPayment_ = {};
 		var addressToEdit_ = {};
 		
@@ -14,14 +13,6 @@ angular.module('dssMiddlewareApp')
 		
 		creditCardEditor.setPointToMailAddr = function(pointToMailAddr) {
 			pointToMailAddr_ = pointToMailAddr;
-		};
-		
-		creditCardEditor.getCart = function() {
-			return cart_;
-		};
-		
-		creditCardEditor.setCart = function(cart) {
-			cart_ = cart;
 		};
 		
 		creditCardEditor.getSelectedPayment = function() {
