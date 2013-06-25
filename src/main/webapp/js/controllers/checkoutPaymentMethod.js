@@ -33,7 +33,7 @@ angular.module('dssMiddlewareApp')
 				$scope.transType = params.transType;
 			}
 			
-			$scope.displayAddress = $scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
 			creditCardEditorService.setSelectedPayment($scope.selectedPayment);
 		};
 		
@@ -46,7 +46,7 @@ angular.module('dssMiddlewareApp')
 			$scope.selectedPayment = $scope.paymentMethodList[0];
 			creditCardEditorService.setSelectedPayment($scope.selectedPayment);
 			creditCardEditorService.setPointToMailAddr(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
-			$scope.displayAddress = $scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
 		};
 		
 		$scope.initCommonVariables = function() {
@@ -84,10 +84,10 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.setDisplayAddress = function(pointToMailAddr) {
 			if(pointToMailAddr) {
-				return $scope.cart.mailingAddress;
+				addressService.setDisplayAddress($scope.cart.mailingAddress);
 			}
 			else {
-				return $scope.selectedPayment.billingAddress;
+				addressService.setDisplayAddress($scope.selectedPayment.billingAddress);
 			}
 		};
 		

@@ -3,6 +3,7 @@
 angular.module('dssMiddlewareApp')
 	.factory('addressService', function() {
 		var addressServiceObject = {};
+		var displayAddress_ = {};
 		
 		addressServiceObject.isUsa = function(address) {
 			if(address == undefined) return false;
@@ -28,6 +29,14 @@ angular.module('dssMiddlewareApp')
                     {countryCode: 'USA', countryName: 'USA'}, 
                     {countryCode: 'Zimbabwe', countryName: 'Zimbabwe'}];
 		};
+		
+		addressServiceObject.getDisplayAddress = function() {
+			return displayAddress_;
+		};
+		
+		addressServiceObject.setDisplayAddress = function(displayAddress) {
+			displayAddress_ = displayAddress;
+		}
 		
 		addressServiceObject.removeUnusedAddressInformation = function(address) {
 			//If USA, remove address line 4

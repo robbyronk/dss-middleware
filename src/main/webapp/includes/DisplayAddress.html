@@ -1,8 +1,10 @@
 <!-- DisplayAddress include starts here-->
-{{displayAddress.streetAddress1}}
-<span data-ng-show="displayAddress.streetAddress2 != null && displayAddress.streetAddress2 != ''"><br />{{displayAddress.streetAddress2}}</span>
-<span data-ng-show="displayAddress.streetAddress3 != null && displayAddress.streetAddress3 != ''"><br />{{displayAddress.streetAddress3}}</span>
-<span data-ng-show="displayAddress.streetAddress4 != null && displayAddress.streetAddress4 != ''"><br />{{displayAddress.streetAddress4}}</span>
-<span data-ng-show="displayAddress.city != null && displayAddress.city != ''"><br />{{displayAddress.city}}, {{displayAddress.state}} {{displayAddress.zipCode}}</span>
-<span data-ng-show="displayAddress.country != 'USA'"><br />{{displayAddress.country}}</span>
+<div data-ng-controller="AddressCtrl">
+	{{displayAddress.streetAddress1}}
+	<span data-ng-show="displayAddress.streetAddress2 != null && displayAddress.streetAddress2 != ''"><br />{{displayAddress.streetAddress2}}</span>
+	<span data-ng-show="displayAddress.streetAddress3 != null && displayAddress.streetAddress3 != ''"><br />{{displayAddress.streetAddress3}}</span>
+	<span data-ng-show="displayAddress.streetAddress4 != null && displayAddress.streetAddress4 != ''"><br />{{displayAddress.streetAddress4}}</span>
+	<span data-ng-show="displayAddress.city != null && displayAddress.city != ''"><br />{{displayAddress.city}}, {{displayAddress.state}} {{displayAddress.zipCode}}</span>
+	<span data-ng-show="displayAddress.country != 'USA'"><br />{{displayAddress.country}}</span>
+</div>
 <!-- DisplayAddress include ends here-->

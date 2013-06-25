@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CreditCardEditorCtrl', function($scope, $routeParams, creditCardEditorService, cartCrud) {
+	.controller('CreditCardEditorCtrl', function($scope, $routeParams, addressService, creditCardEditorService, cartCrud) {
 		$scope.initPage = function() {
 			$scope.creditCardTypes = ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa'];
 			$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 
@@ -26,7 +26,7 @@ angular.module('dssMiddlewareApp')
 				 * edit the fields, so we want to make it read only (so the required 
 				 * is taken off and we can submit the form).
 				 */ 
-				$scope.displayAddress = $scope.cart.mailingAddress;
+				addressService.setDisplayAddress($scope.cart.mailingAddress);
 				$scope.readOnly = true;
 			}
 			else {

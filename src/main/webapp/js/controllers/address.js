@@ -4,6 +4,7 @@ angular.module('dssMiddlewareApp')
 	.controller('AddressCtrl', function($scope, addressService) {
 		$scope.states = addressService.getStates();
 		$scope.countries = addressService.getCountries();
+		$scope.displayAddress = addressService.getDisplayAddress();
 		
 		$scope.isUsa = function(address) {
 			return addressService.isUsa(address);
