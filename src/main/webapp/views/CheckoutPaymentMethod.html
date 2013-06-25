@@ -44,11 +44,8 @@
 							</td>
 						</tr>
 					</table>
-					<!-- TODO: Find a way to speed this up.  Show is much faster, but gives a $digest already in progress error. -->
-<!-- 					<span data-ng-show="transType == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span> -->
-<!-- 					<span data-ng-show="transType == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span> -->
-					<span data-ui-if="transType == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span>
-					<span data-ui-if="transType == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span>
+					<span data-ng-show="transType == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span>
+					<span data-ng-show="transType == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span>
 				</td>
 			</tr>
 			<tr class="tableFooter">
@@ -74,12 +71,10 @@
 
 
 <div id="sidebar">
-
 	<div class="box">
 		<h3>More Choices</h3>
 		<span data-ng-include="'includes/searchbox.html'"></span>		
 	</div> <!--end box -->
-
 </div> <!--end sidebar -->
 
 <div class="clear"></div>

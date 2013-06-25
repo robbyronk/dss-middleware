@@ -13,7 +13,6 @@ angular.module('dssMiddlewareApp')
 			});
 		};
 		
-		
 		/**
 		 * Deal with the more complex logic involved with 
 		 * switching between the mailing address on file and a 
