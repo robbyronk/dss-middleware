@@ -111,8 +111,6 @@ angular.module('dssMiddlewareApp')
 		$scope.editCreditCard = function(selectedPayment) {
 			$scope.editingCreditCard = true;
 			$scope.paymentIdCurrentlyBeingEdited = selectedPayment.paymentId;
-			$scope.limitedEdit = true;
-			$scope.isCheckout = true;
 			
 			/* If the user comes into the edit mode and the billing address is
 			 * different from the mailing address, we want to make sure 
