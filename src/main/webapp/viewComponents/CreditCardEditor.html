@@ -2,7 +2,6 @@
 	<table style="width:100%; border:0; padding:3px; border-spacing:0;">
 		<tr class="tableHeader" data-ng-show="!$parent.limitedEdit">
 			<td>			
-	<!-- 			## SHOULD NOT START A NEW FORM HERE <form method="POST" action="/give" name="form"> -->
 		 		<b>Credit Card Information</b> 
 			</td>
 		</tr>
@@ -17,7 +16,7 @@
 						    <b>Card Type</b>
 						    <br/>
 						    <select data-ng-required="true" data-ng-model="selectedPayment.paymentType" 
-						    	data-ng-options="type for type in $parent.creditCardTypes">
+						    	data-ng-options="type for type in creditCardTypes">
 						    </select>
 						</td>
 						<td width="31%">
@@ -30,11 +29,11 @@
 						<td width="39%">
 							<span class="redhighlight">*</span> <b>Expiration Date </b><br/>
 							<select data-ng-required="true" data-ng-model="selectedPayment.expirationMonth" 
-								data-ng-options="month for month in $parent.availableExpirationMonths">
+								data-ng-options="month for month in availableExpirationMonths">
 							</select>
 							<b>/</b>
 							<select data-ng-required="true" data-ng-model="selectedPayment.expirationYear" 
-								data-ng-options="year for year in $parent.availableExpirationYears">
+								data-ng-options="year for year in availableExpirationYears">
 							</select>
 						</td>
 					</tr>
@@ -54,11 +53,11 @@
 						<td width="42%" align="left" data-ng-show="$parent.limitedEdit">
 							<span class="redhighlight">*</span><b>Expiration Date </b><br/>
 							<select data-ng-required="true" data-ng-model="selectedPayment.expirationMonth" 
-								data-ng-options="month for month in $parent.availableExpirationMonths">
+								data-ng-options="month for month in availableExpirationMonths">
 							</select>
 							<b>/</b>													
 							<select data-ng-required="true" data-ng-model="selectedPayment.expirationYear" 
-								data-ng-options="year for year in $parent.availableExpirationYears">
+								data-ng-options="year for year in availableExpirationYears">
 							</select>
 						</td>
 					</tr>
@@ -97,8 +96,6 @@
 							<td width="2%"/>
 							<td width="120px" valign="top"><b>Billing Address:</b></td>
 							<td align="left">
-								
-<!-- 								#set $DisplayAddress = $This.MailingAddress -->
 								<span data-ng-include='"includes/DisplayAddress.html"'></span>
 							</td>
 						</tr>

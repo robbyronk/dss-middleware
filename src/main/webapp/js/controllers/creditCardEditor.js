@@ -3,6 +3,12 @@
 angular.module('dssMiddlewareApp')
 	.controller('CreditCardEditorCtrl', function($scope, $routeParams, creditCardEditorService, cartCrud) {
 		$scope.initPage = function() {
+			$scope.creditCardTypes = ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa'];
+			$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 
+			                                    '07', '08', '09', '10', '11', '12'];
+			$scope.availableExpirationYears = ['2013','2014','2015','2016','2017','2018','2019','2020','2021',
+			                                   '2022','2023','2024','2025','2026','2027','2028','2029','2030'];
+			
 			$scope.addressToEdit = creditCardEditorService.getAddressToEdit();
 			$scope.pointToMailAddr = creditCardEditorService.getPointToMailAddr();
 			$scope.selectedPayment = creditCardEditorService.getSelectedPayment();
