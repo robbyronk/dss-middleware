@@ -108,9 +108,9 @@ angular.module('dssMiddlewareApp')
 		/**
 		 * Allow the user to edit their selected credit card.
 		 */
-		$scope.editCreditCard = function(paymentId) {
+		$scope.editCreditCard = function(selectedPayment) {
 			$scope.editingCreditCard = true;
-			$scope.paymentIdCurrentlyBeingEdited = paymentId;
+			$scope.paymentIdCurrentlyBeingEdited = selectedPayment.paymentId;
 			$scope.limitedEdit = true;
 			$scope.isCheckout = true;
 			
@@ -120,7 +120,7 @@ angular.module('dssMiddlewareApp')
 			 */ 
 			if(!creditCardEditorService.getPointToMailAddr()) {
 				$scope.readOnly = false;
-				creditCardEditorService.setAddressToEdit(creditCardEditorService.getSelectedPayment().billingAddress);
+				creditCardEditorService.setAddressToEdit(selectedPayment.billingAddress);
 			}
 		};
 		
