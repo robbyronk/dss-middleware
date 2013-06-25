@@ -1,61 +1,55 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService, creditCardEditorService) {
+	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService, creditCardEditorService, cartResolved) {
 		var params = $routeParams;
 		var pointToMailAddr;
 		
 		$scope.initCheckoutPaymentMethod = function() {
-			cartCrud.retrieve(params.cartId).then(function(data) {
-				$scope.cart = data;
-				$scope.isCheckout = true;
-				$scope.limitedEdit = false;
-				$scope.agreeToTerms = false;
-				$scope.selectedPayment = {billingAddress: {}};
-				pointToMailAddr = true;
-				creditCardEditorService.setPointToMailAddr(pointToMailAddr);
-				$scope.initCommonVariables();
-				$scope.routingHelp = "Routing Number is 9 digits surrounded by the &nbsp;<img src='images/RoutingIcon.gif'/>&nbsp; symbols and may be listed left or right of the Account Number. &nbsp;If your check has an ACH/RT number, enter that as your bank routing number.";
-				$scope.accountHelp = "Account Number may be up to 17 digits and is usually listed left of the &nbsp;<img src='images/AccountIcon.gif'/>&nbsp; symbol.  &nbsp;Check Number may be listed left of the Account Number, but should not be included in the Account Number.";
-				$scope.retypeAccountHelp = $scope.accountHelp;
-				$scope.retypeBankAccountNumber = '';
-				$scope.showRoutingHelpTip = false;
-				$scope.showAccountHelpTip = false;
-				$scope.showRetypeAccountHelpTip = false;
-				
-				if(params.transType == undefined || params.transType == null || params.transType == 'BA') {
-					$scope.transType = 'BA';
-					$scope.selectedPayment.paymentMethod = 'EFT';
-					$scope.selectedPayment.paymentType = 'Checking';
-				}
-				else {
-					$scope.transType = params.transType;
-				}
-				
-				$scope.displayAddress = $scope.setDisplayAddress(pointToMailAddr);
-				creditCardEditorService.setSelectedPayment($scope.selectedPayment);
-			});
+			$scope.isCheckout = true;
+			$scope.limitedEdit = false;
+			$scope.agreeToTerms = false;
+			$scope.selectedPayment = {billingAddress: {}};
+			pointToMailAddr = true;
+			creditCardEditorService.setPointToMailAddr(pointToMailAddr);
+			$scope.initCommonVariables();
+			$scope.routingHelp = "Routing Number is 9 digits surrounded by the &nbsp;<img src='images/RoutingIcon.gif'/>&nbsp; symbols and may be listed left or right of the Account Number. &nbsp;If your check has an ACH/RT number, enter that as your bank routing number.";
+			$scope.accountHelp = "Account Number may be up to 17 digits and is usually listed left of the &nbsp;<img src='images/AccountIcon.gif'/>&nbsp; symbol.  &nbsp;Check Number may be listed left of the Account Number, but should not be included in the Account Number.";
+			$scope.retypeAccountHelp = $scope.accountHelp;
+			$scope.retypeBankAccountNumber = '';
+			$scope.showRoutingHelpTip = false;
+			$scope.showAccountHelpTip = false;
+			$scope.showRetypeAccountHelpTip = false;
+			
+			if(params.transType == undefined || params.transType == null || params.transType == 'BA') {
+				$scope.transType = 'BA';
+				$scope.selectedPayment.paymentMethod = 'EFT';
+				$scope.selectedPayment.paymentType = 'Checking';
+			}
+			else {
+				$scope.transType = params.transType;
+			}
+			
+			$scope.displayAddress = $scope.setDisplayAddress(pointToMailAddr);
+			creditCardEditorService.setSelectedPayment($scope.selectedPayment);
 		};
 		
 		$scope.initCheckoutSelectPaymentMethod = function() {
-			cartCrud.retrieve(params.cartId).then(function(data) {
-				$scope.cart = data;
-				$scope.isCheckout = true;
-				$scope.limitedEdit = true;
-				$scope.paymentIdCurrentlyBeingEdited = null;
-				$scope.readOnly = true;
-				$scope.editingCreditCard = false;
-				$scope.initCommonVariables();
-				$scope.selectedPayment = $scope.paymentMethodList[0];
-				creditCardEditorService.setSelectedPayment($scope.selectedPayment);
-				pointToMailAddr = creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress);
-				creditCardEditorService.setPointToMailAddr(pointToMailAddr);
-				$scope.displayAddress = $scope.setDisplayAddress(pointToMailAddr);
-			});
-			
+			$scope.isCheckout = true;
+			$scope.limitedEdit = true;
+			$scope.paymentIdCurrentlyBeingEdited = null;
+			$scope.readOnly = true;
+			$scope.editingCreditCard = false;
+			$scope.initCommonVariables();
+			$scope.selectedPayment = $scope.paymentMethodList[0];
+			creditCardEditorService.setSelectedPayment($scope.selectedPayment);
+			pointToMailAddr = creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress);
+			creditCardEditorService.setPointToMailAddr(pointToMailAddr);
+			$scope.displayAddress = $scope.setDisplayAddress(pointToMailAddr);
 		};
 		
 		$scope.initCommonVariables = function() {
+			$scope.cart = cartResolved;
 			$scope.loggedIn = true;
 			$scope.creditCardTypes = ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa'];
 			$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 

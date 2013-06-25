@@ -25,15 +25,30 @@ angular.module('dssMiddlewareApp', ['ui'])
       })
       .when('/CheckoutSelectPaymentMethod/:cartId', {
     	  templateUrl: 'views/CheckoutSelectPaymentMethod.html',
-    	  controller: 'CheckoutPaymentMethodCtrl'
+    	  controller: 'CheckoutPaymentMethodCtrl', 
+    	  resolve: {
+    		  cartResolved: function($route, cartCrud) {
+    			  return cartCrud.retrieve($route.current.params.cartId);
+    		  }
+    	  }
       })
       .when('/CheckoutPaymentMethod/:cartId', {
     	  templateUrl: 'views/CheckoutPaymentMethod.html',
-    	  controller: 'CheckoutPaymentMethodCtrl'
+    	  controller: 'CheckoutPaymentMethodCtrl', 
+    	  resolve: {
+    		  cartResolved: function($route, cartCrud) {
+    			  return cartCrud.retrieve($route.current.params.cartId);
+    		  }
+    	  }
       })
       .when('/CheckoutPaymentMethod/:cartId/:transType', {
     	  templateUrl: 'views/CheckoutPaymentMethod.html',
-    	  controller: 'CheckoutPaymentMethodCtrl'
+    	  controller: 'CheckoutPaymentMethodCtrl', 
+    	  resolve: {
+    		  cartResolved: function($route, cartCrud) {
+    			  return cartCrud.retrieve($route.current.params.cartId);
+    		  }
+    	  }
       })
       .otherwise({
         redirectTo: '/GiftDetail/:designationNumber'

@@ -2,15 +2,10 @@
 
 angular.module('dssMiddlewareApp')
 	.controller('CreditCardEditorCtrl', function($scope, $routeParams, creditCardEditorService, cartCrud) {
-		var params = $routeParams;
-		
 		$scope.initPage = function() {
-			cartCrud.retrieve(params.cartId).then(function(data) {
-				$scope.cart = data;
-				$scope.addressToEdit = creditCardEditorService.getAddressToEdit();
-				$scope.pointToMailAddr = creditCardEditorService.getPointToMailAddr();
-				$scope.selectedPayment = creditCardEditorService.getSelectedPayment();
-			});
+			$scope.addressToEdit = creditCardEditorService.getAddressToEdit();
+			$scope.pointToMailAddr = creditCardEditorService.getPointToMailAddr();
+			$scope.selectedPayment = creditCardEditorService.getSelectedPayment();
 		};
 		
 		/**
