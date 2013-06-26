@@ -21,7 +21,12 @@ angular.module('dssMiddlewareApp', ['ui'])
       })
       .when('/CheckoutMailingAddress/:cartId', {
     	  templateUrl: 'views/CheckoutMailingAddress.html',
-    	  controller: 'CheckoutMailingAddressCtrl'
+    	  controller: 'CheckoutMailingAddressCtrl', 
+    	  resolve: {
+    		  cartResolved: function($route, cartCrud) {
+    			  return cartCrud.retrieve($route.current.params.cartId);
+    		  }
+    	  }
       })
       .when('/CheckoutSelectPaymentMethod/:cartId', {
     	  templateUrl: 'views/CheckoutSelectPaymentMethod.html',

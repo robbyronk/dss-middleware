@@ -37,10 +37,10 @@
 			<tr height="30" data-ui-if="loggedIn == false">
 				<td>&nbsp;&nbsp;&nbsp;&nbsp;Are you giving this gift as an individual or on behalf of an organization?<br />&nbsp;&nbsp;&nbsp;
 					<input type="radio" name="cart.personType" data-ng-value="'Household'" 
-						data-ng-model="$parent.cart.personType" />&nbsp;&nbsp;An Individual
+						data-ng-model="cart.personType" />&nbsp;&nbsp;An Individual
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<input type="radio" name="cart.personType" data-ng-value="'Organization'" 
-						data-ng-model="$parent.cart.personType" />&nbsp;&nbsp;A Business, Church, Foundation, or other organization
+						data-ng-model="cart.personType" />&nbsp;&nbsp;A Business, Church, Foundation, or other organization
 				</td>
 			</tr>
 			
@@ -55,7 +55,7 @@
 						    <td colspan="5">
 						    	<span class="redhighlight">*</span>&nbsp;<b>Organization Name</b><br/>
 						    	<input type="text" size="40" data-ng-required="true" 
-						    		data-ng-model="$parent.cart.organizationName" maxlength="40" class="inputStyle" />
+						    		data-ng-model="cart.organizationName" maxlength="40" class="inputStyle" />
 						    </td>
 						</tr>
 					</table>
@@ -73,7 +73,7 @@
 							<td width="">
 								<span class="redhighlight">*</span> <b>Title</b><br/>
 								<select data-ng-required="true" 
-									data-ng-model="$parent.cart.primaryName.namePrefix"
+									data-ng-model="cart.primaryName.namePrefix"
 									data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes">
 								</select>
 							</td>
@@ -82,17 +82,17 @@
 							<td width="">
 								<span class="redhighlight">*</span>&nbsp;<b>First Name</b><br/>
 								<input type="text" class="inputStyle" style="width:175px;" size="11" maxlength="40"  
-									data-ng-model="$parent.cart.primaryName.firstName" data-ng-required="true" />
+									data-ng-model="cart.primaryName.firstName" data-ng-required="true" />
 							</td>
 						    <td width="12">
 						    	MI<br/> 
 						    	<input type="text" class="inputStyle" style="width:35px;" size="5" maxlength="15"
-						    		data-ng-model="$parent.cart.primaryName.middleName" />
+						    		data-ng-model="cart.primaryName.middleName" />
 						    </td>
 						    <td width="">
 						    	<span class="redhighlight">*</span> <b>Last Name</b><br/>
 						    	<input  type="text" class="inputStyle" size="17" maxlength="40" style="width:175px;"
-						    		data-ng-model="$parent.cart.primaryName.lastName" data-ng-required="true" />
+						    		data-ng-model="cart.primaryName.lastName" data-ng-required="true" />
 						    </td>
 						    <td width="">
 						    	Suffix<br/> 
@@ -109,7 +109,7 @@
 						    <td width="160">
 						    	Phone Number<br/>
 						    	<input type="text" class="inputStyle" size="20" maxlength="12"
-						    		data-ng-model="$parent.cart.phoneNumber" 
+						    		data-ng-model="cart.phoneNumber" 
 						    		placeholder="555-555-5555" />
 						    </td>
 						    <td>
@@ -128,7 +128,7 @@
 						    <td width="160" colspan="2">
 						    	<span class="redhighlight">*</span> <b>E-mail Address</b><br/>
 						    	<input type="text" class="inputStyle" size="20" maxlength="60"
-						    		data-ng-model="$parent.cart.emailAddress" data-ng-required="true" />
+						    		data-ng-model="cart.emailAddress" data-ng-required="true" />
 						    </td>
 						</tr>
 					</table>
@@ -156,7 +156,7 @@
 						<tr>
 							<td width="">
 								Title<br/>
-								<select class="inputStyle" data-ng-model="$parent.cart.spouseName.namePrefix" 
+								<select class="inputStyle" data-ng-model="cart.spouseName.namePrefix" 
 									data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes">
 								</select>
 							</td>
@@ -165,21 +165,21 @@
 							<td width="">
 								First Name<br/>
 								<input type="text" class="inputStyle" style="width: 175px;" size="11" maxlength="40" 
-									data-ng-model="$parent.cart.spouseName.firstName" />
+									data-ng-model="cart.spouseName.firstName" />
 							</td>
 							<td width="">
 								MI<br/> 
 								<input type="text" style="width: 35px;" class="inputStyle" size="5" maxlength="15"
-									data-ng-model="$parent.cart.spouseName.middleName" />
+									data-ng-model="cart.spouseName.middleName" />
 							</td>
 							<td width="">
 								Last Name<br/>
 								<input type="text" style="width: 175px;" class="inputStyle" size="17" maxlength="40" 
-								data-ng-model="$parent.cart.spouseName.lastName" />
+								data-ng-model="cart.spouseName.lastName" />
 							</td>
 							<td width="">
 								Suffix<br/>
-								<select data-ng-model="$parent.cart.spouseName.suffix" 
+								<select data-ng-model="cart.spouseName.suffix" 
 							    		data-ng-options="suffix.nameSuffix as suffix.suffix for suffix in suffixes">
 						    	</select> 
 						    </td>
