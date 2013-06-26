@@ -2,7 +2,8 @@
 
 angular.module('dssMiddlewareApp')
 	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, 
-			cartCrud, addressService, creditCardEditorService, paymentEditorService, paymentService, paymentCrud, cartResolved) {
+			cartCrud, addressService, creditCardEditorService, paymentEditorService, 
+			paymentService, paymentCrud, designationService, cartResolved) {
 		var params = $routeParams;
 		
 		$scope.initCheckoutPaymentMethod = function() {
@@ -23,8 +24,8 @@ angular.module('dssMiddlewareApp')
 				 */
 				if(params.transType == undefined) {
 					var hasMinistry = false;
-					for(var i = 0; i < cart.gifts.length; i++) {
-						if($scope.isMinistry(cart.gifts[i].designationNumber)) {
+					for(var i = 0; i < $scope.cart.gifts.length; i++) {
+						if($scope.isMinistry($scope.cart.gifts[i].designationNumber)) {
 							$scope.transType = 'CC';
 							$scope.selectedPayment.paymentMethod = 'Credit Card';
 							hasMinistry = true;
@@ -121,7 +122,7 @@ angular.module('dssMiddlewareApp')
 		
 		//TODO: put this into a designation service
 		$scope.isMinistry = function(designationNumber) {
-			return false;
+			return designationService.isMinistry(designationNumber);
 		};
 		
 		$scope.isExpired = function(selectedPayment) {

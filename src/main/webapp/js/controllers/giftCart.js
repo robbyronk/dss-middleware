@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cartCrud, giftCrud) {
+	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cartCrud, giftCrud, designationService) {
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
@@ -18,7 +18,7 @@ angular.module('dssMiddlewareApp')
 					//This is the case where a user deletes a line and the cart becomes empty
 					if($scope.giftLines.length == 0) {
 						var cartId = $scope.cart.cartId;
-						/*Delete cart to prevent empty carts sitting in the database
+						/* Delete cart to prevent empty carts sitting in the database
 						 * This is okay because a new cart will be created when 
 						 * the user comes back to add a gift.
 						 */
@@ -132,17 +132,15 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.getWebTitle = function(designationNumber) {
-			//TODO: REST call
-			if(designationNumber == null || designationNumber == '2843160') return 'Ryan T. Carlson';
-			else if(designationNumber == '0550510') return 'Marc and Evangeline Vergo';
-			else if(designationNumber == '2863048') return 'Orphan Care Outreach';
+			return designationService.getWebTitle();
 		};
 		
 		$scope.getDesigType = function(designationNumber) {
-			//TODO: REST call
-			if(designationNumber == null || designationNumber == '2843160') return 'Ministry';
-			else if(designationNumber == '0550510') return 'Staff';
-			else if(designationNumber == '2863048') return 'Fund Appeal';
+			return designationService.getDesigType();
+		};
+		
+		$scope.isStaff = function(designationNumber) {
+			return !designationService.isMinistry();
 		};
 		
 		$scope.edit = function(giftId) {
@@ -199,14 +197,5 @@ angular.module('dssMiddlewareApp')
 			}
 			
 			return true;
-		};
-		
-		$scope.isStaff = function(designationNumber) {
-			if($scope.getDesigType() == 'Staff') {
-				return true;
-			}
-			else {
-				return false;
-			}
 		};
 });
