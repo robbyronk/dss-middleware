@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CreditCardEditorCtrl', function($scope, $routeParams, addressService, creditCardEditorService, cartCrud) {
+	.controller('CreditCardEditorCtrl', function($scope, addressService, creditCardEditorService, paymentEditorService) {
 		var addressToEdit = {};
 		
 		$scope.initPage = function() {
@@ -13,7 +13,9 @@ angular.module('dssMiddlewareApp')
 			
 			addressToEdit = addressService.getAddressToEdit();
 			$scope.pointToMailAddr = creditCardEditorService.getPointToMailAddr();
-			$scope.selectedPayment = creditCardEditorService.getSelectedPayment();
+			$scope.selectedPayment = paymentEditorService.getSelectedPayment();
+			$scope.limitedEdit = creditCardEditorService.getLimitedEdit();
+			$scope.isCheckout = paymentEditorService.getIsCheckout();
 		};
 		
 		/**
@@ -29,13 +31,13 @@ angular.module('dssMiddlewareApp')
 				 * is taken off and we can submit the form).
 				 */ 
 				addressService.setDisplayAddress($scope.cart.mailingAddress);
-				$scope.readOnly = true;
+				addressService.setReadOnly(true);
 			}
 			else {
 				/* If we are using a separate billing address, we need to be able to 
 				 * edit the address fields.
 				 */
-				$scope.readOnly = false;
+				addressService.setReadOnly(false);
 				
 				/* If the user has already created this payment method, it may have the 
 				 * billing address filled in as the mailing address, in this case, we do 

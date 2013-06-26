@@ -32,6 +32,7 @@ angular.module('dssMiddlewareApp')
 			}
 			
 			addressService.setAddressToEdit($scope.cart.mailingAddress);
+			addressService.setReadOnly($scope.personalInfo != null && $scope.personalInfo.isStaff);
 		};
 		
 		$scope.continueToPaymentPage = function() {

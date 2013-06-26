@@ -1,12 +1,12 @@
 <div id="dssCreditCardEditor" data-ng-controller="CreditCardEditorCtrl" data-ng-init="initPage()">
 	<table style="width:100%; border:0; padding:3px; border-spacing:0;">
-		<tr class="tableHeader" data-ng-show="!$parent.limitedEdit">
+		<tr class="tableHeader" data-ng-show="!limitedEdit">
 			<td>			
 		 		<b>Credit Card Information</b> 
 			</td>
 		</tr>
-		<tr height="3" data-ng-show="!$parent.limitedEdit"><td></td></tr>
-		<tr height="20" valign="bottom" data-ng-show="!$parent.limitedEdit">
+		<tr height="3" data-ng-show="!limitedEdit"><td></td></tr>
+		<tr height="20" valign="bottom" data-ng-show="!limitedEdit">
 			<td>
 				<table style="width:100%; border:0; border-spacing:0; padding:3px;">
 	 				<tr>
@@ -50,7 +50,7 @@
 							<input type="text" class="inputStyle" size="45" maxlength="55" 
 								data-ng-required="true" data-ng-model="selectedPayment.cardholderName" />
 						</td>
-						<td width="42%" align="left" data-ng-show="$parent.limitedEdit">
+						<td width="42%" align="left" data-ng-show="limitedEdit">
 							<span class="redhighlight">*</span><b>Expiration Date </b><br/>
 							<select data-ng-required="true" data-ng-model="selectedPayment.expirationMonth" 
 								data-ng-options="month for month in availableExpirationMonths">
@@ -70,7 +70,7 @@
 	<!-- BILLING ADDRESS INFORMATION SECTION -->
 	<div id="cardbillingaddress">
 		<table style="width:100%; border:0; padding:3px; border-spacing:0;">
-			<tr class="tableHeader" data-ng-show="!$parent.limitedEdit">
+			<tr class="tableHeader" data-ng-show="!limitedEdit">
 				<td>
 			 		<b>Credit Card Billing Address</b> 
 			 	</td>
@@ -103,12 +103,12 @@
 				</td>
 			</tr>
 			
-			<tr class="tableHeader" data-ng-show="!$parent.isCheckout && $parent.loggedIn && !$parent.limitedEdit">
+			<tr class="tableHeader" data-ng-show="!isCheckout && loggedIn && !limitedEdit">
 				<td>
 			 		<b>Optional Credit Card Nickname</b> 
 			 	</td>
 			</tr>
-			<tr data-ng-show="!$parent.isCheckout && $parent.loggedIn && !$parent.limitedEdit">
+			<tr data-ng-show="!isCheckout && loggedIn && !limitedEdit">
 				<td>
 					<table style="width:100%;">
 						<tr>

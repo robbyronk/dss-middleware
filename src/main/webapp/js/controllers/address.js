@@ -8,6 +8,7 @@ angular.module('dssMiddlewareApp')
 			$scope.countries = addressService.getCountries();
 			$scope.displayAddress = addressService.getDisplayAddress();
 			$scope.addressToEdit = addressService.getAddressToEdit();
+			$scope.readOnly = addressService.getReadOnly();
 		};
 		
 		$scope.isUsa = function(address) {

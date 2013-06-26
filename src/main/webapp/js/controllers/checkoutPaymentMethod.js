@@ -1,22 +1,15 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService, creditCardEditorService, cartResolved) {
+	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService, creditCardEditorService, paymentEditorService, cartResolved) {
 		var params = $routeParams;
 		
 		$scope.initCheckoutPaymentMethod = function() {
-			$scope.limitedEdit = false;
-			$scope.agreeToTerms = false;
+			creditCardEditorService.setLimitedEdit(false);
 			$scope.selectedPayment = {billingAddress: {}};
+			
 			creditCardEditorService.setPointToMailAddr(true);
 			$scope.initCommonVariables();
-			$scope.routingHelp = "Routing Number is 9 digits surrounded by the &nbsp;<img src='images/RoutingIcon.gif'/>&nbsp; symbols and may be listed left or right of the Account Number. &nbsp;If your check has an ACH/RT number, enter that as your bank routing number.";
-			$scope.accountHelp = "Account Number may be up to 17 digits and is usually listed left of the &nbsp;<img src='images/AccountIcon.gif'/>&nbsp; symbol.  &nbsp;Check Number may be listed left of the Account Number, but should not be included in the Account Number.";
-			$scope.retypeAccountHelp = $scope.accountHelp;
-			$scope.retypeBankAccountNumber = '';
-			$scope.showRoutingHelpTip = false;
-			$scope.showAccountHelpTip = false;
-			$scope.showRetypeAccountHelpTip = false;
 			
 			if(params.transType == undefined) {
 				//TODO: if(cart contains a ministry desig) set to CC else set to BA
@@ -34,17 +27,17 @@ angular.module('dssMiddlewareApp')
 			}
 			
 			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
-			creditCardEditorService.setSelectedPayment($scope.selectedPayment);
+			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 		};
 		
 		$scope.initCheckoutSelectPaymentMethod = function() {
-			$scope.limitedEdit = true;
+			creditCardEditorService.setLimitedEdit(true);
 			$scope.paymentIdCurrentlyBeingEdited = null;
-			$scope.readOnly = true;
+			addressService.setReadOnly(true);
 			$scope.editingCreditCard = false;
 			$scope.initCommonVariables();
 			$scope.selectedPayment = $scope.paymentMethodList[0];
-			creditCardEditorService.setSelectedPayment($scope.selectedPayment);
+			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 			creditCardEditorService.setPointToMailAddr(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
 			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
 		};
@@ -52,7 +45,7 @@ angular.module('dssMiddlewareApp')
 		$scope.initCommonVariables = function() {
 			$scope.cart = cartResolved;
 			$scope.loggedIn = true;
-			$scope.isCheckout = true;
+			paymentEditorService.setIsCheckout(true);
 			
 			/*TODO: Create a payment method list on the server to retrieve 
 			 *	    and figure out how we want to deal with updating only 
@@ -87,7 +80,7 @@ angular.module('dssMiddlewareApp')
 				addressService.setDisplayAddress($scope.cart.mailingAddress);
 			}
 			else {
-				addressService.setDisplayAddress($scope.selectedPayment.billingAddress);
+				addressService.setDisplayAddress(paymentEditorService.getSelectedPayment().billingAddress);
 			}
 		};
 		
@@ -117,7 +110,7 @@ angular.module('dssMiddlewareApp')
 			 * the user can edit the address and that it is pre-filled.
 			 */ 
 			if(!creditCardEditorService.getPointToMailAddr()) {
-				$scope.readOnly = false;
+				addressService.setReadOnly(false);
 				addressService.setAddressToEdit(selectedPayment.billingAddress);
 			}
 		};
@@ -186,22 +179,11 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.setTransTypeVariables = function(transType) {
 			if(transType == 'BA') {
+				$scope.selectedPayment = paymentEditorService.getSelectedPayment();
 				if($scope.selectedPayment.paymentType == undefined) {
 					$scope.selectedPayment.paymentType = 'Checking';
+					paymentEditorService.setSelectedPayment($scope.selectedPayment);
 				}
-			}
-		};
-		
-		//TODO: Perhaps turn this into a directive
-		$scope.showHelpTip = function(field, event) {
-			if(field == 'routingNumber') {
-				showHelpTip(event, $scope.routingHelp, false);
-			}
-			else if(field == 'accountNumber') {
-				showHelpTip(event, $scope.accountHelp, false);
-			}
-			else if(field == 'retypeAccountNumber') {
-				showHelpTip(event, $scope.retypeAccountHelp, false);
 			}
 		};
 		
@@ -210,6 +192,8 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.continueToSubmitPage = function() {
+			$scope.selectedPayment = paymentEditorService.getSelectedPayment();
+			
 			if(creditCardEditorService.getPointToMailAddr()) {
 				$scope.selectedPayment.billingAddress = $scope.cart.mailingAddress;
 			}
@@ -220,6 +204,7 @@ angular.module('dssMiddlewareApp')
 			}
 			
 			$scope.cart.payment = $scope.selectedPayment;
+			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 			
 			//TODO: Do we want to do client side validation on credit card expired?
 			//TODO: Add a create payment method type thing
