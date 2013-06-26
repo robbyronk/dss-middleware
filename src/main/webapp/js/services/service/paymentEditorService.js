@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * This service is designed to pass variables between the 
+ * parent pages (CheckoutPaymentMethod, CheckoutSelectPaymentMethod, 
+ * perhaps eventually EditPayment) and the editor components for 
+ * the specific payment editors (credit card and bank account).
+ */
 angular.module('dssMiddlewareApp')
 	.factory('paymentEditorService', function() {
 		var paymentEditor = {};

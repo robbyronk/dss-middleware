@@ -1,33 +1,55 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, cartCrud, addressService, creditCardEditorService, paymentEditorService, cartResolved) {
+	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, 
+			cartCrud, addressService, creditCardEditorService, paymentEditorService, paymentService, paymentCrud, cartResolved) {
 		var params = $routeParams;
 		
 		$scope.initCheckoutPaymentMethod = function() {
 			creditCardEditorService.setLimitedEdit(false);
-			$scope.selectedPayment = {billingAddress: {}};
-			
 			creditCardEditorService.setPointToMailAddr(true);
+			
+			$scope.selectedPayment = {billingAddress: {}};
 			$scope.initCommonVariables();
 			
-			if(params.transType == undefined) {
-				//TODO: if(cart contains a ministry desig) set to CC else set to BA
-				$scope.transType = 'BA';
-				$scope.selectedPayment.paymentMethod = 'EFT';
-				$scope.selectedPayment.paymentType = 'Checking';
-			}
-			else if(params.transType == 'BA') {
-				$scope.transType = 'BA';
-				$scope.selectedPayment.paymentMethod = 'EFT';
-				$scope.selectedPayment.paymentType = 'Checking';
-			}
-			else {
-				$scope.transType = params.transType;
-			}
-			
-			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
-			paymentEditorService.setSelectedPayment($scope.selectedPayment);
+			paymentCrud.retrievePaymentMethodList($scope.cart.cartId).then(function(list) {
+				$scope.paymentMethodList = list;
+				
+				/* If the user is coming into the checkout 
+				 * payment page from the mailing address page, 
+				 * we want to set the transaction type to credit 
+				 * card if they are giving to a ministry designation, 
+				 * otherwise set it to a bank account.
+				 */
+				if(params.transType == undefined) {
+					var hasMinistry = false;
+					for(var i = 0; i < cart.gifts.length; i++) {
+						if($scope.isMinistry(cart.gifts[i].designationNumber)) {
+							$scope.transType = 'CC';
+							$scope.selectedPayment.paymentMethod = 'Credit Card';
+							hasMinistry = true;
+						}
+					}
+					
+					if(!hasMinistry) {
+						$scope.transType = 'BA';
+						$scope.selectedPayment.paymentMethod = 'EFT';
+						$scope.selectedPayment.paymentType = 'Checking';
+					}
+				}
+				else if(params.transType == 'BA') {
+					$scope.transType = 'BA';
+					$scope.selectedPayment.paymentMethod = 'EFT';
+					$scope.selectedPayment.paymentType = 'Checking';
+				}
+				else {
+					$scope.transType = params.transType;
+					$scope.selectedPayment.paymentMethod = 'Credit Card';
+				}
+				
+				$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+				paymentEditorService.setSelectedPayment($scope.selectedPayment);
+			});
 		};
 		
 		$scope.initCheckoutSelectPaymentMethod = function() {
@@ -36,43 +58,20 @@ angular.module('dssMiddlewareApp')
 			addressService.setReadOnly(true);
 			$scope.editingCreditCard = false;
 			$scope.initCommonVariables();
-			$scope.selectedPayment = $scope.paymentMethodList[0];
-			paymentEditorService.setSelectedPayment($scope.selectedPayment);
-			creditCardEditorService.setPointToMailAddr(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
-			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+			
+			paymentCrud.retrievePaymentMethodList($scope.cart.cartId).then(function(list) {
+				$scope.paymentMethodList = list;
+				$scope.selectedPayment = $scope.paymentMethodList[0];
+				paymentEditorService.setSelectedPayment($scope.selectedPayment);
+				creditCardEditorService.setPointToMailAddr(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
+				$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+			});
 		};
 		
 		$scope.initCommonVariables = function() {
 			$scope.cart = cartResolved;
 			$scope.loggedIn = true;
 			paymentEditorService.setIsCheckout(true);
-			
-			/*TODO: Create a payment method list on the server to retrieve 
-			 *	    and figure out how we want to deal with updating only 
-			 *		the selected payment
-			 */
-			$scope.paymentMethodList = [$scope.cart.payment,
-										{existingPaymentId: '2',
-										 description: 'Test Bank Account', 
-										 paymentMethod: 'EFT',
-										 paymentType: 'Checking',
-										 lastFourDigits: '6789',
-										 bankName: 'Test Bank',
-										 bankAccountNumber: '123456789',
-										 bankRoutingNumber: '123123123',
-										 creditCardToken: null,
-										 creditCardHash: null,
-										 expirationMonth: null,
-										 expirationYear: null,
-										 cardholderName: null,
-										 billingAddress: {streetAddress1: '',
-								 			  			  streetAddress2: '',
-								 			  			  streetAddress3: '',
-								 			  			  streetAddress4: '',
-								 			  			  city: '',
-								 			  			  state: '',
-								 			  			  zipCode: '',
-								 			  			  country: ''}}];
 		};
 		
 		$scope.setDisplayAddress = function(pointToMailAddr) {
@@ -82,20 +81,6 @@ angular.module('dssMiddlewareApp')
 			else {
 				addressService.setDisplayAddress(paymentEditorService.getSelectedPayment().billingAddress);
 			}
-		};
-		
-		/**
-		 * Create a new bank account profile
-		 */
-		$scope.newBankAccount = function() {
-			$location.path('/CheckoutPaymentMethod/' + $scope.cart.cartId + '/BA');
-		};
-		
-		/**
-		 * Create a new credit card profile
-		 */
-		$scope.newCreditCard = function() {
-			$location.path('/CheckoutPaymentMethod/' + $scope.cart.cartId + '/CC');
 		};
 		
 		/**
@@ -134,47 +119,21 @@ angular.module('dssMiddlewareApp')
 			return months[monthAsNumber];
 		};
 		
-		/**
-		 * Check to see if the selected payment profile is 
-		 * currently expired.
-		 */
-		$scope.isExpired = function(selectedPayment) {
-			var expMonth = parseInt(selectedPayment.expirationMonth) - 1; //Subtract one month because Javascript is 0 based and we are 1 based
-			var expirationDate = new Date(selectedPayment.expirationYear, expMonth + 1, 0); //This will set it to the last day of the expiration month
-			var today = new Date();
-			
-			if(today.getTime() >= expirationDate.getTime()) {
-				return true;
-			}
-			else {
-				return false;
-			}
+		//TODO: put this into a designation service
+		$scope.isMinistry = function(designationNumber) {
+			return false;
 		};
 		
-		/**
-		 * Check to see if the selected payment profile will 
-		 * expire in the next two months.
-		 */
+		$scope.isExpired = function(selectedPayment) {
+			return paymentService.isExpired(selectedPayment);
+		};
+		
 		$scope.willExpireTwoMonths = function(selectedPayment) {
-			if(selectedPayment == undefined) return false;
-			
-			var expMonth = parseInt(selectedPayment.expirationMonth) - 1; //Subtract one month because Javascript is 0 based and we are 1 based
-			var expirationDate = new Date(selectedPayment.expirationYear, expMonth + 1, 0); //This will set it to the last day of the expiration month
-			var today = new Date();
-			var thisMonth = today.getMonth();
-			today.setMonth(thisMonth + 2);
-			
-			if(expirationDate.getTime() < today.getTime()) {
-				return true;
-			}
-			else {
-				return false;
-			}
+			return paymentService.willExpireTwoMonths(selectedPayment);
 		};
 		
 		$scope.getAccountMasked = function(selectedPayment) {
-			if(selectedPayment == undefined) return null;
-			return '******' + selectedPayment.lastFourDigits;
+			return paymentService.getAccountMasked(selectedPayment);
 		};
 		
 		$scope.setTransTypeVariables = function(transType) {
@@ -187,11 +146,31 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
+		/**
+		 * Use an existing payment profile
+		 */
 		$scope.useExisting = function() {
 			$location.path('/CheckoutSelectPaymentMethod/' + $scope.cart.cartId);
 		};
 		
+		/**
+		 * Create a new bank account profile
+		 */
+		$scope.newBankAccount = function() {
+			$location.path('/CheckoutPaymentMethod/' + $scope.cart.cartId + '/BA');
+		};
+		
+		/**
+		 * Create a new credit card profile
+		 */
+		$scope.newCreditCard = function() {
+			$location.path('/CheckoutPaymentMethod/' + $scope.cart.cartId + '/CC');
+		};
+		
 		$scope.continueToSubmitPage = function() {
+			/*TODO: Figure out how we want to deal with updating only 
+			 *		the selected payment
+			 */
 			$scope.selectedPayment = paymentEditorService.getSelectedPayment();
 			
 			if(creditCardEditorService.getPointToMailAddr()) {
