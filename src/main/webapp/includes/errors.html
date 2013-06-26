@@ -1,26 +1,28 @@
-<div id="errorsdiv" class="error" style="text-align:left;" data-ui-if="hasError()">
-	<div data-ui-if="errors != null && (errors.length > 1 || errorText.length > 0 || error.length > 0 || errorHeader.length > 0)">
-		<span data-ui-if="$parent.errorHeader.length > 0">
-			{{$parent.errorHeader}}
-		</span>
-		
-		<ul>
-			<li data-ng-repeat="error in $parent.errors">{{error.key}}</li>
-			<li data-ng-hide="$parent.errorText.length == 0">{{$parent.errorText}}</li>
-			<li data-ng-hide="$parent.error.length == 0">{{$parent.error}}</li>
-		</ul>
-		
+<div data-ng-controller="ErrorCtrl">
+	<div id="errorsdiv" class="error" style="text-align:left;" data-ui-if="hasError()">
+		<div data-ui-if="errors != null && (errors.length > 1 || errorText.length > 0 || error.length > 0 || errorHeader.length > 0)">
+			<span data-ui-if="errorHeader.length > 0">
+				{{errorHeader}}
+			</span>
+			
+			<ul>
+				<li data-ng-repeat="error in errors">{{error.key}}</li>
+				<li data-ng-hide="errorText.length == 0">{{errorText}}</li>
+				<li data-ng-hide="error.length == 0">{{error}}</li>
+			</ul>
+			
+		</div>
+		<div data-ui-if="errors != null && errors.length == 1">
+			<span>
+				{{errors[0].key}}
+			</span>
+		</div>
+		<div data-ui-if="errors == null && errorText.length > 0">{{errorText}}</div>
+		<div data-ui-if="errors == null && error.length > 0">{{error}}</div>
 	</div>
-	<div data-ui-if="errors != null && errors.length == 1">
-		<span>
-			{{$parent.errors[0].key}}
-		</span>
+	
+	<div id="clientSideErrorBox" class="error" style="display: none">
+		<span id="clientSideErrorMessage" class="errorTag"></span>
 	</div>
-	<div data-ui-if="errors == null && errorText.length > 0">{{$parent.errorText}}</div>
-	<div data-ui-if="errors == null && error.length > 0">{{$parent.error}}</div>
+	<br />
 </div>
-
-<div id="clientSideErrorBox" class="error" style="display: none">
-	<span id="clientSideErrorMessage" class="errorTag"></span>
-</div>
-<br />
