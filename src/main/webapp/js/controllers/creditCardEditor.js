@@ -2,6 +2,8 @@
 
 angular.module('dssMiddlewareApp')
 	.controller('CreditCardEditorCtrl', function($scope, $routeParams, addressService, creditCardEditorService, cartCrud) {
+		var addressToEdit = {};
+		
 		$scope.initPage = function() {
 			$scope.creditCardTypes = ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa'];
 			$scope.availableExpirationMonths = ['01', '02', '03', '04', '05', '06', 
@@ -9,7 +11,7 @@ angular.module('dssMiddlewareApp')
 			$scope.availableExpirationYears = ['2013','2014','2015','2016','2017','2018','2019','2020','2021',
 			                                   '2022','2023','2024','2025','2026','2027','2028','2029','2030'];
 			
-			$scope.addressToEdit = creditCardEditorService.getAddressToEdit();
+			addressToEdit = addressService.getAddressToEdit();
 			$scope.pointToMailAddr = creditCardEditorService.getPointToMailAddr();
 			$scope.selectedPayment = creditCardEditorService.getSelectedPayment();
 		};
@@ -44,23 +46,23 @@ angular.module('dssMiddlewareApp')
 				 * checked the checkbox and came back to empty fields).
 				 */
 				if(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress)) {
-					$scope.addressToEdit = {country: ''};
+					addressToEdit = {country: ''};
 				}
 				else {
-					$scope.addressToEdit = $scope.selectedPayment.billingAddress;
+					addressToEdit = $scope.selectedPayment.billingAddress;
 				}
 				
 				//If blank, set country to the current mailing address country or USA if that is blank
-				if($scope.addressToEdit.country == '' || $scope.addressToEdit.country == null) {
+				if(addressToEdit.country == '' || addressToEdit.country == null) {
 					if($scope.cart.mailingAddress != null && $scope.cart.mailingAddress.country != '') {
-						$scope.addressToEdit.country = $scope.cart.mailingAddress.country;
+						addressToEdit.country = $scope.cart.mailingAddress.country;
 					}
 					else {
-						$scope.addressToEdit.country = 'USA';
+						addressToEdit.country = 'USA';
 					}
 				}
 				
-				creditCardEditorService.setAddressToEdit($scope.addressToEdit);
+				addressService.setAddressToEdit(addressToEdit);
 			}
 		};
 	});

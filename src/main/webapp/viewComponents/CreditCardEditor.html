@@ -90,8 +90,8 @@
 			<tr>
 				<td>
 					<span class="error" data-ng-show="!pointToMailAddr && selectedPayment.billingAddress == null">Problem:  BillingAddress not set correctly</span>
-					<span data-ng-include="'viewComponents/DssAddressEditor.html'" data-ng-show="!pointToMailAddr && selectedPayment.billingAddress != null"></span>
-					<table style="width:100%;" data-ng-show="pointToMailAddr">
+					<span data-ng-include="'viewComponents/DssAddressEditor.html'" data-ui-if="!pointToMailAddr && selectedPayment.billingAddress != null"></span>
+					<table style="width:100%;" data-ui-if="pointToMailAddr">
 						<tr>
 							<td width="2%"/>
 							<td width="120px" valign="top"><b>Billing Address:</b></td>

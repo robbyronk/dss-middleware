@@ -1,15 +1,15 @@
-<div id="dssAddressEditor" data-ng-controller="AddressCtrl">
+<div id="dssAddressEditor" data-ng-controller="AddressCtrl" data-ng-init="initAddresses()">
 	<table style="width:100%; border:0; border-spacing:0; padding:3px;">
 	  	<tr>
 		    <td width="3%" rowspan="5">&nbsp;</td>
 		    <td colspan="5">
 		    	<span class="redhighlight">*</span> <b>Address</b><br/>
 	    		<input type="text" class="inputStyle" size="28" maxlength="35" 
-	    			data-ng-disabled="readOnly" data-ng-model="$parent.addressToEdit.streetAddress1" 
+	    			data-ng-disabled="readOnly" data-ng-model="addressToEdit.streetAddress1" 
 	    			data-ng-required="!readOnly" 
 	    			data-ng-class="{readOnly: disabled-background}" />
 		    </td>
-		    <td rowspan="3" align="left" valign="middle" data-ng-show="!isUsa($parent.addressToEdit)">
+		    <td rowspan="3" align="left" valign="middle" data-ng-show="!isUsa(addressToEdit)">
 		    	Please use the four Address lines on the<br/>
 		    	left to enter your full mailing address, not<br>
 		    	including the country name.
@@ -18,22 +18,22 @@
 	  	<tr>
 		    <td colspan="5">
 		    	<input type="text" class="inputStyle" size="28" maxlength="35" 
-		    		data-ng-disabled="readOnly" data-ng-model="$parent.addressToEdit.streetAddress2" 
+		    		data-ng-disabled="readOnly" data-ng-model="addressToEdit.streetAddress2" 
 		    		data-ng-class="{readOnly: disabled-background}" />
 		    </td>
 	  	</tr>
 	  	<tr>
 		    <td colspan="5">
 	    		<input type="text" class="inputStyle" size="28" maxlength="35" 
-	    			data-ng-disabled="readOnly" data-ng-model="$parent.addressToEdit.streetAddress3" 
+	    			data-ng-disabled="readOnly" data-ng-model="addressToEdit.streetAddress3" 
 	    			data-ng-class="{readOnly: disabled-background}" />
 		    </td>
 	  	</tr>
-	  	<tr data-ui-if="isUsa($parent.addressToEdit)">
+	  	<tr data-ui-if="isUsa(addressToEdit)">
 		    <td colspan="3">
 		    	<span class="redhighlight">*</span> <b>City</b><br/>
 		    	<input type="text" class="inputStyle" size="25" maxlength="30" 
-		    		data-ng-disabled="readOnly" data-ng-model="$parent.addressToEdit.city" 
+		    		data-ng-disabled="readOnly" data-ng-model="addressToEdit.city" 
 		    		data-ng-required="!readOnly" 
 		    		data-ng-class="{readOnly: disabled-background}" />
 		    </td>
@@ -41,7 +41,7 @@
 		    	<span class="redhighlight">*</span> <b>State</b><br/>
 		    	<select style="width:150px;" 
 		    		data-ng-disabled="readOnly" data-ng-required="!readOnly" 
-		    		data-ng-model="$parent.addressToEdit.state" 
+		    		data-ng-model="addressToEdit.state" 
 		    		data-ng-options="state.stateCode as state.stateName for state in states">
 		    	</select>
 		    </td>
@@ -50,15 +50,15 @@
 		    	<span class="redhighlight">*</span> <b>Zip/Postal Code</b><br/>
 	    		<input type="text" class="inputStyle" size="14" maxlength="10" 
 	    			data-ng-disabled="readOnly" data-ng-required="!readOnly" 
-	    			data-ng-model="$parent.addressToEdit.zipCode" 
+	    			data-ng-model="addressToEdit.zipCode" 
 	    			data-ng-class="{readOnly: disabled-background}" />
 		    </td>
 	  	</tr>
-	  	<tr data-ui-if="!isUsa($parent.addressToEdit)">
+	  	<tr data-ui-if="!isUsa(addressToEdit)">
 		    <td>
 		    	<input class="inputStyle" type="text" size="28" maxlength="35" 
 				 	data-ng-disabled="readOnly" 
-				 	data-ng-model="$parent.addressToEdit.streetAddress4" 
+				 	data-ng-model="addressToEdit.streetAddress4" 
 				 	data-ng-class="{readOnly: disabled-background}" />
 		    </td>
 		</tr>
@@ -66,7 +66,7 @@
 		    <td colspan="5">
 			    <span class="redhighlight">*</span> <b>Country</b><br/>
 			    <select data-ng-disabled="readOnly" data-ng-required="!readOnly"
-			    	data-ng-model="$parent.addressToEdit.country" 
+			    	data-ng-model="addressToEdit.country" 
 			    	data-ng-options="country.countryCode as country.countryName for country in countries">
 			    </select>
 		    </td>

@@ -4,6 +4,7 @@ angular.module('dssMiddlewareApp')
 	.factory('addressService', function() {
 		var addressServiceObject = {};
 		var displayAddress_ = {};
+		var addressToEdit_ = {};
 		
 		addressServiceObject.isUsa = function(address) {
 			if(address == undefined) return false;
@@ -36,7 +37,15 @@ angular.module('dssMiddlewareApp')
 		
 		addressServiceObject.setDisplayAddress = function(displayAddress) {
 			displayAddress_ = displayAddress;
-		}
+		};
+		
+		addressServiceObject.getAddressToEdit = function() {
+			return addressToEdit_;
+		};
+		
+		addressServiceObject.setAddressToEdit = function(addressToEdit) {
+			addressToEdit_ = addressToEdit;
+		};
 		
 		addressServiceObject.removeUnusedAddressInformation = function(address) {
 			//If USA, remove address line 4

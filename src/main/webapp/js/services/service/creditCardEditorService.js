@@ -5,7 +5,6 @@ angular.module('dssMiddlewareApp')
 		var creditCardEditor = {};
 		var pointToMailAddr_ = false;
 		var selectedPayment_ = {};
-		var addressToEdit_ = {};
 		
 		creditCardEditor.getPointToMailAddr = function() {
 			return pointToMailAddr_;
@@ -21,14 +20,6 @@ angular.module('dssMiddlewareApp')
 		
 		creditCardEditor.setSelectedPayment = function(selectedPayment) {
 			selectedPayment_ = selectedPayment;
-		};
-		
-		creditCardEditor.getAddressToEdit = function() {
-			return addressToEdit_;
-		};
-		
-		creditCardEditor.setAddressToEdit = function(addressToEdit) {
-			addressToEdit_ = addressToEdit;
 		};
 		
 		/**

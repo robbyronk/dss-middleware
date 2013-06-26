@@ -118,7 +118,7 @@ angular.module('dssMiddlewareApp')
 			 */ 
 			if(!creditCardEditorService.getPointToMailAddr()) {
 				$scope.readOnly = false;
-				creditCardEditorService.setAddressToEdit(selectedPayment.billingAddress);
+				addressService.setAddressToEdit(selectedPayment.billingAddress);
 			}
 		};
 		
@@ -214,7 +214,7 @@ angular.module('dssMiddlewareApp')
 				$scope.selectedPayment.billingAddress = $scope.cart.mailingAddress;
 			}
 			else {
-				var addressToEdit = creditCardEditorService.getAddressToEdit();
+				var addressToEdit = addressService.getAddressToEdit();
 				addressService.removeUnusedAddressInformation(addressToEdit);
 				$scope.selectedPayment.billingAddress = addressToEdit;
 			}
