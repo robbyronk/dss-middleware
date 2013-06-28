@@ -35,11 +35,13 @@ angular.module('dssMiddlewareApp')
 			else if(billingAddress == {} && mailingAddress == {}) {
 				return true;
 			}
-			else if((billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
+			else if(billingAddress != null && mailingAddress != null &&
+					 billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
 					 billingAddress.streetAddress2 == mailingAddress.streetAddress2 && 
 					 billingAddress.city == mailingAddress.city && 
 					 billingAddress.state == mailingAddress.state && 
-					 billingAddress.country == mailingAddress.country)) {
+					 billingAddress.zipCode == mailingAddress.zipCode && 
+					 billingAddress.country == mailingAddress.country) {
 				return true;
 			}
 			else {

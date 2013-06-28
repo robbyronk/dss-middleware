@@ -32,10 +32,10 @@
 							<td width="45%">
 								<div id="radioDiv">
 									<input type="radio" name="transTypeRadio" data-ng-value="'BA'" 
-										data-ng-model="transType" data-ng-change="setTransTypeVariables(transType)" />&nbsp;&nbsp;<b>Bank Account</b>
+										data-ng-model="transType.type" data-ng-change="setTransTypeVariables(transType.type)" />&nbsp;&nbsp;<b>Bank Account</b>
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 									<input type="radio" name="transTypeRadio" data-ng-value="'CC'" 
-										data-ng-model="transType" data-ng-change="setTransTypeVariables(transType)" />&nbsp;&nbsp;<b>Credit Card</b>
+										data-ng-model="transType.type" data-ng-change="setTransTypeVariables(transType.type)" />&nbsp;&nbsp;<b>Credit Card</b>
 								</div>
 							</td>
 							<td width="52%" align="right">
@@ -44,8 +44,8 @@
 							</td>
 						</tr>
 					</table>
-					<span data-ng-show="transType == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span>
-					<span data-ng-show="transType == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span>
+					<span data-ng-show="transType.type == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span>
+					<span data-ng-show="transType.type == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span>
 				</td>
 			</tr>
 			<tr class="tableFooter">
@@ -59,7 +59,7 @@
 	
 	<p>&nbsp;&nbsp;&nbsp;<span class="redhighlight">*</span> indicates a required field.</p>
 	
-	<p data-ng-show="transType == 'CC'">Please note, 2.35% of each credit card donation (all of which is still tax-deductible) will be used to cover the fee credit card companies charge Cru for the transaction. Bank account transactions have no fee.</p>
+	<p data-ng-show="transType.type == 'CC'">Please note, 2.35% of each credit card donation (all of which is still tax-deductible) will be used to cover the fee credit card companies charge Cru for the transaction. Bank account transactions have no fee.</p>
 
 
 

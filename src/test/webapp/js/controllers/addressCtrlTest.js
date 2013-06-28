@@ -1,6 +1,6 @@
 'use strict';
 
-describe('DSS address editor controller tests', function() {
+describe('Address controller tests', function() {
 	var scope = null;
 	
 	describe('Is USA', function() {

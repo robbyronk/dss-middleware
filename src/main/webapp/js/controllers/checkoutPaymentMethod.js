@@ -13,37 +13,8 @@ angular.module('dssMiddlewareApp')
 			$scope.selectedPayment = {billingAddress: {}};
 			$scope.initCommonVariables();
 			
-			/* If the user is coming into the checkout 
-			 * payment page from the mailing address page, 
-			 * we want to set the transaction type to credit 
-			 * card if they are giving to a ministry designation, 
-			 * otherwise set it to a bank account.
-			 */
-			if(params.transType == undefined) {
-				var hasMinistry = false;
-				for(var i = 0; i < $scope.cart.gifts.length; i++) {
-					if($scope.isMinistry($scope.cart.gifts[i].designationNumber)) {
-						$scope.transType = 'CC';
-						$scope.selectedPayment.paymentMethod = 'Credit Card';
-						hasMinistry = true;
-					}
-				}
-				
-				if(!hasMinistry) {
-					$scope.transType = 'BA';
-					$scope.selectedPayment.paymentMethod = 'EFT';
-					$scope.selectedPayment.paymentType = 'Checking';
-				}
-			}
-			else if(params.transType == 'BA') {
-				$scope.transType = 'BA';
-				$scope.selectedPayment.paymentMethod = 'EFT';
-				$scope.selectedPayment.paymentType = 'Checking';
-			}
-			else {
-				$scope.transType = params.transType;
-				$scope.selectedPayment.paymentMethod = 'Credit Card';
-			}
+			$scope.transType = {};
+			$scope.setInitialTransactionType(params, $scope.transType, $scope.selectedPayment, $scope.cart);
 			
 			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
 			paymentEditorService.setSelectedPayment($scope.selectedPayment);
@@ -83,7 +54,7 @@ angular.module('dssMiddlewareApp')
 		 */
 		$scope.editCreditCard = function(selectedPayment) {
 			$scope.editingCreditCard = true;
-			$scope.paymentIdCurrentlyBeingEdited = selectedPayment.paymentId;
+			$scope.paymentIdCurrentlyBeingEdited = selectedPayment.existingPaymentId;
 			
 			/* If the user comes into the edit mode and the billing address is
 			 * different from the mailing address, we want to make sure 
@@ -114,17 +85,55 @@ angular.module('dssMiddlewareApp')
 			return months[monthAsNumber];
 		};
 		
+		$scope.setInitialTransactionType = function(params, transType, selectedPayment, cart) {
+			/* If the user is coming into the checkout 
+			 * payment page from the mailing address page, 
+			 * we want to set the transaction type to credit 
+			 * card if they are giving to a ministry designation, 
+			 * otherwise set it to a bank account.
+			 */
+			if(params.transType == undefined) {
+				var hasMinistry = false;
+				for(var i = 0; i < cart.gifts.length; i++) {
+					if($scope.isMinistry(cart.gifts[i].designationNumber)) {
+//						transType = 'CC';
+						transType.type = 'CC';
+						selectedPayment.paymentMethod = 'Credit Card';
+						hasMinistry = true;
+					}
+				}
+				
+				if(!hasMinistry) {
+//					transType = 'BA';
+					transType.type = 'BA';
+					selectedPayment.paymentMethod = 'EFT';
+					selectedPayment.paymentType = 'Checking';
+				}
+			}
+			else if(params.transType == 'BA') {
+//				transType = 'BA';
+				transType.type = 'BA';
+				selectedPayment.paymentMethod = 'EFT';
+				selectedPayment.paymentType = 'Checking';
+			}
+			else {
+//				transType = params.transType;
+				transType.type = params.transType;
+				selectedPayment.paymentMethod = 'Credit Card';
+			}
+		};
+		
 		//TODO: put this into a designation service
 		$scope.isMinistry = function(designationNumber) {
 			return designationService.isMinistry(designationNumber);
 		};
 		
 		$scope.isExpired = function(selectedPayment) {
-			return paymentService.isExpired(selectedPayment);
+			return paymentService.isExpired(selectedPayment, new Date());
 		};
 		
 		$scope.willExpireTwoMonths = function(selectedPayment) {
-			return paymentService.willExpireTwoMonths(selectedPayment);
+			return paymentService.willExpireTwoMonths(selectedPayment, new Date());
 		};
 		
 		$scope.getAccountMasked = function(selectedPayment) {
