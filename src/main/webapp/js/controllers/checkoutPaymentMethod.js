@@ -58,7 +58,7 @@ angular.module('dssMiddlewareApp')
 			
 			$scope.selectedPayment = $scope.paymentMethodList[0];
 			paymentEditorService.setSelectedPayment($scope.selectedPayment);
-			creditCardEditorService.setPointToMailAddr(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
+			creditCardEditorService.setPointToMailAddr($scope.shouldPointToMailAddrOnInit($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
 			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
 		};
 		
@@ -139,6 +139,11 @@ angular.module('dssMiddlewareApp')
 					paymentEditorService.setSelectedPayment($scope.selectedPayment);
 				}
 			}
+		};
+		
+		$scope.shouldPointToMailAddrOnInit = function(mailingAddress, billingAddress) {
+			return billingAddress == null || billingAddress.streetAddress1 == '' || 
+				creditCardEditorService.areAddressesEffectivelyTheSame(mailingAddress, billingAddress);
 		};
 		
 		/**

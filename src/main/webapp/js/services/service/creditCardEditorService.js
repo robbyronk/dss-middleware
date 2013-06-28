@@ -26,8 +26,16 @@ angular.module('dssMiddlewareApp')
 		 * Determine whether the mailing address and billing address are the same place.
 		 */
 		creditCardEditor.areAddressesEffectivelyTheSame = function(mailingAddress, billingAddress) {
-			if(billingAddress == null || billingAddress.streetAddress1 == '' || 
-					(billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
+			if(billingAddress == undefined && mailingAddress == undefined) {
+				return true;
+			}
+			else if(billingAddress == null && mailingAddress == null) {
+				return true;
+			}
+			else if(billingAddress == {} && mailingAddress == {}) {
+				return true;
+			}
+			else if((billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
 					 billingAddress.streetAddress2 == mailingAddress.streetAddress2 && 
 					 billingAddress.city == mailingAddress.city && 
 					 billingAddress.state == mailingAddress.state && 
