@@ -34,7 +34,11 @@ angular.module('dssMiddlewareApp', ['ui'])
     	  resolve: {
     		  cartResolved: function($route, cartCrud) {
     			  return cartCrud.retrieve($route.current.params.cartId);
-    		  }
+    		  },
+    		  //TODO: Remove this when we get the paymentMethodList from cart
+      		  paymentMethodListResolved: function(paymentCrud) {
+      			  return paymentCrud.retrievePaymentMethodList('470');
+      		  }
     	  }
       })
       .when('/CheckoutPaymentMethod/:cartId', {
@@ -43,6 +47,9 @@ angular.module('dssMiddlewareApp', ['ui'])
     	  resolve: {
     		  cartResolved: function($route, cartCrud) {
     			  return cartCrud.retrieve($route.current.params.cartId);
+    		  },
+      		  paymentMethodListResolved: function(paymentCrud) {
+      			  return paymentCrud.retrievePaymentMethodList('470');
     		  }
     	  }
       })
@@ -52,6 +59,9 @@ angular.module('dssMiddlewareApp', ['ui'])
     	  resolve: {
     		  cartResolved: function($route, cartCrud) {
     			  return cartCrud.retrieve($route.current.params.cartId);
+    		  },
+      		  paymentMethodListResolved: function(paymentCrud) {
+      			  return paymentCrud.retrievePaymentMethodList('470');
     		  }
     	  }
       })

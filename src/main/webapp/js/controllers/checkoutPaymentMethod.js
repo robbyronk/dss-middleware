@@ -3,7 +3,7 @@
 angular.module('dssMiddlewareApp')
 	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, 
 			cartCrud, addressService, creditCardEditorService, paymentEditorService, 
-			paymentService, paymentCrud, designationService, cartResolved) {
+			paymentService, paymentCrud, designationService, cartResolved, paymentMethodListResolved) {
 		var params = $routeParams;
 		
 		$scope.initCheckoutPaymentMethod = function() {
@@ -13,44 +13,40 @@ angular.module('dssMiddlewareApp')
 			$scope.selectedPayment = {billingAddress: {}};
 			$scope.initCommonVariables();
 			
-			paymentCrud.retrievePaymentMethodList($scope.cart.cartId).then(function(list) {
-				$scope.paymentMethodList = list;
-				
-				/* If the user is coming into the checkout 
-				 * payment page from the mailing address page, 
-				 * we want to set the transaction type to credit 
-				 * card if they are giving to a ministry designation, 
-				 * otherwise set it to a bank account.
-				 */
-				if(params.transType == undefined) {
-					var hasMinistry = false;
-					for(var i = 0; i < $scope.cart.gifts.length; i++) {
-						if($scope.isMinistry($scope.cart.gifts[i].designationNumber)) {
-							$scope.transType = 'CC';
-							$scope.selectedPayment.paymentMethod = 'Credit Card';
-							hasMinistry = true;
-						}
-					}
-					
-					if(!hasMinistry) {
-						$scope.transType = 'BA';
-						$scope.selectedPayment.paymentMethod = 'EFT';
-						$scope.selectedPayment.paymentType = 'Checking';
+			/* If the user is coming into the checkout 
+			 * payment page from the mailing address page, 
+			 * we want to set the transaction type to credit 
+			 * card if they are giving to a ministry designation, 
+			 * otherwise set it to a bank account.
+			 */
+			if(params.transType == undefined) {
+				var hasMinistry = false;
+				for(var i = 0; i < $scope.cart.gifts.length; i++) {
+					if($scope.isMinistry($scope.cart.gifts[i].designationNumber)) {
+						$scope.transType = 'CC';
+						$scope.selectedPayment.paymentMethod = 'Credit Card';
+						hasMinistry = true;
 					}
 				}
-				else if(params.transType == 'BA') {
+				
+				if(!hasMinistry) {
 					$scope.transType = 'BA';
 					$scope.selectedPayment.paymentMethod = 'EFT';
 					$scope.selectedPayment.paymentType = 'Checking';
 				}
-				else {
-					$scope.transType = params.transType;
-					$scope.selectedPayment.paymentMethod = 'Credit Card';
-				}
-				
-				$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
-				paymentEditorService.setSelectedPayment($scope.selectedPayment);
-			});
+			}
+			else if(params.transType == 'BA') {
+				$scope.transType = 'BA';
+				$scope.selectedPayment.paymentMethod = 'EFT';
+				$scope.selectedPayment.paymentType = 'Checking';
+			}
+			else {
+				$scope.transType = params.transType;
+				$scope.selectedPayment.paymentMethod = 'Credit Card';
+			}
+			
+			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 		};
 		
 		$scope.initCheckoutSelectPaymentMethod = function() {
@@ -60,17 +56,15 @@ angular.module('dssMiddlewareApp')
 			$scope.editingCreditCard = false;
 			$scope.initCommonVariables();
 			
-			paymentCrud.retrievePaymentMethodList($scope.cart.cartId).then(function(list) {
-				$scope.paymentMethodList = list;
-				$scope.selectedPayment = $scope.paymentMethodList[0];
-				paymentEditorService.setSelectedPayment($scope.selectedPayment);
-				creditCardEditorService.setPointToMailAddr(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
-				$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
-			});
+			$scope.selectedPayment = $scope.paymentMethodList[0];
+			paymentEditorService.setSelectedPayment($scope.selectedPayment);
+			creditCardEditorService.setPointToMailAddr(creditCardEditorService.areAddressesEffectivelyTheSame($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
+			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
 		};
 		
 		$scope.initCommonVariables = function() {
 			$scope.cart = cartResolved;
+			$scope.paymentMethodList = paymentMethodListResolved;
 			$scope.loggedIn = true;
 			paymentEditorService.setIsCheckout(true);
 		};
