@@ -73,7 +73,7 @@
 	
 										<b>Name On Card:</b> {{selectedPayment.cardholderName}} <br />
 										<b>Billing Address:</b>
-										<span data-ng-include="'includes/DisplayAddress.html'"></span>
+										<span data-ng-include="'includes/DisplayAddress.html'" data-ng-controller="AddressCtrl" data-ng-init="initAddresses()"></span>
 										<br /><br />
 									</span>
 								</span>

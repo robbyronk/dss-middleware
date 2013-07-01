@@ -11,6 +11,10 @@ angular.module('dssMiddlewareApp')
 			$scope.readOnly = addressService.getReadOnly();
 		};
 		
+		$scope.initDisplayAddress = function(address) {
+			$scope.displayAddress = address;
+		};
+		
 		$scope.isUsa = function(address) {
 			return addressService.isUsa(address);
 		};

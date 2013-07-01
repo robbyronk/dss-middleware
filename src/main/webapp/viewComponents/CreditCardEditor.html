@@ -96,7 +96,7 @@
 							<td width="2%"/>
 							<td width="120px" valign="top"><b>Billing Address:</b></td>
 							<td align="left">
-								<span data-ng-include='"includes/DisplayAddress.html"'></span>
+								<span data-ng-include='"includes/DisplayAddress.html"' data-ng-controller="AddressCtrl" data-ng-init="initAddresses()"></span>
 							</td>
 						</tr>
 					</table>
