@@ -2,7 +2,7 @@
 
 angular.module('dssMiddlewareApp')
 	.controller('CheckoutPaymentMethodCtrl', function($scope, $routeParams, $location, 
-			cartCrud, addressService, creditCardEditorService, paymentEditorService, 
+			cartCrud, addressService, creditCardEditorService, paymentEditorService, dateService, 
 			paymentService, paymentCrud, designationService, cartResolved, paymentMethodListResolved) {
 		var params = $routeParams;
 		
@@ -78,11 +78,7 @@ angular.module('dssMiddlewareApp')
 		 * for example: 01 = January
 		 */
 		$scope.getMonthLongName = function(month) {
-			var months = ['', 'January', 'February', 'March', 'April', 
-			              'May', 'June', 'July', 'August', 'September', 
-			              'October', 'November', 'December'];
-			var monthAsNumber = parseInt(month);
-			return months[monthAsNumber];
+			return dateService.getMonthAsString(parseInt(month));
 		};
 		
 		$scope.setInitialTransactionType = function(params, transType, selectedPayment, cart) {

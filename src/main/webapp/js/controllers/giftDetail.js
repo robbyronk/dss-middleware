@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, giftCrud, cartCrud, validationService) {
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, 
+			giftCrud, cartCrud, validationService, dateService) {
 		var params = $routeParams;
 		var cart = null;
 		$scope.showComment = {staff: 'N', dsg: 'N'};
@@ -205,14 +206,9 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
-		/**
-		 * Using the month, year, and day, create a date object
-		 */
+		
 		$scope.createDate = function(year, month, day) {
-			var startDate = new Date();
-			var zeroIndexMonth = month - 1;
-			startDate.setFullYear(year,zeroIndexMonth,day);
-			return startDate;
+			return dateService.createDate(year, month, day);
 		};
 		
 		/**
@@ -228,13 +224,8 @@ angular.module('dssMiddlewareApp')
 			return monthObject;
 		};
 		
-		/**
-		 * Get the month for a specific millisecond date
-		 */
 		$scope.parseMonth = function(millisDate) {
-			var date = new Date(millisDate);
-			var month = date.getMonth();  //this is 0 based
-			return month + 1;
+			return dateService.parseMonth(millisDate);
 		};
 		
 		/**
@@ -249,10 +240,7 @@ angular.module('dssMiddlewareApp')
 		 * Get the name of the month based on the number month
 		 */
 		$scope.monthAsString = function(month) {
-			var months = ['January', 'February', 'March', 'April', 
-			              'May', 'June', 'July', 'August', 'September', 
-			              'October', 'November', 'December'];
-			return months[month - 1];
+			return dateService.getMonthAsString(month);
 		};
 		
 		$scope.getTransactionMonthIndex = function(monthObject, transactionMonths) {

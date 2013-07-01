@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CartInfoCtrl', function($scope, $location, paymentService, addressService, checkoutSubmitService, creditCardEditorService, paymentEditorService) {
+	.controller('CartInfoCtrl', function($scope, $location, paymentService, addressService, 
+			checkoutSubmitService, creditCardEditorService, paymentEditorService, dateService) {
 		$scope.initCartInfo = function() {
 			$scope.cart = checkoutSubmitService.getCart();
 //			$scope.payment = {existingPaymentId: '2',
@@ -28,7 +29,8 @@ angular.module('dssMiddlewareApp')
 			$scope.payment = $scope.cart.payment;
 			
 			if($scope.payment.paymentMethod == 'Credit Card') {
-				$scope.setDisplayAddress($scope.shouldPointToMailAddrOnInit($scope.cart.mailingAddress, $scope.payment.billingAddress));
+				$scope.setDisplayAddress($scope.shouldPointToMailAddrOnInit($scope.cart.mailingAddress, 
+						$scope.payment.billingAddress));
 			}
 			
 			$scope.editable = false;  //This is only used by branded checkout right now
@@ -56,17 +58,8 @@ angular.module('dssMiddlewareApp')
 			return $scope.getMonthLongName(month) + ' ' + year;
 		};
 		
-		//TODO: Move this to a service
-		/**
-		 * Given a numeric month, find the proper month name, 
-		 * for example: 01 = January
-		 */
 		$scope.getMonthLongName = function(month) {
-			var months = ['', 'January', 'February', 'March', 'April', 
-			              'May', 'June', 'July', 'August', 'September', 
-			              'October', 'November', 'December'];
-			var monthAsNumber = parseInt(month);
-			return months[monthAsNumber];
+			return dateService.getMonthAsString(parseInt(month));
 		};
 		
 		/**
