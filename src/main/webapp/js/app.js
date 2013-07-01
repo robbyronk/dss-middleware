@@ -65,6 +65,15 @@ angular.module('dssMiddlewareApp', ['ui'])
     		  }
     	  }
       })
+      .when('/CheckoutSubmitGift/:cartId', {
+    	  templateUrl: 'views/CheckoutSubmitGift.html',
+    	  controller: 'CheckoutSubmitGiftCtrl', 
+    	  resolve: {
+    		  cartResolved: function($route, cartCrud) {
+    			  return cartCrud.retrieve($route.current.params.cartId);
+    		  }
+    	  }
+      })
       .otherwise({
         redirectTo: '/GiftDetail/:designationNumber'
       });

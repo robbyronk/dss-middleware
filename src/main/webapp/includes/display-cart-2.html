@@ -1,0 +1,87 @@
+<!-- display-cart-2 include starts here-->
+<!-- ################################################################################### -->
+<!-- ## The following code is for the traditional checkout process -->
+<!-- ################################################################################### -->
+<table style="width:100%; border:0; padding:3px; border-spacing:1px; margin-left:auto; margin-right:auto;" 
+	data-ng-show="!isBrandedCheckout">
+	<tr class="tableHeader">
+  		<td colspan="2" align="left"><b>{{descrHeader}}</b></td>
+  	</tr>
+  	<tr class="alternatingRows" data-ng-repeat="gift in cart.gifts">
+  		<td align="left">
+			<b>{{getWebTitle(gift.designationNumber)}}</b><br/>
+		    <font size="1">{{getDesigType(gift.designationNumber)}} #{{gift.designationNumber}}</font>
+   	 	</td>
+   	 	<td align="left" width="280">
+   	 		<b class="giftNumbers">${{gift.giftAmount | number:2}}</b>
+   	 		{{gift.giftFrequency}} Gift<br />
+			<span data-ng-show="gift.giftFrequency == 'Single'">
+				&nbsp;<span>Transaction Date: 1-2 Business Days</span>
+			</span>
+			<span data-ng-show="gift.giftFrequency != 'Single'">(First Gift: {{gift.startDate | date:'M/d/yyyy'}})<br/></span>
+   	 		<span data-ng-show="gift.commentsToRecipient.length > 0">
+   	 			<br />
+   	 			<span data-ng-show="getDesigType(gift.designationNumber) == 'Staff'">
+   	 				&nbsp;Includes Comments For Staff Member
+  	 				</span>
+  	 				<span data-ng-show="getDesigType(gift.designationNumber) != 'Staff'">
+   	 				&nbsp;Includes Comments For Ministry
+  	 				</span>
+  	 			</span>
+  	 			<span data-ng-show="gift.commentsToDonationServices.length > 0">
+  	 				<span><br />&nbsp;Includes Comments For Donation Services</span>
+  	 			</span>
+   	 	</td>
+  	</tr>
+
+	<tr>	
+		<td colspan="2">
+			<table style="width:100%; border:0; padding:3px; border-spacing:0;">
+				<tr data-ng-repeat="frequency in usedFrequencies">
+					<td align="right">
+						<span class="goldText">My {{frequency}} 
+							<span data-ng-show="frequency != 'Single'">Gift</span> Total:
+						</span>
+						<b class="giftNumbers">${{getTotalForFrequency(frequency, cart.gifts) | number:2}}</b>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<!-- ################################################################################### -->
+<!-- ## The following code is for the 3-step checkout process -->
+<!-- ################################################################################### -->
+<div data-ng-show="isBrandedCheckout">
+	<div data-ng-repeat="gift in cart.gifts">
+		<label>Ministry</label>
+		<ul class="field">
+			<li>
+				{{getDescription(gift.designationNumber)}} ({{getTypeDescription(gift.designationNumber)}} #{{gift.designationNumber}})
+			</li>	
+		</ul>
+		<label>Amount</label>
+		<ul class="field">
+			<li>
+				{{gift.giftFrequency}} Gift<br />
+				<span data-ng-show="gift.giftFrequency == 'Single'">
+					&nbsp;<span>Transaction Date: 1-2 Business Days</span>
+				</span>
+				<span data-ng-show="gift.giftFrequency != 'Single'">(First Gift: {{gift.startDate | date:'M/d/yyyy'}})<br /></span>
+			</li>	
+		</ul>
+		<br />
+		<br />
+	</div>
+	
+	<ul class="field" data-ng-repeat="frequency in usedFrequencies">
+	 <li>
+	 	<span class="goldText">My {{frequency}} 
+			<span data-ng-show="frequency != 'Single'">Gift</span> Total:
+		</span>
+		<b class="giftNumbers">${{getTotalForFrequency(frequency, cart.gifts) | number:2}}</b>
+	 </li>
+	</ul>
+</div>
+<!-- display-cart-2 include ends here-->

@@ -1,0 +1,67 @@
+<!-- cart-info include starts here-->
+<table style="width:100%; border:0; padding:0; border-spacing:0;" data-ng-controller="CartInfoCtrl" data-ng-init="initCartInfo()">
+	<tr>
+  		<td align="left" valign="top" width="50%">
+   	 		<table style="border:0; width:100%; padding:3px; border-spacing:0;" data-ng-show="payment.paymentMethod == 'Credit Card'">
+			    <tr class="tableHeader">
+					<td>
+						<b>Gift Payment Method</b>
+					</td>
+					<td align="right" data-ng-show="editable">
+						<a data-ng-click="backToPayment()">Edit</a>
+					</td>
+				</tr>
+			    <tr>
+			    	<td colspan="2">
+				    	<b>Card Type: </b> {{payment.paymentType}} <br/>
+						<b>Card Number: </b> {{getAccountMasked(payment)}} <br/>
+						<b>Expiration Date: </b>{{longMonthYearDate(payment.expirationMonth, payment.expirationYear)}} <br/>
+				        <b>Name On Card: </b>{{payment.cardholderName}} <br/>
+						<b>Billing Address:<br /></b>
+						<span data-ng-include="'includes/DisplayAddress.html'" data-ng-controller="AddressCtrl" data-ng-init="initAddresses()"></span>
+					</td>
+				</tr>
+			</table>
+			<table style="width:100%; border:0; padding:3px; border-spacing:0;" data-ng-show="payment.paymentMethod == 'EFT'">
+		    	<tr class="tableHeader">
+					<td><b>Gift Payment Method</b></td>
+					<td align="right" data-ng-show="editable">
+						<a data-ng-click="backToPayment()">Edit</a>
+					</td>
+				</tr>
+		    	<tr>
+		    		<td>
+						<b>Bank Name: </b> {{payment.bankName}} <br>
+						<b>Account Type: </b> {{payment.paymentType}} <br>
+						<b>Account Number: </b> {{getAccountMasked(payment)}} <br>
+						<b>Routing Number: </b> {{payment.bankRoutingNumber}} <br>
+					</td>
+				</tr>
+			</table>
+		</td>
+		<td align="left" valign="top" width="50%">
+		    <table style="width:100%; border:0; padding:3px; border-spacing:0;">
+			    <tr class="tableHeader">
+					<td><b>Receipt Mailing Address</b></td>
+					<td align="right" data-ng-show="editable">
+						<a data-ng-click="checkoutMailingAddress()">Edit</a>
+					</td>
+				</tr>
+			    <tr>
+				    <td>
+						<span data-ng-show="cart.personType == 'Organization'">{{cart.organizationName}}<br /></span>
+						<span data-ng-show="cart.personType == 'Household'">
+							{{displayPersonName(cart.primaryName)}}<br />
+						</span>
+						<span data-ng-show="cart.spouseName.firstName.length > 0">
+							{{displayPersonName(cart.spouseName)}}<br />
+						</span>
+						<span data-ng-include='"includes/DisplayAddress.html"' data-ng-controller="AddressCtrl" data-ng-init="initDisplayAddress(cart.mailingAddress)"></span>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<!-- cart-info include ends here-->
