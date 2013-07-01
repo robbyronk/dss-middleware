@@ -96,7 +96,6 @@ angular.module('dssMiddlewareApp')
 				var hasMinistry = false;
 				for(var i = 0; i < cart.gifts.length; i++) {
 					if($scope.isMinistry(cart.gifts[i].designationNumber)) {
-//						transType = 'CC';
 						transType.type = 'CC';
 						selectedPayment.paymentMethod = 'Credit Card';
 						hasMinistry = true;
@@ -104,26 +103,22 @@ angular.module('dssMiddlewareApp')
 				}
 				
 				if(!hasMinistry) {
-//					transType = 'BA';
 					transType.type = 'BA';
 					selectedPayment.paymentMethod = 'EFT';
 					selectedPayment.paymentType = 'Checking';
 				}
 			}
 			else if(params.transType == 'BA') {
-//				transType = 'BA';
 				transType.type = 'BA';
 				selectedPayment.paymentMethod = 'EFT';
 				selectedPayment.paymentType = 'Checking';
 			}
 			else {
-//				transType = params.transType;
 				transType.type = params.transType;
 				selectedPayment.paymentMethod = 'Credit Card';
 			}
 		};
 		
-		//TODO: put this into a designation service
 		$scope.isMinistry = function(designationNumber) {
 			return designationService.isMinistry(designationNumber);
 		};
@@ -194,10 +189,12 @@ angular.module('dssMiddlewareApp')
 			$scope.cart.payment = $scope.selectedPayment;
 			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 			
+			$location.path('/CheckoutSubmitGift/' + $scope.cart.cartId); //TODO: put this after the updates/creates
+			
 			//TODO: Do we want to do client side validation on credit card expired?
 			//TODO: Add a create payment method type thing
-			cartCrud.updateCart($scope.cart).then(function() {
-				//TODO: Redirect to submit page
-			});
+//			cartCrud.updateCart($scope.cart).then(function() {
+//				
+//			});
 		};
 	});
