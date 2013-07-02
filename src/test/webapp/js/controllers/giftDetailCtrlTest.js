@@ -3,6 +3,7 @@
 describe('Gift detail controller tests', function() {
 	var scope = null;
 	var params = null;
+	var giftResolved = {};
 	
 	describe('isOther', function() {
 		var other = null;
@@ -12,7 +13,7 @@ describe('Gift detail controller tests', function() {
 		
 		beforeEach(inject(function($rootScope, $controller) {
 			scope = $rootScope.$new();
-			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params});
+			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
 		}));
 		
 		it('should be false', function() {
@@ -40,7 +41,7 @@ describe('Gift detail controller tests', function() {
 		
 		beforeEach(inject(function($rootScope, $controller) {
 			scope = $rootScope.$new();
-			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params});
+			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
 		}));
 		
 		it('should use the gift draw day', function() {
@@ -73,6 +74,13 @@ describe('Gift detail controller tests', function() {
 		describe('Transaction month index', function() {
 			var monthObject = null;
 			
+			beforeEach(module('dssMiddlewareApp'));
+			
+			beforeEach(inject(function($rootScope, $controller) {
+				scope = $rootScope.$new();
+				$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
+			}));
+			
 			it('should be 11', function() {
 				monthObject = {month: 'April', year: '2014', display: 'April, 2014'};
 				var index = scope.getTransactionMonthIndex(monthObject, transactionMonths);
@@ -89,12 +97,11 @@ describe('Gift detail controller tests', function() {
 		describe('Transaction month', function() {
 			var transactionMonth = null;
 			
-			
 			beforeEach(module('dssMiddlewareApp'));
 			
 			beforeEach(inject(function($rootScope, $controller) {
 				scope = $rootScope.$new();
-				$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params});
+				$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
 			}));
 			
 			it('should be set based on gift start date', function() {

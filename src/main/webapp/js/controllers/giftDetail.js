@@ -2,7 +2,7 @@
 
 angular.module('dssMiddlewareApp')
 	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, 
-			giftCrud, cartCrud, validationService, dateService) {
+			giftCrud, cartCrud, validationService, dateService, giftResolved) {
 		var params = $routeParams;
 		var cart = null;
 		$scope.showComment = {staff: 'N', dsg: 'N'};
@@ -27,6 +27,7 @@ angular.module('dssMiddlewareApp')
 				cartAndGift = results;
 				$scope.gift = cartAndGift.gift;
 				designationNumber = params.designationNumber;
+				//TODO: Get this from the server
 				$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
 						  designationNumber: designationNumber};
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
@@ -91,35 +92,35 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.initPage = function(){
 			
-			if(params.edit == 'Y') {
+			if(params.giftId != null) {
 				$scope.isNew = false;
-				giftCrud.retrieve(params.giftId).then(function(results) {
-					$scope.gift = results;
-					designationNumber = $scope.gift.designationNumber;
-					$scope.initTransactionDate($scope.gift.startDate);
-					
-					//TODO: Remove this once we can load designation numbers properly
-					if(designationNumber == null) {
-						designationNumber = '2843160';
-					}
-					$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
-							  designationNumber: designationNumber};
-					$scope.gift.designationNumber = $scope.designation.designationNumber;
-					
-					if($scope.isOther($scope.gift.giftAmount, $scope.amounts)) {
-						$scope.otherValue = $scope.gift.giftAmount;
-						$scope.setGiftToOther();
-					}
-					
-					if($scope.gift.commentsToDonationServices != null && 
-							$scope.gift.commentsToDonationServices.length > 0) {
-						$scope.showComment.dsg = 'Y';
-					}
-					if($scope.gift.commentsToRecipient != null && 
-							$scope.gift.commentsToRecipient.length > 0) {
-						$scope.showComment.staff = 'Y';
-					}
-				});
+				$scope.gift = giftResolved;
+				designationNumber = $scope.gift.designationNumber;
+				$scope.initTransactionDate($scope.gift.startDate);
+				
+				//TODO: Remove this once we can load designation numbers properly
+				if(designationNumber == null) {
+					designationNumber = '2843160';
+				}
+				$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
+						  designationNumber: designationNumber};
+				//////////////////////////////////////////////////////////////////
+				
+				$scope.gift.designationNumber = $scope.designation.designationNumber;
+				
+				if($scope.isOther($scope.gift.giftAmount, $scope.amounts)) {
+					$scope.otherValue = $scope.gift.giftAmount;
+					$scope.setGiftToOther();
+				}
+				
+				if($scope.gift.commentsToDonationServices != null && 
+						$scope.gift.commentsToDonationServices.length > 0) {
+					$scope.showComment.dsg = 'Y';
+				}
+				if($scope.gift.commentsToRecipient != null && 
+						$scope.gift.commentsToRecipient.length > 0) {
+					$scope.showComment.staff = 'Y';
+				}
 			}
 			else {
 				$scope.isNew = true;

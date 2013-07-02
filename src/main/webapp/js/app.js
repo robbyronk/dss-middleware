@@ -7,9 +7,14 @@ angular.module('dssMiddlewareApp', ['ui'])
         templateUrl: 'views/GiftDetail.html',
         controller: 'GiftDetailCtrl'
       })
-      .when('/GiftDetail/:giftId/:edit', {
+      .when('/GiftDetail/edit/:giftId', {
         templateUrl: 'views/GiftDetail.html',
-        controller: 'GiftDetailCtrl'
+        controller: 'GiftDetailCtrl',
+        resolve: {
+        	giftResolved: function($route, giftCrud) {
+        		return giftCrud.retrieve($route.current.params.giftId);
+        	}
+        }
       })
       .when('/GiftCartPage', {
     	  templateUrl: 'views/GiftCartPage.html',
