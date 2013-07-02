@@ -244,7 +244,6 @@ angular.module('dssMiddlewareApp')
 			validationService.setErrorMessage(errorMessage);
 		};
 		
-		
 		/**
 		 * Determine whether the user picked a default radio 
 		 * option or if they entered a custom amount.
@@ -258,4 +257,4 @@ angular.module('dssMiddlewareApp')
 			
 			return true;
 		};
-});
+	});

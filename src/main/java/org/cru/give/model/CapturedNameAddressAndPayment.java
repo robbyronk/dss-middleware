@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.cru.give.webservices.model.GiftCart.PaymentSource;
+
 @Entity
 @Table(name="captured_gift_cart_nam_adr_pmt")
 public class CapturedNameAddressAndPayment implements java.io.Serializable
@@ -93,6 +95,8 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
 	
+	@Column(name = "PAYMENT_SOURCE")
+	private String paymentSource;
 	@Column(name = "PAYMENT_PROFILE_ID")
 	private String paymentProfileId;
 	@Column(name = "PAYMENT_DESCR")
@@ -397,6 +401,15 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	public void setPhoneNumber(String phoneNumber)
 	{
 		this.phoneNumber = phoneNumber;
+	}
+	public PaymentSource getPaymentSource()
+	{
+		if(paymentSource == null) return PaymentSource.NONE;
+		return PaymentSource.valueOf(paymentSource);
+	}
+	public void setPaymentSource(PaymentSource paymentSource)
+	{
+		this.paymentSource = paymentSource.name();
 	}
 	public String getPaymentProfileId()
 	{

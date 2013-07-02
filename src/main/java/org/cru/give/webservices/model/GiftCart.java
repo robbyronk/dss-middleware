@@ -7,7 +7,17 @@ import org.cru.give.model.CapturedNameAddressAndPayment;
 public class GiftCart implements java.io.Serializable
 {
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 * This helps us to determine if the payment method selected is new, or if it was
+	 * selected from a drop down.  This also reminds us if it has been edited or not
+	 * (which will let us know if we need to save updates).
+	 */
+	public enum PaymentSource
+	{
+		NONE, EXISTING, EXISTING_EDITED, NEW;
+	}
+	
 	Long cartId;
 	
 	String status;
@@ -21,6 +31,8 @@ public class GiftCart implements java.io.Serializable
 	MailingAddress mailingAddress;
 	
 	Payment payment;
+	
+	PaymentSource paymentSource = PaymentSource.NONE;
 	
 	String emailAddress;
 	String phoneNumber;
@@ -84,6 +96,7 @@ public class GiftCart implements java.io.Serializable
 			capturedNameAddressPayment.setCcBillingCountry(payment.getBillingAddress().getCountry());
 		}
 		
+		capturedNameAddressPayment.setPaymentSource(paymentSource);
 		capturedNameAddressPayment.setEmailAddress(emailAddress);
 		capturedNameAddressPayment.setPhoneNumber(phoneNumber);
 		capturedNameAddressPayment.setOrganizationName(organizationName);
@@ -150,6 +163,16 @@ public class GiftCart implements java.io.Serializable
 		this.payment = payment;
 	}
 	
+	public PaymentSource getPaymentSource()
+	{
+		return paymentSource;
+	}
+	
+	public void setPaymentSource(PaymentSource paymentSource)
+	{
+		this.paymentSource = paymentSource;
+	}
+	
 	public String getEmailAddress()
 	{
 		return emailAddress;
@@ -185,5 +208,4 @@ public class GiftCart implements java.io.Serializable
 	public void setPersonType(String personType) {
 		this.personType = personType;
 	}
-	
 }

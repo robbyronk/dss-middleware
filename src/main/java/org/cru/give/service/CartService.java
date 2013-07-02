@@ -33,6 +33,8 @@ public class CartService
 		giftCart.getMailingAddress().setZipCode(capNap.getZipCode());
 		giftCart.getMailingAddress().setCountry(capNap.getCountry());
 		
+		giftCart.setPaymentSource(capNap.getPaymentSource());
+		
 		giftCart.setPayment(new Payment());
 		giftCart.getPayment().setDescription(capNap.getPaymentDescription());
 		giftCart.getPayment().setPaymentMethod(capNap.getPaymentMethod());

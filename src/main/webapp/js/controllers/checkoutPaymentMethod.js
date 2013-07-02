@@ -5,6 +5,7 @@ angular.module('dssMiddlewareApp')
 			cartCrud, addressService, creditCardEditorService, paymentEditorService, dateService, 
 			paymentService, paymentCrud, designationService, cartResolved, paymentMethodListResolved) {
 		var params = $routeParams;
+		var paymentSource = null;
 		
 		$scope.initCheckoutPaymentMethod = function() {
 			creditCardEditorService.setLimitedEdit(false);
@@ -18,6 +19,7 @@ angular.module('dssMiddlewareApp')
 			
 			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
 			paymentEditorService.setSelectedPayment($scope.selectedPayment);
+			paymentSource = 'NEW';
 		};
 		
 		$scope.initCheckoutSelectPaymentMethod = function() {
@@ -31,6 +33,7 @@ angular.module('dssMiddlewareApp')
 			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 			creditCardEditorService.setPointToMailAddr($scope.shouldPointToMailAddrOnInit($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
 			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+			paymentSource = 'EXISTING';
 		};
 		
 		$scope.initCommonVariables = function() {
@@ -64,6 +67,12 @@ angular.module('dssMiddlewareApp')
 				addressService.setReadOnly(false);
 				addressService.setAddressToEdit(selectedPayment.billingAddress);
 			}
+			paymentSource = 'EXISTING_EDITED';
+		};
+		
+		$scope.changeSelectedPayment = function() {
+			$scope.editingCreditCard = false;
+			paymentSource = 'EXISTING';
 		};
 		
 		/**
@@ -174,6 +183,7 @@ angular.module('dssMiddlewareApp')
 				$scope.selectedPayment.billingAddress = addressToEdit;
 			}
 			
+			$scope.selectedPayment.paymentSource = paymentSource;
 			$scope.cart.payment = $scope.selectedPayment;
 			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 			
