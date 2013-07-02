@@ -8,15 +8,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import org.cru.give.model.GiftFrequencyOptions;
-import org.cru.give.service.FrequencyService;
+import org.cru.give.service.GiftFrequencyService;
 import org.cru.give.validators.FrequencyValidator;
 
 @Path("/frequencies")
 @Stateless
-public class FrequencyResource
+public class GiftFrequencyResource
 {
 	@Inject FrequencyValidator frequencyValidator;
-	@Inject FrequencyService frequencyService;
+	@Inject GiftFrequencyService frequencyService;
 	
 	@GET
 	@Path("/")

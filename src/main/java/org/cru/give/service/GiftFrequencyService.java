@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.cru.give.cdi.GiftFrequencyOptionsProducer;
 import org.cru.give.model.GiftFrequencyOptions;
 
-public class FrequencyService
+public class GiftFrequencyService
 {
 	@Inject GiftFrequencyOptionsProducer producer;
 	
