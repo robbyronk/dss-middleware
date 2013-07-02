@@ -26,4 +26,8 @@ angular.module('dssMiddlewareApp')
 				showHelpTip(event, $scope.retypeAccountHelp, false);
 			}
 		};
+		
+		$scope.isRequired = function() {
+			return paymentEditorService.isBankAccountRequired();
+		};
 	});

@@ -15,11 +15,14 @@
 			 			<td width="44%">
 							<span class="redhighlight">*</span> <b>Bank Name</b><br/>
 							<input type="text" class="inputStyle" size="35" maxlength="30"
-								data-ng-required="true" data-ng-model="selectedPayment.bankName" />
+								data-ng-required="isRequired()" data-ng-model="selectedPayment.bankName" />
 						</td>
 						<td width="53%" align="left">
 							<br/>
-							<input name="paymentTypeRadio" type="radio" data-ng-value="'Checking'" data-ng-model="selectedPayment.paymentType" />&nbsp;&nbsp;Checking Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="paymentTypeRadio" type="radio" data-ng-value="'Savings'" data-ng-model="selectedPayment.paymentType" />&nbsp;&nbsp;Savings Account
+							<input name="paymentTypeRadio" type="radio" data-ng-value="'Checking'" 
+								data-ng-model="selectedPayment.paymentType" />&nbsp;&nbsp;Checking Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input name="paymentTypeRadio" type="radio" data-ng-value="'Savings'" 
+								data-ng-model="selectedPayment.paymentType" />&nbsp;&nbsp;Savings Account
 						</td>
 					</tr>
 					<tr height="1"><td colspan="3"></td></tr>
@@ -44,13 +47,14 @@
 						<td width="30%">
 							<span class="redhighlight">*</span> <b>Bank Routing Number</b><br/><br/>
 							<input type="text" class="inputStyle" style="width:120px;" size="20" maxlength="9" 
-								data-ng-required="selectedPayment.paymentType == 'Savings'" data-ng-model="selectedPayment.bankRoutingNumber" />
+								data-ng-required="isRequired() && selectedPayment.paymentType == 'Savings'" 
+								data-ng-model="selectedPayment.bankRoutingNumber" />
 						</td>
 						<td width="29%">
 							<span class="redhighlight">*</span> <b>Bank Account Number</b><br/><br/>
 							<!-- TODO: figure out masking -->
 							<input autocomplete="off" type="text" class="inputStyle" style="width:120px;" size="20" maxlength="17" 
-								data-ng-required="selectedPayment.paymentType == 'Savings'" data-ng-model="selectedPayment.bankAccountNumber" />
+								data-ng-required="isRequired() && selectedPayment.paymentType == 'Savings'" data-ng-model="selectedPayment.bankAccountNumber" />
 						</td>
 						<td width="9%" align="left">
 							<br/><br/><img src="images/CheckArrow.gif">
@@ -58,7 +62,7 @@
 						<td width="31%">
 							<span class="redhighlight">*</span> <b>Retype Account Number</b><br/><br/>
 							<input autocomplete="off" style="width:120px;" type="text" class="inputStyle" size="20" maxlength="17" 
-								data-ng-required="selectedPayment.paymentType == 'Savings'" data-ng-model="retypeBankAccountNumber" />
+								data-ng-required="isRequired() && selectedPayment.paymentType == 'Savings'" data-ng-model="retypeBankAccountNumber" />
 						</td>
 					</tr>
 					<tr ><td colspan="5"></td></tr>
@@ -99,16 +103,19 @@
 									<td width="12%">&nbsp;</td>
 									<td align="left" width="22%">
 										<input type="text" class="inputStyle" style="width: 120px;" autocomplete="off" size="10" maxlength="9" 
-											data-ng-required="selectedPayment.paymentType == 'Checking'" data-ng-model="selectedPayment.bankRoutingNumber" />
+											data-ng-required="isRequired() && selectedPayment.paymentType == 'Checking'" 
+											data-ng-model="selectedPayment.bankRoutingNumber" />
 									</td>
 									<td align="left" width="23%">
 										<input type="text" class="inputStyle" style="width: 120px;" autocomplete="off" size="17" maxlength="17" 
-											data-ng-required="selectedPayment.paymentType == 'Checking'" data-ng-model="selectedPayment.bankAccountNumber" />
+											data-ng-required="isRequired() && selectedPayment.paymentType == 'Checking'" 
+											data-ng-model="selectedPayment.bankAccountNumber" />
 									</td>
 									<td width="9%" align="left"><img src="images/CheckArrow.gif" border="0"></td>
 									<td align="left" width="27%">
 										<input type="text" class="inputStyle" autocomplete="off" size="17" maxlength="17" style="width: 120px;" 
-											data-ng-required="selectedPayment.paymentType == 'Checking'" data-ng-model="retypeBankAccountNumber" />
+											data-ng-required="isRequired() && selectedPayment.paymentType == 'Checking'" 
+											data-ng-model="retypeBankAccountNumber" />
 									</td>
 									<td width="7%">&nbsp;</td>
 								</tr>
@@ -194,7 +201,7 @@
 				complete discretion and control over the use of all donated funds.
 				</div>
 				<br/>
-				<div style="text-align:center;"><input type="checkbox" data-ng-model="agreeToTerms" data-ng-required="true" /><b>&nbsp;I Agree</b></div>
+				<div style="text-align:center;"><input type="checkbox" data-ng-model="agreeToTerms" data-ng-required="isRequired()" /><b>&nbsp;I Agree</b></div>
 			</td>
 		</tr>
 		<tr  height="5"><td></td></tr>

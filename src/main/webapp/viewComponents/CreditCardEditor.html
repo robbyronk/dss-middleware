@@ -15,7 +15,7 @@
 						    <span class="redhighlight">*</span> 
 						    <b>Card Type</b>
 						    <br/>
-						    <select data-ng-required="true" data-ng-model="selectedPayment.paymentType" 
+						    <select data-ng-required="isRequired()" data-ng-model="selectedPayment.paymentType" 
 						    	data-ng-options="type for type in creditCardTypes">
 						    </select>
 						</td>
@@ -28,11 +28,11 @@
 						</td>
 						<td width="39%">
 							<span class="redhighlight">*</span> <b>Expiration Date </b><br/>
-							<select data-ng-required="true" data-ng-model="selectedPayment.expirationMonth" 
+							<select data-ng-required="isRequired()" data-ng-model="selectedPayment.expirationMonth" 
 								data-ng-options="month for month in availableExpirationMonths">
 							</select>
 							<b>/</b>
-							<select data-ng-required="true" data-ng-model="selectedPayment.expirationYear" 
+							<select data-ng-required="isRequired()" data-ng-model="selectedPayment.expirationYear" 
 								data-ng-options="year for year in availableExpirationYears">
 							</select>
 						</td>
@@ -48,15 +48,15 @@
 						<td align="left">
 							<span class="redhighlight">*</span><b> Name On Card</b><br/>
 							<input type="text" class="inputStyle" size="45" maxlength="55" 
-								data-ng-required="true" data-ng-model="selectedPayment.cardholderName" />
+								data-ng-required="isRequired()" data-ng-model="selectedPayment.cardholderName" />
 						</td>
 						<td width="42%" align="left" data-ng-show="limitedEdit">
 							<span class="redhighlight">*</span><b>Expiration Date </b><br/>
-							<select data-ng-required="true" data-ng-model="selectedPayment.expirationMonth" 
+							<select data-ng-required="isRequired()" data-ng-model="selectedPayment.expirationMonth" 
 								data-ng-options="month for month in availableExpirationMonths">
 							</select>
 							<b>/</b>													
-							<select data-ng-required="true" data-ng-model="selectedPayment.expirationYear" 
+							<select data-ng-required="isRequired()" data-ng-model="selectedPayment.expirationYear" 
 								data-ng-options="year for year in availableExpirationYears">
 							</select>
 						</td>
@@ -81,7 +81,8 @@
 						<tr>
 							<td width="2%"></td>
 							<td width="98%" align="left">
-								<input type="checkbox" class="pointToMailAddr" data-ng-model="pointToMailAddr" data-ng-change="changePointToMailAddr()" /><b>&nbsp;My credit card billing address is the same as my mailing address.</b>
+								<input type="checkbox" class="pointToMailAddr" data-ng-model="pointToMailAddr" 
+									data-ng-change="changePointToMailAddr()" /><b>&nbsp;My credit card billing address is the same as my mailing address.</b>
 							</td>
 						</tr>
 					</table>

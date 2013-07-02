@@ -67,4 +67,8 @@ angular.module('dssMiddlewareApp')
 				addressService.setAddressToEdit(addressToEdit);
 			}
 		};
+		
+		$scope.isRequired = function() {
+			return paymentEditorService.isCreditCardRequired();
+		};
 	});

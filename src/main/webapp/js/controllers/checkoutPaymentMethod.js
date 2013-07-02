@@ -96,6 +96,8 @@ angular.module('dssMiddlewareApp')
 						transType.type = 'CC';
 						selectedPayment.paymentMethod = 'Credit Card';
 						hasMinistry = true;
+						paymentEditorService.setCreditCardRequired(true);
+						paymentEditorService.setBankAccountRequired(false);
 					}
 				}
 				
@@ -103,16 +105,22 @@ angular.module('dssMiddlewareApp')
 					transType.type = 'BA';
 					selectedPayment.paymentMethod = 'EFT';
 					selectedPayment.paymentType = 'Checking';
+					paymentEditorService.setCreditCardRequired(false);
+					paymentEditorService.setBankAccountRequired(true);
 				}
 			}
 			else if(params.transType == 'BA') {
 				transType.type = 'BA';
 				selectedPayment.paymentMethod = 'EFT';
 				selectedPayment.paymentType = 'Checking';
+				paymentEditorService.setCreditCardRequired(false);
+				paymentEditorService.setBankAccountRequired(true);
 			}
 			else {
 				transType.type = params.transType;
 				selectedPayment.paymentMethod = 'Credit Card';
+				paymentEditorService.setCreditCardRequired(true);
+				paymentEditorService.setBankAccountRequired(false);
 			}
 		};
 		
@@ -139,6 +147,12 @@ angular.module('dssMiddlewareApp')
 					$scope.selectedPayment.paymentType = 'Checking';
 					paymentEditorService.setSelectedPayment($scope.selectedPayment);
 				}
+				paymentEditorService.setBankAccountRequired(true);
+				paymentEditorService.setCreditCardRequired(false);
+			}
+			else {
+				paymentEditorService.setBankAccountRequired(false);
+				paymentEditorService.setCreditCardRequired(true);
 			}
 		};
 		
