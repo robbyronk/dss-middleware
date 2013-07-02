@@ -5,7 +5,12 @@ angular.module('dssMiddlewareApp', ['ui'])
     $routeProvider
       .when('/GiftDetail/:designationNumber', {
         templateUrl: 'views/GiftDetail.html',
-        controller: 'GiftDetailCtrl'
+        controller: 'GiftDetailCtrl',
+        resolve: {
+        	frequenciesResolved: function(frequencyCrud) {
+        		return frequencyCrud.retrieve();
+        	}
+        }
       })
       .when('/GiftDetail/edit/:giftId', {
         templateUrl: 'views/GiftDetail.html',
@@ -13,6 +18,9 @@ angular.module('dssMiddlewareApp', ['ui'])
         resolve: {
         	giftResolved: function($route, giftCrud) {
         		return giftCrud.retrieve($route.current.params.giftId);
+        	},
+        	frequenciesResolved: function(frequencyCrud) {
+        		return frequencyCrud.retrieve();
         	}
         }
       })

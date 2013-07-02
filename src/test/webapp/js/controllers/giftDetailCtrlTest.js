@@ -4,6 +4,7 @@ describe('Gift detail controller tests', function() {
 	var scope = null;
 	var params = null;
 	var giftResolved = {};
+	var frequenciesResolved = {};
 	
 	describe('isOther', function() {
 		var other = null;
@@ -13,7 +14,8 @@ describe('Gift detail controller tests', function() {
 		
 		beforeEach(inject(function($rootScope, $controller) {
 			scope = $rootScope.$new();
-			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
+			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, 
+				giftResolved: giftResolved, frequenciesResolved: frequenciesResolved});
 		}));
 		
 		it('should be false', function() {
@@ -41,7 +43,8 @@ describe('Gift detail controller tests', function() {
 		
 		beforeEach(inject(function($rootScope, $controller) {
 			scope = $rootScope.$new();
-			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
+			$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, 
+				giftResolved: giftResolved, frequenciesResolved: frequenciesResolved});
 		}));
 		
 		it('should use the gift draw day', function() {
@@ -78,7 +81,8 @@ describe('Gift detail controller tests', function() {
 			
 			beforeEach(inject(function($rootScope, $controller) {
 				scope = $rootScope.$new();
-				$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
+				$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, 
+					giftResolved: giftResolved, frequenciesResolved: frequenciesResolved});
 			}));
 			
 			it('should be 11', function() {
@@ -101,7 +105,8 @@ describe('Gift detail controller tests', function() {
 			
 			beforeEach(inject(function($rootScope, $controller) {
 				scope = $rootScope.$new();
-				$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, giftResolved: giftResolved});
+				$controller('GiftDetailCtrl', {$scope: scope, $routeParams: params, 
+					giftResolved: giftResolved, frequenciesResolved: frequenciesResolved});
 			}));
 			
 			it('should be set based on gift start date', function() {

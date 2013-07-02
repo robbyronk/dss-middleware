@@ -43,12 +43,12 @@
 			<tr>
 				<td height="30" colspan="3" style="text-align: center;">
 					<span data-ng-repeat="frequency in frequencies">
-						<span data-ng-switch="frequency">
+						<span data-ng-switch="frequency.dropdownValue">
 							<span data-ng-switch-when="Single">
-								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency" /> <b>{{frequency}} Gift</b> &nbsp;&nbsp;
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> <b>{{frequency.dropdownValue}} Gift</b> &nbsp;&nbsp;
 							</span>
 							<span data-ng-switch-default>
-								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency" /> <b>{{frequency}}</b> &nbsp;&nbsp;
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> <b>{{frequency.dropdownValue}}</b> &nbsp;&nbsp;
 							</span>
 						</span>
 					</span>

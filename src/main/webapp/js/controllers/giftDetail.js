@@ -2,21 +2,11 @@
 
 angular.module('dssMiddlewareApp')
 	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, 
-			giftCrud, cartCrud, validationService, dateService, giftResolved) {
+			giftCrud, cartCrud, validationService, dateService, giftResolved, frequencyCrud, 
+			frequencyService, frequenciesResolved) {
 		var params = $routeParams;
 		var cart = null;
-		$scope.showComment = {staff: 'N', dsg: 'N'};
-		$scope.clientSideError = {message: ''};
 		var designationNumber = '';
-		
-		
-		//TODO: Get these values from the server
-		$scope.frequencies = ['Single','Monthly','Quarterly','Semi-Annual','Annual']; 
-		 
-		//can get custom amounts or defaults
-		$scope.amounts = ['50','100','250','500','1000','5000'];
-		$scope.amounts.push('Other:');
-
 		
 		/**
 		 * Create a gift and set the proper gift values and defaults.
@@ -91,6 +81,14 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.initPage = function(){
+			$scope.frequencies = frequencyService.getSortedFrequencies(frequenciesResolved.list);
+			$scope.showComment = {staff: 'N', dsg: 'N'};
+			$scope.clientSideError = {message: ''};
+			
+			//TODO: Get amounts from server
+			//can get custom amounts or defaults
+			$scope.amounts = ['50','100','250','500','1000','5000'];
+			$scope.amounts.push('Other:');
 			
 			if(params.giftId != null) {
 				$scope.isNew = false;
