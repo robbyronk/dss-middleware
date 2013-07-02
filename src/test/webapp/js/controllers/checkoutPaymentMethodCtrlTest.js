@@ -149,32 +149,6 @@ describe('Checkout payment method controller tests', function() {
 		}));
 	});
 	
-	describe('Month long name', function() {
-		var month;
-		
-		beforeEach(module('dssMiddlewareApp'));
-
-		beforeEach(inject(function($rootScope, $controller) {
-			scope = $rootScope.$new();
-			$controller('CheckoutPaymentMethodCtrl', {$scope: scope, cartResolved: cartResolved, paymentMethodListResolved: paymentMethodListResolved});
-		}));
-		
-		it('should be January', function() {
-			month = scope.getMonthLongName('01');
-			expect(month).toEqual('January');
-		});
-		
-		it('should be December', function() {
-			month = scope.getMonthLongName('12');
-			expect(month).toEqual('December');
-		});
-		
-		it('should be June', function() {
-			month = scope.getMonthLongName('06');
-			expect(month).toEqual('June');
-		});
-	});
-	
 	describe('Initial transaction type', function() {
 		beforeEach(module('dssMiddlewareApp'));
 

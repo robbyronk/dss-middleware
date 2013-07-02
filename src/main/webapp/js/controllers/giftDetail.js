@@ -129,7 +129,7 @@ angular.module('dssMiddlewareApp')
 		
 		
 		$scope.refreshDrawDays = function(){
-			drawDayEndpoints.fetchDrawDays($scope.createDate(
+			drawDayEndpoints.fetchDrawDays(dateService.createDate(
 														$scope.transactionMonth.year,
 														$scope.transactionMonth.month,
 														1).toISOString()).then(function(results){
@@ -159,7 +159,7 @@ angular.module('dssMiddlewareApp')
 			
 			if($scope.gift.giftFrequency != 'Single') {
 				$scope.gift.dayOfMonth = $scope.transactionDay;
-				$scope.gift.startDate = $scope.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
+				$scope.gift.startDate = dateService.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
 			}
 			giftCrud.update($scope.gift).then(function(results) {
 				//TODO: Need some sort of way to tell the user that the server is working
@@ -206,41 +206,17 @@ angular.module('dssMiddlewareApp')
 			}
 		};
 		
-		
-		$scope.createDate = function(year, month, day) {
-			return dateService.createDate(year, month, day);
-		};
-		
 		/**
 		 * Create an object with the transaction month information 
 		 * included.
 		 */
 		$scope.generateMonthObject = function(millisDate) {
 			var monthObject = {};
-			monthObject.month = '' + $scope.parseMonth(millisDate);
-			monthObject.year = '' + $scope.parseYear(millisDate);
-			monthObject.display = $scope.monthAsString(monthObject.month) 
+			monthObject.month = '' + dateService.parseMonth(millisDate);
+			monthObject.year = '' + dateService.parseYear(millisDate);
+			monthObject.display = dateService.getMonthAsString(monthObject.month) 
 				+ ', ' + monthObject.year;
 			return monthObject;
-		};
-		
-		$scope.parseMonth = function(millisDate) {
-			return dateService.parseMonth(millisDate);
-		};
-		
-		/**
-		 * Get the year for a specific millisecond date
-		 */
-		$scope.parseYear = function(millisDate) {
-			var date = new Date(millisDate);
-			return date.getFullYear();
-		};
-		
-		/**
-		 * Get the name of the month based on the number month
-		 */
-		$scope.monthAsString = function(month) {
-			return dateService.getMonthAsString(month);
 		};
 		
 		$scope.getTransactionMonthIndex = function(monthObject, transactionMonths) {

@@ -70,15 +70,7 @@ angular.module('dssMiddlewareApp')
 		 * Format the given month and year for display.
 		 */
 		$scope.longMonthYearDate = function(month, year) {
-			return $scope.getMonthLongName(month) + ' ' + year;
-		};
-		
-		/**
-		 * Given a numeric month, find the proper month name, 
-		 * for example: 01 = January
-		 */
-		$scope.getMonthLongName = function(month) {
-			return dateService.getMonthAsString(parseInt(month));
+			return dateService.getMonthAsString(parseInt(month)) + ' ' + year;
 		};
 		
 		$scope.setInitialTransactionType = function(params, transType, selectedPayment, cart) {
