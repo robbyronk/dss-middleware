@@ -42,7 +42,7 @@
 		    	<select style="width:150px;" 
 		    		data-ng-disabled="readOnly" data-ng-required="!readOnly" 
 		    		data-ng-model="addressToEdit.state" 
-		    		data-ng-options="state.stateCode as state.stateName for state in states">
+		    		data-ng-options="state.dropdownValue as state.descText for state in states.list">
 		    	</select>
 		    </td>
 	

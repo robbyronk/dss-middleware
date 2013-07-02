@@ -19,6 +19,8 @@ public class ListOfValues implements java.io.Serializable
 	String dropdownType;
 	@Column(name = "ORDER_BY")
 	String dropdownOrderBy;
+	@Column(name = "DESC_TEXT")
+	String descText;
 	
 	
 	public String getDropdownValue()
@@ -53,5 +55,12 @@ public class ListOfValues implements java.io.Serializable
 	{
 		this.dropdownOrderBy = dropdownOrderBy;
 	}
-	
+	public String getDescText()
+	{
+		return descText;
+	}
+	public void setDescText(String descText)
+	{
+		this.descText = descText;
+	}
 }

@@ -17,14 +17,7 @@ angular.module('dssMiddlewareApp')
 			return address.country == 'Canada';
 		};
 		
-		//TODO: Get states and countries from server
-		addressServiceObject.getStates = function() {
-			return [{stateCode: 'AE', stateName: 'Armed Forces Europe (includes Africa, Middle East and Canada)'},
-	                {stateCode: 'IN', stateName: 'Indiana'},
-	                {stateCode: 'FL', stateName: 'Florida'},
-	                {stateCode: 'TX', stateName: 'Texas'}];
-		};
-		
+		//TODO: Get countries from server
 		addressServiceObject.getCountries = function() {
 			return [{countryCode: 'Canada', countryName: 'Canada'},
                     {countryCode: 'Macedonia, The Former Yugoslav', countryName: 'Macedonia, The Former Yugoslav'},

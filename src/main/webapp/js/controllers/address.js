@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('AddressCtrl', function($scope, addressService) {
+	.controller('AddressCtrl', function($scope, addressService, stateCrud) {
 		
 		$scope.initAddresses = function() {
-			$scope.states = addressService.getStates();
+			stateCrud.retrieve().then(function(data) {
+				$scope.states = data;
+			});
 			$scope.countries = addressService.getCountries();
 			$scope.displayAddress = addressService.getDisplayAddress();
 			$scope.addressToEdit = addressService.getAddressToEdit();
