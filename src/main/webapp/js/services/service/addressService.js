@@ -17,14 +17,6 @@ angular.module('dssMiddlewareApp')
 			return address.country == 'Canada';
 		};
 		
-		//TODO: Get countries from server
-		addressServiceObject.getCountries = function() {
-			return [{countryCode: 'Canada', countryName: 'Canada'},
-                    {countryCode: 'Macedonia, The Former Yugoslav', countryName: 'Macedonia, The Former Yugoslav'},
-                    {countryCode: 'USA', countryName: 'USA'}, 
-                    {countryCode: 'Zimbabwe', countryName: 'Zimbabwe'}];
-		};
-		
 		addressServiceObject.getDisplayAddress = function() {
 			return displayAddress_;
 		};

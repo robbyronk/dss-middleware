@@ -42,7 +42,7 @@
 		    	<select style="width:150px;" 
 		    		data-ng-disabled="readOnly" data-ng-required="!readOnly" 
 		    		data-ng-model="addressToEdit.state" 
-		    		data-ng-options="state.dropdownValue as state.descText for state in states.list">
+		    		data-ng-options="state.dropdownValue as state.descText for state in states">
 		    	</select>
 		    </td>
 	
@@ -67,7 +67,7 @@
 			    <span class="redhighlight">*</span> <b>Country</b><br/>
 			    <select data-ng-disabled="readOnly" data-ng-required="!readOnly"
 			    	data-ng-model="addressToEdit.country" 
-			    	data-ng-options="country.countryCode as country.countryName for country in countries">
+			    	data-ng-options="country.dropdownValue as country.dropdownName for country in countries">
 			    </select>
 		    </td>
 		</tr>
