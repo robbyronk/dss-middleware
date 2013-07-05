@@ -2,8 +2,6 @@
 
 describe('Date service tests', function() {
 	describe('Date', function() {
-		
-		params = {designationNumber: '2843160'};
 		var controlDate;
 		var date;
 		
