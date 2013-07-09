@@ -144,7 +144,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.edit = function(giftId) {
-			$location.path('/GiftDetail/' + giftId + '/Y');
+			$location.path('/GiftDetail/edit/' + giftId);
 		};
 		
 		$scope.remove = function(giftId) {
