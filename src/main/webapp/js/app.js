@@ -9,7 +9,8 @@ angular.module('dssMiddlewareApp', ['ui'])
         resolve: {
         	frequenciesResolved: function(frequencyCrud) {
         		return frequencyCrud.retrieve();
-        	}
+        	},
+        	giftResolved: function() {}
         }
       })
       .when('/GiftDetail/edit/:giftId', {
