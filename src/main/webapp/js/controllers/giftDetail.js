@@ -85,6 +85,8 @@ angular.module('dssMiddlewareApp')
 //			$scope.frequencies = frequencyService.getHardCodedFrequencies();
 			$scope.showComment = {staff: 'N', dsg: 'N'};
 			$scope.clientSideError = {message: ''};
+			$scope.hasError = {value: false};
+			$scope.otherValue = {value: ''};
 			
 			//TODO: Get amounts from server
 			//can get custom amounts or defaults
@@ -108,7 +110,7 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
 				
 				if($scope.isOther($scope.gift.giftAmount, $scope.amounts.list)) {
-					$scope.otherValue = $scope.gift.giftAmount;
+					$scope.otherValue.value = $scope.gift.giftAmount;
 					$scope.setGiftToOther();
 				}
 				
@@ -151,10 +153,11 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.cartId = cart.cartId;
 			}
 			
-			//make sure we have a positive value in the Other box and Other is selected
-			if($scope.otherValue != null && $scope.otherValue > 0 
+			//see if we have a positive value in the Other box and Other is selected
+			if($scope.otherValue != undefined && $scope.otherValue != null 
+					&& $scope.otherValue.value.length > 0 && $scope.otherValue.value >= 0.01 
 					&& $scope.gift.giftAmount === 'Other:') {
-				$scope.gift.giftAmount = $scope.otherValue;
+				$scope.gift.giftAmount = $scope.otherValue.value;
 			}
 			
 			if($scope.gift.giftFrequency != 'Single') {
@@ -204,6 +207,12 @@ angular.module('dssMiddlewareApp')
 			if($scope.gift.giftAmount === 'Other:') {
 				$scope.otherFocus = true;
 			}
+			else {
+				//TODO: find a way to remove error stuff here 
+				$scope.setErrorMessage('');
+				$scope.otherValue.value = '';
+				$scope.$broadcast('updateError', '');
+			}
 		};
 		
 		/**
@@ -241,6 +250,13 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.setErrorMessage = function(errorMessage) {
 			validationService.setErrorMessage(errorMessage);
+			$scope.clientSideError.message = errorMessage;
+			if(errorMessage.length > 0) {
+				$scope.hasError.value = true;
+			}
+			else {
+				$scope.hasError.value = false;
+			}
 		};
 		
 		/**

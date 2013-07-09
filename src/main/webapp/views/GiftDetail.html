@@ -30,8 +30,10 @@
 							</li>
 						</ul>
 						<div class="otherText">
-							<input type="text" class="inputStyle" size="15" data-ng-model="$parent.otherValue" 
-								data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" data-other-amount-validate />
+							<input type="text" class="inputStyle" size="15" data-ng-class="{'error-input': $parent.hasError.value}"
+								data-ng-model="$parent.otherValue.value" 
+								data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" 
+								data-other-amount-validate />
 						</div>
 					</div>
 					<br /><br />
