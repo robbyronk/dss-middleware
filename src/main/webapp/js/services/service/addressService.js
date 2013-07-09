@@ -5,7 +5,7 @@ angular.module('dssMiddlewareApp')
 		var addressServiceObject = {};
 		var displayAddress_ = {};
 		var addressToEdit_ = {};
-		var readOnly_ = false;
+		var readOnly_ = {isReadOnly: false};
 		
 		addressServiceObject.isUsa = function(address) {
 			if(address == undefined) return false;
@@ -38,7 +38,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		addressServiceObject.setReadOnly = function(readOnly) {
-			readOnly_ = readOnly;
+			readOnly_.isReadOnly = readOnly;
 		};
 		
 		addressServiceObject.removeUnusedAddressInformation = function(address) {

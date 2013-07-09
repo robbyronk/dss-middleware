@@ -7,7 +7,7 @@
 					<td>
 						<b>Gift Payment Method</b>
 					</td>
-					<td align="right" data-ng-show="editable">
+					<td align="right" data-ng-show="editable.value">
 						<a data-ng-click="backToPayment()">Edit</a>
 					</td>
 				</tr>
@@ -25,7 +25,7 @@
 			<table style="width:100%; border:0; padding:3px; border-spacing:0;" data-ng-show="payment.paymentMethod == 'EFT'">
 		    	<tr class="tableHeader">
 					<td><b>Gift Payment Method</b></td>
-					<td align="right" data-ng-show="editable">
+					<td align="right" data-ng-show="editable.value">
 						<a data-ng-click="backToPayment()">Edit</a>
 					</td>
 				</tr>
@@ -43,7 +43,7 @@
 		    <table style="width:100%; border:0; padding:3px; border-spacing:0;">
 			    <tr class="tableHeader">
 					<td><b>Receipt Mailing Address</b></td>
-					<td align="right" data-ng-show="editable">
+					<td align="right" data-ng-show="editable.value">
 						<a data-ng-click="checkoutMailingAddress()">Edit</a>
 					</td>
 				</tr>

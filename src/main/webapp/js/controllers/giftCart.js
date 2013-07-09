@@ -5,25 +5,25 @@ angular.module('dssMiddlewareApp')
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
-			$scope.successMessage = '';
+			$scope.successMessage = {message: ''};
 			
 			if(params.cartId == undefined) {
-				$scope.emptyCart = true;
+				$scope.emptyCart = {empty: true};
 			}
 			else {
 				cartCrud.retrieve(params.cartId).then(function(results) {
 					$scope.cart = results;
-					$scope.giftLines = $scope.cart.gifts;
+					$scope.giftLines = {lines: $scope.cart.gifts};
 					
 					//This is the case where a user deletes a line and the cart becomes empty
-					if($scope.giftLines.length == 0) {
+					if($scope.giftLines.lines.length == 0) {
 						var cartId = $scope.cart.cartId;
 						/* Delete cart to prevent empty carts sitting in the database
 						 * This is okay because a new cart will be created when 
 						 * the user comes back to add a gift.
 						 */
 						cartCrud.deleteCart(cartId).then(function() {
-							$scope.emptyCart = true;
+							$scope.emptyCart = {empty: true};
 						});
 					}
 					else {
@@ -33,9 +33,9 @@ angular.module('dssMiddlewareApp')
 					}
 				});
 				
-//				$scope.giftLines = [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
+//				$scope.giftLines = {lines: [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
 //				                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
-//				                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}];
+//				                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}]};
 			}
 		};
 		
@@ -49,21 +49,21 @@ angular.module('dssMiddlewareApp')
 			$scope.semiAnnualGifts = [];
 			$scope.annualGifts = [];
 			
-			for(var i = 0; i < $scope.giftLines.length; i++) {
-				if($scope.giftLines[i].giftFrequency == 'Single') {
-					$scope.singleGifts.push($scope.giftLines[i]);
+			for(var i = 0; i < $scope.giftLines.lines.length; i++) {
+				if($scope.giftLines.lines[i].giftFrequency == 'Single') {
+					$scope.singleGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines[i].giftFrequency == 'Monthly') {
-					$scope.monthlyGifts.push($scope.giftLines[i]);
+				else if($scope.giftLines.lines[i].giftFrequency == 'Monthly') {
+					$scope.monthlyGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines[i].giftFrequency == 'Quarterly') {
-					$scope.quarterlyGifts.push($scope.giftLines[i]);
+				else if($scope.giftLines.lines[i].giftFrequency == 'Quarterly') {
+					$scope.quarterlyGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines[i].giftFrequency == 'Semi-Annual') {
-					$scope.semiAnnualGifts.push($scope.giftLines[i]);
+				else if($scope.giftLines.lines[i].giftFrequency == 'Semi-Annual') {
+					$scope.semiAnnualGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines[i].giftFrequency == 'Annual') {
-					$scope.annualGifts.push($scope.giftLines[i]);
+				else if($scope.giftLines.lines[i].giftFrequency == 'Annual') {
+					$scope.annualGifts.push($scope.giftLines.lines[i]);
 				}
 			}
 		};
@@ -72,22 +72,22 @@ angular.module('dssMiddlewareApp')
 		 * Create a list of the frequencies that are being utilized
 		 */
 		$scope.generateListOfFrequencies = function() {
-			$scope.frequencies = [];
+			$scope.usedFrequencies = {list: []};
 			
 			if($scope.monthlyGifts.length > 0) {
-				$scope.frequencies.push('Monthly');
+				$scope.usedFrequencies.list.push('Monthly');
 			}
 			if($scope.quarterlyGifts.length > 0) {
-				$scope.frequencies.push('Quarterly');
+				$scope.usedFrequencies.list.push('Quarterly');
 			}
 			if($scope.semiAnnualGifts.length > 0) {
-				$scope.frequencies.push('Semi-Annual');
+				$scope.usedFrequencies.list.push('Semi-Annual');
 			}
 			if($scope.annualGifts.length > 0) {
-				$scope.frequencies.push('Annual');
+				$scope.usedFrequencies.list.push('Annual');
 			}
 			if($scope.singleGifts.length > 0) {
-				$scope.frequencies.push('Single');
+				$scope.usedFrequencies.list.push('Single');
 			}
 		};
 		
@@ -150,7 +150,7 @@ angular.module('dssMiddlewareApp')
 		$scope.remove = function(giftId) {
 			giftCrud.deleteGift(giftId).then(function() {
 				$scope.initPage();
-				$scope.successMessage = 'Your gift was successfully removed. Your updated gift cart is displayed below.';
+				$scope.successMessage.message = 'Your gift was successfully removed. Your updated gift cart is displayed below.';
 			});
 		};
 		

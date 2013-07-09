@@ -3,8 +3,8 @@
 angular.module('dssMiddlewareApp')
 	.controller('EndOfYearEftTextCtrl', function($scope) {
 		$scope.initEndOfYearEftText = function() {
-			$scope.receiptYear = $scope.determineReceiptYear(new Date());
-			$scope.showEftText = $scope.determineShowEftText(new Date()); 
+			$scope.receiptYear = {year: $scope.determineReceiptYear(new Date())};
+			$scope.showEftText = {show: $scope.determineShowEftText(new Date())}; 
 		};
 		
 		$scope.determineReceiptYear = function(today) {

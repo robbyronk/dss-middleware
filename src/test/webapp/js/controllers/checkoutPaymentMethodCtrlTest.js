@@ -37,8 +37,9 @@ describe('Checkout payment method controller tests', function() {
 			}));
 			
 			it('should be true', function() {
+				scope.editingCreditCard = {beingEdited: false};
 				scope.editCreditCard(selectedPayment);
-				var isEditable = scope.editingCreditCard;
+				var isEditable = scope.editingCreditCard.beingEdited;
 				expect(isEditable).toBe(true);
 			});
 		});
@@ -52,8 +53,9 @@ describe('Checkout payment method controller tests', function() {
 			}));
 			
 			it('should equal 2', function() {
+				scope.editingCreditCard = {beingEdited: false};
 				scope.editCreditCard(selectedPayment);
-				var paymentIdCurrentlyBeingEdited = scope.paymentIdCurrentlyBeingEdited;
+				var paymentIdCurrentlyBeingEdited = scope.paymentCurrentlyBeingEdited.id;
 				expect(paymentIdCurrentlyBeingEdited).toEqual('2');
 			});
 		});
@@ -71,7 +73,7 @@ describe('Checkout payment method controller tests', function() {
 				initCheckoutSelectPaymentMethod(addressService);
 				creditCardEditorService.setPointToMailAddr(false);
 				scope.editCreditCard(selectedPayment);
-				expect(addressService.getReadOnly()).toBe(false);
+				expect(addressService.getReadOnly().isReadOnly).toBe(false);
 			}));
 			
 			it('should be true', inject(function(addressService, creditCardEditorService) {
@@ -79,7 +81,7 @@ describe('Checkout payment method controller tests', function() {
 				initCheckoutSelectPaymentMethod(addressService);
 				creditCardEditorService.setPointToMailAddr(true);
 				scope.editCreditCard(selectedPayment);
-				expect(addressService.getReadOnly()).toBe(true);
+				expect(addressService.getReadOnly().isReadOnly).toBe(true);
 			}));
 		});
 		
@@ -110,9 +112,9 @@ describe('Checkout payment method controller tests', function() {
 		
 		
 		function initCheckoutSelectPaymentMethod(addressService) {
-			scope.paymentIdCurrentlyBeingEdited = null;
+			scope.paymentCurrentlyBeingEdited = null;
 			addressService.setReadOnly(true);
-			scope.editingCreditCard = false;
+			scope.editingCreditCard = {beingEdited: false};
 		} 
 	});
 	

@@ -5,13 +5,13 @@ angular.module('dssMiddlewareApp')
 		$scope.initSubmitGiftPage = function() {
 			$scope.cart = cartResolved;
 			checkoutSubmitService.setCart($scope.cart);
-			$scope.cartHasSingleGift = $scope.cartHasSingleFrequencyGift($scope.cart);
 			$scope.showTransactionDayForSingleGifts = true;
 			
 			//TODO: Put these 3 variables into the cart
 			$scope.operatingSystem = navigator.platform;
 			$scope.screenWidth = $window.screen.width;
 			$scope.screenHeight = $window.screen.height;
+			$scope.endOfYearTextType = {type: ''};
 		};
 		
 		/**
@@ -20,11 +20,12 @@ angular.module('dssMiddlewareApp')
 		$scope.cartHasSingleFrequencyGift = function(cart) {
 			for(var i = 0; i < cart.gifts.length; i++) {
 				if(cart.gifts[i].giftFrequency == 'Single') {
-					$scope.endOfYearTextType = 'SubmitGift';
+					$scope.endOfYearTextType.type = 'SubmitGift';
 					return true;
 				}
 			}
 			
+			//TODO: What is the EOY Text type here?
 			return false;
 		};
 		

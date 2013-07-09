@@ -62,7 +62,7 @@
 						<td width="31%">
 							<span class="redhighlight">*</span> <b>Retype Account Number</b><br/><br/>
 							<input autocomplete="off" style="width:120px;" type="text" class="inputStyle" size="20" maxlength="17" 
-								data-ng-required="isRequired() && selectedPayment.paymentType == 'Savings'" data-ng-model="retypeBankAccountNumber" />
+								data-ng-required="isRequired() && selectedPayment.paymentType == 'Savings'" data-ng-model="retypeBankAccountNumber.number" />
 						</td>
 					</tr>
 					<tr ><td colspan="5"></td></tr>
@@ -115,21 +115,24 @@
 									<td align="left" width="27%">
 										<input type="text" class="inputStyle" autocomplete="off" size="17" maxlength="17" style="width: 120px;" 
 											data-ng-required="isRequired() && selectedPayment.paymentType == 'Checking'" 
-											data-ng-model="retypeBankAccountNumber" />
+											data-ng-model="retypeBankAccountNumber.number" />
 									</td>
 									<td width="7%">&nbsp;</td>
 								</tr>
 								<tr>
 									<td width="12%">&nbsp;</td>
 									<td align="left" width="22%">
-										<span class="redhighlight">*</span><a class="helpLink" data-ng-click="showHelpTip('routingNumber', $event)">Routing Number</a>
+										<span class="redhighlight">*</span>
+										<a class="helpLink" data-ng-click="showHelpTip(helpTips.routingHelp, $event)">Routing Number</a>
 									</td>
 									<td align="left" width="23%">
-										<span class="redhighlight">*</span><a class="helpLink" data-ng-click="showHelpTip('accountNumber', $event)">Account Number</a>
+										<span class="redhighlight">*</span>
+										<a class="helpLink" data-ng-click="showHelpTip(helpTips.accountHelp, $event)">Account Number</a>
 									</td>
 									<td width="9%">&nbsp;</td>
 									<td align="left" width="27%">
-										<span class="redhighlight">*</span><a class="helpLink" data-ng-click="showHelpTip('retypeAccountNumber', $event)">Retype Account Number</a>
+										<span class="redhighlight">*</span>
+										<a class="helpLink" data-ng-click="showHelpTip(helpTips.retypeAccountHelp, $event)">Retype Account Number</a>
 									</td>
 									<td width="7%">&nbsp;</td>
 								</tr>
@@ -150,12 +153,12 @@
 			</td>
 		</tr>
 		
-		<tr data-ng-show="!isCheckout && loggedIn">
+		<tr data-ng-show="!checkout.isCheckout && authentication.loggedIn">
 			<td class="tableHeader">
 		 		<b>Optional Bank Account Nickname</b> 
 		 	</td>
 		</tr>
-		<tr data-ng-show="!isCheckout && loggedIn">
+		<tr data-ng-show="!checkout.isCheckout && authentication.loggedIn">
 			<td>
 				<table style="width:100%;">
 					<tr height="5"><td></td></tr>
@@ -201,7 +204,7 @@
 				complete discretion and control over the use of all donated funds.
 				</div>
 				<br/>
-				<div style="text-align:center;"><input type="checkbox" data-ng-model="agreeToTerms" data-ng-required="isRequired()" /><b>&nbsp;I Agree</b></div>
+				<div style="text-align:center;"><input type="checkbox" data-ng-model="agreeToTerms.agree" data-ng-required="isRequired()" /><b>&nbsp;I Agree</b></div>
 			</td>
 		</tr>
 		<tr  height="5"><td></td></tr>

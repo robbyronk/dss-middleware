@@ -18,7 +18,7 @@
 	<div data-ng-include="'includes/canadian-address.html'"></div>
 	
 	
-	<p class="info" data-ng-show="willExpireTwoMonths(selectedPayment) && !isExpired(selectedPayment) && !editingCreditCard">
+	<p class="info" data-ng-show="willExpireTwoMonths(selectedPayment) && !isExpired(selectedPayment) && !editingCreditCard.beingEdited">
 		{{selectedPayment.description}} will soon expire.&nbsp;
 		If you know the new expiration date, select "Edit" below to enter the new date.
 	</p><br />
@@ -37,10 +37,10 @@
 						 <tr height="40" valign="bottom">
 							 <td width="15"> </td>
 							 <td width="360"><span class="redhighlight">*</span> <b>Accounts On Record:</b><br />
-					 			<span data-ng-show="paymentMethodList.length == 0">No accounts on record.</span>
-								<select tabindex="4" data-ng-show="paymentMethodList.length > 0" 
+					 			<span data-ng-show="paymentMethodList.list.length == 0">No accounts on record.</span>
+								<select tabindex="4" data-ng-show="paymentMethodList.list.length > 0" 
 									data-ng-model="selectedPayment" data-ng-change="changeSelectedPayment()"
-									data-ng-options="paymentMethod.description for paymentMethod in paymentMethodList">
+									data-ng-options="paymentMethod.description for paymentMethod in paymentMethodList.list">
 								</select>
 							</td>
 							<td align="left">
@@ -63,7 +63,7 @@
 									<b>Card Type:</b> {{selectedPayment.paymentType}}<br />
 									<b>Card Number:</b> {{getAccountMasked(selectedPayment)}}<br />
 									
-									<span data-ng-show="!editingCreditCard">
+									<span data-ng-show="!editingCreditCard.beingEdited">
 										<hr style="width: 100%; border-bottom:1px dashed #777; border-top:0px; border-left:0px; border-right:0px; line-height:0px; height:1px;" />
 										<br />
 										<b>Expiration Date:</b> {{longMonthYearDate(selectedPayment.expirationMonth, selectedPayment.expirationYear)}}
@@ -79,7 +79,7 @@
 								</span>
 							</td>
 						</tr>
-						<tr data-ui-if="editingCreditCard && selectedPayment != null && selectedPayment.existingPaymentId == paymentIdCurrentlyBeingEdited">
+						<tr data-ui-if="editingCreditCard.beingEdited && selectedPayment != null && selectedPayment.existingPaymentId == paymentCurrentlyBeingEdited.id">
 							<td colspan="3" data-ng-include="'viewComponents/CreditCardEditor.html'"></td>
 						</tr>
 					</table>						

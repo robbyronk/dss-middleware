@@ -3,15 +3,15 @@
 angular.module('dssMiddlewareApp')
 	.factory('creditCardEditorService', function() {
 		var creditCardEditor = {};
-		var pointToMailAddr_ = false;
-		var limitedEdit_ = false;
+		var pointToMailAddr_ = {isMailAddr: false};
+		var limitedEdit_ = {isLimited: false};
 		
 		creditCardEditor.getPointToMailAddr = function() {
 			return pointToMailAddr_;
 		};
 		
 		creditCardEditor.setPointToMailAddr = function(pointToMailAddr) {
-			pointToMailAddr_ = pointToMailAddr;
+			pointToMailAddr_.isMailAddr = pointToMailAddr;
 		};
 		
 		creditCardEditor.getLimitedEdit = function() {
@@ -19,7 +19,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		creditCardEditor.setLimitedEdit = function(limitedEdit) {
-			limitedEdit_ = limitedEdit;
+			limitedEdit_.isLimited = limitedEdit;
 		};
 		
 		/**

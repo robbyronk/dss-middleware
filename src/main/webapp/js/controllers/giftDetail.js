@@ -21,8 +21,8 @@ angular.module('dssMiddlewareApp')
 				$scope.designation = {externalDescription: 'Ryan T. Carlson', type: 'Ministry', 
 						  designationNumber: designationNumber};
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
-				$scope.gift.giftAmount = $scope.amounts[0];
-				$scope.gift.giftFrequency = $scope.frequencies[0];
+				$scope.gift.giftAmount = $scope.amounts.list[0];
+				$scope.gift.giftFrequency = $scope.frequencies.list[0].dropdownValue;
 				cart = cartAndGift.cart;
 				$scope.initTransactionDate(null);
 			});
@@ -33,7 +33,7 @@ angular.module('dssMiddlewareApp')
 		 */
 		$scope.initTransactionDate = function(startDate) {
 			var fetchDate = null;
-			if($scope.isNew) {
+			if($scope.isNew.value) {
 				fetchDate = new Date();
 			}
 			else {
@@ -42,14 +42,14 @@ angular.module('dssMiddlewareApp')
 			
 			drawDayEndpoints.fetchDrawDays(fetchDate.toISOString()).then(function(results){
 				$scope.transactionDays = results.data;
-				$scope.transactionDay = 
-					$scope.setTransactionDay($scope.gift.dayOfMonth, $scope.transactionDays);
+				$scope.transactionDay = {day: 
+					$scope.setTransactionDay($scope.gift.dayOfMonth, $scope.transactionDays)};
 			});
 			
 			drawDayEndpoints.fetchDrawMonths(new Date().toISOString()).then(function(results){
-				$scope.transactionMonths = results.data;
+				$scope.transactionMonths = {months: results.data};
 				$scope.transactionMonth = 
-					$scope.setTransactionMonth(startDate, $scope.transactionMonths);
+					$scope.setTransactionMonth(startDate, $scope.transactionMonths.months);
 			});
 		};
 		
@@ -82,16 +82,17 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.initPage = function(){
 			$scope.frequencies = frequencyService.getSortedFrequencies(frequenciesResolved.list);
+//			$scope.frequencies = frequencyService.getHardCodedFrequencies();
 			$scope.showComment = {staff: 'N', dsg: 'N'};
 			$scope.clientSideError = {message: ''};
 			
 			//TODO: Get amounts from server
 			//can get custom amounts or defaults
-			$scope.amounts = ['50','100','250','500','1000','5000'];
-			$scope.amounts.push('Other:');
+			$scope.amounts = {list: ['50','100','250','500','1000','5000']};
+			$scope.amounts.list.push('Other:');
 			
 			if(params.giftId != null) {
-				$scope.isNew = false;
+				$scope.isNew = {value: false};
 				$scope.gift = giftResolved;
 				designationNumber = $scope.gift.designationNumber;
 				$scope.initTransactionDate($scope.gift.startDate);
@@ -106,7 +107,7 @@ angular.module('dssMiddlewareApp')
 				
 				$scope.gift.designationNumber = $scope.designation.designationNumber;
 				
-				if($scope.isOther($scope.gift.giftAmount, $scope.amounts)) {
+				if($scope.isOther($scope.gift.giftAmount, $scope.amounts.list)) {
 					$scope.otherValue = $scope.gift.giftAmount;
 					$scope.setGiftToOther();
 				}
@@ -121,7 +122,7 @@ angular.module('dssMiddlewareApp')
 				}
 			}
 			else {
-				$scope.isNew = true;
+				$scope.isNew = {value: true};
 				$scope.createGift();
 			}
 		};
@@ -133,7 +134,7 @@ angular.module('dssMiddlewareApp')
 														$scope.transactionMonth.month,
 														1).toISOString()).then(function(results){
 				$scope.transactionDays = results.data;
-				$scope.transactionDay = $scope.transactionDays[0].key;
+				$scope.transactionDay = {day: $scope.transactionDays[0].key};
 			});
 		};
 		
@@ -157,8 +158,8 @@ angular.module('dssMiddlewareApp')
 			}
 			
 			if($scope.gift.giftFrequency != 'Single') {
-				$scope.gift.dayOfMonth = $scope.transactionDay;
-				$scope.gift.startDate = dateService.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay);
+				$scope.gift.dayOfMonth = $scope.transactionDay.day;
+				$scope.gift.startDate = dateService.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay.day);
 			}
 			giftCrud.update($scope.gift).then(function(results) {
 				//TODO: Need some sort of way to tell the user that the server is working

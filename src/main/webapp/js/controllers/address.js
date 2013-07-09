@@ -5,11 +5,11 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.initAddresses = function() {
 			stateCrud.retrieve().then(function(data) {
-				$scope.states = data.list;
+				$scope.states = data;
 			});
 			
 			countryCrud.retrieve().then(function(data) {
-				$scope.countries = data.list;
+				$scope.countries = data;
 			});
 			
 			$scope.displayAddress = addressService.getDisplayAddress();

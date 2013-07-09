@@ -4,8 +4,8 @@ angular.module('dssMiddlewareApp')
 	.controller('DisplayCartCtrl', function($scope, designationService, checkoutSubmitService) {
 		$scope.initDisplayCart = function(isBrandedCheckout) {
 			$scope.cart = checkoutSubmitService.getCart();
-			$scope.isBrandedCheckout = isBrandedCheckout;
-			$scope.descrHeader = 'I would like my gift to benefit the ministry of:';
+			$scope.isBrandedCheckout = {value: isBrandedCheckout};
+			$scope.descrHeader = {header: 'I would like my gift to benefit the ministry of:'};
 			$scope.generateListOfFrequencies();
 		};
 		
@@ -29,22 +29,22 @@ angular.module('dssMiddlewareApp')
 		 * Create a list of the frequencies that are being utilized
 		 */
 		$scope.generateListOfFrequencies = function() {
-			$scope.usedFrequencies = [];
+			$scope.usedFrequencies = {list: []};
 			
 			if($scope.getListForFrequency('Monthly', $scope.cart.gifts).length > 0) {
-				$scope.usedFrequencies.push('Monthly');
+				$scope.usedFrequencies.list.push('Monthly');
 			}
 			if($scope.getListForFrequency('Quarterly', $scope.cart.gifts).length > 0) {
-				$scope.usedFrequencies.push('Quarterly');
+				$scope.usedFrequencies.list.push('Quarterly');
 			}
 			if($scope.getListForFrequency('Semi-Annual', $scope.cart.gifts).length > 0) {
-				$scope.usedFrequencies.push('Semi-Annual');
+				$scope.usedFrequencies.list.push('Semi-Annual');
 			}
 			if($scope.getListForFrequency('Annual', $scope.cart.gifts).length > 0) {
-				$scope.usedFrequencies.push('Annual');
+				$scope.usedFrequencies.list.push('Annual');
 			}
 			if($scope.getListForFrequency('Single', $scope.cart.gifts).length > 0) {
-				$scope.usedFrequencies.push('Single');
+				$scope.usedFrequencies.list.push('Single');
 			}
 		};
 		

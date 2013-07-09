@@ -33,7 +33,7 @@ angular.module('dssMiddlewareApp')
 						$scope.payment.billingAddress));
 			}
 			
-			$scope.editable = false;  //This is only used by branded checkout right now
+			$scope.editable = {value: false};  //This is only used by branded checkout right now
 		};
 		
 		$scope.setDisplayAddress = function(pointToMailAddr) {

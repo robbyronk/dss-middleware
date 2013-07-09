@@ -10,7 +10,7 @@ angular.module('dssMiddlewareApp')
 	.factory('paymentEditorService', function() {
 		var paymentEditor = {};
 		var selectedPayment_ = {};
-		var isCheckout_ = false;
+		var checkout_ = {isCheckout: false};
 		var isBankAccountRequired_ = true;
 		var isCreditCardRequired_ = true;
 		
@@ -23,11 +23,11 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		paymentEditor.getIsCheckout = function() {
-			return isCheckout_;
+			return checkout_;
 		};
 		
 		paymentEditor.setIsCheckout = function(isCheckout) {
-			isCheckout_ = isCheckout;
+			checkout_.isCheckout = isCheckout;
 		};
 		
 		paymentEditor.isBankAccountRequired = function() {

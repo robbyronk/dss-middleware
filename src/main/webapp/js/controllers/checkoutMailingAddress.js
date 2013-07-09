@@ -8,19 +8,19 @@ angular.module('dssMiddlewareApp')
 			
 			//TODO: Get these from the server
 			$scope.personalInfo = {isStaff: false, hasPaymentMethods: false};
-			$scope.prefixes = [{namePrefix: 'Mr.', namePrefixCode: 'Mr'},
-			                   {namePrefix: 'Mrs.', namePrefixCode: 'Mrs'},
-			                   {namePrefix: 'Lieutenant Commander (NAVY,CG)', namePrefixCode: 'LCDR'}];
-			$scope.suffixes = [{suffix: 'Jr.', nameSuffix: 'Jr.'},
-			                   {suffix: 'Sr.', nameSuffix: 'Sr.'},
-			                   {suffix: 'II', nameSuffix: 'II'},
-			                   {suffix: 'III', nameSuffix: 'III'},
-			                   {suffix: 'IV', nameSuffix: 'IV'}];
-			$scope.phoneTypes = [{display: 'Home', value: 'HOME'},
-			                     {display: 'Work', value: 'WORK'},
-			                     {display: 'Mobile', value: 'MOBILE'}];
-			$scope.loggedIn = false;
-			$scope.failoverMode = false;
+			$scope.prefixes = {list: [{namePrefix: 'Mr.', namePrefixCode: 'Mr'},
+			                          {namePrefix: 'Mrs.', namePrefixCode: 'Mrs'},
+			                          {namePrefix: 'Lieutenant Commander (NAVY,CG)', namePrefixCode: 'LCDR'}]};
+			$scope.suffixes = {list: [{suffix: 'Jr.', nameSuffix: 'Jr.'},
+			                          {suffix: 'Sr.', nameSuffix: 'Sr.'},
+			                          {suffix: 'II', nameSuffix: 'II'},
+			                          {suffix: 'III', nameSuffix: 'III'},
+			                          {suffix: 'IV', nameSuffix: 'IV'}]};
+			$scope.phoneTypes = {types: [{display: 'Home', value: 'HOME'},
+			                             {display: 'Work', value: 'WORK'},
+			                             {display: 'Mobile', value: 'MOBILE'}]};
+			$scope.authentication = {loggedIn: false};
+			$scope.failoverMode = {isFailover: false};
 			
 			//If blank, set country code to the default
 			if($scope.cart.mailingAddress.country == '' || $scope.cart.mailingAddress.country == null) {
@@ -41,7 +41,7 @@ angular.module('dssMiddlewareApp')
 			$scope.cart.mailingAddress = addressToEdit;
 			
 			cartCrud.updateCart($scope.cart).then(function(data) {
-				if($scope.loggedIn && $scope.personalInfo.hasPaymentMethods) {
+				if($scope.authentication.loggedIn && $scope.personalInfo.hasPaymentMethods) {
 					$location.path('/CheckoutSelectPaymentMethod/' + $scope.cart.cartId);
 				}
 				else {

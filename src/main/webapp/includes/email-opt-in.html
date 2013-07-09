@@ -1,5 +1,5 @@
 <table style="margin-left:auto; margin-right:auto;" data-ng-controller="EmailOptInCtrl">
-	<tr data-ng-repeat="webTitle in webTitleList">
+	<tr data-ng-repeat="webTitle in webTitleList.list">
 		<td>
 			<input type="checkbox" data-ng-model="webTitle.checked" />&nbsp; Yes! Please send me ministry updates from <b> {{webTitle.title}} </b>
 		</td>

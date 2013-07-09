@@ -24,22 +24,22 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.initCheckoutSelectPaymentMethod = function() {
 			creditCardEditorService.setLimitedEdit(true);
-			$scope.paymentIdCurrentlyBeingEdited = null;
+			$scope.paymentCurrentlyBeingEdited = null;
 			addressService.setReadOnly(true);
-			$scope.editingCreditCard = false;
+			$scope.editingCreditCard = {beingEdited: false};
 			$scope.initCommonVariables();
 			
-			$scope.selectedPayment = $scope.paymentMethodList[0];
+			$scope.selectedPayment = $scope.paymentMethodList.list[0];
 			paymentEditorService.setSelectedPayment($scope.selectedPayment);
 			creditCardEditorService.setPointToMailAddr($scope.shouldPointToMailAddrOnInit($scope.cart.mailingAddress, $scope.selectedPayment.billingAddress));
-			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr());
+			$scope.setDisplayAddress(creditCardEditorService.getPointToMailAddr().isMailAddr);
 			paymentSource = 'EXISTING';
 		};
 		
 		$scope.initCommonVariables = function() {
 			$scope.cart = cartResolved;
 			$scope.paymentMethodList = paymentMethodListResolved;
-			$scope.loggedIn = true;
+			$scope.authentication = {loggedIn: true};
 			paymentEditorService.setIsCheckout(true);
 		};
 		
@@ -56,14 +56,14 @@ angular.module('dssMiddlewareApp')
 		 * Allow the user to edit their selected credit card.
 		 */
 		$scope.editCreditCard = function(selectedPayment) {
-			$scope.editingCreditCard = true;
-			$scope.paymentIdCurrentlyBeingEdited = selectedPayment.existingPaymentId;
+			$scope.editingCreditCard.beingEdited = true;
+			$scope.paymentCurrentlyBeingEdited = {id: selectedPayment.existingPaymentId};
 			
 			/* If the user comes into the edit mode and the billing address is
 			 * different from the mailing address, we want to make sure 
 			 * the user can edit the address and that it is pre-filled.
 			 */ 
-			if(!creditCardEditorService.getPointToMailAddr()) {
+			if(!creditCardEditorService.getPointToMailAddr().isMailAddr) {
 				addressService.setReadOnly(false);
 				addressService.setAddressToEdit(selectedPayment.billingAddress);
 			}
@@ -71,7 +71,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.changeSelectedPayment = function() {
-			$scope.editingCreditCard = false;
+			$scope.editingCreditCard.beingEdited = false;
 			paymentSource = 'EXISTING';
 		};
 		
@@ -188,7 +188,7 @@ angular.module('dssMiddlewareApp')
 			 */
 			$scope.selectedPayment = paymentEditorService.getSelectedPayment();
 			
-			if(creditCardEditorService.getPointToMailAddr()) {
+			if(creditCardEditorService.getPointToMailAddr().isMailAddr) {
 				$scope.selectedPayment.billingAddress = $scope.cart.mailingAddress;
 			}
 			else {

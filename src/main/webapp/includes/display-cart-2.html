@@ -3,9 +3,9 @@
 <!-- ## The following code is for the traditional checkout process -->
 <!-- ################################################################################### -->
 <table style="width:100%; border:0; padding:3px; border-spacing:1px; margin-left:auto; margin-right:auto;" 
-	data-ng-show="!isBrandedCheckout">
+	data-ng-show="!isBrandedCheckout.value">
 	<tr class="tableHeader">
-  		<td colspan="2" align="left"><b>{{descrHeader}}</b></td>
+  		<td colspan="2" align="left"><b>{{descrHeader.header}}</b></td>
   	</tr>
   	<tr class="alternatingRows" data-ng-repeat="gift in cart.gifts">
   		<td align="left">
@@ -37,7 +37,7 @@
 	<tr>	
 		<td colspan="2">
 			<table style="width:100%; border:0; padding:3px; border-spacing:0;">
-				<tr data-ng-repeat="frequency in usedFrequencies">
+				<tr data-ng-repeat="frequency in usedFrequencies.list">
 					<td align="right">
 						<span class="goldText">My {{frequency}} 
 							<span data-ng-show="frequency != 'Single'">Gift</span> Total:
@@ -53,7 +53,7 @@
 <!-- ################################################################################### -->
 <!-- ## The following code is for the 3-step checkout process -->
 <!-- ################################################################################### -->
-<div data-ng-show="isBrandedCheckout">
+<div data-ng-show="isBrandedCheckout.value">
 	<div data-ng-repeat="gift in cart.gifts">
 		<label>Ministry</label>
 		<ul class="field">
@@ -75,7 +75,7 @@
 		<br />
 	</div>
 	
-	<ul class="field" data-ng-repeat="frequency in usedFrequencies">
+	<ul class="field" data-ng-repeat="frequency in usedFrequencies.list">
 	 <li>
 	 	<span class="goldText">My {{frequency}} 
 			<span data-ng-show="frequency != 'Single'">Gift</span> Total:

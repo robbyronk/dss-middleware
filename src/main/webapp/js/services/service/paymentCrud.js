@@ -12,32 +12,32 @@ angular.module('dssMiddlewareApp')
 			
 		};
 		
-		//TODO: Create a list on the server to retrieve
+		//TODO: Create a list on the server to retrieve (Current production has this in personalInfo)
 		payment.retrievePaymentMethodList = function(cartId) {
 			var deferred = $q.defer();
 			cartCrud.retrieve(cartId).then(function(cart) {
-				var paymentMethodList = [cart.payment,
-						{existingPaymentId: '2',
-					 	 description: 'Test Bank Account', 
-					 	 paymentMethod: 'EFT',
-					 	 paymentType: 'Checking',
-					 	 lastFourDigits: '6789',
-					 	 bankName: 'Test Bank',
-					 	 bankAccountNumber: '123456789',
-					 	 bankRoutingNumber: '123123123',
-					 	 creditCardToken: null,
-					 	 creditCardHash: null,
-					 	 expirationMonth: null,
-					 	 expirationYear: null,
-					 	 cardholderName: null,
-					 	 billingAddress: {streetAddress1: '',
-			 			  			  	  streetAddress2: '',
-			 			  			  	  streetAddress3: '',
-			 			  			  	  streetAddress4: '',
-			 			  			  	  city: '',
-			 			  			  	  state: '',
-			 			  			  	  zipCode: '',
-			 			  			  	  country: ''}}];
+				var paymentMethodList = {list: [cart.payment,
+				                                {existingPaymentId: '2',
+					 	 						 description: 'Test Bank Account', 
+					 	 						 paymentMethod: 'EFT',
+					 	 						 paymentType: 'Checking',
+					 	 						 lastFourDigits: '6789',
+					 	 						 bankName: 'Test Bank',
+					 	 						 bankAccountNumber: '123456789',
+					 	 						 bankRoutingNumber: '123123123',
+					 	 						 creditCardToken: null,
+					 	 						 creditCardHash: null,
+					 	 						 expirationMonth: null,
+					 	 						 expirationYear: null,
+					 	 						 cardholderName: null,
+					 	 						 billingAddress: {streetAddress1: '',
+					 	 							 			  streetAddress2: '',
+					 	 							 			  streetAddress3: '',
+					 	 							 			  streetAddress4: '',
+					 	 							 			  city: '',
+					 	 							 			  state: '',
+					 	 							 			  zipCode: '',
+					 	 							 			  country: ''}}]};
 				deferred.resolve(paymentMethodList);
 			});
 			return deferred.promise;

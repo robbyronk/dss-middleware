@@ -1,24 +1,24 @@
 <div data-ng-controller="ErrorCtrl">
 	<div id="errorsdiv" class="error" style="text-align:left;" data-ui-if="hasError()">
-		<div data-ui-if="errors != null && (errors.length > 1 || errorText.length > 0 || error.length > 0 || errorHeader.length > 0)">
-			<span data-ui-if="errorHeader.length > 0">
-				{{errorHeader}}
+		<div data-ui-if="errors.errorList != null && (errors.errorList.length > 1 || errors.errorText.length > 0 || errors.error.length > 0 || errors.errorHeader.length > 0)">
+			<span data-ui-if="errors.errorHeader.length > 0">
+				{{errors.errorHeader}}
 			</span>
 			
 			<ul>
-				<li data-ng-repeat="error in errors">{{error.key}}</li>
-				<li data-ng-hide="errorText.length == 0">{{errorText}}</li>
-				<li data-ng-hide="error.length == 0">{{error}}</li>
+				<li data-ng-repeat="repeatError in errors.errorList">{{repeatError.key}}</li>
+				<li data-ng-hide="errors.errorText.length == 0">{{errors.errorText}}</li>
+				<li data-ng-hide="errors.error.length == 0">{{errors.error}}</li>
 			</ul>
 			
 		</div>
-		<div data-ui-if="errors != null && errors.length == 1">
+		<div data-ui-if="errors.errorList != null && errors.errorList.length == 1">
 			<span>
-				{{errors[0].key}}
+				{{errors.errorList[0].key}}
 			</span>
 		</div>
-		<div data-ui-if="errors == null && errorText.length > 0">{{errorText}}</div>
-		<div data-ui-if="errors == null && error.length > 0">{{error}}</div>
+		<div data-ui-if="errors.errorList == null && errors.errorText.length > 0">{{errors.errorText}}</div>
+		<div data-ui-if="errors.errorList == null && errors.error.length > 0">{{errors.error}}</div>
 	</div>
 	
 	<div id="clientSideErrorBox" class="error" style="display: none">

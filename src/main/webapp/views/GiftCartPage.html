@@ -4,8 +4,8 @@
 	
 	<div id="checkoutOptionDisplay">
 		<form data-ng-init="initPage()" data-ng-submit="proceedToCheckout()">
-			<p class="success" data-ng-show="successMessage.length > 0">
-				{{successMessage}}
+			<p class="success" data-ng-show="successMessage.message.length > 0">
+				{{successMessage.message}}
 			</p>
 			
 			<table style="width:100%; border:0; border-spacing:0">
@@ -20,7 +20,7 @@
 							</tr>
 			
 							<!-- My Gift History Detail Row -->
-							<tr data-ng-show="emptyCart">
+							<tr data-ng-show="emptyCart.empty">
 								<td colspan="6">
 									<table style="width:95%;">
 										<tr>
@@ -32,7 +32,7 @@
 								</td>
 							</tr>
 							
-							<tr data-ng-hide="emptyCart" class="alternatingRows" data-ng-repeat="line in giftLines">
+							<tr data-ng-hide="emptyCart.empty" class="alternatingRows" data-ng-repeat="line in giftLines.lines">
 								<td align="left" style="padding: 4px" colspan="2">
 									&nbsp;<a data-ng-click="viewDesig(line.designationNumber)">{{getWebTitle(line.designationNumber)}}</a><br/>
 									<span>&nbsp;{{getDesigType(line.designationNumber)}} #{{line.designationNumber}}</span>
@@ -56,15 +56,18 @@
 							<tr>
 								<td colspan="6">
 									<table style="border:0; width:100%; padding:3px; border-spacing:0;">
-										<tr data-ng-repeat="frequency in frequencies">
-											<td align="right"><span class="goldText">My {{frequency}} Gift Total:</span> <span class="giftNumbers" style="font-weight:bold;">${{getFrequencyTotal(frequency) | number:2}}</span></td>
+										<tr data-ng-repeat="frequency in usedFrequencies.list">
+											<td align="right">
+												<span class="goldText">My {{frequency}} Gift Total:</span> 
+												<span class="giftNumbers" style="font-weight:bold;">${{getFrequencyTotal(frequency) | number:2}}</span>
+											</td>
 										</tr>
 									</table>
 								</td>
 							</tr>
 			
 							<!-- Add More Gifts Button Row -->
-							<tr class="tableFooter" data-ng-hide="emptyCart">
+							<tr class="tableFooter" data-ng-hide="emptyCart.empty">
 								<td colspan="6" class="td-no-padding">
 									<table style="margin-bottom:0; border:0; width:100%; padding:3px; border-spacing:0;">
 			  								<tr>
@@ -79,7 +82,7 @@
 								</td>
 							</tr>
 						</table>
-						<table style="width:620px; border:0; border-spacing:0; padding:3px;" data-ng-show="emptyCart">
+						<table style="width:620px; border:0; border-spacing:0; padding:3px;" data-ng-show="emptyCart.empty">
 							<tr height="5">
 								<td colspan="3">&nbsp;</td>
 							</tr>

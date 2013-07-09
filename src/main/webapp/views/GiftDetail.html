@@ -1,6 +1,6 @@
 <div id="content" style="min-height: 50px;">
-	<h1 class="pagetitle" data-ng-hide="!isNew">New Gift</h1>
-	<h1 class="pagetitle" data-ng-hide="isNew">Edit Gift</h1>
+	<h1 class="pagetitle" data-ng-hide="!isNew.value">New Gift</h1>
+	<h1 class="pagetitle" data-ng-hide="isNew.value">Edit Gift</h1>
 	<br />
 	
 	<div data-ng-include="'includes/errors.html'"></div>
@@ -21,14 +21,18 @@
 					<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
 			
 					<div class="giftAmounts" >
-						<ul data-ng-repeat="amount in amounts">
+						<ul data-ng-repeat="amount in amounts.list">
 							<li>
-								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount"  data-ng-value="amount" data-ng-change="setFocusOther()" />
+								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount" 
+									data-ng-value="amount" data-ng-change="setFocusOther()" />
 								<div class="actualAmount" data-ng-hide="$last"><b class="giftNumbers">${{amount}}</b></div>
 								<div class="actualAmount" data-ng-hide="!$last"><b>{{amount}}</b></div>
 							</li>
 						</ul>
-						<div class="otherText"><input type="text" class="inputStyle" size="15" data-ng-model="$parent.otherValue" data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" data-other-amount-validate /></div>
+						<div class="otherText">
+							<input type="text" class="inputStyle" size="15" data-ng-model="$parent.otherValue" 
+								data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" data-other-amount-validate />
+						</div>
 					</div>
 					<br /><br />
 				</td>
@@ -42,13 +46,15 @@
 			
 			<tr>
 				<td height="30" colspan="3" style="text-align: center;">
-					<span data-ng-repeat="frequency in frequencies">
+					<span data-ng-repeat="frequency in frequencies.list">
 						<span data-ng-switch="frequency.dropdownValue">
 							<span data-ng-switch-when="Single">
-								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> <b>{{frequency.dropdownValue}} Gift</b> &nbsp;&nbsp;
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> 
+								<b>{{frequency.dropdownValue}} Gift</b> &nbsp;&nbsp;
 							</span>
 							<span data-ng-switch-default>
-								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> <b>{{frequency.dropdownValue}}</b> &nbsp;&nbsp;
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> 
+								<b>{{frequency.dropdownValue}}</b> &nbsp;&nbsp;
 							</span>
 						</span>
 					</span>
@@ -64,10 +70,10 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<select data-ng-model="transactionMonth" 
 							data-ng-change="refreshDrawDays();"
-							data-ng-options="month as month.display for month in transactionMonths"></select>
+							data-ng-options="month as month.display for month in transactionMonths.months"></select>
 				</td>
 				<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
-					<select data-ng-model="transactionDay" data-ng-options="day.key as day.value for day in transactionDays"></select>
+					<select data-ng-model="transactionDay.day" data-ng-options="day.key as day.value for day in transactionDays"></select>
 				</td>
 			</tr>
 			
@@ -120,18 +126,18 @@
 			
 			<tr class="tableFooter">
 				<td align="left" height="30" colspan="1">
-					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="!isNew">Cancel</a>
-					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="isNew">Back</a>	
+					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="!isNew.value">Cancel</a>
+					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="isNew.value">Back</a>	
 				</td>
 			
 				<td align="right" height="30" colspan="2">
 					<!-- TODO: Add logic to determine Update or Add -->
-			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" data-ng-hide="!isNew" />
-			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Update Gift Cart" data-ng-hide="isNew" />
+			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" data-ng-hide="!isNew.value" />
+			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Update Gift Cart" data-ng-hide="isNew.value" />
 			  	</td>
 			</tr>
 		</table>
-	</form>			
+	</form>
 	
 	<span data-ng-include="'includes/footer-text.html'"></span>
 	<div class="clear"></div>
