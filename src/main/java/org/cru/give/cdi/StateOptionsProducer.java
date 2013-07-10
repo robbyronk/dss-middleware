@@ -12,7 +12,7 @@ import org.cru.give.model.StateOptions;
 @ApplicationScoped
 public class StateOptionsProducer
 {
-	public static String FREQUENCY_LOV_TYPE = "STATE_ABBREV";
+	public static String STATE_LOV_TYPE = "STATE_ABBREV";
 	
 	StateOptions stateOptions;
 	
@@ -22,7 +22,7 @@ public class StateOptionsProducer
 	public void init()
 	{
 		stateOptions = new StateOptions(em.createQuery("SELECT lov FROM ListOfValues lov WHERE lov.dropdownType = :lovType", ListOfValues.class)
-				.setParameter("lovType", FREQUENCY_LOV_TYPE)
+				.setParameter("lovType", STATE_LOV_TYPE)
 				.getResultList());
 	}
 	

@@ -12,7 +12,7 @@ import org.cru.give.model.ListOfValues;
 @ApplicationScoped
 public class CountryOptionsProducer
 {
-public static String FREQUENCY_LOV_TYPE = "COUNTRY";
+public static String COUNTRY_LOV_TYPE = "COUNTRY";
 	
 	CountryOptions countryOptions;
 	
@@ -22,7 +22,7 @@ public static String FREQUENCY_LOV_TYPE = "COUNTRY";
 	public void init()
 	{
 		countryOptions = new CountryOptions(em.createQuery("SELECT lov FROM ListOfValues lov WHERE lov.dropdownType = :lovType", ListOfValues.class)
-				.setParameter("lovType", FREQUENCY_LOV_TYPE)
+				.setParameter("lovType", COUNTRY_LOV_TYPE)
 				.getResultList());
 	}
 	
