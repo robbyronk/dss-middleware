@@ -132,15 +132,15 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.getWebTitle = function(designationNumber) {
-			return designationService.getWebTitle();
+			return designationService.getWebTitle(designationNumber);
 		};
 		
 		$scope.getDesigType = function(designationNumber) {
-			return designationService.getDesigType();
+			return designationService.getDesigType(designationNumber);
 		};
 		
 		$scope.isStaff = function(designationNumber) {
-			return !designationService.isMinistry();
+			return !designationService.isMinistry(designationNumber);
 		};
 		
 		$scope.edit = function(giftId) {
