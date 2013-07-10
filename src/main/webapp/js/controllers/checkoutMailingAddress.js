@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutMailingAddressCtrl', function ($scope, $location, giftCrud, cartCrud, addressService, cartResolved) {
+	.controller('CheckoutMailingAddressCtrl', function ($scope, $location, 
+			giftCrud, cartCrud, addressService, cartResolved, prefixCrud) {
 		
 		$scope.initPage = function() {
 			$scope.cart = cartResolved;
 			
 			//TODO: Get these from the server
 			$scope.personalInfo = {isStaff: false, hasPaymentMethods: false};
-			$scope.prefixes = {list: [{namePrefix: 'Mr.', namePrefixCode: 'Mr'},
-			                          {namePrefix: 'Mrs.', namePrefixCode: 'Mrs'},
-			                          {namePrefix: 'Lieutenant Commander (NAVY,CG)', namePrefixCode: 'LCDR'}]};
+			
+			prefixCrud.retrieve().then(function(prefixes) {
+				$scope.prefixes = prefixes;
+			});
+			
 			$scope.suffixes = {list: [{suffix: 'Jr.', nameSuffix: 'Jr.'},
 			                          {suffix: 'Sr.', nameSuffix: 'Sr.'},
 			                          {suffix: 'II', nameSuffix: 'II'},

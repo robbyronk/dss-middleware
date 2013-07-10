@@ -2,7 +2,6 @@ package org.cru.give.model;
 
 import java.util.List;
 
-
 public class StateOptions
 {
 	List<ListOfValues> stateOptions;

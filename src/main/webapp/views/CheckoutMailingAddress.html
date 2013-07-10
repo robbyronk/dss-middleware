@@ -74,7 +74,7 @@
 								<span class="redhighlight">*</span> <b>Title</b><br/>
 								<select data-ng-required="true" 
 									data-ng-model="cart.primaryName.namePrefix"
-									data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes.list">
+									data-ng-options="prefix.dropdownValue as prefix.dropdownName for prefix in prefixes.list">
 								</select>
 							</td>
 						</tr>
@@ -155,7 +155,7 @@
 							<td width="">
 								Title<br/>
 								<select class="inputStyle" data-ng-model="cart.spouseName.namePrefix" 
-									data-ng-options="prefix.namePrefixCode as prefix.namePrefix for prefix in prefixes.list">
+									data-ng-options="prefix.dropdownValue as prefix.dropdownName for prefix in prefixes.list">
 								</select>
 							</td>
 						</tr>
