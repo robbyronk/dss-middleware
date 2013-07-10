@@ -4,29 +4,33 @@ angular.module('dssMiddlewareApp')
 	.factory('frequencyService', function() {
 		var frequencyService = {};
 		
-		//NOTE: It would be better to just hard code frequencies
+		/**
+		 * Sort the frequencies based on the Order_By 
+		 * value.
+		 * 
+		 * @param frequencies - unsorted list of frequencies
+		 * 
+		 * @returns sorted list of frequencies
+		 */
 		frequencyService.getSortedFrequencies = function(frequencies) {
-			var frequencyPriority = ['Single', 'Monthly', 'Quarterly',
-			                         'Semi-Annual', 'Annual'];
-			var sortedFrequencies = {list: []};
-			
-			for(var i = 0; i < frequencyPriority.length; i++) {
-				for(var j = 0; j < frequencies.length; j++) {
-					if(frequencies[j].dropdownValue == frequencyPriority[i]) {
-						sortedFrequencies.list.push(frequencies[j]);
-					}
+			frequencies.list.sort(function(freq1, freq2) {
+				if(freq1.dropdownOrderBy == null && freq2.dropdownOrderBy != null) {
+					return -1;
 				}
-			}
-			
-			return sortedFrequencies;
-		};
-		
-		frequencyService.getHardCodedFrequencies = function() {
-			return {list: [{dropdownValue: 'Single', dropdownName: 'Single'},
-			               {dropdownValue: 'Monthly', dropdownName: 'Monthly'},
-			               {dropdownValue: 'Quarterly', dropdownName: 'Quarterly'},
-			               {dropdownValue: 'Semi-Annual', dropdownName: 'Semi-Annual'},
-			               {dropdownValue: 'Annual', dropdownName: 'Annual'}]};
+				else if(freq1.dropdownOrderBy != null && freq2.dropdownOrderBy == null) {
+					return 1;
+				}
+				else if(freq1.dropdownOrderBy > freq2.dropdownOrderBy) {
+					return 1;
+				}
+				else if(freq1.dropdownOrderBy < freq2.dropdownOrderBy) {
+					return -1;
+				}
+				else {
+					return 0;
+				}
+			});
+			return frequencies;
 		};
 		
 		return frequencyService;

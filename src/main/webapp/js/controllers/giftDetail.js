@@ -81,8 +81,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.initPage = function(){
-			$scope.frequencies = frequencyService.getSortedFrequencies(frequenciesResolved.list);
-//			$scope.frequencies = frequencyService.getHardCodedFrequencies();
+			$scope.frequencies = frequencyService.getSortedFrequencies(frequenciesResolved);
 			$scope.showComment = {staff: 'N', dsg: 'N'};
 			$scope.clientSideError = {message: ''};
 			$scope.hasError = {value: false};
