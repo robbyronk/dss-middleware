@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, cartCrud, giftCrud, designationService) {
+	.controller('GiftCartCtrl', function ($scope, $routeParams, $location, $window, 
+			cartCrud, giftCrud, designationService) {
 		var params = $routeParams;
 		
 		$scope.initPage = function() {
@@ -14,6 +15,9 @@ angular.module('dssMiddlewareApp')
 				cartCrud.retrieve(params.cartId).then(function(results) {
 					$scope.cart = results;
 					$scope.giftLines = {lines: $scope.cart.gifts};
+//					$scope.giftLines = {lines: [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
+//							                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
+//							                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}]};
 					
 					//This is the case where a user deletes a line and the cart becomes empty
 					if($scope.giftLines.lines.length == 0) {
@@ -32,10 +36,6 @@ angular.module('dssMiddlewareApp')
 						$scope.calculateFrequencyTotals();
 					}
 				});
-				
-//				$scope.giftLines = {lines: [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
-//				                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
-//				                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}]};
 			}
 		};
 		
@@ -154,6 +154,7 @@ angular.module('dssMiddlewareApp')
 			});
 		};
 		
+		//TODO: Dynamic designation numbers
 		$scope.addMoreGifts = function() {
 			/* current logic:
 			 *  if type == ministry, go back to that ministry's page
@@ -161,13 +162,21 @@ angular.module('dssMiddlewareApp')
 			 *  if type == fund appeal, go back to that fund appeal's page
 			 *  this is based on the most recent gift given
 			 */
-			//TODO: Redirect back to the client
-			window.href = 'https://give-stage.cru.org/';
+			var mostRecentGift = $scope.giftLines.lines.slice(-1)[0];
+			if(designationService.getDesigType(mostRecentGift.designationNumber) === 'Ministry') {
+				$window.location.href = 'https://give-stage.cru.org/2843160';
+			}
+			else if(designationService.getDesigType(mostRecentGift.designationNumber) === 'Fund Appeal') {
+				$window.location.href = 'https://give.cru.org/2863048_2743?CampaignCode=425D01';
+			}
+			else {
+				$window.location.href = 'https://give-stage.cru.org/';
+			}
 		};
 		
 		$scope.continueBrowsing = function() {
 			//TODO: Redirect back to the client
-			window.href = 'https://give-stage.cru.org/';
+			$window.location.href = 'https://give-stage.cru.org/';
 		};
 		
 		$scope.viewDesig = function(designation) {
