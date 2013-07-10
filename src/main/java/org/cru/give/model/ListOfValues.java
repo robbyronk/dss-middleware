@@ -3,9 +3,11 @@ package org.cru.give.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Entity
+@IdClass(ListOfValuesPK.class)
 @Table(name = "S_LST_OF_VAL")
 public class ListOfValues implements java.io.Serializable
 {
