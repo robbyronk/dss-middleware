@@ -2,7 +2,7 @@
 
 angular.module('dssMiddlewareApp')
 	.controller('CheckoutMailingAddressCtrl', function ($scope, $location, 
-			giftCrud, cartCrud, addressService, cartResolved, prefixCrud) {
+			giftCrud, cartCrud, addressService, cartResolved, prefixCrud, suffixCrud) {
 		
 		$scope.initPage = function() {
 			$scope.cart = cartResolved;
@@ -14,11 +14,10 @@ angular.module('dssMiddlewareApp')
 				$scope.prefixes = prefixes;
 			});
 			
-			$scope.suffixes = {list: [{suffix: 'Jr.', nameSuffix: 'Jr.'},
-			                          {suffix: 'Sr.', nameSuffix: 'Sr.'},
-			                          {suffix: 'II', nameSuffix: 'II'},
-			                          {suffix: 'III', nameSuffix: 'III'},
-			                          {suffix: 'IV', nameSuffix: 'IV'}]};
+			suffixCrud.retrieve().then(function(suffixes) {
+				$scope.suffixes = suffixes;
+			});
+			
 			$scope.phoneTypes = {types: [{display: 'Home', value: 'HOME'},
 			                             {display: 'Work', value: 'WORK'},
 			                             {display: 'Mobile', value: 'MOBILE'}]};

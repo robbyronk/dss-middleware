@@ -97,7 +97,7 @@
 						    <td width="">
 						    	Suffix<br/> 
 						    	<select data-ng-model="cart.primaryName.suffix" 
-						    		data-ng-options="suffix.nameSuffix as suffix.suffix for suffix in suffixes.list">
+						    		data-ng-options="suffix.dropdownValue as suffix.dropdownName for suffix in suffixes.list">
 						    	</select>
 						    </td>
 						</tr>
@@ -178,7 +178,7 @@
 							<td width="">
 								Suffix<br/>
 								<select data-ng-model="cart.spouseName.suffix" 
-							    		data-ng-options="suffix.nameSuffix as suffix.suffix for suffix in suffixes.list">
+							    		data-ng-options="suffix.dropdownValue as suffix.dropdownName for suffix in suffixes.list">
 						    	</select> 
 						    </td>
 					  	</tr>
