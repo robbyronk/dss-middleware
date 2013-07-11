@@ -16,7 +16,7 @@
 						    <b>Card Type</b>
 						    <br/>
 						    <select data-ng-required="isRequired()" data-ng-model="selectedPayment.paymentType" 
-						    	data-ng-options="type for type in creditCardTypes.types">
+						    	data-ng-options="type.description for type in creditCardTypes">
 						    </select>
 						</td>
 						<td width="31%">

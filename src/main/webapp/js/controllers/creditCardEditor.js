@@ -1,11 +1,14 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CreditCardEditorCtrl', function($scope, addressService, creditCardEditorService, paymentEditorService) {
+	.controller('CreditCardEditorCtrl', function($scope, addressService, creditCardEditorService, 
+			paymentEditorService, creditCardTypeCrud) {
 		var addressToEdit = {};
 		
 		$scope.initPage = function() {
-			$scope.creditCardTypes = {types: ['American Express', 'Diners Club', 'Discover', 'MasterCard', 'Visa']};
+			creditCardTypeCrud.retrieve().then(function(cardTypes) {
+				$scope.creditCardTypes = cardTypes;
+			});
 			$scope.expiration = {
 					availableExpirationMonths: ['01', '02', '03', '04', '05', '06', 
 			                                    '07', '08', '09', '10', '11', '12'],
