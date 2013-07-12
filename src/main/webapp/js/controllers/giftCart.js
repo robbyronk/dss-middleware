@@ -17,7 +17,7 @@ angular.module('dssMiddlewareApp')
 					$scope.giftLines = {lines: $scope.cart.gifts};
 //					$scope.giftLines = {lines: [{designationNumber: '2843160', giftAmount: 50.00, giftFrequency: 'Single', startDate: ''}, 
 //							                    {designationNumber: '0550510', giftAmount: 100.00, giftFrequency: 'Monthly', startDate: '6/10/2013'}, 
-//							                    {designationNumber: '2863048', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}]};
+//							                    {designationNumber: '2571058', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}]};
 					
 					//This is the case where a user deletes a line and the cart becomes empty
 					if($scope.giftLines.lines.length == 0) {
@@ -167,7 +167,7 @@ angular.module('dssMiddlewareApp')
 				$window.location.href = 'https://give-stage.cru.org/2843160';
 			}
 			else if(designationService.getDesigType(mostRecentGift.designationNumber) === 'Fund Appeal') {
-				$window.location.href = 'https://give.cru.org/2863048_2743?CampaignCode=425D01';
+				$window.location.href = 'https://give-stage.cru.org/2571058_653';
 			}
 			else {
 				$window.location.href = 'https://give-stage.cru.org/';

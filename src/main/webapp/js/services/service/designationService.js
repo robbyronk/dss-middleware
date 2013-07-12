@@ -8,13 +8,13 @@ angular.module('dssMiddlewareApp')
 		designationService.getDesigType = function(designationNumber) {
 			if(designationNumber == null || designationNumber == '2843160') return 'Ministry';
 			else if(designationNumber == '0550510') return 'Staff';
-			else if(designationNumber == '2863048') return 'Fund Appeal';
+			else if(designationNumber == '2571058') return 'Fund Appeal';
 		};
 		
 		designationService.getWebTitle = function(designationNumber) {
 			if(designationNumber == null || designationNumber == '2843160') return 'Ryan T. Carlson';
 			else if(designationNumber == '0550510') return 'Marc and Evangeline Vergo';
-			else if(designationNumber == '2863048') return 'Orphan Care Outreach';
+			else if(designationNumber == '2571058') return 'Africa "JESUS" Film Equipment and Teams';
 		};
 		
 		designationService.isMinistry = function(designationNumber) {
