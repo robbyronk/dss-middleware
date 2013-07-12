@@ -217,7 +217,7 @@ describe('Checkout payment method controller tests', function() {
 			expect(selectedPayment.paymentMethod).toEqual('Credit Card');
 			
 			cart = {gifts: [{commentsToDonationServices: null,
-							 designationNumber: '2863048',
+							 designationNumber: '2571058',
 							 giftAmount: 50.0,
 							 giftFrequency: "Monthly",
 							 motivationCode: null,
