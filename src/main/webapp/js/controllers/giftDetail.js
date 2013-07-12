@@ -249,7 +249,7 @@ angular.module('dssMiddlewareApp')
 			
 			//see if we have a positive value in the Other box and Other is selected
 			if($scope.otherValue != undefined && $scope.otherValue != null 
-					&& $scope.otherValue.value.length > 0 && $scope.otherValue.value >= 0.01 
+					&& ($scope.otherValue.value.length > 0 || $scope.otherValue.value >= 0.01) //numbers don't have the .length property
 					&& $scope.gift.giftAmount === 'Other:') {
 				$scope.gift.giftAmount = $scope.otherValue.value;
 			}
