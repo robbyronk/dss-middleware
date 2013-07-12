@@ -260,9 +260,16 @@ angular.module('dssMiddlewareApp')
 			}
 			giftCrud.update($scope.gift).then(function(results) {
 				//TODO: Need some sort of way to tell the user that the server is working
-				cartCrud.updateCart(cart).then(function () {
+				
+				//if this is a new gift, we want to save the metadata on the cart
+				if(cart != null) { 
+					cartCrud.updateCart(cart).then(function () {
+						$location.path('/GiftCartPage/' + $scope.gift.cartId);
+					});
+				}
+				else {
 					$location.path('/GiftCartPage/' + $scope.gift.cartId);
-				});
+				}
 			});
 		};
 		
