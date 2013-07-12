@@ -5,7 +5,7 @@ angular.module('dssMiddlewareApp')
 			paymentEditorService, creditCardTypeCrud) {
 		var addressToEdit = {};
 		
-		$scope.initPage = function() {
+		$scope.initCreditCardEditor = function() {
 			creditCardTypeCrud.retrieve().then(function(cardTypes) {
 				$scope.creditCardTypes = cardTypes;
 			});

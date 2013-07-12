@@ -5,7 +5,7 @@ angular.module('dssMiddlewareApp')
 			cartCrud, giftCrud, designationService) {
 		var params = $routeParams;
 		
-		$scope.initPage = function() {
+		$scope.initGiftCart = function() {
 			$scope.successMessage = {message: ''};
 			
 			if(params.cartId == undefined) {
@@ -149,7 +149,7 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.remove = function(giftId) {
 			giftCrud.deleteGift(giftId).then(function() {
-				$scope.initPage();
+				$scope.initGiftCart();
 				$scope.successMessage.message = 'Your gift was successfully removed. Your updated gift cart is displayed below.';
 			});
 		};
@@ -179,7 +179,7 @@ angular.module('dssMiddlewareApp')
 			$window.location.href = 'https://give-stage.cru.org/';
 		};
 		
-		$scope.viewDesig = function(designation) {
+		$scope.viewDesig = function(designationNumber) {
 			//TODO: Redirect to give.cru.org/designation
 		};
 		

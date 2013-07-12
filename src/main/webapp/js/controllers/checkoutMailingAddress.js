@@ -4,7 +4,7 @@ angular.module('dssMiddlewareApp')
 	.controller('CheckoutMailingAddressCtrl', function ($scope, $location, 
 			giftCrud, cartCrud, addressService, cartResolved, prefixCrud, suffixCrud) {
 		
-		$scope.initPage = function() {
+		$scope.initCheckoutMailingAddress = function() {
 			$scope.cart = cartResolved;
 			
 			//TODO: Get these from the server
