@@ -1,16 +1,11 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('CheckoutSubmitGiftCtrl', function($scope, $routeParams, $location, $window, cartResolved, checkoutSubmitService, cartCrud) {
+	.controller('CheckoutSubmitGiftCtrl', function($scope, $routeParams, $location, cartResolved, checkoutSubmitService, cartCrud) {
 		$scope.initSubmitGiftPage = function() {
 			$scope.cart = cartResolved;
 			checkoutSubmitService.setCart($scope.cart);
 			$scope.showTransactionDayForSingleGifts = true;
-			
-			//TODO: Put these 3 variables into the cart
-			$scope.operatingSystem = navigator.platform;
-			$scope.screenWidth = $window.screen.width;
-			$scope.screenHeight = $window.screen.height;
 			$scope.endOfYearTextType = {type: ''};
 		};
 		

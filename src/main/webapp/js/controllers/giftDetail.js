@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dssMiddlewareApp')
-	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, drawDayEndpoints, 
+	.controller('GiftDetailCtrl', function ($scope, $routeParams, $location, $window, drawDayEndpoints, 
 			giftCrud, cartCrud, validationService, dateService, giftResolved, frequencyCrud, 
 			frequencyService, frequenciesResolved) {
 		var params = $routeParams;
@@ -24,6 +24,10 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.giftAmount = $scope.amounts.list[0];
 				$scope.gift.giftFrequency = $scope.frequencies.list[0].dropdownValue;
 				cart = cartAndGift.cart;
+				cart.checkoutType = 'STANDARD_CHECKOUT';  //TODO: Are we going to reuse this controller for branded checkout?
+				cart.operatingSystem = navigator.platform;
+				cart.screenWidth = $window.screen.width;
+				cart.screenHeight = $window.screen.height;
 				$scope.initTransactionDate(null);
 			});
 		};
@@ -165,7 +169,9 @@ angular.module('dssMiddlewareApp')
 			}
 			giftCrud.update($scope.gift).then(function(results) {
 				//TODO: Need some sort of way to tell the user that the server is working
-				$location.path('/GiftCartPage/' + $scope.gift.cartId);
+				cartCrud.updateCart(cart).then(function () {
+					$location.path('/GiftCartPage/' + $scope.gift.cartId);
+				});
 			});
 		};
 		

@@ -137,6 +137,15 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	@Column(name = "CC_COUNTRY")
 	private String ccBillingCountry;
 	
+	@Column(name = "CHECKOUT_TYPE")
+	private String checkoutType;
+	@Column(name = "OPERATING_SYSTEM")
+	private String operatingSystem;
+	@Column(name = "SCREEN_WIDTH")
+	private String screenWidth;
+	@Column(name = "SCREEN_HEIGHT")
+	private String screenHeight;
+	
 	
 	public Long getCartId()
 	{
@@ -563,5 +572,36 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	{
 		this.ccBillingCountry = ccBillingCountry;
 	}
-	
+	public String getCheckoutType()
+	{
+		return checkoutType;
+	}
+	public void setCheckoutType(String checkoutType)
+	{
+		this.checkoutType = checkoutType;
+	}
+	public String getOperatingSystem()
+	{
+		return operatingSystem;
+	}
+	public void setOperatingSystem(String operatingSystem)
+	{
+		this.operatingSystem = operatingSystem;
+	}
+	public String getScreenWidth()
+	{
+		return screenWidth;
+	}
+	public void setScreenWidth(String screenWidth)
+	{
+		this.screenWidth = screenWidth;
+	}
+	public String getScreenHeight()
+	{
+		return screenHeight;
+	}
+	public void setScreenHeight(String screenHeight)
+	{
+		this.screenHeight = screenHeight;
+	}
 }

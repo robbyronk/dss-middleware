@@ -75,6 +75,11 @@ public class CartService
 		giftCart.setOrganizationName(capNap.getOrganizationName());
 		giftCart.setPersonType(capNap.getAccountType());
 		
+		giftCart.setCheckoutType(capNap.getCheckoutType());
+		giftCart.setOperatingSystem(capNap.getOperatingSystem());
+		giftCart.setScreenWidth(capNap.getScreenWidth());
+		giftCart.setScreenHeight(capNap.getScreenHeight());
+		
 		giftCart.setGifts(giftService.fetchGiftsForCart(cartId));
 		
 		return giftCart;

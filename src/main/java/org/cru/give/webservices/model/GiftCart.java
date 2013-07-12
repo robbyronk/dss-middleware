@@ -39,6 +39,11 @@ public class GiftCart implements java.io.Serializable
 	String organizationName;
 	String personType;
 	
+	String checkoutType;
+	String operatingSystem;
+	String screenWidth;
+	String screenHeight;
+	
 	public CapturedNameAddressAndPayment asCapturedNameAddressAndPayment()
 	{
 		CapturedNameAddressAndPayment capturedNameAddressPayment = new CapturedNameAddressAndPayment();
@@ -101,6 +106,11 @@ public class GiftCart implements java.io.Serializable
 		capturedNameAddressPayment.setPhoneNumber(phoneNumber);
 		capturedNameAddressPayment.setOrganizationName(organizationName);
 		capturedNameAddressPayment.setAccountType(personType);
+		
+		capturedNameAddressPayment.setCheckoutType(checkoutType);
+		capturedNameAddressPayment.setOperatingSystem(operatingSystem);
+		capturedNameAddressPayment.setScreenWidth(screenWidth);
+		capturedNameAddressPayment.setScreenHeight(screenHeight);
 		return capturedNameAddressPayment;
 	}
 	
@@ -207,5 +217,45 @@ public class GiftCart implements java.io.Serializable
 
 	public void setPersonType(String personType) {
 		this.personType = personType;
+	}
+
+	public String getCheckoutType()
+	{
+		return checkoutType;
+	}
+
+	public void setCheckoutType(String checkoutType)
+	{
+		this.checkoutType = checkoutType;
+	}
+
+	public String getOperatingSystem()
+	{
+		return operatingSystem;
+	}
+
+	public void setOperatingSystem(String operatingSystem)
+	{
+		this.operatingSystem = operatingSystem;
+	}
+
+	public String getScreenWidth()
+	{
+		return screenWidth;
+	}
+
+	public void setScreenWidth(String screenWidth)
+	{
+		this.screenWidth = screenWidth;
+	}
+
+	public String getScreenHeight()
+	{
+		return screenHeight;
+	}
+
+	public void setScreenHeight(String screenHeight)
+	{
+		this.screenHeight = screenHeight;
 	}
 }
