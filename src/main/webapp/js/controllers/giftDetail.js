@@ -279,7 +279,7 @@ angular.module('dssMiddlewareApp')
 		 * user back to a detail page.
 		 */
 		$scope.cancel = function() {
-			if(params.edit === 'Y') {
+			if(params.giftId != null) {
 				$location.path('/GiftCartPage/' + $scope.gift.cartId);
 			}
 			else {
