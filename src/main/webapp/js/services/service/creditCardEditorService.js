@@ -36,12 +36,12 @@ angular.module('dssMiddlewareApp')
 				return true;
 			}
 			else if(billingAddress != null && mailingAddress != null &&
-					 billingAddress.streetAddress1 == mailingAddress.streetAddress1 && 
-					 billingAddress.streetAddress2 == mailingAddress.streetAddress2 && 
-					 billingAddress.city == mailingAddress.city && 
-					 billingAddress.state == mailingAddress.state && 
-					 billingAddress.zipCode == mailingAddress.zipCode && 
-					 billingAddress.country == mailingAddress.country) {
+					 billingAddress.streetAddress1 === mailingAddress.streetAddress1 && 
+					 billingAddress.streetAddress2 === mailingAddress.streetAddress2 && 
+					 billingAddress.city === mailingAddress.city && 
+					 billingAddress.state === mailingAddress.state && 
+					 billingAddress.zipCode === mailingAddress.zipCode && 
+					 billingAddress.country === mailingAddress.country) {
 				return true;
 			}
 			else {

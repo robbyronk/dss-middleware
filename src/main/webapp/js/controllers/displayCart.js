@@ -62,7 +62,7 @@ angular.module('dssMiddlewareApp')
 		$scope.getListForFrequency = function(frequency, gifts) {
 			var frequencyGifts = [];
 			for(var i = 0; i < gifts.length; i++) {
-				if(gifts[i].giftFrequency == frequency) {
+				if(gifts[i].giftFrequency === frequency) {
 					frequencyGifts.push(gifts[i]);
 				}
 			}

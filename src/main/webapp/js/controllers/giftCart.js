@@ -20,7 +20,7 @@ angular.module('dssMiddlewareApp')
 //							                    {designationNumber: '2571058', giftAmount: 47.50, giftFrequency: 'Monthly', startDate: '7/15/2013'}]};
 					
 					//This is the case where a user deletes a line and the cart becomes empty
-					if($scope.giftLines.lines.length == 0) {
+					if($scope.giftLines.lines.length === 0) {
 						var cartId = $scope.cart.cartId;
 						/* Delete cart to prevent empty carts sitting in the database
 						 * This is okay because a new cart will be created when 
@@ -50,19 +50,19 @@ angular.module('dssMiddlewareApp')
 			$scope.annualGifts = [];
 			
 			for(var i = 0; i < $scope.giftLines.lines.length; i++) {
-				if($scope.giftLines.lines[i].giftFrequency == 'Single') {
+				if($scope.giftLines.lines[i].giftFrequency === 'Single') {
 					$scope.singleGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines.lines[i].giftFrequency == 'Monthly') {
+				else if($scope.giftLines.lines[i].giftFrequency === 'Monthly') {
 					$scope.monthlyGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines.lines[i].giftFrequency == 'Quarterly') {
+				else if($scope.giftLines.lines[i].giftFrequency === 'Quarterly') {
 					$scope.quarterlyGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines.lines[i].giftFrequency == 'Semi-Annual') {
+				else if($scope.giftLines.lines[i].giftFrequency === 'Semi-Annual') {
 					$scope.semiAnnualGifts.push($scope.giftLines.lines[i]);
 				}
-				else if($scope.giftLines.lines[i].giftFrequency == 'Annual') {
+				else if($scope.giftLines.lines[i].giftFrequency === 'Annual') {
 					$scope.annualGifts.push($scope.giftLines.lines[i]);
 				}
 			}
@@ -124,11 +124,11 @@ angular.module('dssMiddlewareApp')
 		 * frequency.
 		 */
 		$scope.getFrequencyTotal = function(frequency) {
-			if(frequency == 'Single') return $scope.singleTotal;
-			else if(frequency == 'Monthly') return $scope.monthlyTotal;
-			else if(frequency == 'Quarterly') return $scope.quarterlyTotal;
-			else if(frequency == 'Semi-Annual') return $scope.semiAnnualTotal;
-			else if(frequency == 'Annual') return $scope.annualTotal;
+			if(frequency === 'Single') return $scope.singleTotal;
+			else if(frequency === 'Monthly') return $scope.monthlyTotal;
+			else if(frequency === 'Quarterly') return $scope.quarterlyTotal;
+			else if(frequency === 'Semi-Annual') return $scope.semiAnnualTotal;
+			else if(frequency === 'Annual') return $scope.annualTotal;
 		};
 		
 		$scope.getWebTitle = function(designationNumber) {
@@ -157,9 +157,9 @@ angular.module('dssMiddlewareApp')
 		//TODO: Dynamic designation numbers
 		$scope.addMoreGifts = function() {
 			/* current logic:
-			 *  if type == ministry, go back to that ministry's page
-			 *  if type == staff, go back to home page
-			 *  if type == fund appeal, go back to that fund appeal's page
+			 *  if type === ministry, go back to that ministry's page
+			 *  if type === staff, go back to home page
+			 *  if type === fund appeal, go back to that fund appeal's page
 			 *  this is based on the most recent gift given
 			 */
 			var mostRecentGift = $scope.giftLines.lines.slice(-1)[0];
@@ -192,15 +192,15 @@ angular.module('dssMiddlewareApp')
 		 * the specified recipient.
 		 */
 		$scope.hasComments = function(commentTo, gift) {
-			if(commentTo == 'recipient') {
+			if(commentTo === 'recipient') {
 				if(gift.commentsToRecipient == null || 
-						gift.commentsToRecipient.length == 0) {
+						gift.commentsToRecipient.length === 0) {
 					return false;
 				}
 			}
 			else {
 				if(gift.commentsToDonationServices == null || 
-						gift.commentsToDonationServices.length == 0) {
+						gift.commentsToDonationServices.length === 0) {
 					return false;
 				}
 			}

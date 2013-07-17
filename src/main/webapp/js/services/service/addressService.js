@@ -14,7 +14,7 @@ angular.module('dssMiddlewareApp')
 		
 		addressServiceObject.isCanada = function(address) {
 			if(address == undefined) return false;
-			return address.country == 'Canada';
+			return address.country === 'Canada';
 		};
 		
 		addressServiceObject.getDisplayAddress = function() {
@@ -43,7 +43,7 @@ angular.module('dssMiddlewareApp')
 		
 		addressServiceObject.removeUnusedAddressInformation = function(address) {
 			//If USA, remove address line 4
-			if(address.country == 'USA') {
+			if(address.country === 'USA') {
 				address.streetAddress4 = null;
 			}
 			else {

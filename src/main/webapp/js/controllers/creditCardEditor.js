@@ -59,8 +59,8 @@ angular.module('dssMiddlewareApp')
 				}
 				
 				//If blank, set country to the current mailing address country or USA if that is blank
-				if(addressToEdit.country == '' || addressToEdit.country == null) {
-					if($scope.cart.mailingAddress != null && $scope.cart.mailingAddress.country != '') {
+				if(addressToEdit.country == null || addressToEdit.country === '') {
+					if($scope.cart.mailingAddress != null && $scope.cart.mailingAddress.country !== '') {
 						addressToEdit.country = $scope.cart.mailingAddress.country;
 					}
 					else {

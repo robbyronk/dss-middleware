@@ -15,7 +15,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.errorsSizeOne = function() {
-			return $scope.errors.errorList.length == 1;
+			return $scope.errors.errorList.length === 1;
 		};
 		
 		$scope.$on('updateError', function(event, message) {

@@ -25,11 +25,11 @@ angular.module('dssMiddlewareApp')
 			$scope.failoverMode = {isFailover: false};
 			
 			//If blank, set country code to the default
-			if($scope.cart.mailingAddress.country == '' || $scope.cart.mailingAddress.country == null) {
+			if($scope.cart.mailingAddress.country == null || $scope.cart.mailingAddress.country === '') {
 				$scope.cart.mailingAddress.country = 'USA';
 			}
 			
-			if($scope.cart.personType == '' || $scope.cart.personType == null) {
+			if($scope.cart.personType == null || $scope.cart.personType === '') {
 				$scope.cart.personType = 'Household';
 			}
 			

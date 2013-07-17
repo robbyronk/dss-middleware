@@ -191,7 +191,7 @@ angular.module('dssMiddlewareApp')
 		
 		$scope.getTransactionMonthIndex = function(monthObject, transactionMonths) {
 			for(var i = 0; i < transactionMonths.length; i++) {
-				if(transactionMonths[i].display == monthObject.display) {
+				if(transactionMonths[i].display === monthObject.display) {
 					return i;
 				}
 			}
@@ -254,7 +254,7 @@ angular.module('dssMiddlewareApp')
 				$scope.gift.giftAmount = $scope.otherValue.value;
 			}
 			
-			if($scope.gift.giftFrequency != 'Single') {
+			if($scope.gift.giftFrequency !== 'Single') {
 				$scope.gift.dayOfMonth = $scope.transactionDay.day;
 				$scope.gift.startDate = dateService.createDate($scope.transactionMonth.year, $scope.transactionMonth.month, $scope.transactionDay.day);
 			}
@@ -279,7 +279,7 @@ angular.module('dssMiddlewareApp')
 		 * user back to a detail page.
 		 */
 		$scope.cancel = function() {
-			if(params.edit == 'Y') {
+			if(params.edit === 'Y') {
 				$location.path('/GiftCartPage/' + $scope.gift.cartId);
 			}
 			else {

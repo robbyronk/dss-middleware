@@ -109,7 +109,7 @@ angular.module('dssMiddlewareApp')
 					paymentEditorService.setBankAccountRequired(true);
 				}
 			}
-			else if(params.transType == 'BA') {
+			else if(params.transType === 'BA') {
 				transType.type = 'BA';
 				selectedPayment.paymentMethod = 'EFT';
 				selectedPayment.paymentType = 'Checking';
@@ -141,7 +141,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.setTransTypeVariables = function(transType) {
-			if(transType == 'BA') {
+			if(transType === 'BA') {
 				$scope.selectedPayment = paymentEditorService.getSelectedPayment();
 				if($scope.selectedPayment.paymentType == undefined) {
 					$scope.selectedPayment.paymentType = 'Checking';
@@ -157,7 +157,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.shouldPointToMailAddrOnInit = function(mailingAddress, billingAddress) {
-			return billingAddress == null || billingAddress.streetAddress1 == '' || 
+			return billingAddress == null || billingAddress.streetAddress1 === '' || 
 				creditCardEditorService.areAddressesEffectivelyTheSame(mailingAddress, billingAddress);
 		};
 		

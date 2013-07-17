@@ -28,7 +28,7 @@ angular.module('dssMiddlewareApp')
 //		 			  			  	  country: ''}};
 			$scope.payment = $scope.cart.payment;
 			
-			if($scope.payment.paymentMethod == 'Credit Card') {
+			if($scope.payment.paymentMethod === 'Credit Card') {
 				$scope.setDisplayAddress($scope.shouldPointToMailAddrOnInit($scope.cart.mailingAddress, 
 						$scope.payment.billingAddress));
 			}
@@ -47,7 +47,7 @@ angular.module('dssMiddlewareApp')
 		
 		//TODO: Perhaps move this to a service
 		$scope.shouldPointToMailAddrOnInit = function(mailingAddress, billingAddress) {
-			return billingAddress == null || billingAddress.streetAddress1 == '' || 
+			return billingAddress == null || billingAddress.streetAddress1 === '' || 
 				creditCardEditorService.areAddressesEffectivelyTheSame(mailingAddress, billingAddress);
 		};
 		
@@ -87,7 +87,7 @@ angular.module('dssMiddlewareApp')
 		};
 		
 		$scope.backToPayment = function() {
-			//TODO: if(cart.paymentSource == NEW) redirect to /CheckoutPaymentMethod/cartId
+			//TODO: if(cart.paymentSource === 'NEW') redirect to /CheckoutPaymentMethod/cartId
 			$location.path('/CheckoutSelectPaymentMethod/' + $scope.cart.cartId);
 		};
 		

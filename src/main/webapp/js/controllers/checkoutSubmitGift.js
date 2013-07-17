@@ -14,7 +14,7 @@ angular.module('dssMiddlewareApp')
 		 */
 		$scope.cartHasSingleFrequencyGift = function(cart) {
 			for(var i = 0; i < cart.gifts.length; i++) {
-				if(cart.gifts[i].giftFrequency == 'Single') {
+				if(cart.gifts[i].giftFrequency === 'Single') {
 					$scope.endOfYearTextType.type = 'SubmitGift';
 					return true;
 				}
