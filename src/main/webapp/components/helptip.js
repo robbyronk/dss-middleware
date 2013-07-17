@@ -152,7 +152,7 @@ var helpTipHandler = {
 	},
 	
 	anchorKeyDown:	function (e) {
-		if (!e) e = window.event
+		if (!e) e = window.event;
 		if (e.keyCode == 27) {	// ESC
 			helpTipHandler.hideHelpTip(this);
 		}

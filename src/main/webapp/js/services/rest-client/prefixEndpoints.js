@@ -2,11 +2,11 @@
 
 angular.module('dssMiddlewareApp')
 	.factory('prefixEndpoints', ['$http', function($http) {
-		var prefixEndpoints = {};
+		var prefixEndpointsObject = {};
 		
-		prefixEndpoints.retrieve = function() {
+		prefixEndpointsObject.retrieve = function() {
 			return $http.get('rest/prefixes');
 		};
 		
-		return prefixEndpoints;
+		return prefixEndpointsObject;
 	}]);

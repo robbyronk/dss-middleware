@@ -50,32 +50,33 @@
 						</tr>
 						<tr>
 							<td width="15">&nbsp;</td>
-							<td align="left" colspan="2">
-								<span data-ng-show="selectedPayment.paymentMethod == 'EFT'">
+							<td align="left" colspan="2" data-ng-show="selectedPayment.paymentMethod == 'EFT'">
 									<br />
 									<b>Bank Name:</b> {{selectedPayment.bankName}}<br />
 									<b>Account Type:</b> {{selectedPayment.paymentType}}<br />
 									<b>Bank Account Number:</b> {{getAccountMasked(selectedPayment)}}<br />
 									<b>Routing Number:</b> {{selectedPayment.bankRoutingNumber}}<br /><br />
-								</span>
-								<span data-ng-show="selectedPayment.paymentMethod == 'Credit Card'">
-									<br />
-									<b>Card Type:</b> {{selectedPayment.paymentType}}<br />
-									<b>Card Number:</b> {{getAccountMasked(selectedPayment)}}<br />
+							</td>
+							<td align="left" colspan="2" data-ng-show="selectedPayment.paymentMethod == 'Credit Card'">
+								<br />
+								<b>Card Type:</b> {{selectedPayment.paymentType}}<br />
+								<b>Card Number:</b> {{getAccountMasked(selectedPayment)}}<br />
+								
+								<hr style="width: 100%; border-bottom:1px dashed #777; border-top:0px; 
+									border-left:0px; border-right:0px; line-height:0px; height:1px;" 
+									data-ng-show="!editingCreditCard.beingEdited" />
 									
-									<span data-ng-show="!editingCreditCard.beingEdited">
-										<hr style="width: 100%; border-bottom:1px dashed #777; border-top:0px; border-left:0px; border-right:0px; line-height:0px; height:1px;" />
-										<br />
-										<b>Expiration Date:</b> {{longMonthYearDate(selectedPayment.expirationMonth, selectedPayment.expirationYear)}}
-										<span style="float: right; position: relative; left: -167px;">
-											<a data-ng-click="editCreditCard(selectedPayment)">Edit</a>
-										</span> <br />
-	
-										<b>Name On Card:</b> {{selectedPayment.cardholderName}} <br />
-										<b>Billing Address:</b>
-										<span data-ng-include="'includes/DisplayAddress.html'" data-ng-controller="AddressCtrl" data-ng-init="initAddresses()"></span>
-										<br /><br />
-									</span>
+								<span data-ng-show="!editingCreditCard.beingEdited">
+									<br />
+									<b>Expiration Date:</b> {{longMonthYearDate(selectedPayment.expirationMonth, selectedPayment.expirationYear)}}
+									<span style="float: right; position: relative; left: -167px;">
+										<a data-ng-click="editCreditCard(selectedPayment)">Edit</a>
+									</span> <br />
+
+									<b>Name On Card:</b> {{selectedPayment.cardholderName}} <br />
+									<b>Billing Address:</b>
+									<span data-ng-include="'includes/DisplayAddress.html'" data-ng-controller="AddressCtrl" data-ng-init="initAddresses()"></span>
+									<br /><br />
 								</span>
 							</td>
 						</tr>

@@ -2,11 +2,11 @@
 
 angular.module('dssMiddlewareApp')
 	.factory('creditCardTypeEndpoints', ['$http', function($http) {
-		var creditCardTypeEndpoints = {};
+		var creditCardTypeEndpointsObject = {};
 		
-		creditCardTypeEndpoints.retrieve = function() {
+		creditCardTypeEndpointsObject.retrieve = function() {
 			return $http.get('rest/cards');
 		};
 		
-		return creditCardTypeEndpoints;
+		return creditCardTypeEndpointsObject;
 	}]);
