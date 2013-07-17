@@ -21,4 +21,14 @@ public class ListOfValuesPK implements java.io.Serializable
 		this.dropdownName = dropdownName;
 		this.dropdownType = dropdownType;
 	}
+	
+	public boolean equals(Object b)
+	{
+		return super.equals(b);
+	}
+	
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
 }
