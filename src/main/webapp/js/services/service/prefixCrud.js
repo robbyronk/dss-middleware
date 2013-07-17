@@ -2,9 +2,9 @@
 
 angular.module('dssMiddlewareApp')
 	.factory('prefixCrud', ['$q', 'prefixEndpoints', function($q, prefixEndpoints) {
-		var prefixCrud = {};
+		var prefixCrudObject = {};
 		
-		prefixCrud.retrieve = function() {
+		prefixCrudObject.retrieve = function() {
 			var deferred = $q.defer();
 			
 			prefixEndpoints.retrieve()
@@ -14,5 +14,5 @@ angular.module('dssMiddlewareApp')
 			return deferred.promise;
 		};
 		
-		return prefixCrud;
+		return prefixCrudObject;
 	}]);
