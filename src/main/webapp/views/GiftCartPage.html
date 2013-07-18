@@ -1,0 +1,116 @@
+<div id="content" style="min-height: 50px;">
+	<h1 class="pagetitle">Your Gift Cart</h1>
+	<br />
+	
+	<div id="checkoutOptionDisplay">
+		<form data-ng-init="initGiftCart()" data-ng-submit="proceedToCheckout()">
+			<p class="success" data-ng-show="successMessage.message.length > 0">
+				{{successMessage.message}}
+			</p>
+			
+			<table style="width:100%; border:0; border-spacing:0">
+				<tr> 
+					<td>
+						<table style="border:solid 1px black; width:95%; border-spacing:0; padding:0;">
+							<!-- My Gift History Header Row -->
+							<tr>
+								<td class="tableHeader" colspan="6" valign="middle" align="left">
+									<b>I would like my gift to benefit the ministry of:</b>
+								</td>
+							</tr>
+			
+							<!-- My Gift History Detail Row -->
+							<tr data-ng-show="emptyCart.empty">
+								<td colspan="6">
+									<table style="width:95%;">
+										<tr>
+											<td>
+												<h4>You currently have no gifts in your gift cart. Once you add a gift it will appear on this page.</h4>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							
+							<tr data-ng-hide="emptyCart.empty" class="alternatingRows" data-ng-repeat="line in giftLines.lines">
+								<td align="left" style="padding: 4px" colspan="2">
+									&nbsp;<a data-ng-click="viewDesig(line.designationNumber)">{{getWebTitle(line.designationNumber)}}</a><br/>
+									<span>&nbsp;{{getDesigType(line.designationNumber)}} #{{line.designationNumber}}</span>
+								</td>
+								<td align="left" style="padding: 4px" colspan="2">
+									&nbsp;<b class="giftNumbers">${{line.giftAmount | number:2}}</b>
+									{{line.giftFrequency}} Gift
+									<br />&nbsp;<span data-ng-hide="line.giftFrequency != 'Single'">Transaction Date: 1-2 Business Days</span>
+									<span data-ng-hide="line.giftFrequency == 'Single'">(First Gift: {{line.startDate | date:'M/d/yyyy'}})</span>
+									<span data-ng-show="hasComments('recipient', line) && isStaff(line.designationNumber)"><br />&nbsp;Includes Comments For Staff Member</span>
+									<span data-ng-show="hasComments('recipient', line) && !isStaff(line.designationNumber)"><br />&nbsp;Includes Comments For Ministry</span>
+									<span data-ng-show="hasComments('dsg', line)"><br />&nbsp;Includes Comments For Donation Services</span>
+								</td>
+								<td align="center" style="padding: 4px" colspan="2">
+									<a data-ng-click="edit(line.giftId)">Edit</a>&nbsp;|&nbsp;<a data-ng-click="remove(line.giftId)">Remove</a>
+								</td>
+							</tr>						
+			
+			
+			 				<!-- Gift Summary Row -->
+							<tr>
+								<td colspan="6">
+									<table style="border:0; width:100%; padding:3px; border-spacing:0;">
+										<tr data-ng-repeat="frequency in usedFrequencies.list">
+											<td align="right">
+												<span class="goldText">My {{frequency}} Gift Total:</span> 
+												<span class="giftNumbers" style="font-weight:bold;">${{getFrequencyTotal(frequency) | number:2}}</span>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+			
+							<!-- Add More Gifts Button Row -->
+							<tr class="tableFooter" data-ng-hide="emptyCart.empty">
+								<td colspan="6" class="td-no-padding">
+									<table style="margin-bottom:0; border:0; width:100%; padding:3px; border-spacing:0;">
+			  								<tr>
+												<td  height="30" align="left" valign="middle">
+													<a class="greyButton" data-ng-click="addMoreGifts()" style="font-size:18px;">Add More Gifts</a>
+												</td>
+												<td colspan="3" height="30" align="right" valign="middle">
+													<input type="submit" class="goldButton" value="Proceed to Checkout">
+												</td>
+			  								</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<table style="width:620px; border:0; border-spacing:0; padding:3px;" data-ng-show="emptyCart.empty">
+							<tr height="5">
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr>
+								<td align="center">
+									<p align="center">
+										<a class="greyButton" data-ng-click="continueBrowsing()">Continue Browsing</a>
+									</p>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<span data-ng-include="'includes/footer-text.html'"></span>
+	<div class="clear"></div>
+</div>
+
+<div id="sidebar">
+	<div class="box">
+		<h3>More Choices</h3>
+		<span data-ng-include="'includes/searchbox.html'"></span>		
+	</div>
+	<span data-ng-include="'includes/need-help.html'"></span>
+</div>
+
+<div class="clear"></div>
+<div class="clear"></div>

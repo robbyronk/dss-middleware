@@ -1,0 +1,151 @@
+<div id="content" style="min-height: 50px;">
+	<h1 class="pagetitle" data-ng-hide="!isNew.value">New Gift</h1>
+	<h1 class="pagetitle" data-ng-hide="isNew.value">Edit Gift</h1>
+	<br />
+	
+	<div data-ng-include="'includes/errors.html'"></div>
+	<!-- TODO: End of year text? -->
+			
+	<form data-ng-init="initGiftDetail()" data-ng-submit="saveGift()">
+		<table style="border:solid 1px black; margin-left:auto; margin-right:auto; width:100%; padding:3px; border-spacing:0">
+			
+			<tr class="tableHeader">
+				<td height="20" colspan="3">
+					<b>I would like my gift to benefit the ministry of:</b>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="3">
+					<b>{{designation.externalDescription}}</b><br/>
+					<font size="1">{{designation.type}} #{{designation.designationNumber}}</font>
+			
+					<div class="giftAmounts" >
+						<ul data-ng-repeat="amount in amounts.list">
+							<li>
+								<input type="radio" name="giftAmount" class="amountRadio" data-ng-model="gift.giftAmount" 
+									data-ng-value="amount" data-ng-change="setFocusOther()" />
+								<div class="actualAmount" data-ng-hide="$last"><b class="giftNumbers">${{amount}}</b></div>
+								<div class="actualAmount" data-ng-hide="!$last"><b>{{amount}}</b></div>
+							</li>
+						</ul>
+						<div class="otherText">
+							<input type="text" class="inputStyle" size="15" data-ng-class="{'error-input': $parent.hasError.value}"
+								data-ng-model="$parent.otherValue.value" 
+								data-ng-click="$parent.setGiftToOther()" data-focus-me="otherFocus" 
+								data-other-amount-validate />
+						</div>
+					</div>
+					<br /><br />
+				</td>
+			</tr>
+			
+			<tr class="tableHeader">
+				<td height="15" colspan="3">
+					<b>Gift Frequency</b>
+				</td>
+			</tr>
+			
+			<tr>
+				<td height="30" colspan="3" style="text-align: center;">
+					<span data-ng-repeat="frequency in frequencies.list">
+						<span data-ng-switch="frequency.dropdownValue">
+							<span data-ng-switch-when="Single">
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> 
+								<b>{{frequency.dropdownValue}} Gift</b> &nbsp;&nbsp;
+							</span>
+							<span data-ng-switch-default>
+								<input type="radio" name="giftFrequency" data-ng-model="gift.giftFrequency" data-ng-value="frequency.dropdownValue" /> 
+								<b>{{frequency.dropdownValue}}</b> &nbsp;&nbsp;
+							</span>
+						</span>
+					</span>
+				</td>
+			</tr>
+			
+			<tr class="tableHeader" data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'">
+				<td height="15" colspan="3"><b>Recurring Gift Options</b></td>
+			</tr>
+			<tr height="45" valign="middle" data-ng-hide="!gift.giftFrequency || gift.giftFrequency == 'Single'">
+				<td align="left" valign="middle" width="40%" colspan="1">
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Month To Begin:</b><br />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<select data-ng-model="transactionMonth" 
+							data-ng-change="refreshDrawDays();"
+							data-ng-options="month as month.display for month in transactionMonths.months"></select>
+				</td>
+				<td align="left" valign="middle" colspan="1"><b>Transaction Day:</b><br />
+					<select data-ng-model="transactionDay.day" data-ng-options="day.key as day.value for day in transactionDays"></select>
+				</td>
+			</tr>
+			
+			<tr class="tableHeader">
+				<td height="15" colspan="3">
+					<b>Optional Comments</b>
+				</td>
+			</tr>
+			<tr height="5"><td colspan="3"><!-- this is for spacing --></td></tr>
+			
+			<tr height="20" data-ng-hide="showComment.staff == 'Y'">
+				<td colspan="3">
+					&nbsp; <a data-ng-click="showComment.staff = 'Y'"> Add Comments For {{designation.externalDescription}}</a>
+				</td>
+			</tr>
+			<tr data-ng-hide="showComment.staff == 'N'">
+				<td align="left" valign="middle" height="100" colspan="3">
+					<b>&nbsp; Comments For {{designation.externalDescription}}:</b>
+					<br />
+					<table style="margin-left:auto; margin-right:auto;">
+						<tr >
+							<td>
+								<textarea rows="3" cols="60" maxlength="1000" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToRecipient"></textarea>
+							</td>
+						</tr>
+					</table>
+					<br />
+				</td>
+			</tr>
+						
+			<tr height="25" valign="top" data-ng-hide="showComment.dsg == 'Y'">
+				<td valign="top" colspan="3">
+					&nbsp; <a data-ng-click="showComment.dsg = 'Y'"> Add Comments For Donation Services</a>
+				</td>
+			</tr>
+			<tr data-ng-hide="showComment.dsg == 'N'">
+				<td align="left" valign="middle" height="20" colspan="3">
+					<b>&nbsp; Comments For Donation Services:</b>
+					<br />
+					<table style="margin-left:auto; margin-right:auto;">
+						<tr >
+							<td>
+								<textarea rows="3" cols="60" maxlength="250" data-ng-change="isMaxLength(this)" data-ng-model="gift.commentsToDonationServices"></textarea>
+							</td>
+						</tr>
+					</table>
+					<br />
+				</td>
+			</tr>
+			
+			<tr class="tableFooter">
+				<td align="left" height="30" colspan="1">
+					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="!isNew.value">Cancel</a>
+					<a class="greyButton" data-ng-click="cancel()" data-ng-hide="isNew.value">Back</a>	
+				</td>
+			
+				<td align="right" height="30" colspan="2">
+					<!-- TODO: Add logic to determine Update or Add -->
+			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Add to Gift Cart" data-ng-hide="!isNew.value" />
+			  		<input type="submit" class="goldButton" alt="Add to Gift Cart" value="Update Gift Cart" data-ng-hide="isNew.value" />
+			  	</td>
+			</tr>
+		</table>
+	</form>
+	
+	<span data-ng-include="'includes/footer-text.html'"></span>
+	<div class="clear"></div>
+</div>
+
+<div id="sidebar" data-ng-include="'includes/need-help.html'"></div>
+
+<div class="clear"></div>
+<div class="clear"></div>

@@ -46,7 +46,7 @@ public class GiftService
 	
 	public void deleteGift(String giftId)
 	{
-		em.remove(em.find(CapturedGift.class, giftId));
+		em.remove(em.find(CapturedGift.class, new Long(giftId)));
 	}
 	
 	public void updateGift(GiftDetails gift)

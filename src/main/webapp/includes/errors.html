@@ -1,0 +1,28 @@
+<div data-ng-controller="ErrorCtrl">
+	<div id="errorsdiv" class="error" style="text-align:left;" data-ui-if="hasError()">
+		<div data-ui-if="errors.errorList != null && (errors.errorList.length > 1 || errors.errorText.length > 0 || errors.error.length > 0 || errors.errorHeader.length > 0)">
+			<span data-ui-if="errors.errorHeader.length > 0">
+				{{errors.errorHeader}}
+			</span>
+			
+			<ul>
+				<li data-ng-repeat="repeatError in errors.errorList">{{repeatError.key}}</li>
+				<li data-ng-hide="errors.errorText.length == 0">{{errors.errorText}}</li>
+				<li data-ng-hide="errors.error.length == 0">{{errors.error}}</li>
+			</ul>
+			
+		</div>
+		<div data-ui-if="errors.errorList != null && errors.errorList.length == 1">
+			<span>
+				{{errors.errorList[0].key}}
+			</span>
+		</div>
+		<div data-ui-if="errors.errorList == null && errors.errorText.length > 0">{{errors.errorText}}</div>
+		<div data-ui-if="errors.errorList == null && errors.error.length > 0">{{errors.error}}</div>
+	</div>
+	
+	<div id="clientSideErrorBox" class="error" style="display: none">
+		<span id="clientSideErrorMessage" class="errorTag"></span>
+	</div>
+	<br />
+</div>

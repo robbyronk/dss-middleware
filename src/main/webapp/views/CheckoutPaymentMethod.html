@@ -1,0 +1,81 @@
+<div id="content" style="min-height: 50px;" data-ng-init="initCheckoutPaymentMethod()">
+
+
+	<!-- START EDITING FROM HERE -->
+	<h1 class="pagetitle">Checkout Step 2 of 3</h1>
+	
+	<p>
+		<b><span class="notCurrentStep">&nbsp;&nbsp;&nbsp;Receipt Mailing Address</span>
+		<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+		<span class="currentStep">Gift Payment Method</span>
+		<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+		<span class="notCurrentStep">Submit Gift</span></b>
+	</p>
+	
+	
+	<div data-ng-include="'includes/errors.html'"></div>
+	<div data-ng-include="'includes/canadian-address.html'"></div>
+	
+	<form data-ng-submit="continueToSubmitPage()">
+		<table style="border:solid 1px black; width:100%; padding:0; border-spacing:0;">
+			<!-- PAYMENT TYPE SECTION -->
+			<tr class="tableHeader" height="20">
+				<td colspan="2">
+					<b>Gift Payment Type</b> 
+				</td>
+			</tr>
+			<tr >
+				<td colspan="2" class="td-no-padding">
+					<table style="width:100%; border:0; padding:0; border-spacing:0;">
+						<tr height="30">
+							<td width="3%"></td>
+							<td width="45%">
+								<div id="radioDiv">
+									<input type="radio" name="transTypeRadio" data-ng-value="'BA'" 
+										data-ng-model="transType.type" data-ng-change="setTransTypeVariables(transType.type)" />&nbsp;&nbsp;<b>Bank Account</b>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="transTypeRadio" data-ng-value="'CC'" 
+										data-ng-model="transType.type" data-ng-change="setTransTypeVariables(transType.type)" />&nbsp;&nbsp;<b>Credit Card</b>
+								</div>
+							</td>
+							<td width="52%" align="right">
+								<a data-ng-click="useExisting()" 
+									data-ng-show="authentication.loggedIn && paymentMethodList != null && paymentMethodList.list.length > 0">Use My Gift Payment Method On Record</a>&nbsp;&nbsp;
+							</td>
+						</tr>
+					</table>
+					<span data-ng-show="transType.type == 'CC'" data-ng-include="'viewComponents/CreditCardEditor.html'"></span>
+					<span data-ng-show="transType.type == 'BA'" data-ng-include="'viewComponents/BankAccountEditor.html'"></span>
+				</td>
+			</tr>
+			<tr class="tableFooter">
+				<td width="500"></td>
+				<td width="86" valign="middle" align="right">
+					<input type="submit" class="goldButton" value="Continue" alt="Continue" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	
+	<p>&nbsp;&nbsp;&nbsp;<span class="redhighlight">*</span> indicates a required field.</p>
+	
+	<p data-ng-show="transType.type == 'CC'">Please note, 2.35% of each credit card donation (all of which is still tax-deductible) will be used to cover the fee credit card companies charge Cru for the transaction. Bank account transactions have no fee.</p>
+
+
+
+	<span data-ng-include="'includes/footer-text.html'"></span>
+	<!-- STOP EDITING FROM HERE -->
+
+	<div class="clear"></div>
+</div> <!-- end content -->
+
+
+<div id="sidebar">
+	<div class="box">
+		<h3>More Choices</h3>
+		<span data-ng-include="'includes/searchbox.html'"></span>		
+	</div> <!--end box -->
+</div> <!--end sidebar -->
+
+<div class="clear"></div>
+<div class="clear"></div>

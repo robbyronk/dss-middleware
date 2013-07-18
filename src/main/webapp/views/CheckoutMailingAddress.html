@@ -1,0 +1,236 @@
+<div id="content" style="min-height: 50px;" data-ng-init="initCheckoutMailingAddress()">
+			
+	<!-- START EDITING FROM HERE -->
+	<h1 class="pagetitle">Checkout Step 1 of 3</h1>
+	
+	<p>
+		<b>
+			<span class="currentStep">&nbsp;&nbsp;&nbsp;Receipt Mailing Address</span>
+			<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+			<span class="notCurrentStep">Gift Payment Method</span>
+			<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+			<span class="notCurrentStep">Submit Gift</span>
+		</b>
+	</p>
+	
+	<div data-ng-show="personalInfo.isStaff">
+		Since you are a staff employee with Cru, please use the 
+		<a href="https://staffweb.ccci.org/personalize/index.htm" target="_new">Staff Services web site</a>
+		if you need to update your mailing address. Changes you make on the
+		<a href="https://staffweb.ccci.org/personalize/index.htm" target="_new">Staff Services web site</a>
+		will be reflected on this web site within a day. If you are not a staff employee of 
+		Cru, please call 1-888-278-7233 for assistance.<br/><br/>
+	</div>
+	
+	<div data-ng-include="'includes/errors.html'"></div>
+	<div data-ng-include="'includes/canadian-address.html'"></div>
+	
+	<form data-ng-submit="continueToPaymentPage()">
+	
+		<table style="width:100%; margin-left:auto; margin-right:auto; border:solid 1px black; padding:1px; border-spacing:0;">
+			<!-- PERSON ORGANIZATION SELECTION -->
+			<tr class="tableHeader" data-ui-if="!authentication.loggedIn">
+			    <td colspan="1" height="15">
+					<b>Individual or Organization</b> 
+				</td>
+			</tr>
+			<tr height="30" data-ui-if="!authentication.loggedIn">
+				<td>&nbsp;&nbsp;&nbsp;&nbsp;Are you giving this gift as an individual or on behalf of an organization?<br />&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="cart.personType" data-ng-value="'Household'" 
+						data-ng-model="cart.personType" />&nbsp;&nbsp;An Individual
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="radio" name="cart.personType" data-ng-value="'Organization'" 
+						data-ng-model="cart.personType" />&nbsp;&nbsp;A Business, Church, Foundation, or other organization
+				</td>
+			</tr>
+			
+		    <tr class="tableHeader" data-ui-if="cart.personType != 'Household' && !authentication.loggedIn">
+		       <td><b>Organization Name</b></td>
+		    </tr>
+		    <tr height="15" valign="bottom" data-ui-if="cart.personType != 'Household' && !authentication.loggedIn">
+		    	<td>
+					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
+						<tr>
+						    <td width="5">&nbsp;</td>
+						    <td colspan="5">
+						    	<span class="redhighlight">*</span>&nbsp;<b>Organization Name</b><br/>
+						    	<input type="text" size="40" data-ng-required="true" 
+						    		data-ng-model="cart.organizationName" maxlength="40" class="inputStyle" />
+						    </td>
+						</tr>
+					</table>
+		     	</td>
+			</tr>
+		    <tr class="tableHeader" data-ui-if="!authentication.loggedIn">
+				<td data-ng-show="cart.personType != 'Household'"><b>Contact Person</b></td>
+				<td data-ng-show="cart.personType == 'Household'"><b>Your Name</b></td>
+			</tr>
+			<!-- PRIMARY NAME INFO -->
+			<tr data-ui-if="!authentication.loggedIn">
+		    	<td>
+					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
+						<tr>
+							<td width="">
+								<span class="redhighlight">*</span> <b>Title</b><br/>
+								<select data-ng-required="true" 
+									data-ng-model="cart.primaryName.namePrefix"
+									data-ng-options="prefix.dropdownValue as prefix.dropdownName for prefix in prefixes.list">
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td width="">
+								<span class="redhighlight">*</span>&nbsp;<b>First Name</b><br/>
+								<input type="text" class="inputStyle" style="width:175px;" size="11" maxlength="40"  
+									data-ng-model="cart.primaryName.firstName" data-ng-required="true" />
+							</td>
+						    <td width="12">
+						    	MI<br/> 
+						    	<input type="text" class="inputStyle" style="width:35px;" size="5" maxlength="15"
+						    		data-ng-model="cart.primaryName.middleName" />
+						    </td>
+						    <td width="">
+						    	<span class="redhighlight">*</span> <b>Last Name</b><br/>
+						    	<input  type="text" class="inputStyle" size="17" maxlength="40" style="width:175px;"
+						    		data-ng-model="cart.primaryName.lastName" data-ng-required="true" />
+						    </td>
+						    <td width="">
+						    	Suffix<br/> 
+						    	<select data-ng-model="cart.primaryName.suffix" 
+						    		data-ng-options="suffix.dropdownValue as suffix.dropdownName for suffix in suffixes.list">
+						    	</select>
+						    </td>
+						</tr>
+					</table>
+				
+					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
+						<tr>
+						    <td width="5">&nbsp;</td>
+						    <td width="160">
+						    	Phone Number<br/>
+						    	<input type="text" class="inputStyle" size="20" maxlength="12"
+						    		data-ng-model="cart.phoneNumber" 
+						    		placeholder="555-555-5555" />
+						    </td>
+						    <td>
+						    	<br/>
+						    	<span data-ng-repeat="phoneType in phoneTypes.types">
+									<input type="radio" name="phoneType" 
+										data-ng-model="personalInfo.phoneNumber.type" data-ng-value="phoneType.value" />
+									&nbsp;&nbsp;{{phoneType.display}} &nbsp;&nbsp;&nbsp;
+								</span>
+							</td>
+						</tr>
+					</table>
+					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
+						<tr>
+						    <td width="5">&nbsp;</td>
+						    <td width="160" colspan="2">
+						    	<span class="redhighlight">*</span> <b>E-mail Address</b><br/>
+						    	<input type="text" class="inputStyle" size="20" maxlength="60"
+						    		data-ng-model="cart.emailAddress" data-ng-required="true" />
+						    </td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- ADDRESS INFO -->
+			<tr class="tableHeader">
+				<td data-ng-show="cart.personType != 'Household'"><b>Organization Mailing Address</b></td>
+				<td data-ng-show="cart.personType == 'Household'"><b>Your Mailing Address</b></td>
+	    	</tr>
+	       	<tr>
+	        	<td>
+	        		<div data-ng-include="'viewComponents/DssAddressEditor.html'"></div>
+		   		</td>
+			</tr>
+			<!-- SPOUSE NAME INFO -->
+			<tr class="tableHeader" data-ui-if="cart.personType == 'Household' && !authentication.loggedIn">
+	       		<td><b>Spouse Name (If Applicable)</b></td>
+	    	</tr>
+	    	<tr data-ui-if="cart.personType == 'Household' && !authentication.loggedIn">
+	    		<td>
+					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
+						<tr>
+							<td width="">
+								Title<br/>
+								<select class="inputStyle" data-ng-model="cart.spouseName.namePrefix" 
+									data-ng-options="prefix.dropdownValue as prefix.dropdownName for prefix in prefixes.list">
+								</select>
+							</td>
+						</tr>
+				  		<tr>
+							<td width="">
+								First Name<br/>
+								<input type="text" class="inputStyle" style="width: 175px;" size="11" maxlength="40" 
+									data-ng-model="cart.spouseName.firstName" />
+							</td>
+							<td width="">
+								MI<br/> 
+								<input type="text" style="width: 35px;" class="inputStyle" size="5" maxlength="15"
+									data-ng-model="cart.spouseName.middleName" />
+							</td>
+							<td width="">
+								Last Name<br/>
+								<input type="text" style="width: 175px;" class="inputStyle" size="17" maxlength="40" 
+								data-ng-model="cart.spouseName.lastName" />
+							</td>
+							<td width="">
+								Suffix<br/>
+								<select data-ng-model="cart.spouseName.suffix" 
+							    		data-ng-options="suffix.dropdownValue as suffix.dropdownName for suffix in suffixes.list">
+						    	</select> 
+						    </td>
+					  	</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- ACCOUNT NUMBER -->
+			<tr class="tableHeader" data-ui-if="!failoverMode.isFailover && !authentication.loggedIn">
+	       		<td>
+	       			<b>Your Personal  9 digit Account number here will help us 
+	       			identify you (and avoid creating a duplicate account)</b>
+	       		</td>
+	    	</tr>
+	    	<tr data-ui-if="!failoverMode.isFailover && !authentication.loggedIn">
+	    		<td>
+					<table style="width:100%; border:0; border-spacing:0; padding:3px;">
+				  		<tr>
+							<td width="5">&nbsp;</td>
+		   					<td>
+		   						Donor Account ID<br/>
+		   						<input type="text" class="inputStyle" size="9" 
+		   							maxlength="9" data-ng-model="personalInfo.existingPeopleId" 
+		   							placeholder="435024555" />
+		   						<b>&nbsp;&nbsp;&nbsp;Optional (e.g., 435024555)</b></td>
+				  		</tr>
+					</table>
+				</td>
+			</tr>	
+				
+		  	<tr class="tableFooter">
+				<td valign="middle" align="right">
+					<input type="submit" class="goldButton" value="Continue" alt="Continue"/>
+				</td>
+		  	</tr>
+		</table>
+	</form>
+	<p>&nbsp;&nbsp;&nbsp;<span class="redhighlight">*</span> indicates a required field.</p>
+	
+	
+	<span data-ng-include="'includes/footer-text.html'"></span>
+	<!-- STOP EDITING FROM HERE -->
+	
+	<div class="clear"></div>
+</div> <!-- end content -->
+
+
+<div id="sidebar">
+	<div class="box">
+		<h3>More Choices</h3>
+		<span data-ng-include="'includes/searchbox.html'"></span>		
+	</div>
+</div>
+
+<div class="clear"></div>
+<div class="clear"></div>

@@ -1,0 +1,58 @@
+<div id="content" style="min-height: 50px;" data-ng-init="initSubmitGiftPage()">
+	<!-- START EDITING FROM HERE -->
+	<h1 class="pagetitle">Checkout Step 3 of 3</h1>
+	
+	<p>
+		<b>
+			<span class="notCurrentStep">&nbsp;&nbsp;&nbsp;Receipt Mailing Address</span>
+			<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+			<span class="notCurrentStep">Gift Payment Method</span>
+			<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+			<span class="currentStep">Submit Gift</span>
+		</b>
+	</p>
+	
+	<div data-ng-include="'includes/errors.html'"></div>
+	<div data-ng-include="'includes/canadian-address.html'"></div>
+	
+	<div data-ui-if="cartHasSingleFrequencyGift(cart)" data-ng-include="'viewComponents/EndOfYearEftText'"></div>
+	
+	<p>Please review the information below and press the &quot;Submit Gift&quot; button when you are ready to give your gift.</p>
+	
+	<div data-ng-include="'includes/cart-info.html'"></div>
+	
+	<form data-ng-submit="submitCart()">
+<!-- 	<input type="hidden" $c.bindValue("Page.CheckoutId")/> -->
+		
+		<div data-ng-include="'includes/display-cart-2.html'" data-ng-controller="DisplayCartCtrl" data-ng-init="initDisplayCart(false)"></div>
+		<br />
+	
+		<div data-ng-include="'includes/email-opt-in.html'"></div>
+		
+		<table style="width:100%; padding:3px; margin-left:auto; margin-right:auto;">
+			<tr class="tableFooter">
+				<td align="left">         
+					<a class="greyButton" data-ng-click="backToGiftCart()" title="Back To Gift Cart">Back To Gift Cart</a>
+		   		</td>	
+				<td align="right">
+					<input type="submit" class="goldButton" value="Submit Gift" alt="Submit Gift" />         
+		  		</td>
+		  	</tr>
+		</table>
+	</form>
+	
+	<p data-ng-show="cart.payment.paymentMethod == 'Credit Card'">Please note, 2.35% of each credit card donation (all of which is still tax-deductible) will be used to cover the fee credit card companies charge Cru for the transaction. Bank account transactions have no fee.</p>
+	
+	<span data-ng-include="'includes/footer-text.html'"></span>
+	<!-- STOP EDITING FROM HERE -->
+	
+	<div class="clear"></div>
+</div>
+
+
+<div id="sidebar">
+	<div data-ng-include="'includes/need-help.html'"></div>
+</div>
+
+<div class="clear"></div>
+<div class="clear"></div>

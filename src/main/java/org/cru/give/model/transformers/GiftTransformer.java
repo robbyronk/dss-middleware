@@ -19,6 +19,9 @@ public class GiftTransformer
 		giftDetails.setDayOfMonth(capturedGift.getGiftDay());
 		giftDetails.setMotivationCode(capturedGift.getMotivation());
 		giftDetails.setCampaignCode(capturedGift.getCampaignCode());
+		giftDetails.setStartDate(capturedGift.getStartDate());
+		giftDetails.setCommentsToRecipient(capturedGift.getCommentToStaff());
+		giftDetails.setCommentsToDonationServices(capturedGift.getCommentToDonationServices());
 		
 		return giftDetails;
 	}

@@ -1,5 +1,6 @@
 package org.cru.give.validators;
 
+import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
 import org.ccci.util.time.Clock;

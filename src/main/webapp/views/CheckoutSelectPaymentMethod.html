@@ -1,0 +1,120 @@
+<div id="content" style="min-height: 50px;" data-ng-init="initCheckoutSelectPaymentMethod()">
+
+
+	<!-- START EDITING FROM HERE -->
+	<h1 class="pagetitle">Checkout Step 2 of 3</h1>
+	
+	<p><b>
+	<span class="notCurrentStep">&nbsp;&nbsp;&nbsp;Receipt Mailing Address</span>
+						<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+	<span class="currentStep">Gift Payment Method</span>
+						<span class="currentStep">&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+	<span class="notCurrentStep">Submit Gift</span>
+	</b></p>
+	
+	
+	
+	<div data-ng-include="'includes/errors.html'"></div>
+	<div data-ng-include="'includes/canadian-address.html'"></div>
+	
+	
+	<p class="info" data-ng-show="willExpireTwoMonths(selectedPayment) && !isExpired(selectedPayment) && !editingCreditCard.beingEdited">
+		{{selectedPayment.description}} will soon expire.&nbsp;
+		If you know the new expiration date, select "Edit" below to enter the new date.
+	</p><br />
+	
+	<form data-ng-submit="continueToSubmitPage()">
+		<table style="width:100%; margin-left:auto; margin-right:auto; border:solid 1px black; padding:0; border-spacing:0;">
+			<!-- PAYMENT TYPE SECTION -->
+			<tr class="tableHeader" height="20">
+				<td colspan="2">
+					&nbsp;<b>Select A Gift Payment Method To Use</b> 
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<table style="width:100%; border:0; border-spacing:0; padding:0;">
+						 <tr height="40" valign="bottom">
+							 <td width="15"> </td>
+							 <td width="360"><span class="redhighlight">*</span> <b>Accounts On Record:</b><br />
+					 			<span data-ng-show="paymentMethodList.list.length == 0">No accounts on record.</span>
+								<select tabindex="4" data-ng-show="paymentMethodList.list.length > 0" 
+									data-ng-model="selectedPayment" data-ng-change="changeSelectedPayment()"
+									data-ng-options="paymentMethod.description for paymentMethod in paymentMethodList.list">
+								</select>
+							</td>
+							<td align="left">
+								<a data-ng-click="newBankAccount()">Use A New Bank Account</a><br />
+								<a data-ng-click="newCreditCard()">Use A New Credit Card</a><br />
+							</td>
+						</tr>
+						<tr>
+							<td width="15">&nbsp;</td>
+							<td align="left" colspan="2" data-ng-show="selectedPayment.paymentMethod == 'EFT'">
+									<br />
+									<b>Bank Name:</b> {{selectedPayment.bankName}}<br />
+									<b>Account Type:</b> {{selectedPayment.paymentType}}<br />
+									<b>Bank Account Number:</b> {{getAccountMasked(selectedPayment)}}<br />
+									<b>Routing Number:</b> {{selectedPayment.bankRoutingNumber}}<br /><br />
+							</td>
+							<td align="left" colspan="2" data-ng-show="selectedPayment.paymentMethod == 'Credit Card'">
+								<br />
+								<b>Card Type:</b> {{selectedPayment.paymentType}}<br />
+								<b>Card Number:</b> {{getAccountMasked(selectedPayment)}}<br />
+								
+								<hr style="width: 100%; border-bottom:1px dashed #777; border-top:0px; 
+									border-left:0px; border-right:0px; line-height:0px; height:1px;" 
+									data-ng-show="!editingCreditCard.beingEdited" />
+									
+								<span data-ng-show="!editingCreditCard.beingEdited">
+									<br />
+									<b>Expiration Date:</b> {{longMonthYearDate(selectedPayment.expirationMonth, selectedPayment.expirationYear)}}
+									<span style="float: right; position: relative; left: -167px;">
+										<a data-ng-click="editCreditCard(selectedPayment)">Edit</a>
+									</span> <br />
+
+									<b>Name On Card:</b> {{selectedPayment.cardholderName}} <br />
+									<b>Billing Address:</b>
+									<span data-ng-include="'includes/DisplayAddress.html'" data-ng-controller="AddressCtrl" data-ng-init="initAddresses()"></span>
+									<br /><br />
+								</span>
+							</td>
+						</tr>
+						<tr data-ui-if="editingCreditCard.beingEdited && selectedPayment != null && selectedPayment.existingPaymentId == paymentCurrentlyBeingEdited.id">
+							<td colspan="3" data-ng-include="'viewComponents/CreditCardEditor.html'"></td>
+						</tr>
+					</table>						
+				</td>
+			</tr>
+		
+			<tr class="tableFooter">
+				<td width="500"></td>
+				<td width="86" valign="middle" align="right">
+					<input type="submit" class="goldButton" value="Continue" alt="Continue" />
+				</td>
+			</tr>
+		</table>
+	</form>
+	<p>&nbsp;&nbsp;&nbsp;<span class="redhighlight">*</span> indicates a required field.</p>
+	
+	<p data-ng-show="selectedPayment.paymentMethod == 'Credit Card'">Please note, 2.35% of each credit card donation (all of which is still tax-deductible) will be used to cover the fee credit card companies charge Cru for the transaction. &nbsp;Bank account transactions have no fee.</p>
+	
+	
+
+
+	<span data-ng-include="'includes/footer-text.html'"></span>
+	<!-- STOP EDITING FROM HERE -->
+
+	<div class="clear"></div>
+</div> <!-- end content -->
+
+
+<div id="sidebar">
+	<div class="box">
+		<h3>More Choices</h3>
+		<span data-ng-include="'includes/searchbox.html'"></span>		
+	</div>
+</div>
+
+<div class="clear"></div>
+<div class="clear"></div>

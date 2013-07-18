@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.cru.give.webservices.model.GiftCart.PaymentSource;
+
 @Entity
 @Table(name="captured_gift_cart_nam_adr_pmt")
 public class CapturedNameAddressAndPayment implements java.io.Serializable
@@ -57,6 +59,8 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	private String middleName;
 	@Column(name = "LAST_NAME")
 	private String lastName;
+	@Column(name = "SUFFIX")
+	private String suffix;
 	
 	@Column(name = "SP_NAME_PREFIX")
 	private String spouseNamePrefix;
@@ -66,6 +70,8 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	private String spouseMiddleName;
 	@Column(name = "SP_LAST_NAME")
 	private String spouseLastName;
+	@Column(name = "SP_SUFFIX")
+	private String spouseSuffix;
 	
 	@Column(name = "ADDRESS_LINE1")
 	private String addressLine1;
@@ -89,6 +95,8 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	@Column(name = "PHONE_NUMBER")
 	private String phoneNumber;
 	
+	@Column(name = "PAYMENT_SOURCE")
+	private String paymentSource;
 	@Column(name = "PAYMENT_PROFILE_ID")
 	private String paymentProfileId;
 	@Column(name = "PAYMENT_DESCR")
@@ -128,6 +136,15 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	private String ccBillingZipCode;
 	@Column(name = "CC_COUNTRY")
 	private String ccBillingCountry;
+	
+	@Column(name = "CHECKOUT_TYPE")
+	private String checkoutType;
+	@Column(name = "OPERATING_SYSTEM")
+	private String operatingSystem;
+	@Column(name = "SCREEN_WIDTH")
+	private String screenWidth;
+	@Column(name = "SCREEN_HEIGHT")
+	private String screenHeight;
 	
 	
 	public Long getCartId()
@@ -266,6 +283,14 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	{
 		this.lastName = lastName;
 	}
+	public String getSuffix()
+	{
+		return suffix;
+	}
+	public void setSuffix(String suffix)
+	{
+		this.suffix = suffix;
+	}
 	public String getSpouseNamePrefix()
 	{
 		return spouseNamePrefix;
@@ -297,6 +322,14 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	public void setSpouseLastName(String spouseLastName)
 	{
 		this.spouseLastName = spouseLastName;
+	}
+	public String getSpouseSuffix()
+	{
+		return spouseSuffix;
+	}
+	public void setSpouseSuffix(String spouseSuffix)
+	{
+		this.spouseSuffix = spouseSuffix;
 	}
 	public String getAddressLine1()
 	{
@@ -377,6 +410,15 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	public void setPhoneNumber(String phoneNumber)
 	{
 		this.phoneNumber = phoneNumber;
+	}
+	public PaymentSource getPaymentSource()
+	{
+		if(paymentSource == null) return PaymentSource.NONE;
+		return PaymentSource.valueOf(paymentSource);
+	}
+	public void setPaymentSource(PaymentSource paymentSource)
+	{
+		this.paymentSource = paymentSource.name();
 	}
 	public String getPaymentProfileId()
 	{
@@ -530,5 +572,36 @@ public class CapturedNameAddressAndPayment implements java.io.Serializable
 	{
 		this.ccBillingCountry = ccBillingCountry;
 	}
-	
+	public String getCheckoutType()
+	{
+		return checkoutType;
+	}
+	public void setCheckoutType(String checkoutType)
+	{
+		this.checkoutType = checkoutType;
+	}
+	public String getOperatingSystem()
+	{
+		return operatingSystem;
+	}
+	public void setOperatingSystem(String operatingSystem)
+	{
+		this.operatingSystem = operatingSystem;
+	}
+	public String getScreenWidth()
+	{
+		return screenWidth;
+	}
+	public void setScreenWidth(String screenWidth)
+	{
+		this.screenWidth = screenWidth;
+	}
+	public String getScreenHeight()
+	{
+		return screenHeight;
+	}
+	public void setScreenHeight(String screenHeight)
+	{
+		this.screenHeight = screenHeight;
+	}
 }

@@ -43,6 +43,8 @@ public class GiftDetails implements java.io.Serializable
 		capturedGift.setCommentToDonationServices(commentsToDonationServices);
 		capturedGift.setCommentToStaff(commentsToRecipient);
 		
+		capturedGift.setStartDate(startDate);
+		
 		return capturedGift;
 	}
 	

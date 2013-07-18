@@ -1,0 +1,31 @@
+<div data-ng-show="showEftText.show" data-ng-controller="EndOfYearEftTextCtrl" data-ng-init="initEndOfYearEftText()">
+	<div data-ng-show="endOfYearTextType.type == 'Short1'">
+		Gifts submitted by midnight on December 31 will be included in your {{receiptYear.year}} tax-deductible giving.
+	</div>
+	<div data-ng-show="endOfYearTextType.type == 'Short2'">
+		<table style="border:0; width:98%; margin-left:auto; margin-right:auto;">
+		   	<tr>
+		   		<td>
+			   		<p class="info">
+			   			Single gifts submitted by midnight on December 31 will be included in your {{receiptYear.year}} tax-deductible giving.
+					</p>
+		   		</td>
+	   		</tr>
+	   </table>
+	</div>
+	<div data-ng-show="endOfYearTextType.type == 'SubmitGift'">
+		<table style="border:0; width:100%; margin-left:auto; margin-right:auto;">
+		   	<tr>
+		   		<td>
+		   			<p class="info">
+		   				Single gifts submitted by midnight on December 31 will be included in your {{receiptYear.year}} tax-deductible
+		   				giving.  &nbsp;These gifts 
+		   				<span data-ng-show="cart.payment.paymentType == 'EFT'">will not be withdrawn from your bank account</span>
+		   				<span data-ng-show="cart.payment.paymentType == 'Credit Card'">may not be charged to your credit card</span>
+			   			until early January.  &nbsp;However if they were submitted before midnight on December 31, they will be receipted for the {{receiptYear.year}} tax year.
+					</p>
+		   		</td>
+	   		</tr>
+	   </table>
+	</div>
+</div>
