@@ -1,3 +1,5 @@
+package org.cru.give.webservices;
+
 import org.jboss.resteasy.annotations.interception.ServerInterceptor;
 import org.jboss.resteasy.spi.interception.MessageBodyWriterContext;
 import org.jboss.resteasy.spi.interception.MessageBodyWriterInterceptor;
@@ -16,31 +18,36 @@ import java.util.logging.Logger;
 @Provider
 @ServerInterceptor
 public class CorsInterceptor implements MessageBodyWriterInterceptor {
+    private static final String ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
+    private static final String ACCESS_CONTROL_ALLOW_HEADERS = "Access-Control-Allow-Headers";
+    private static final String ACCESS_CONTROL_ALLOW_METHODS = "Access-Control-Allow-Methods";
+    private static final String ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
+    private static final String ACCESS_CONTROL_REQUEST_HEADERS = "Access-Control-Request-Headers";
+    private static final String ORIGIN = "http://localhost:8000";
+
     @Inject
     Logger logger;
 
     @Override
     public void write(MessageBodyWriterContext messageBodyWriterContext) throws IOException, WebApplicationException {
-        logger.info("writing");
-        messageBodyWriterContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+        messageBodyWriterContext.getHeaders().add(ACCESS_CONTROL_ALLOW_ORIGIN, ORIGIN);
         messageBodyWriterContext.proceed();
     }
 
     @OPTIONS
     @Path("/{path:.*}")
     public Response handleCORSRequest(
-            @HeaderParam("Access-Control-Request-Method") final String requestMethod,
-            @HeaderParam("Access-Control-Request-Headers") final String requestHeaders) {
-        logger.info("handling");
+            @HeaderParam(ACCESS_CONTROL_REQUEST_METHOD) final String requestMethod,
+            @HeaderParam(ACCESS_CONTROL_REQUEST_HEADERS) final String requestHeaders) {
         final Response.ResponseBuilder retValue = Response.ok();
 
         if (requestHeaders != null)
-            retValue.header("Access-Control-Allow-Headers", requestHeaders);
+            retValue.header(ACCESS_CONTROL_ALLOW_HEADERS, requestHeaders);
 
         if (requestMethod != null)
-            retValue.header("Access-Control-Allow-Methods", requestMethod);
+            retValue.header(ACCESS_CONTROL_ALLOW_METHODS, requestMethod);
 
-        retValue.header("Access-Control-Allow-Origin", "*");
+        retValue.header(ACCESS_CONTROL_ALLOW_ORIGIN, ORIGIN);
 
         return retValue.build();
     }
